@@ -5,7 +5,7 @@
     <link>https://willxwu.github.io/</link>
     <description>Recent content on Your title</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 02 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://willxwu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
@@ -13,7 +13,7 @@
     <item>
       <title>html</title>
       <link>https://willxwu.github.io/posts/html/</link>
-      <pubDate>Fri, 02 Feb 2018 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
       <guid>https://willxwu.github.io/posts/html/</guid>
       <description>HTML 知识点总结 1、HTML基本格式 &amp;lt;html&amp;gt;	&amp;lt;head&amp;gt;	&amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt;	&amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; html：根标签，只有一个（网页所有内容都应该写在根标签里面）
