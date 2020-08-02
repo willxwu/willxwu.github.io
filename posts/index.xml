@@ -5,10 +5,33 @@
     <link>https://willxwu.github.io/posts/</link>
     <description>Recent content in Posts on Your title</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://willxwu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>java</title>
+      <link>https://willxwu.github.io/posts/javase/</link>
+      <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://willxwu.github.io/posts/javase/</guid>
+      <description>1、jdk安装   安装目录:C:\Program Files\Java\jdk1.8.0_151
+  JDK安装过程中提示安装JRE：C:\Program Files\Java\jre1.8.0_151
+  验证是否安装成功：进入安装目录：cd C:\Program Files\Java\jdk1.8.0_151\bin，执行程序:java/javac，看到一堆关于java的帮助就是成功了。
+  注意：安装目录不要出现中文。
+2、JDK目录结构   bin：要存放的是java工具中常用命令如：java，javac等。
+  db：安装java db的路径。
+  include:一些平台特定的头文件。
+  jre：运行java程序所需的jre环境。
+  lib:JDK工具命令的实际存放位置。
+例如：bin中javac命令，实际是lib中tools.jar\sun\tools\javac中的Main.class文件，而bin中的javac命令只是包装了这个类。 实际上bin中的大部分命令都是包装了tool.jar中的工具类。
+  src.zip:主要存放java核心类库的源代码。
+  其他文件:主要是一些说明性的文档。
+  3、java运行过程  源文件：程序员编写的Java源文件，扩展名.java 编译：通过编译器编译源文件(.java文件)编译成字节码文件，扩展名.class 运行：使用解释器来运行字节码文件。  4、环境变量配置   变量名-变量值：
+JAVA_HOME：C:\Program Files\Java\jdk1.8.0_151 Path：%JAVA_HOME%\bin\; CLASSPATH：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar   验证环境变量是否配置成功：
+Win+R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Java帮助信息。 javac -version：出现javac版本信息。 java -version：出现java版本信息。 出现上述信息，表示环境变量配置成功。   变量值说明：</description>
+    </item>
     
     <item>
       <title>html</title>
