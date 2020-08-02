@@ -5,17 +5,56 @@
     <link>https://willxwu.github.io/posts/</link>
     <description>Recent content in Posts on Your title</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sun, 02 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://willxwu.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>java</title>
-      <link>https://willxwu.github.io/posts/javase/</link>
-      <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
+      <title>JavaSE 第三篇</title>
+      <link>https://willxwu.github.io/posts/javase-2020-08-01/</link>
+      <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://willxwu.github.io/posts/javase/</guid>
+      <guid>https://willxwu.github.io/posts/javase-2020-08-01/</guid>
+      <description>JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
+一、选择结构if if条件语句分为三种格式。
+  if语句
+如果满足某种条件就执行。
+if语句格式：
+if（条件）{ 语句的执行体 } 条件：结果必须是布尔类型 1==1 true || false 执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。
+例如：
+/** * if语句例子 */ public class IfDemo { public static void main(String[] args) { // TODO Auto-generated method stub  int i = 5; if(i==5) { System.out.println(&amp;#34;if中的条件是true&amp;#34;); i++; } System.out.println(&amp;#34;i=&amp;#34;+i); } } 注意：if()括号后面没有分号&amp;rdquo;;&amp;quot;
+  if&amp;hellip;else语句
+如果满足某种条件，就执行某种处理，否则就执行另一种处理。
+if &amp;hellip; else语法格式：
+if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时，执行if的执行体，为false时，执行else的执行体。
+例如：
+** * if ... else 语句 * */ public class IfElseDemo { public static void main(String[] args) { int i = 13; if(i%2==0) { System.</description>
+    </item>
+    
+    <item>
+      <title>JavaSE 第二篇</title>
+      <link>https://willxwu.github.io/posts/javase-2020-07-31/</link>
+      <pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://willxwu.github.io/posts/javase-2020-07-31/</guid>
+      <description>Java的两个引用输入类型Scanner、Random类，Scanner用于接收键盘输入，Random用户产生随机数。引用类型也就是Sun公司为我们写好的类，我们直接使用就可以了。
+1、引用数据类型的使用 1. 导入包：知道用的这个类，在jdk的那个目录那个文件下。 2. 创建对象：格式， 类 对象 = new 类型(); 3. 如何使用: 对象.类的方法()  引用数据类型的使用与定义基本数据类型变量不同，引用数据类型的变量定义及赋值有一个相对固定的步骤或格式，如下：
+数据类型 变量名 = new 数据类型(); 每种引用数据类型都有其方法，我们可以调用该类型实例的方法。
+变量名.方法名(); 2、Scanner类 Scanner类是引用数据类型的一种，我们可以使用该类来完成用户键盘录入，获取到录入的数据。
+  导包
+import java.util.Scanner;   创建对象实例
+Scanner sc = new Scanner(System.in);   调用方法
+//用来接收控制台录入的数字 int i = sc.nextInt(); //用来接收控制台录入的字符串 String s = sc.next();   Scanner使用Demo：
+package java_learn_code; //导入包，指明类所在的的文件见，关键字import import java.util.Scanner; /** * 引用数据类型,使用步骤：1、导入包 。2、创建对象 3、通过对象调用方法 * @author Jole * Scanner的使用，所在目录java文件见-util文件夹 */ public class ScannerDemo { public static void main(String[] args) { System.</description>
+    </item>
+    
+    <item>
+      <title>JavaSE 第一篇</title>
+      <link>https://willxwu.github.io/posts/javase-2020-07-30/</link>
+      <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://willxwu.github.io/posts/javase-2020-07-30/</guid>
       <description>1、jdk安装   安装目录:C:\Program Files\Java\jdk1.8.0_151
   JDK安装过程中提示安装JRE：C:\Program Files\Java\jre1.8.0_151
   验证是否安装成功：进入安装目录：cd C:\Program Files\Java\jdk1.8.0_151\bin，执行程序:java/javac，看到一堆关于java的帮助就是成功了。
@@ -34,7 +73,7 @@ Win+R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Java帮
     </item>
     
     <item>
-      <title>html</title>
+      <title>Html 学习记录</title>
       <link>https://willxwu.github.io/posts/html/</link>
       <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
       
