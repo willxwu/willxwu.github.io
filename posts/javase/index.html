@@ -88,7 +88,7 @@ Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Jav
   <title>clock</title>
   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
 </svg>
-          3 min read
+          5 min read
         </div></div>
     </header>
     <div class="post-content">
@@ -521,6 +521,207 @@ System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span>
 </li>
 </ol>
 <hr>
+<h3 id="1数据类型转换">1、数据类型转换</h3>
+<p>数据类型转换分为自动转换和强制转换。不同类型的变量是否可以一起运算？答案是可以的，但是需要先进行数据类型转换，再运算。</p>
+<p>数据转换遵循原则：</p>
+<pre><code class="language-dos" data-lang="dos">范围小的数据类型值，可以直接转换为范围大的数据类型值。
+
+范围大的数据类型值，不可以直接转换为范围小的数据类型值。
+</code></pre><p>各种数据类型按照数据范围从小到大依次列出：</p>
+<pre><code class="language-dos" data-lang="dos">byte -&gt; short -&gt; int -&gt; long -&gt; float -&gt; double
+</code></pre><p><strong>A:自动类型转换：表示范围小的数据类型转换成范围大的数据类型，这种方式称为自动类型转换。</strong></p>
+<p>自动转换格式：</p>
+<p>范围大的数据类型  变量 = 范围小的数据类型值；</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* 数据类型转换
+</span><span style="color:#75715e">* 自动转换：取值范围小的数据值，会自动转换成取值范围大的值。
+</span><span style="color:#75715e">* 注意：bolean类型不能参与转换
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataTypeConversion</span><span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+     <span style="color:#75715e">//double类型变量
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">double</span> d <span style="color:#f92672">=</span> 10000<span style="color:#f92672">;</span>  <span style="color:#75715e">//出现类型自动转换，int自动转换成double
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>d<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+     
+     <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span>100<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">double</span> d2 <span style="color:#f92672">=</span> i<span style="color:#f92672">;</span> <span style="color:#75715e">//出现类型自动转换，int自动转换成double
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>d2<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+        
+        <span style="color:#66d9ef">byte</span> b <span style="color:#f92672">=</span>10<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> b<span style="color:#f92672">;</span> <span style="color:#75715e">//自动类型转换，byte类型自动转换成int类型
+</span><span style="color:#75715e"></span>        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>j<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>注意：bolean类型不能参与转换</strong></p>
+<p><strong>B:强制转换：把数据类型取值范围大的，转换成数据类型取值范围小的。</strong></p>
+<p>数据类型强制转换公式：</p>
+<p>被转后的数据类型 变量名 = (被转换后数据类型)要被转的数据；</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* 强制数据类型转换
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DataTypeConversion2</span><span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+     <span style="color:#75715e">//double浮点，转成int
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">double</span> d <span style="color:#f92672">=</span> 3<span style="color:#f92672">.</span><span style="color:#a6e22e">14</span><span style="color:#f92672">;</span> 
+     
+     <span style="color:#75715e">//被转后的数据类型 变量名 = (被转换后数据类型)要被转的数据
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">)</span>d<span style="color:#f92672">;</span>
+     
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>i<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+     
+     <span style="color:#75715e">//类似大桶中的水倒入小桶，水肯定会丢失（精度丢失）
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">byte</span> b <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span>200<span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>b<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>输出结果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">3
+<span style="color:#f92672">-</span>56
+</code></pre></div><p><strong>注意：强制类型转换，实际开发中没有要求强制转换时，不转换，不然会丢失精度 ，除非要求转换才做强制转换。</strong></p>
+<hr>
+<h3 id="1运算符">1、运算符</h3>
+<p>运算符分为：算术运算符、赋值运算符、比较运算符、三元运算符。</p>
+<ol>
+<li>
+<p>算术运算符</p>
+<p><strong>运算符是用来计算数据的符号。数据可以是常量，也可以是变量。被运算符操作的数我们称为操作数。</strong></p>
+<p>算术运算符最常见的操作是将操作数参与数学计算，如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">运算符		运算规则		范列		结果 
++	        正号      	    +3       	 3
++	        加       	    2+3       	 5
++	      字符串连接  	   &#34;你&#34;+&#34;好&#34;   	你好
+-	        负号		   int a=3;-a    -3
+-	        减号		    3-1      	 2
+*	        乘		        2*3     	 6
+/	        除		        5/2     	 2
+%	        取模	   	    5/2     	 1
+++	        自增	   int a=1;a++/++a   2
+--	        自减	   int b=3;b--/--b   2
+</code></pre></div><p>算术运算符演示：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#75715e">/**
+</span><span style="color:#75715e">* + 加法，连
+</span><span style="color:#75715e">* - 减法
+</span><span style="color:#75715e">* * 乘法
+</span><span style="color:#75715e">* / 除法
+</span><span style="color:#75715e">* % 取模（求余数）
+</span><span style="color:#75715e">* ++ 自增
+</span><span style="color:#75715e">* -- 自减
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Operator</span><span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+     <span style="color:#75715e">// + 连接作用，将一个字符串和其他数据连接起来
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">// 遇到字符串，变成连&#34;5+4=54&#34;
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">// + 任何类型只要和字符串+,所有的数据都变成了字符串。
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;5+4=&#34;</span><span style="color:#f92672">+</span>5<span style="color:#f92672">+</span>4<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#75715e">//除法运算
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">//java中，整数除法运算最后只会得到整数
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 100<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 9<span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>i<span style="color:#f92672">/</span>j<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#75715e">//取模运算，两数相除，获取的余数
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span>6<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span>4<span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>k<span style="color:#f92672">%</span>m<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#75715e">//++/-- 自增/自减运算
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> 3<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> 3<span style="color:#f92672">;</span>
+   		
+     a<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span> <span style="color:#75715e">//变量a自己增加1
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#f92672">+</span><span style="color:#f92672">+</span>b<span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>b<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+     <span style="color:#75715e">//======================================================
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">//++：写在变量前面，和写在后面的，区别
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> 3<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> 3<span style="color:#f92672">;</span>
+     <span style="color:#f92672">+</span><span style="color:#f92672">+</span>c<span style="color:#f92672">;</span>
+     d<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+     <span style="color:#75715e">//结论：符号写在前面，还是后面，在变量自己独立计算的时候，没有区别。
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">//但是变量，要是参与了其它运算，就有区别了。
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">//f = e++,++后算，先将e的值赋予f，然后e再自增1.
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">//q = ++h,++先算，先将h自增1，后再赋值给q。
+</span><span style="color:#75715e"></span>     <span style="color:#75715e">//======================测试============================
+</span><span style="color:#75715e"></span>     <span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> 5<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">int</span> f <span style="color:#f92672">=</span> e<span style="color:#f92672">+</span><span style="color:#f92672">+</span><span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>e<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>f<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> 5<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> <span style="color:#f92672">+</span><span style="color:#f92672">+</span>h<span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>h<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>q<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>输出结果：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">5<span style="color:#f92672">+</span>4<span style="color:#f92672">=</span>54
+11
+2
+4
+4
+6
+5
+6
+6
+</code></pre></div><p><strong>++：写在变量前面，和写在后面的，区别：</strong></p>
+<p>符号写在前面，还是后面，在变量自己独立计算的时候，没有区别。但是变量，要是参与了其它运算，就有区别了。</p>
+<pre><code class="language-dos" data-lang="dos">f = e++,++后算，先将e的值赋予f，然后e再自增1.
+q = ++h,++先算，先将h自增1，后再赋值给q。
+</code></pre><p>&ndash; 与++类似，不再做说明。</p>
+</li>
+<li>
+<p>赋值运算符</p>
+<p>赋值运算符就是为变量赋值的符号。</p>
+<p>赋值运算符的使用如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">运算符		运算规则		范例		结果
+=		     赋值		   int a=2		2
++=		     加后赋值	int a=2,a+=2	4
+-=		     减后赋值	int a=2,a-=2	0
+*=		     乘后赋值	int a=2,a*=2	4
+/=		     整除后赋值	int a=2,a/=2	1
+%=		     取模后赋值	int a=2,a%=2	0
+</code></pre></div><p><strong>注意：诸如+=这样形式的赋值运算符，会将结果自动强制转成等号左边的数据类型。</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Operator2</span><span style="color:#f92672">{</span>
+ <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+     <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span>
+     a<span style="color:#f92672">+</span><span style="color:#f92672">=</span>4<span style="color:#f92672">.</span><span style="color:#a6e22e">8</span><span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>a<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span>
+     b<span style="color:#f92672">%</span><span style="color:#f92672">=</span>3<span style="color:#f92672">.</span><span style="color:#a6e22e">3</span><span style="color:#f92672">;</span>  <span style="color:#75715e">//会先把10转成double 10.0 然后相除余数0.1，去整数0.
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>b<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#66d9ef">int</span> h <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span>
+     <span style="color:#75715e">//h=h%3.3;  会报 不兼容的类型: 从double转换到int可能会有损失
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>h<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> 10<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">double</span> d<span style="color:#f92672">=</span>3<span style="color:#f92672">.</span><span style="color:#a6e22e">3</span><span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>c<span style="color:#f92672">/</span>d<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>c<span style="color:#f92672">%</span>d<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+   		
+     <span style="color:#66d9ef">byte</span> m <span style="color:#f92672">=</span>1<span style="color:#f92672">;</span>
+     <span style="color:#75715e">//m = m + 1; //出错，会丢失精度，类似把小桶加大桶的水，放到小桶。
+</span><span style="color:#75715e"></span>     m<span style="color:#f92672">=</span><span style="color:#f92672">(</span><span style="color:#66d9ef">byte</span><span style="color:#f92672">)</span><span style="color:#f92672">(</span>m<span style="color:#f92672">+</span>1<span style="color:#f92672">)</span><span style="color:#f92672">;</span><span style="color:#75715e">//通过强转就可以。
+</span><span style="color:#75715e"></span>   		
+     m<span style="color:#f92672">+</span><span style="color:#f92672">=</span>1<span style="color:#f92672">;</span><span style="color:#75715e">//这种加就包含了上面的强转，因此推荐使用+=这种
+</span><span style="color:#75715e"></span>     System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>m<span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+ <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>输出结果:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">5
+0
+10
+3<span style="color:#f92672">.</span><span style="color:#a6e22e">0303030303030303</span>
+0<span style="color:#f92672">.</span><span style="color:#a6e22e">10000000000000053</span>
+3
+</code></pre></div><p><strong>注意：在运算时，都会往类型占有字节大的转换后再运算，除/余数运算，结果去整数。</strong></p>
+</li>
+</ol>
 
     </div>
     <div class="post-footer">
