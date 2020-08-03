@@ -167,45 +167,41 @@ else if(条件n){
  执行语句n
 }else{
  执行语句n+1
-</code></pre></div></li>
-</ol>
-<p>}</p>
-<pre><code>
-当判断条件1为true时，if后面{}中的执行语句1会执行。当判断条件1为false时，会继续执行判断条件2，如果为true则执行语句2，以此类推，如果所有的判断条件都为false，则意味着所有条件均未满足，else后面{}中的执行语句n+1会执行。
-
-**注意：条件最后都是boolean值，要么true要么false。**
-
-例如：
-
-```java
-package java_learn_code;
-
-import java.util.Scanner;
-
-/**
- * if...else if...else
- * 多条件判断
- */
-public class IfElseIfElseDemo {
- public static void main(String[] args) {
-     while(true) {
-         System.out.print(&quot;请输入分数:&quot;);
-         Scanner scan = new Scanner(System.in);
-         double sum = scan.nextDouble();
-         if(sum&lt;90) {
-             System.out.print(&quot;可以哦&quot;);
-         }else if(sum &lt;=80) {
-             System.out.println(&quot;合格&quot;);
-         }else if(sum &lt;=60){
-             System.out.println(&quot;不及格&quot;);
-         }else {
-             System.out.println(&quot;分数有问题&quot;);
-         }
-         System.out.println(&quot;&quot;);
-     }
  }
-}
-</code></pre><p>注意:if&hellip;else只能进行单条件判断，而if&hellip;else if&hellip;else可以进行多条件进行判断了。if..else也可以实现，但是效率没有if..else .. if &hellip; else效率高。</p>
+</code></pre></div><p>``</p>
+<p>当判断条件1为true时，if后面{}中的执行语句1会执行。当判断条件1为false时，会继续执行判断条件2，如果为true则执行语句2，以此类推，如果所有的判断条件都为false，则意味着所有条件均未满足，else后面{}中的执行语句n+1会执行。</p>
+<p>** 注意：条件最后都是boolean值，要么true要么false。**</p>
+<p>例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> java_learn_code<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">import</span> java.util.Scanner<span style="color:#f92672">;</span>
+
+<span style="color:#75715e">/**
+</span><span style="color:#75715e">* if...else if...else
+</span><span style="color:#75715e">* 多条件判断
+</span><span style="color:#75715e">*/</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IfElseIfElseDemo</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;请输入分数:&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      Scanner scan <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">double</span> sum <span style="color:#f92672">=</span> scan<span style="color:#f92672">.</span><span style="color:#a6e22e">nextDouble</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum<span style="color:#f92672">&lt;</span>90<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;可以哦&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>80<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;合格&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>60<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
+          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;不及格&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+          System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分数有问题&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+      <span style="color:#f92672">}</span>
+      System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
+  <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><pre><code></code></pre></li>
+</ol>
+<p><strong>注意:if&hellip;else只能进行单条件判断，而if&hellip;else if&hellip;else可以进行多条件进行判断了。if..else也可以实现，但是效率没有if..else .. if &hellip; else效率高。</strong></p>
 <h3 id="二三元运算符">二、三元运算符</h3>
 <p><strong>三元运算符得到一个结果，通常用于对某个变量进行赋值，当判断条件成立时，运算结果为表达式1的值，否则结果为表达式2的值。</strong></p>
 <p>三元运算符和if&hellip;else类似，语法如下：</p>
