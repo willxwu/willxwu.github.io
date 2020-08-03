@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <title>JavaSE 第一篇 // willxwu</title>
+    <title>Java 语法 // willxwu</title>
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.64.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,7 +11,7 @@
 
     
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JavaSE 第一篇"/>
+<meta name="twitter:title" content="Java 语法"/>
 <meta name="twitter:description" content="1、jdk安装   安装目录:C:\Program Files\Java\jdk1.8.0_151
   JDK安装过程中提示安装JRE：C:\Program Files\Java\jre1.8.0_151
   验证是否安装成功：进入安装目录：cd C:\Program Files\Java\jdk1.8.0_151\bin，执行程序:java/javac，看到一堆关于java的帮助就是成功了。
@@ -28,7 +28,7 @@
 JAVA_HOME：C:\Program Files\Java\jdk1.8.0_151 Path：%JAVA_HOME%\bin\; CLASSPATH：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar   验证环境变量是否配置成功：
 Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Java帮助信息。 javac -version：出现javac版本信息。 java -version：出现java版本信息。 出现上述信息，表示环境变量配置成功。   变量值说明："/>
 
-    <meta property="og:title" content="JavaSE 第一篇" />
+    <meta property="og:title" content="Java 语法" />
 <meta property="og:description" content="1、jdk安装   安装目录:C:\Program Files\Java\jdk1.8.0_151
   JDK安装过程中提示安装JRE：C:\Program Files\Java\jre1.8.0_151
   验证是否安装成功：进入安装目录：cd C:\Program Files\Java\jdk1.8.0_151\bin，执行程序:java/javac，看到一堆关于java的帮助就是成功了。
@@ -45,7 +45,7 @@ Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Jav
 JAVA_HOME：C:\Program Files\Java\jdk1.8.0_151 Path：%JAVA_HOME%\bin\; CLASSPATH：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar   验证环境变量是否配置成功：
 Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Java帮助信息。 javac -version：出现javac版本信息。 java -version：出现java版本信息。 出现上述信息，表示环境变量配置成功。   变量值说明：" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://willxwu.github.io/posts/javase-2020-07-30/" />
+<meta property="og:url" content="https://willxwu.github.io/posts/javayufa/" />
 <meta property="article:published_time" content="2020-07-30T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-07-30T00:00:00+00:00" />
 
@@ -74,7 +74,7 @@ Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Jav
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">JavaSE 第一篇</h1>
+      <h1 class ="post-title">Java 语法</h1>
       <div class="post-meta">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
@@ -106,6 +106,7 @@ Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Jav
 </ol>
 <p><strong>注意：安装目录不要出现中文。</strong></p>
 <h3 id="2jdk目录结构">2、JDK目录结构</h3>
+<p><img src="/jdk/jdk1.png" alt=""></p>
 <ol>
 <li>
 <p>bin：要存放的是java工具中常用命令如：java，javac等。</p>
@@ -132,6 +133,7 @@ Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Jav
 </li>
 </ol>
 <h3 id="3java运行过程">3、java运行过程</h3>
+<p><img src="/jdk/jdk2.png" alt=""></p>
 <ol>
 <li>源文件：程序员编写的Java源文件，扩展名.java</li>
 <li>编译：通过编译器编译源文件(.java文件)编译成字节码文件，扩展名.class</li>
@@ -141,9 +143,12 @@ Win&#43;R：打开运行程序输入cmd：打开dos窗口 javac/java：出现Jav
 <ol>
 <li>
 <p>变量名-变量值：</p>
-<pre><code class="language-dos" data-lang="dos">  JAVA_HOME：C:\Program Files\Java\jdk1.8.0_151
-  Path：%JAVA_HOME%\bin\;
-  CLASSPATH：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
+<p><img src="/jdk/jdk3.png" alt=""></p>
+<pre><code class="language-dos" data-lang="dos">JAVA_HOME：C:\Program Files\Java\jdk1.8.0_151
+</code></pre><p><img src="/jdk/jdk4.png" alt=""></p>
+<pre><code class="language-dos" data-lang="dos">Path：%JAVA_HOME%\bin\;
+</code></pre><p><img src="/jdk/jdk5.png" alt=""></p>
+<pre><code class="language-dos" data-lang="dos">CLASSPATH：.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar
 </code></pre></li>
 <li>
 <p>验证环境变量是否配置成功：</p>
@@ -157,12 +162,12 @@ java -version：出现java版本信息。
 </code></pre></li>
 <li>
 <p>变量值说明：</p>
+</li>
+</ol>
 <pre><code>.：主要是告诉jre在当前文件中查找.class文件。
 %JAVAHOME%：JDK安装路径。
 dt.jar\tool.jar: 编译运行需要jdk目录lib文件夹中的dt.jar、tool.jar中的java类。
-</code></pre></li>
-</ol>
-<p><strong>注意</strong>： 在jdk之前是需要配置classpath路径的，现在1.5之后的jdk不用配置也可以。</p>
+</code></pre><p><strong>注意</strong>： 在jdk之前是需要配置classpath路径的，现在1.5之后的jdk不用配置也可以。</p>
 <h3 id="5为什么">5、为什么？</h3>
 <ol>
 <li>
@@ -311,6 +316,7 @@ dt.jar\tool.jar: 编译运行需要jdk目录lib文件夹中的dt.jar、tool.jar�
 1.45F：为float类型。
 </code></pre><h3 id="6变量">6、变量</h3>
 <p>Java变量应用最多的。内存数据运行时，临时存储数据的地方。变量就是内存中装载数据的小盒子，只能用来存数据和取数据，数据类型定义了就不能改变了，里面的数据可以变化的。</p>
+<p><img src="/jdk/jdk6.png" alt=""></p>
 <p>定义变量格式：</p>
 <pre><code class="language-dos" data-lang="dos">数据类型  变量名  数据值
 int       num  =  100；
@@ -523,6 +529,7 @@ System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span>
 <hr>
 <h3 id="1数据类型转换">1、数据类型转换</h3>
 <p>数据类型转换分为自动转换和强制转换。不同类型的变量是否可以一起运算？答案是可以的，但是需要先进行数据类型转换，再运算。</p>
+<p><img src="/jdk/jdk7.png" alt=""></p>
 <p>数据转换遵循原则：</p>
 <pre><code class="language-dos" data-lang="dos">范围小的数据类型值，可以直接转换为范围大的数据类型值。
 

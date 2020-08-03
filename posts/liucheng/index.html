@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en-us">
   <head>
-    <title>JavaSE 第三篇 // willxwu</title>
+    <title>Java 流程控制语 // willxwu</title>
     <meta charset="utf-8" />
     <meta name="generator" content="Hugo 0.64.1" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -11,7 +11,7 @@
 
     
     <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="JavaSE 第三篇"/>
+<meta name="twitter:title" content="Java 流程控制语"/>
 <meta name="twitter:description" content="JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
 一、选择结构if if条件语句分为三种格式。
   if语句
@@ -27,7 +27,7 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
 例如：
 ** * if ... else 语句 * */ public class IfElseDemo { public static void main(String[] args) { int i = 13; if(i%2==0) { System."/>
 
-    <meta property="og:title" content="JavaSE 第三篇" />
+    <meta property="og:title" content="Java 流程控制语" />
 <meta property="og:description" content="JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
 一、选择结构if if条件语句分为三种格式。
   if语句
@@ -43,7 +43,7 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
 例如：
 ** * if ... else 语句 * */ public class IfElseDemo { public static void main(String[] args) { int i = 13; if(i%2==0) { System." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://willxwu.github.io/posts/javase-2020-08-01/" />
+<meta property="og:url" content="https://willxwu.github.io/posts/liucheng/" />
 <meta property="article:published_time" content="2020-08-01T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-01T00:00:00+00:00" />
 
@@ -72,7 +72,7 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
       
   <article class="post">
     <header class="post-header">
-      <h1 class ="post-title">JavaSE 第三篇</h1>
+      <h1 class ="post-title">Java 流程控制语</h1>
       <div class="post-meta">
         <div>
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar">
@@ -97,6 +97,7 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
 <li>
 <p>if语句</p>
 <p><strong>如果满足某种条件就执行。</strong></p>
+<p><img src="/liucheng/liucheng1.png" alt=""></p>
 <p>if语句格式：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">if（条件）{
  语句的执行体
@@ -125,6 +126,7 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
 <li>
 <p>if&hellip;else语句</p>
 <p><strong>如果满足某种条件，就执行某种处理，否则就执行另一种处理。</strong></p>
+<p><img src="/liucheng/liucheng2.png" alt=""></p>
 <p>if &hellip; else语法格式：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">if(条件){
  if的执行体
@@ -153,6 +155,7 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
 <li>
 <p>if&hellip;else if&hellip;else语句</p>
 <p><strong>用于多条件进行判断，进行多种不同的处理。</strong></p>
+<p><img src="/liucheng/liucheng3.png" alt=""></p>
 <p>语句格式：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">if(条件1){
  执行语句1
@@ -164,40 +167,45 @@ else if(条件n){
  执行语句n
 }else{
  执行语句n+1
-}
-</code></pre></div><p>当判断条件1为true时，if后面{}中的执行语句1会执行。当判断条件1为false时，会继续执行判断条件2，如果为true则执行语句2，以此类推，如果所有的判断条件都为false，则意味着所有条件均未满足，else后面{}中的执行语句n+1会执行。</p>
-<p><strong>注意：条件最后都是boolean值，要么true要么false。</strong></p>
-<p>例如：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">package</span> java_learn_code<span style="color:#f92672">;</span>
-   
-<span style="color:#f92672">import</span> java.util.Scanner<span style="color:#f92672">;</span>
-   
-<span style="color:#75715e">/**
-</span><span style="color:#75715e"> * if...else if...else
-</span><span style="color:#75715e"> * 多条件判断
-</span><span style="color:#75715e"> */</span>
-<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">IfElseIfElseDemo</span> <span style="color:#f92672">{</span>
- <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span><span style="color:#f92672">(</span>String<span style="color:#f92672">[</span><span style="color:#f92672">]</span> args<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-     <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span><span style="color:#66d9ef">true</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;请输入分数:&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         Scanner scan <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Scanner<span style="color:#f92672">(</span>System<span style="color:#f92672">.</span><span style="color:#a6e22e">in</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         <span style="color:#66d9ef">double</span> sum <span style="color:#f92672">=</span> scan<span style="color:#f92672">.</span><span style="color:#a6e22e">nextDouble</span><span style="color:#f92672">(</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum<span style="color:#f92672">&lt;</span>90<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">print</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;可以哦&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>80<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;合格&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>sum <span style="color:#f92672">&lt;</span><span style="color:#f92672">=</span>60<span style="color:#f92672">)</span><span style="color:#f92672">{</span>
-             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;不及格&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         <span style="color:#f92672">}</span><span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-             System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;分数有问题&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-         <span style="color:#f92672">}</span>
-         System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span><span style="color:#e6db74">&#34;&#34;</span><span style="color:#f92672">)</span><span style="color:#f92672">;</span>
-     <span style="color:#f92672">}</span>
- <span style="color:#f92672">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>注意:if&hellip;else只能进行单条件判断，而if&hellip;else if&hellip;else可以进行多条件进行判断了。if..else也可以实现，但是效率没有if..else .. if &hellip; else效率高。</p>
-</li>
+</code></pre></div></li>
 </ol>
+<p>}</p>
+<pre><code>
+当判断条件1为true时，if后面{}中的执行语句1会执行。当判断条件1为false时，会继续执行判断条件2，如果为true则执行语句2，以此类推，如果所有的判断条件都为false，则意味着所有条件均未满足，else后面{}中的执行语句n+1会执行。
+
+**注意：条件最后都是boolean值，要么true要么false。**
+
+例如：
+
+```java
+package java_learn_code;
+
+import java.util.Scanner;
+
+/**
+ * if...else if...else
+ * 多条件判断
+ */
+public class IfElseIfElseDemo {
+ public static void main(String[] args) {
+     while(true) {
+         System.out.print(&quot;请输入分数:&quot;);
+         Scanner scan = new Scanner(System.in);
+         double sum = scan.nextDouble();
+         if(sum&lt;90) {
+             System.out.print(&quot;可以哦&quot;);
+         }else if(sum &lt;=80) {
+             System.out.println(&quot;合格&quot;);
+         }else if(sum &lt;=60){
+             System.out.println(&quot;不及格&quot;);
+         }else {
+             System.out.println(&quot;分数有问题&quot;);
+         }
+         System.out.println(&quot;&quot;);
+     }
+ }
+}
+</code></pre><p>注意:if&hellip;else只能进行单条件判断，而if&hellip;else if&hellip;else可以进行多条件进行判断了。if..else也可以实现，但是效率没有if..else .. if &hellip; else效率高。</p>
 <h3 id="二三元运算符">二、三元运算符</h3>
 <p><strong>三元运算符得到一个结果，通常用于对某个变量进行赋值，当判断条件成立时，运算结果为表达式1的值，否则结果为表达式2的值。</strong></p>
 <p>三元运算符和if&hellip;else类似，语法如下：</p>
@@ -227,6 +235,7 @@ else if(条件n){
 </code></pre></div><p><strong>注意：如果判断条件比较多，使用三元运算符，是必须有结果的，而if语句可以没有结果的。</strong></p>
 <h3 id="三循环语句while">三、循环语句while</h3>
 <p><strong>while语句会反复地进行条件判断，只要条件成立，{}内的执行语句就会执行，直到条件不成立，while循环结束。</strong></p>
+<p><img src="/liucheng/liucheng4.png" alt=""></p>
 <p>while循环语句的语法结构:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">while(循环条件){
 执行语句

@@ -12,10 +12,10 @@
     
     <item>
       <title>Java 数组</title>
-      <link>https://willxwu.github.io/posts/javase-2020-08-02/</link>
+      <link>https://willxwu.github.io/posts/shuzu/</link>
       <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://willxwu.github.io/posts/javase-2020-08-02/</guid>
+      <guid>https://willxwu.github.io/posts/shuzu/</guid>
       <description>数组 数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。
 数组定义格式：
 数据类型[] 数组名(变量名) = new 数据类型[元素个数或数组长度]; 实例：
@@ -29,11 +29,11 @@ JVM内存划分：JVM对自己的内存进行了划分，分成5个区域。
     </item>
     
     <item>
-      <title>JavaSE 第三篇</title>
-      <link>https://willxwu.github.io/posts/javase-2020-08-01/</link>
+      <title>Java 流程控制语</title>
+      <link>https://willxwu.github.io/posts/liucheng/</link>
       <pubDate>Sat, 01 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://willxwu.github.io/posts/javase-2020-08-01/</guid>
+      <guid>https://willxwu.github.io/posts/liucheng/</guid>
       <description>JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
 一、选择结构if if条件语句分为三种格式。
   if语句
@@ -51,11 +51,11 @@ if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时
     </item>
     
     <item>
-      <title>JavaSE 第二篇</title>
-      <link>https://willxwu.github.io/posts/javase-2020-07-31/</link>
+      <title>Scanner和Random类</title>
+      <link>https://willxwu.github.io/posts/scan-random/</link>
       <pubDate>Fri, 31 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://willxwu.github.io/posts/javase-2020-07-31/</guid>
+      <guid>https://willxwu.github.io/posts/scan-random/</guid>
       <description>Java的两个引用输入类型Scanner、Random类，Scanner用于接收键盘输入，Random用户产生随机数。引用类型也就是Sun公司为我们写好的类，我们直接使用就可以了。
 1、引用数据类型的使用 1. 导入包：知道用的这个类，在jdk的那个目录那个文件下。 2. 创建对象：格式， 类 对象 = new 类型(); 3. 如何使用: 对象.类的方法()  引用数据类型的使用与定义基本数据类型变量不同，引用数据类型的变量定义及赋值有一个相对固定的步骤或格式，如下：
 数据类型 变量名 = new 数据类型(); 每种引用数据类型都有其方法，我们可以调用该类型实例的方法。
@@ -68,11 +68,11 @@ package java_learn_code; //导入包，指明类所在的的文件见，关键�
     </item>
     
     <item>
-      <title>JavaSE 第一篇</title>
-      <link>https://willxwu.github.io/posts/javase-2020-07-30/</link>
+      <title>Java 语法</title>
+      <link>https://willxwu.github.io/posts/javayufa/</link>
       <pubDate>Thu, 30 Jul 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://willxwu.github.io/posts/javase-2020-07-30/</guid>
+      <guid>https://willxwu.github.io/posts/javayufa/</guid>
       <description>1、jdk安装   安装目录:C:\Program Files\Java\jdk1.8.0_151
   JDK安装过程中提示安装JRE：C:\Program Files\Java\jre1.8.0_151
   验证是否安装成功：进入安装目录：cd C:\Program Files\Java\jdk1.8.0_151\bin，执行程序:java/javac，看到一堆关于java的帮助就是成功了。

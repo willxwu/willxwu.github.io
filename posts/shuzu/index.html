@@ -35,7 +35,7 @@ JVM内存划分：JVM对自己的内存进行了划分，分成5个区域。
 数组内存划分  首先，运行class文件，所以先进入方法区。 运行main方法，在方法栈中运行，但是main用不了那么多，所以方法栈中会分配一块给main方法是用。 执行数组，一个容器，所以JVM在堆内存，开空间，存储数组容器。 JVM会将该地址，给定义的数组变量arr（相当于arr引用了这个地址），所以数组是引用类型。 每次运行，JVM分配的地址是不同的。 当main方法运行完了，arr变量就没了，然后new int[3]也就没了 ，JVM垃圾回收机制，会自动帮我们回收，不用我们去处理了。  堆空间太大，怎么找到这个容器呢，所以每个数组，在内存中，都有自己的内存地址，也就是数组元素的首地址，第一个数据的地址。
 注意：arr引用类型，保存的数据，实际上是内存中的地址。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://willxwu.github.io/posts/javase-2020-08-02/" />
+<meta property="og:url" content="https://willxwu.github.io/posts/shuzu/" />
 <meta property="article:published_time" content="2020-08-02T00:00:00+00:00" />
 <meta property="article:modified_time" content="2020-08-02T00:00:00+00:00" />
 
