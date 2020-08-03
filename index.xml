@@ -5,10 +5,28 @@
     <link>https://willxwu.github.io/</link>
     <description>Recent content on willxwu</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Sat, 01 Aug 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Aug 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://willxwu.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Java 数组</title>
+      <link>https://willxwu.github.io/posts/javase-2020-08-02/</link>
+      <pubDate>Sun, 02 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://willxwu.github.io/posts/javase-2020-08-02/</guid>
+      <description>数组 数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。
+数组定义格式：
+数据类型[] 数组名(变量名) = new 数据类型[元素个数或数组长度]; 实例：
+public class ArrayDemo01 { public static void main(String[] args) { int[] x = new int[100]; } } 注意：数组定长，一但定义长度为100，在使用时大小就是100了。不变量。
+数组特点：定长、引用类型。
+JVM java程序运行时，操作系统会给jvm虚拟机分配一块内存。JVM又会将这块内存，进行划分管理。
+JVM内存划分：JVM对自己的内存进行了划分，分成5个区域。
+1、寄存器：内存和CPU之间。 2、本地方法栈：JVM调用操作系统中的功能。 3、方法和数据共享：运行时其class文件，进入的地方。 4、方法栈：所有的方法运行的时候，进入的内存。 5、堆：存储的是容器和对象。 开发人员主要关心：方法和数据共享、方法栈、堆。
+数组内存划分  首先，运行class文件，所以先进入方法区。 运行main方法，在方法栈中运行，但是main用不了那么多，所以方法栈中会分配一块给main方法是用。 执行数组，一个容器，所以JVM在堆内存，开空间，存储数组容器。 JVM会将该地址，给定义的数组变量arr（相当于arr引用了这个地址），所以数组是引用类型。 每次运行，JVM分配的地址是不同的。 当main方法运行完了，arr变量就没了，然后new int[3]也就没了 ，JVM垃圾回收机制，会自动帮我们回收，不用我们去处理了。  堆空间太大，怎么找到这个容器呢，所以每个数组，在内存中，都有自己的内存地址，也就是数组元素的首地址，第一个数据的地址。
+注意：arr引用类型，保存的数据，实际上是内存中的地址。</description>
+    </item>
     
     <item>
       <title>JavaSE 第三篇</title>
