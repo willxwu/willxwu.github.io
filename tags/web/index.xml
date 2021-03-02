@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>web on Your title</title><link>https://yanxizhu.com/tags/web/</link><description>Recent content in web on Your title</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yanxizhu.com/tags/web/index.xml" rel="self" type="application/rss+xml"/><item><title>Html</title><link>https://yanxizhu.com/posts/html/</link><pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate><guid>https://yanxizhu.com/posts/html/</guid><description>HTML 知识点总结 1、HTML基本格式 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; html：根标签，只有一个（网页所有内容都应该写在根标签里面）
+head：子标签，用来设置头部内容
+body：子标签，网页主体,所有要显示的内容放这里面
+title：
+网页的标题标签，也就是网页显示名字。
+搜索引擎检索页面时，会首先检索titlte中的内容。
+元素：一个完整的标签&amp;lt;&amp;gt;&amp;lt;/&amp;gt;
+标签&amp;lt;&amp;gt;
+2、HTML后缀名 将编写好的文件保存为.html网页格式文件
+显示文件格式名
+3、HTML注释 &amp;lt;！-- 这是一个注释的格式，可以直接换行 继续写注释。 --&amp;gt; 注释中的内容，不会显示在页面。
+可以写注释来对代码进行描述，便于后期的维护。要养成良好的编写注释习惯。
+4、标签属性 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello &amp;lt;font color=&amp;#34;red&amp;#34;&amp;gt;World&amp;lt;/font&amp;gt; ！&amp;lt;/h1&amp;gt; &amp;lt;!-- 这是一个注释，不会显示在网页中。 --&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 属性只能在开始标签中设置</description></item></channel></rss>

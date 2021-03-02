@@ -1,36 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>willxwu</title>
-    <link>https://willxwu.github.io/</link>
-    <description>Recent content on willxwu</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Mon, 01 Jan 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://willxwu.github.io/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Html</title>
-      <link>https://willxwu.github.io/posts/html/</link>
-      <pubDate>Mon, 01 Jan 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://willxwu.github.io/posts/html/</guid>
-      <description>HTML 知识点总结 1、HTML基本格式 &amp;lt;html&amp;gt;	&amp;lt;head&amp;gt;	&amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt;	&amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; html：根标签，只有一个（网页所有内容都应该写在根标签里面）
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Your title</title><link>https://yanxizhu.com/</link><description>Recent content on Your title</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://yanxizhu.com/index.xml" rel="self" type="application/rss+xml"/><item><title>Html</title><link>https://yanxizhu.com/posts/html/</link><pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate><guid>https://yanxizhu.com/posts/html/</guid><description>HTML 知识点总结 1、HTML基本格式 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; html：根标签，只有一个（网页所有内容都应该写在根标签里面）
 head：子标签，用来设置头部内容
 body：子标签，网页主体,所有要显示的内容放这里面
 title：
-  网页的标题标签，也就是网页显示名字。
-  搜索引擎检索页面时，会首先检索titlte中的内容。
-  元素：一个完整的标签&amp;lt;&amp;gt;&amp;lt;/&amp;gt;
-  标签&amp;lt;&amp;gt;
-  2、HTML后缀名   将编写好的文件保存为.html网页格式文件
-  显示文件格式名
-  3、HTML注释 &amp;lt;！-- 这是一个注释的格式，可以直接换行 继续写注释。 --&amp;gt;   注释中的内容，不会显示在页面。
-  可以写注释来对代码进行描述，便于后期的维护。要养成良好的编写注释习惯。
-  4、标签属性 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello &amp;lt;font color=&amp;#34;red&amp;#34;&amp;gt;World&amp;lt;/font&amp;gt; ！&amp;lt;/h1&amp;gt; &amp;lt;!--这是一个注释，不会显示在网页中。 --&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt;   属性只能在开始标签中设置
-  属性名 =&amp;quot;属性值&amp;rdquo;</description>
-    </item>
-    
-  </channel>
-</rss>
+网页的标题标签，也就是网页显示名字。
+搜索引擎检索页面时，会首先检索titlte中的内容。
+元素：一个完整的标签&amp;lt;&amp;gt;&amp;lt;/&amp;gt;
+标签&amp;lt;&amp;gt;
+2、HTML后缀名 将编写好的文件保存为.html网页格式文件
+显示文件格式名
+3、HTML注释 &amp;lt;！-- 这是一个注释的格式，可以直接换行 继续写注释。 --&amp;gt; 注释中的内容，不会显示在页面。
+可以写注释来对代码进行描述，便于后期的维护。要养成良好的编写注释习惯。
+4、标签属性 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello &amp;lt;font color=&amp;#34;red&amp;#34;&amp;gt;World&amp;lt;/font&amp;gt; ！&amp;lt;/h1&amp;gt; &amp;lt;!-- 这是一个注释，不会显示在网页中。 --&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 属性只能在开始标签中设置</description></item><item><title>(Hu)go Template Primer</title><link>https://yanxizhu.com/posts/goisforlovers/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://yanxizhu.com/posts/goisforlovers/</guid><description>Hugo uses the excellent Go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in Go templates.
+This document is a brief primer on using Go templates.</description></item><item><title>关于我</title><link>https://yanxizhu.com/about/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://yanxizhu.com/about/</guid><description>一名JAVA后端程序员</description></item><item><title>友情链接</title><link>https://yanxizhu.com/link/</link><pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate><guid>https://yanxizhu.com/link/</guid><description>Web前端导航
+美团技术团队 | 小米信息部技术团队 | 腾讯MDX Tencent TG ideas | Tencent AlloyTeam | 搜狐畅游视觉设计中心团队 | Glow技术团队
+国外技术团队博客：
+https://code.facebook.com
+博客上会介绍一些Facebook在Android、iOS、前端、后端以及硬件技术遇到的问题，也包括一些他们团队研究的新技术， 比如fresco等等。我最感兴趣的是他们在技术上遇到的一些问题，然后他们是怎么解决的.
+http://square.github.io/
+Square应该是业界开源项目最多的公司之一了，它的github主页上列举了好多开源项目，一个做Android的如果没用过Square的开源库的话，要么你非常非常牛逼，要么你真的不关心开源项目。
+https://blog.twitter.com/engineering
+Twitter是一家美国社交网络及微博客服务的网站，是全球互联网上访问量最大的十个网站之一。这是Twitter官方推出的技术博客， 经由Twitter工程研发团队所维护管理，第一时间发布一手的有关Twitter的技术、工具以及活动信息。向业内外人士展示Twitter背后的工具、产品。还包括受到大家强烈关注的，Twitter发布的开源产品信息介绍。
+https://engineering.linkedin.com/
+作为全球最大的职业社交网站，LinkedIn 会员人数在世界范围内已超过 3 亿。这是LinkedIn旗下的科技博客，涵盖的内容非常丰富。 从各个方面详细地介绍了LinkedIn技术人员如何使用高度结构化的数据来完成LinkedIn的搜索功能、社交图谱以及机器学习系统。 此外，还有对于其工程研发团队所创造、管理和使用的开源产品细致化讲解。另外还包含精彩博文，有关于LinkedIn背后的技术背景、 团队开发人员介绍等等您都可以在这里一网打尽，非常值得我们学习借鉴。
+http://google-opensource.blogspot.hk/
+谷歌，是一家美国的跨国科技企业，致力于互联网搜索、云计算、广告技术等领域，开发并提供大量基于互联网的产品与服务。 这个科技博客发布了Google所有的开源产品项目的新闻消息，并会及时更新开源软件的开发信息。Google是支持开源运动的最大公司之一，如果您想第一时间了解新开源的产品，学习Google的实践经验，及时掌握Google的核心关键技术，向Google开发团队表达自己的建议，那这一定会是您最好的去处
+https://www.nginx.com/blog/ Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。 中国大陆使用NGINX网站用户有：百度、新浪、网易、腾讯等。在NGINX的技术博客，您可以看到NGINX的新闻、技术信息和科技交流活动安排。对于NGINX的技术发布、核心技术信息都在这里一一呈现。关注这个微博，您可以第一时间看到有关于NGINX的技术咨询。 如果您对这个高性能的HTTP和反向代理服务器非常感兴趣，请您一定要关注它！
+http://radar.oreilly.com/ 洞悉、分析和研究新兴技术是其宗旨。该博客有请O’Reilly公司的专栏编辑，撰写各个领域的技术类文章。迎合技术开发者的需求， 追踪最前沿技术，每篇文章定位读者精确，您可以选择自己最感兴趣的方面进行阅读。
+https://engineering.opendns.com/ OpenDNS长期以来致力于为广大个人用户以及商务企业用户和公共领域提供免费的域名解析服务。在OpenDNS Engineering博客上， 您可以找到该公司设计的这个全球最大安全网络的相关技术资料。博客上提供了独家的技术见解，谈论了该公司文化，并发布技术活动信息。您可以与OpenDNS开发团队的工程师探讨如何消除恶意软件、网络钓鱼等等的技术。有关具体的技术创新和技术分析，您都可以在博文中找到线索。
+http://techblog.netflix.com/ Netflix是一家在线影片租赁提供商。公司能够提供Netflix超大数量的DVD，而且能够让顾客快速方便的挑选影片，同时免费递送。这是Netflix的博客，专注于技术和技术问题。Netflix的技术专家分享他们创造Netflix service的时候所遇到的挑战、所作出的决定以及所拥有的观点。
+http://githubengineering.com/ 作为开源代码库以及版本控制系统，Github拥有140多万开发者用户。这是由GitHub的一线技术工程师，根据自身开发GitHub环节中遇到的问题、使用的最新技术所撰写的博客。由于作者都是非常有经验的工程师，您可以深入了解GitHub后台结构，对您的相关开发一定有很大帮助。
+http://blog.parse.com/ Parse是由 YC 孵化出来的、专为移动应用提供后台服务的云计算平台，为开发者包办繁琐的后台服务，让开发者只需专注于具体的开发工作。这里分享最新的Parse开发者的开发经验。在这个博客中，你可以零距离学习Parse最新技术，深入探究Parse的技术活动，甚至可以向Parse的技术开发者提问任何你感兴趣的问题。还提供视频选段，全方位直击最新技术热点。
+https://www.buzzfeed.com/techblog BuzzFeed是一个美国的新闻聚合网站，致力于从数百个新闻博客那里获取订阅源，通过搜索、发送信息链接。BuzzFeed的技术博客，主要发布BuzzFeed的产品技术更新，当然也有对于技术核心内容的深入剖析。BuzzFeed的作者编辑们都极具灵感和技能，每篇文章都带有典型的BuzzFeed式幽默，您一定会被其色彩鲜明的配图和极富特色的语言文字所吸引，是非常具有吸引力的一个别具匠心的博客！
+https://labs.spotify.com/ Spotify是全球最大的正版流媒体音乐服务平台。截止到2015年1月，Spotify已经拥有超过6000万的用户，其中1500万为付费用户。具有如此大的用户基数，其后台技术自然不容小视。在这个Spotify的官方技术博客， 您可以看到Spotify的技术人员如何处理遇到的问题。所有的博文都由Spotify的工程技术人员亲自撰写，其专业性和权威性都得到了很大的保障。相信这些最前沿的技术分享一定能让您有所收获！
+http://www.yelp.com/engineering Yelp是美国最大的点评网站，其极快的增长速度、极大的扩张趋势都离不开背后强大的技术支持。这个Yelp的技术博客，邀请到开发团队的工程师，来分享Yelp所运用到的各项先进算法技术。您可以看到Yelp技术人员如何解决技术问题，Yelp团队发布的开源产品等等。
+http://instagram-engineering.tumblr.com/ Instagram是一款最初运行在iOS平台上的移动应用，以一种快速、美妙和有趣的方式将你随时抓拍下的图片分享彼此。Instagram旗下的科技博客，在这里分享了Instagram技术人员的开发见解。 这是最好最直接地了解Instagram背后技术的博客平台。最早仅由五名技术人员打造的系统，现在当然是今非昔比。这里提供的不仅仅是对于关键技术的介绍，更有Instagram技术人员非常值得借鉴的开发经验。</description></item></channel></rss>
