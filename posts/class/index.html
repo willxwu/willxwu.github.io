@@ -1,0 +1,194 @@
+<!doctype html><html lang=en-us><head><title>JAVA反射 // Your title</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.81.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="JAVA反射"><meta name=twitter:description content="获取反射对象的3种方法。通过反射创建对象、通过反射获取有参、无参、公有、私有构造方法。通过反射获取公有、私有成员变量并修改之。通过反射获取成员方法，并调用。通过反射泛型擦除，存值。通过读取配置文件运行反射方法。
+package learn.javase.mycalss; import java.lang.reflect.Constructor; import java.lang.reflect.Field; import java.lang.reflect.Method; import java.util.ArrayList; import java.util.List; /** * 一、获取class的三种方式 * * 二、获取公有构造方法 * 注意： * 1、被反射的类必须是有空参数的构造器 * 2、构造方法必须是public的才能反射获取 * * 三、获取所有构造方法 * * @author Jole * */ public class ClassDemo { public static void main(String[] args) throws Exception{ // 方式1、.getClass() 	Person p = new Person(); Class c = p.getClass(); System.out.println(c); //方式2、类名.class 	Class c3 = Person.class; System.out.println(c3); //方式3、Class.forName(类全名); 	Class c2 = Class."><meta property="og:title" content="JAVA反射"><meta property="og:description" content="获取反射对象的3种方法。通过反射创建对象、通过反射获取有参、无参、公有、私有构造方法。通过反射获取公有、私有成员变量并修改之。通过反射获取成员方法，并调用。通过反射泛型擦除，存值。通过读取配置文件运行反射方法。
+package learn.javase.mycalss; import java.lang.reflect.Constructor; import java.lang.reflect.Field; import java.lang.reflect.Method; import java.util.ArrayList; import java.util.List; /** * 一、获取class的三种方式 * * 二、获取公有构造方法 * 注意： * 1、被反射的类必须是有空参数的构造器 * 2、构造方法必须是public的才能反射获取 * * 三、获取所有构造方法 * * @author Jole * */ public class ClassDemo { public static void main(String[] args) throws Exception{ // 方式1、.getClass() 	Person p = new Person(); Class c = p.getClass(); System.out.println(c); //方式2、类名.class 	Class c3 = Person.class; System.out.println(c3); //方式3、Class.forName(类全名); 	Class c2 = Class."><meta property="og:type" content="article"><meta property="og:url" content="https://yanxizhu.com/posts/class/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2014-04-17T00:00:00+00:00"><meta property="article:modified_time" content="2014-04-17T00:00:00+00:00"></head><body><header class=app-header><a href=https://yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>Your title</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+-
+<a class=app-header-menu-item href=/>home</a>
+-
+<a class=app-header-menu-item href=/link/>link</a>
+-
+<a class=app-header-menu-item href=/tags/>tags</a></nav><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p><div class=app-header-social><a target=_blank href=https://github.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a target=_blank href=https://twitter.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a></div></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title>JAVA反射</h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Apr 17, 2014</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2 min read</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tag"><title>tag</title><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83.0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><line x1="7" y1="7" x2="7" y2="7"/></svg><a class=tag href=https://yanxizhu.com/tags/java/>java</a>
+<a class=tag href=https://yanxizhu.com/tags/javse/>javse</a>
+<a class=tag href=https://yanxizhu.com/tags/class/>class</a>
+<a class=tag href=https://yanxizhu.com/tags/classname/>className</a>
+<a class=tag href=https://yanxizhu.com/tags/getclass/>getClass</a>
+<a class=tag href=https://yanxizhu.com/tags/forname/>forName</a>
+<a class=tag href=https://yanxizhu.com/tags/constructor/>Constructor</a>
+<a class=tag href=https://yanxizhu.com/tags/getfields/>getFields</a></div></div></header><div class=post-content><p>获取反射对象的3种方法。通过反射创建对象、通过反射获取有参、无参、公有、私有构造方法。通过反射获取公有、私有成员变量并修改之。通过反射获取成员方法，并调用。通过反射泛型擦除，存值。通过读取配置文件运行反射方法。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase.mycalss<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.lang.reflect.Constructor<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.lang.reflect.Field<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.lang.reflect.Method<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.ArrayList<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.List<span style=color:#f92672>;</span>
+
+<span style=color:#75715e>/**
+</span><span style=color:#75715e> * 一、获取class的三种方式
+</span><span style=color:#75715e> * 
+</span><span style=color:#75715e> * 二、获取公有构造方法
+</span><span style=color:#75715e> * 注意：
+</span><span style=color:#75715e> * 1、被反射的类必须是有空参数的构造器
+</span><span style=color:#75715e> * 2、构造方法必须是public的才能反射获取
+</span><span style=color:#75715e> * 
+</span><span style=color:#75715e> * 三、获取所有构造方法
+</span><span style=color:#75715e> * 
+</span><span style=color:#75715e> * @author Jole
+</span><span style=color:#75715e> *
+</span><span style=color:#75715e> */</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ClassDemo</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception<span style=color:#f92672>{</span>
+		<span style=color:#75715e>// 方式1、.getClass()
+</span><span style=color:#75715e></span>		Person p <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Person<span style=color:#f92672>();</span>
+		Class c <span style=color:#f92672>=</span> p<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>();</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>c<span style=color:#f92672>);</span>
+		<span style=color:#75715e>//方式2、类名.class
+</span><span style=color:#75715e></span>		Class c3 <span style=color:#f92672>=</span> Person<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>;</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>c3<span style=color:#f92672>);</span>
+		<span style=color:#75715e>//方式3、Class.forName(类全名);
+</span><span style=color:#75715e></span>		Class c2 <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;learn.javase.mycalss.Person&#34;</span><span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>c2<span style=color:#f92672>);</span>
+			
+		Class personClass <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;learn.javase.mycalss.Person&#34;</span><span style=color:#f92672>);</span>
+		<span style=color:#75715e>//获取public所有构造方法
+</span><span style=color:#75715e></span>		Constructor<span style=color:#f92672>[]</span> cons <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getConstructors</span><span style=color:#f92672>();</span>
+		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span>Constructor con <span style=color:#f92672>:</span> cons<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>con<span style=color:#f92672>);</span>
+		<span style=color:#f92672>}</span>
+		<span style=color:#75715e>//获取public无参构造方法
+</span><span style=color:#75715e></span>		Constructor cc <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getConstructor</span><span style=color:#f92672>();</span>
+		Person pp <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Person<span style=color:#f92672>)</span>cc<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>();</span>
+		<span style=color:#75715e>//获取public有参构造方法
+</span><span style=color:#75715e></span>		Constructor  ccc <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getConstructor</span><span style=color:#f92672>(</span>String<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+		Person ppp <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Person<span style=color:#f92672>)</span>ccc<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;张三&#34;</span><span style=color:#f92672>,</span>122<span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>ppp<span style=color:#f92672>);</span>
+		
+		<span style=color:#75715e>//获取所有包括private的构造方法
+</span><span style=color:#75715e></span>		Constructor<span style=color:#f92672>[]</span> conss <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getDeclaredConstructors</span><span style=color:#f92672>();</span>
+		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span>Constructor co<span style=color:#f92672>:</span> conss <span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>co<span style=color:#f92672>);</span>
+		<span style=color:#f92672>}</span>
+		<span style=color:#75715e>//获取私有构造方法
+</span><span style=color:#75715e></span>		Constructor ct <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getDeclaredConstructor</span><span style=color:#f92672>(</span>String<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+		ct<span style=color:#f92672>.</span><span style=color:#a6e22e>setAccessible</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+		Person ps <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Person<span style=color:#f92672>)</span>ct<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;zhangsan&#34;</span><span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>ps<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+		
+		<span style=color:#75715e>//获取所有公共成员变量
+</span><span style=color:#75715e></span>		Field<span style=color:#f92672>[]</span> fis <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getFields</span><span style=color:#f92672>();</span>
+		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span>Field fi <span style=color:#f92672>:</span> fis<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;成员变量：&#34;</span><span style=color:#f92672>+</span>fi<span style=color:#f92672>);</span>
+		<span style=color:#f92672>}</span>
+		
+		<span style=color:#75715e>//获取私有成员变量
+</span><span style=color:#75715e></span>		Field fd <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getDeclaredField</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;name&#34;</span><span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>fd<span style=color:#f92672>);</span>
+		<span style=color:#75715e>//修改成员变量的值
+</span><span style=color:#75715e></span>		Object obj <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>();</span>
+		fd<span style=color:#f92672>.</span><span style=color:#a6e22e>set</span><span style=color:#f92672>(</span>obj<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;哈哈&#34;</span><span style=color:#f92672>);</span>
+		fd<span style=color:#f92672>.</span><span style=color:#a6e22e>setAccessible</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>obj<span style=color:#f92672>);</span>
+		
+		<span style=color:#75715e>//获取所有公共成员方法
+</span><span style=color:#75715e></span>		Method<span style=color:#f92672>[]</span> md <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getMethods</span><span style=color:#f92672>();</span>
+		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span>Method m <span style=color:#f92672>:</span> md<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;所有公共成员方法：&#34;</span><span style=color:#f92672>+</span>m<span style=color:#f92672>);</span>
+		<span style=color:#f92672>}</span>
+		
+		
+		<span style=color:#75715e>//获取单个无参成员方方法
+</span><span style=color:#75715e></span>		Method mt <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getMethod</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;say&#34;</span><span style=color:#f92672>);</span>
+		mt<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>());</span>
+		
+		<span style=color:#75715e>//获取单个有参成员方法，并运行
+</span><span style=color:#75715e></span>		Method me <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>getMethod</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;say&#34;</span><span style=color:#f92672>,</span> String<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+		Object objd <span style=color:#f92672>=</span> personClass<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>();</span>
+		Object ob <span style=color:#f92672>=</span> me<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>objd<span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;Hello World&#34;</span><span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>ob<span style=color:#f92672>);</span>
+		
+		
+		<span style=color:#75715e>//反射泛型的擦除
+</span><span style=color:#75715e></span>		List<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> list <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> ArrayList<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;();</span>
+		<span style=color:#75715e>//正常情况只能存String类型，但是通过反射可以存其他类型
+</span><span style=color:#75715e></span>		Class li <span style=color:#f92672>=</span> list<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>();</span>
+		Method mmm <span style=color:#f92672>=</span> li<span style=color:#f92672>.</span><span style=color:#a6e22e>getMethod</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;add&#34;</span><span style=color:#f92672>,</span> Object<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+		mmm<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>list<span style=color:#f92672>,</span> 1000<span style=color:#f92672>);</span>
+		mmm<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>list<span style=color:#f92672>,</span> 444<span style=color:#f92672>);</span>
+		mmm<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>list<span style=color:#f92672>,</span>999L<span style=color:#f92672>);</span>
+		mmm<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>list<span style=color:#f92672>,</span> <span style=color:#e6db74>&#39;c&#39;</span><span style=color:#f92672>);</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>list<span style=color:#f92672>);</span>
+		
+	<span style=color:#f92672>}</span>
+
+<span style=color:#f92672>}</span>
+
+</code></pre></div><p>通过读取配置文件，用反射调用成员方法，更加灵活。</p><p>不同的成员方法如下：
+人类对象</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase.mycalss<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>People</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>say</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;我是人类&#34;</span><span style=color:#f92672>);</span>
+	<span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+</code></pre></div><p>学生对象</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase.mycalss<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Student</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>stay</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;我要学习&#34;</span><span style=color:#f92672>);</span>
+	<span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+</code></pre></div><p>打工人对象</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase.mycalss<span style=color:#f92672>;</span>
+
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Worker</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>job</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;我要工作&#34;</span><span style=color:#f92672>);</span>
+	<span style=color:#f92672>}</span>
+<span style=color:#f92672>}</span>
+
+</code></pre></div><p>iconfig.properties配置文件如下:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#960050;background-color:#1e0010>#</span>className<span style=color:#f92672>=</span>learn<span style=color:#f92672>.</span><span style=color:#a6e22e>javase</span><span style=color:#f92672>.</span><span style=color:#a6e22e>mycalss</span><span style=color:#f92672>.</span><span style=color:#a6e22e>People</span>
+<span style=color:#960050;background-color:#1e0010>#</span>classMethod<span style=color:#f92672>=</span>say
+className<span style=color:#f92672>=</span>learn<span style=color:#f92672>.</span><span style=color:#a6e22e>javase</span><span style=color:#f92672>.</span><span style=color:#a6e22e>mycalss</span><span style=color:#f92672>.</span><span style=color:#a6e22e>Student</span>
+classMethod<span style=color:#f92672>=</span>stay
+<span style=color:#960050;background-color:#1e0010>#</span>className<span style=color:#f92672>=</span>learn<span style=color:#f92672>.</span><span style=color:#a6e22e>javase</span><span style=color:#f92672>.</span><span style=color:#a6e22e>mycalss</span><span style=color:#f92672>.</span><span style=color:#a6e22e>Worker</span>
+<span style=color:#960050;background-color:#1e0010>#</span>classMethod<span style=color:#f92672>=</span>job
+</code></pre></div><p>通过反射，调用不同对象的成员方法，每次只需要修配置文件即可，不需要修改代码。代码如下:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase.mycalss<span style=color:#f92672>;</span>
+
+<span style=color:#f92672>import</span> java.io.FileReader<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.lang.reflect.Method<span style=color:#f92672>;</span>
+<span style=color:#f92672>import</span> java.util.Properties<span style=color:#f92672>;</span>
+
+
+<span style=color:#75715e>/**
+</span><span style=color:#75715e> * 读取配置文件，通过反射调用不同对象的成员方法
+</span><span style=color:#75715e> * @author Jole
+</span><span style=color:#75715e> *
+</span><span style=color:#75715e> */</span>
+<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ConfigPropertiesRun</span> <span style=color:#f92672>{</span>
+
+	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> Exception<span style=color:#f92672>{</span>
+		<span style=color:#75715e>//读取配置文件，注意配置文件路径为src下
+</span><span style=color:#75715e></span>		FileReader fr <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> FileReader<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;iconfig.properties&#34;</span><span style=color:#f92672>);</span> 
+		Properties pr <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Properties<span style=color:#f92672>();</span>
+		pr<span style=color:#f92672>.</span><span style=color:#a6e22e>load</span><span style=color:#f92672>(</span>fr<span style=color:#f92672>);</span>
+		fr<span style=color:#f92672>.</span><span style=color:#a6e22e>close</span><span style=color:#f92672>();</span>
+		<span style=color:#75715e>//获取配置文件数据
+</span><span style=color:#75715e></span>		String className <span style=color:#f92672>=</span> pr<span style=color:#f92672>.</span><span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;className&#34;</span><span style=color:#f92672>);</span>
+		String classMethod <span style=color:#f92672>=</span> pr<span style=color:#f92672>.</span><span style=color:#a6e22e>getProperty</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;classMethod&#34;</span><span style=color:#f92672>);</span>
+		
+		<span style=color:#75715e>//反射，并获取对象
+</span><span style=color:#75715e></span>		Class c <span style=color:#f92672>=</span> Class<span style=color:#f92672>.</span><span style=color:#a6e22e>forName</span><span style=color:#f92672>(</span>className<span style=color:#f92672>);</span>
+		Object obj  <span style=color:#f92672>=</span> c<span style=color:#f92672>.</span><span style=color:#a6e22e>newInstance</span><span style=color:#f92672>();</span>
+		
+		<span style=color:#75715e>//反射获取成员方法
+</span><span style=color:#75715e></span>		Method m <span style=color:#f92672>=</span> c<span style=color:#f92672>.</span><span style=color:#a6e22e>getMethod</span><span style=color:#f92672>(</span>classMethod<span style=color:#f92672>);</span>
+		<span style=color:#75715e>//反射调用成员方法
+</span><span style=color:#75715e></span>		m<span style=color:#f92672>.</span><span style=color:#a6e22e>invoke</span><span style=color:#f92672>(</span>obj<span style=color:#f92672>);</span>
+	<span style=color:#f92672>}</span>
+
+<span style=color:#f92672>}</span>
+
+</code></pre></div></div><div class=post-footer></div></article></main></body></html>

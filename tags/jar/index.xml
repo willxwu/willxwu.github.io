@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>jar on Your title</title><link>https://yanxizhu.com/tags/jar/</link><description>Recent content in jar on Your title</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Fri, 11 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://yanxizhu.com/tags/jar/index.xml" rel="self" type="application/rss+xml"/><item><title>nexus私服搭建</title><link>https://yanxizhu.com/posts/nexus/</link><pubDate>Fri, 11 Apr 2014 00:00:00 +0000</pubDate><guid>https://yanxizhu.com/posts/nexus/</guid><description>&lt;p>第一步骤：下载nexus私服软件nexus-2.12.0-01-bundle&lt;/p>
+&lt;p>第二不：安装&lt;/p>
+&lt;p>进入nexus解压目录进入到bin目录:&lt;/p>
+&lt;p>1、安装:执行nexus.bat install&lt;/p>
+&lt;p>2、启动:nexus.bat start&lt;/p>
+&lt;p>第三步：查看访问路径&lt;/p>
+&lt;p>进入config目录，打开nexus.properties即可看到端口号，项目命令nexus。&lt;/p>
+&lt;p>第四步：浏览器打开http://127.0.0.1:8081/nexus/&lt;/p>
+&lt;p>默认登录账号:admin/admin123&lt;/p></description></item></channel></rss>
