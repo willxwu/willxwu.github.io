@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>JAVA异常 // 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.82.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="JAVA异常"><meta name=twitter:description content="异常 Throwable Throwable类是所有错误跟异常类的超类.
+<!doctype html><html lang=en-us><head><title>JAVA异常 // 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.84.1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="JAVA异常"><meta name=twitter:description content="异常 Throwable Throwable类是所有错误跟异常类的超类.
 Exception Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。
 RuntimeException RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。
 特点：
@@ -141,22 +141,22 @@ finally：有一些特定的代码无论异常是否发生，都需要执行。�
 </span><span style=color:#75715e> *
 </span><span style=color:#75715e> */</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ZifuException</span> <span style=color:#66d9ef>extends</span> FuException<span style=color:#f92672>{</span>
-   	
+
 	<span style=color:#75715e>//抛出父类一样的异常
 </span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> RuntimeException <span style=color:#f92672>{</span>
-   		
+
 	<span style=color:#f92672>}</span>  
 	<span style=color:#75715e>//抛出父类子异常
 </span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method2</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>{</span>
-       	
+
     <span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>父类:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
-   
+
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FuException</span> <span style=color:#f92672>{</span>
-   	
+
 	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span> <span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> RuntimeException <span style=color:#f92672>{</span>
-   		
+
 	<span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div></li><li><p>当父类方法声明多个异常时，子类覆盖时只能声明多个异常的子集。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
@@ -168,15 +168,15 @@ finally：有一些特定的代码无论异常是否发生，都需要执行。�
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Zexception</span> <span style=color:#66d9ef>extends</span> Fexception<span style=color:#f92672>{</span>
 	<span style=color:#75715e>//抛出父类全部异常
 </span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>,</span> ClassCastException <span style=color:#f92672>{</span>
-   		
+
 	<span style=color:#f92672>}</span>        
 	<span style=color:#75715e>//抛出父类异常中的一部分
 </span><span style=color:#75715e>//    public void method() throws NullPointerException{
-</span><span style=color:#75715e></span>       	
+</span><span style=color:#75715e></span>
 <span style=color:#75715e>//    } 
 </span><span style=color:#75715e></span>    <span style=color:#75715e>//抛出父类异常中的一部分
 </span><span style=color:#75715e>//    public void method() throws ClassCastException {
-</span><span style=color:#75715e></span>       	
+</span><span style=color:#75715e></span>
 <span style=color:#75715e>//    } 
 </span><span style=color:#75715e></span><span style=color:#f92672>}</span>
 </code></pre></div><p>父类异常：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
@@ -187,22 +187,22 @@ finally：有一些特定的代码无论异常是否发生，都需要执行。�
 </span><span style=color:#75715e> */</span>
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Fexception</span> <span style=color:#f92672>{</span>
   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span> <span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>,</span> ClassCastException<span style=color:#f92672>{</span>
-   		 
+
   <span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div></li><li><p>当被覆盖的方法没有异常声明时，子类覆盖时无法声明异常的。</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
-   
+
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Zi</span> <span style=color:#66d9ef>extends</span> Fu<span style=color:#f92672>{</span>
 	<span style=color:#75715e>//错误的方式,会报错。
 </span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
-   		
+
 	<span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div><p>父类:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
-   
+
 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Fu</span> <span style=color:#f92672>{</span>
 	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span> <span style=color:#f92672>(){</span>
-   		
+
 	<span style=color:#f92672>}</span>
 <span style=color:#f92672>}</span>
 </code></pre></div></li></ol></div><div class=post-footer></div></article></main></body></html>

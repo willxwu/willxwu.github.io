@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>JAVA数组 // 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.82.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="JAVA数组"><meta name=twitter:description content="JAVA数组重点掌握知识，以后肯定会用到的，可以了解一下底层原理。数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。
+<!doctype html><html lang=en-us><head><title>JAVA数组 // 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.84.1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="JAVA数组"><meta name=twitter:description content="JAVA数组重点掌握知识，以后肯定会用到的，可以了解一下底层原理。数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。
 数组 数组定义格式：
 数据类型[] 数组名(变量名) = new 数据类型[元素个数或数组长度]; 实例：
 public class ArrayDemo01 { public static void main(String[] args) { int[] x = new int[100]; } } 注意：数组定长，一但定义长度为100，在使用时大小就是100了。不变量。
@@ -73,7 +73,7 @@ boolean：默认值false
 <span style=color:#f92672>}</span>
 </code></pre></div><p><strong>注意：length是int类型，因此数组最大索引为：数组名.length-1</strong></p><p>数组中最小的索引是0，最大的索引是“数组的长度-1”。在Java中，为了方便我们获得数组的长度，提供了一个length属性，在程序中可以通过“数组名.length”的方式来获得数组的长
 度，即元素的个数。</p><h3 id=数组初始化>数组初始化</h3><ol><li><p>在定义数组时只指定数组的长度，由系统自动为元素赋初值的方式称作动态初始化。</p></li><li><p>数组的静态初始化</p><p>方式一：数据类型[] 变量名 = new 数据类型[]{元素1，元素2，元素3&mldr;};</p><p>方式二：数据类型[] 变量名 = {元素1，元素2，元素3,&mldr;};</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ArrayDemo03</span> <span style=color:#f92672>{</span>
-   
+
 	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
      <span style=color:#75715e>//定义方式一
 </span><span style=color:#75715e></span>     <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> arr <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> <span style=color:#f92672>{</span>1<span style=color:#f92672>,</span>3<span style=color:#f92672>,</span>4<span style=color:#f92672>,</span>5<span style=color:#f92672>};</span>
@@ -81,7 +81,7 @@ boolean：默认值false
      <span style=color:#75715e>//注意：new 后面的中括号中，不允许写任何内容，写了就编译失败。
 </span><span style=color:#75715e></span>     <span style=color:#75715e>//错误实例：
 </span><span style=color:#75715e></span>     <span style=color:#75715e>//int[] arr = new int[4]{1,2,3,4};
-</span><span style=color:#75715e></span>   		
+</span><span style=color:#75715e></span>
      <span style=color:#75715e>//定义方式二（这种比较简单，常用）
 </span><span style=color:#75715e></span>     <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> arr2 <span style=color:#f92672>=</span> <span style=color:#f92672>{</span>1<span style=color:#f92672>,</span>2<span style=color:#f92672>,</span>3<span style=color:#f92672>,</span>4<span style=color:#f92672>,};</span>
      <span style=color:#75715e>//注意：最后一个逗号，会自动去掉
@@ -129,7 +129,7 @@ boolean：默认值false
 3
 6
 </code></pre></div><p><strong>注意：</strong></p><p><strong>//for：知道循环次数，计数器思想</strong></p><p><strong>//while:不确定循环次数。</strong></p><p><strong>会自动去掉最后一个逗号。</strong></p><h3 id=数组中常见异常>数组中常见异常</h3><ol><li><p>数组索引越界异常</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ArrayError</span> <span style=color:#f92672>{</span>
-   
+
 	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
      <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> arr <span style=color:#f92672>=</span> <span style=color:#f92672>{</span>1<span style=color:#f92672>,</span>2<span style=color:#f92672>,</span>4<span style=color:#f92672>,};</span>
      <span style=color:#75715e>//1、数组索引越界异常
@@ -139,7 +139,7 @@ boolean：默认值false
 <span style=color:#f92672>}</span>
 </code></pre></div><p>输出结果，编译时不出错，运行时，错误提示信息：</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>Exception in thread <span style=color:#e6db74>&#34;main&#34;</span> java<span style=color:#f92672>.</span><span style=color:#a6e22e>lang</span><span style=color:#f92672>.</span><span style=color:#a6e22e>ArrayIndexOutOfBoundsException</span><span style=color:#f92672>:</span>
 </code></pre></div><p>错误原因：索引越界、索引为负数。</p></li><li><p>空指针异常</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ArrayError</span> <span style=color:#f92672>{</span>
-   
+
 	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
      <span style=color:#75715e>//2、空指针异常
 </span><span style=color:#75715e></span>     <span style=color:#66d9ef>int</span><span style=color:#f92672>[]</span> arr2 <span style=color:#f92672>=</span> <span style=color:#f92672>{</span>2<span style=color:#f92672>,</span>345<span style=color:#f92672>,</span>4<span style=color:#f92672>};</span>
@@ -151,9 +151,9 @@ boolean：默认值false
 </code></pre></div><p>空指针内存运行说明：</p><p><img src=/javase/shuzu3.png alt></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt>步骤1：int[] arr2 = {1,5,8},存在于栈中
 步骤2：同时在堆中开辟一块内存空间存储数据，并分配一个地址，如图右边。
 步骤3：arr2变量，引用执行该存储空间地址。
-   
+
 上面3步是正常情况。
-   
+
 步骤4：当执行arr2=null时，arr2引用就没有了指向的空间地址。
 步骤5：打印的数组的时候就会出现空指针异常了。
 </code></pre></div><p>输出结果：错误提示信息</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java>Exception in thread <span style=color:#e6db74>&#34;main&#34;</span> java<span style=color:#f92672>.</span><span style=color:#a6e22e>lang</span><span style=color:#f92672>.</span><span style=color:#a6e22e>NullPointerException</span>
