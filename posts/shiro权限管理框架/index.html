@@ -1,0 +1,639 @@
+<!doctype html><html lang=en-us>
+<head>
+<title> // 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico>
+<meta charset=utf-8>
+<meta name=generator content="Hugo 0.93.0">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="John Doe">
+<meta name=description content>
+<link rel=stylesheet href=https://www.yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css>
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content>
+<meta name=twitter:description content="首先知道Shiro架构有3个主要概念：Subject、SecurityManager和Realms。
+Shiro基础架构图 ：
+基础架构说明： Subject: As we’ve mentioned in our Tutorial, the Subject is essentially a security specific ‘view’ of the the currently executing user. Whereas the word ‘User’ often implies a human being, a Subject can be a person, but it could also represent a 3rd-party service, daemon account, cron job, or anything similar - basically anything that is currently interacting with the software. Subject instances are all bound to (and require) a SecurityManager.">
+<meta property="og:title" content>
+<meta property="og:description" content="首先知道Shiro架构有3个主要概念：Subject、SecurityManager和Realms。
+Shiro基础架构图 ：
+基础架构说明： Subject: As we’ve mentioned in our Tutorial, the Subject is essentially a security specific ‘view’ of the the currently executing user. Whereas the word ‘User’ often implies a human being, a Subject can be a person, but it could also represent a 3rd-party service, daemon account, cron job, or anything similar - basically anything that is currently interacting with the software. Subject instances are all bound to (and require) a SecurityManager.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://www.yanxizhu.com/posts/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/"><meta property="article:section" content="posts">
+</head><body>
+<header class=app-header>
+<a href=https://www.yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a>
+<h1>朱言蹊</h1><nav class=app-header-menu>
+<a class=app-header-menu-item href=/about/>about</a>
+-
+<a class=app-header-menu-item href=/>home</a>
+-
+<a class=app-header-menu-item href=/link/>link</a>
+-
+<a class=app-header-menu-item href=/tags/>tags</a>
+</nav><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p><div class=app-header-social>
+<a target=_blank href=https://github.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a>
+<a target=_blank href=https://twitter.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a>
+</div></header><main class=app-container>
+<article class=post>
+<header class=post-header>
+<h1 class=post-title></h1><div class=post-meta>
+<div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+Jan 1, 0001
+</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+12 min read
+</div></div></header><div class=post-content>
+<p><strong>首先知道Shiro架构有3个主要概念：Subject、SecurityManager和Realms。</strong></p><p><strong>Shiro基础架构图</strong> ：</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.2/images/uploads/2021/06/shiro/ShiroBasicArchitecture.png alt=Shiro基础架构图>
+基础架构说明：
+Subject: As we’ve mentioned in our Tutorial, the Subject is essentially a security specific ‘view’ of the the currently executing user. Whereas the word ‘User’ often implies a human being, a Subject can be a person, but it could also represent a 3rd-party service, daemon account, cron job, or anything similar - basically anything that is currently interacting with the software.
+Subject instances are all bound to (and require) a SecurityManager. When you interact with a Subject, those interactions translate to subject-specific interactions with the SecurityManager.
+（大概意思：Subject一词是一个安全术语，其基本意思是“当前的操作用户”。称之为“用户”并不准确，因为“用户”一词通常跟人相关。在安全领域，术语“Subject”可以是人，也可以是第三方进程、后台帐户（Daemon Account）、定时作业（Corn Job）或其他类似事物。它仅仅意味着“当前跟软件交互的东西”。但考虑到大多数目的和用途，你可以把它认为是Shiro的“用户”概念。
+在程序中你都能轻易的获得Subject，允许在任何需要的地方进行安全操作。每个Subject对象都必须与一个SecurityManager进行绑定，你访问Subject对象其实都是在与SecurityManager里的特定Subject进行交互。）</p><p>SecurityManager: The SecurityManager is the heart of Shiro’s architecture and acts as a sort of ’umbrella’ object that coordinates its internal security components that together form an object graph. However, once the SecurityManager and its internal object graph is configured for an application, it is usually left alone and application developers spend almost all of their time with the Subject API.
+We will talk about the SecurityManager in detail later on, but it is important to realize that when you interact with a Subject, it is really the SecurityManager behind the scenes that does all the heavy lifting for any Subject security operation. This is reflected in the basic flow diagram above.
+(大概意思：Subject的“幕后”推手是SecurityManager。Subject代表了当前用户的安全操作，SecurityManager则管理所有用户的安全操作。它是Shiro框架的核心，充当“保护伞”，引用了多个内部嵌套安全组件，它们形成了对象图。但是，一旦SecurityManager及其内部对象图配置好，它就会退居幕后，应用开发人员几乎把他们的所有时间都花在Subject API调用上。
+那么，如何设置SecurityManager呢？嗯，这要看应用的环境。例如，Web应用通常会在Web.xml中指定一个Shiro Servlet Filter，这会创建SecurityManager实例，如果你运行的是一个独立应用，你需要用其他配置方式，但有很多配置选项。
+一个应用几乎总是只有一个SecurityManager实例。它实际是应用的Singleton（尽管不必是一个静态Singleton）。跟Shiro里的几乎所有组件一样，SecurityManager的缺省实现是POJO，而且可用POJO兼容的任何配置机制进行配置 - 普通的Java代码、Spring XML、YAML、.properties和.ini文件等。基本来讲，能够实例化类和调用JavaBean兼容方法的任何配置形式都可使用。)</p><p>Realms: Realms act as the ‘bridge’ or ‘connector’ between Shiro and your application’s security data. When it comes time to actually interact with security-related data like user accounts to perform authentication (login) and authorization (access control), Shiro looks up many of these things from one or more Realms configured for an application.
+In this sense a Realm is essentially a security-specific DAO: it encapsulates connection details for data sources and makes the associated data available to Shiro as needed. When configuring Shiro, you must specify at least one Realm to use for authentication and/or authorization. The SecurityManager may be configured with multiple Realms, but at least one is required.
+（大概意思：Shiro的第三个也是最后一个概念是Realm。Realm充当了Shiro与应用安全数据间的“桥梁”或者“连接器”。也就是说，当与像用户帐户这类安全相关数据进行交互，执行认证（登录）和授权（访问控制）时，Shiro会从应用配置的Realm中查找很多内容。
+从这个意义上讲，Realm实质上是一个安全相关的DAO：它封装了数据源的连接细节，并在需要时将相关数据提供给Shiro。当配置Shiro时，你必须至少指定一个Realm，用于认证和（或）授权。配置多个Realm是可以的，但是至少需要一个。
+Shiro内置了可以连接大量安全数据源（又名目录）的Realm，如LDAP、关系数据库（JDBC）、类似INI的文本配置资源以及属性文件 等。如果缺省的Realm不能满足需求，你还可以插入代表自定义数据源的自己的Realm实现。
+象其他内部组件一样，由SecurityManager来管理如何使用Realms来获取安全的身份数据。）</p><p><strong>看了上面一大段介绍后肯定还不知道怎么回事，来个简单比喻吧：</strong>
+比如：新到一家公司，网管给你一台开发机，一个账号密码(这对应账号密码)，你此时不知道账号是属于什么角色，是超级管理员，还是普通账号(这里就是对应角色)，如果是超级管理员那权限就比较打了，比如设置一张自己喜欢的桌面壁纸，如果是普通用户那就没有这个权限了，因为公司统一宣传公司形象，使用统一公司宣传桌面壁纸(这里对应权限也就是资源)，
+<strong>重点 ，网管给的账号密码是属于那个角色，拥有什么权限，不用我自己去判断，而是交给了电脑自己去判断，不用麻烦自己了。这里的账号密码也就类似上面的Subject，而电脑操作系统就类似SecurityManager，电脑操作系统怎么判断属于那个角色，有哪些权限，这个判断的逻辑就类似Realms。</strong></p><p>以后我们使用Shrio就主要就是SecurityManager中的Realms要我们 <strong>自己去实现自己的方法</strong> ，比如这个账号有哪些对应的角色、有哪些权限。在用账号密码进行登录操作系统，这个过程就类似 <strong>认证</strong> 的过程，如果认证失败(账号或面错误登录失败)就返回提示信息登录失败，如果认证成功了，就把这个Subject（账号）对应的角色、权限一起返回给操作系统，登录成功后通过账号查找对应的角色、权限，并返回给操作系统的过程就类似 <strong>授权</strong> 了。最后我们就可以操作电脑， <strong>判断</strong> 是超级管理还是普通用户了， <strong>看看</strong> 有没有权限换壁纸了。</p><p>到这里也许你大概明白了大体怎么回事，接下来我们就要看看Shiro的完整架构图，类似看看这个操作系统里面是怎么回事，有哪些东西，来实现认证、授权的。
+<strong>Shiro核心架构图</strong> :
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.2/images/uploads/2021/06/shiro/ShiroArchitecture.png alt=ShiroArchitecture>
+核心架构说明:
+Subject (org.apache.shiro.subject.Subject)
+A security-specific ‘view’ of the entity (user, 3rd-party service, cron job, etc) currently interacting with the software.（当前与软件交互的实体（用户、第 3 方服务、cron 作业等）的特定于安全的“视图”。）</p><p>SecurityManager (org.apache.shiro.mgt.SecurityManager)
+As mentioned above, the SecurityManager is the heart of Shiro’s architecture. It is mostly an ‘umbrella’ object that coordinates its managed components to ensure they work smoothly together. It also manages Shiro’s view of every application user, so it knows how to perform security operations per user.（如上所述，这SecurityManager是 Shiro 架构的核心。它主要是一个“伞”对象，用于协调其托管组件以确保它们一起顺利工作。它还管理 Shiro 对每个应用程序用户的视图，因此它知道如何为每个用户执行安全操作。）</p><p>Authenticator (org.apache.shiro.authc.Authenticator)
+The Authenticator is the component that is responsible for executing and reacting to authentication (log-in) attempts by users. When a user tries to log-in, that logic is executed by the Authenticator. The Authenticator knows how to coordinate with one or more Realms that store relevant user/account information. The data obtained from these Realms is used to verify the user’s identity to guarantee the user really is who they say they are.（身份认证/登录，验证用户是不是拥有相应的身份,例如账号密码登陆）</p><p>Authentication Strategy (org.apache.shiro.authc.pam.AuthenticationStrategy)
+If more than one Realm is configured, the AuthenticationStrategy will coordinate the Realms to determine the conditions under which an authentication attempt succeeds or fails (for example, if one realm succeeds but others fail, is the attempt successful? Must all realms succeed? Only the first?).(认证器，负责主体认证的，这是一个扩展点，如果用户觉得Shiro默认的不好，可以自定义实现；其需要认证策略（Authentication Strategy），即什么情况下算用户认证通过了；)</p><p>Authorizer (org.apache.shiro.authz.Authorizer)
+The Authorizer is the component responsible determining users’ access control in the application. It is the mechanism that ultimately says if a user is allowed to do something or not. Like the Authenticator, the Authorizer also knows how to coordinate with multiple back-end data sources to access role and permission information. The Authorizer uses this information to determine exactly if a user is allowed to perform a given action.(Authorizer是部件负责确定用户在该应用程序的访问控制。它是最终决定是否允许用户做某事的机制。和 一样Authenticator，Authorizer也知道如何协调多个后端数据源来访问角色和权限信息。在Authorizer使用该信息来准确确定是否允许用户执行特定的操作。)</p><p>SessionManager (org.apache.shiro.session.mgt.SessionManager)
+The SessionManager knows how to create and manage user Session lifecycles to provide a robust Session experience for users in all environments. This is a unique feature in the world of security frameworks - Shiro has the ability to natively manage user Sessions in any environment, even if there is no Web/Servlet or EJB container available. By default, Shiro will use an existing session mechanism if available, (e.g. Servlet Container), but if there isn’t one, such as in a standalone application or non-web environment, it will use its built-in enterprise session management to offer the same programming experience. The SessionDAO exists to allow any datasource to be used to persist sessions.（SessionManager负责管理shiro自己封装的session的生命周期。）</p><p>SessionDAO (org.apache.shiro.session.mgt.eis.SessionDAO)
+The SessionDAO performs Session persistence (CRUD) operations on behalf of the SessionManager. This allows any data store to be plugged in to the Session Management infrastructure.（SessionDAO执行Session持久代（CRUD）操作SessionManager。这允许将任何数据存储插入会话管理基础架构。）</p><p>CacheManager (org.apache.shiro.cache.CacheManager)
+The CacheManager creates and manages Cache instance lifecycles used by other Shiro components. Because Shiro can access many back-end data sources for authentication, authorization and session management, caching has always been a first-class architectural feature in the framework to improve performance while using these data sources. Any of the modern open-source and/or enterprise caching products can be plugged in to Shiro to provide a fast and efficient user-experience.（CacheManager创建和管理Cache其他四郎组件使用实例的生命周期。由于 Shiro 可以访问许多后端数据源进行身份验证、授权和会话管理，因此缓存一直是框架中的一流架构特性，以在使用这些数据源时提高性能。任何现代开源和/或企业缓存产品都可以插入 Shiro，以提供快速高效的用户体验。）</p><p>Cryptography (org.apache.shiro.crypto.*)
+Cryptography is a natural addition to an enterprise security framework. Shiro’s crypto package contains easy-to-use and understand representations of crytographic Ciphers, Hashes (aka digests) and different codec implementations. All of the classes in this package are carefully designed to be very easy to use and easy to understand. Anyone who has used Java’s native cryptography support knows it can be a challenging animal to tame. Shiro’s crypto APIs simplify the complicated Java mechanisms and make cryptography easy to use for normal mortal human beings.（Cryptography是企业安全框架的自然补充。Shiro 的crypto软件包包含易于使用和理解的密码学、哈希（又名摘要）和不同编解码器实现的表示。这个包中的所有类都经过精心设计，非常易于使用和理解。任何使用过 Java 本地加密支持的人都知道，驯服它可能是一种具有挑战性的动物。Shiro 的加密 API 简化了复杂的 Java 机制并使密码学易于普通人使用。）</p><p>Realms (org.apache.shiro.realm.Realm)
+As mentioned above, Realms act as the ‘bridge’ or ‘connector’ between Shiro and your application’s security data. When it comes time to actually interact with security-related data like user accounts to perform authentication (login) and authorization (access control), Shiro looks up many of these things from one or more Realms configured for an application. You can configure as many Realms as you need (usually one per data source) and Shiro will coordinate with them as necessary for both authentication and authorization.（如上所述，Realms 充当 Shiro 和应用程序安全数据之间的“桥梁”或“连接器”。当需要与安全相关数据（如用户帐户）进行实际交互以执行身份验证（登录）和授权（访问控制）时，Shiro 从为应用程序配置的一个或多个 Realms 中查找其中的许多内容。您可以根据Realms需要配置任意数量（通常每个数据源一个），Shiro 将根据需要与他们协调进行身份验证和授权。）</p><p>看了上面一大段肯定有头特了，到底是啥意思没搞明白，那直接来看个有史以来最简单的Shiro使用列子的代码吧：
+列子核心代码，至于导的是那个包啊，为什么我照着来的就不行呢，可以直接拉取我的代码看看，然后自己手动写一次，自己写一次完全不一样哦。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>**</span>
+</span></span><span style=display:flex><span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>@description</span><span style=color:#f92672>:</span> shiro最简单的学习<span style=color:#960050;background-color:#1e0010>，</span>重点login<span style=color:#f92672>()</span><span style=color:#960050;background-color:#1e0010>、</span>checkRoles<span style=color:#f92672>()</span>里面源码最终都是通过realm来获取用户信息<span style=color:#960050;background-color:#1e0010>、</span>角色<span style=color:#960050;background-color:#1e0010>、</span>权限信息<span style=color:#960050;background-color:#1e0010>，</span>以完成认证<span style=color:#960050;background-color:#1e0010>、</span>授权
+</span></span><span style=display:flex><span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>@author</span><span style=color:#f92672>:</span> <span style=color:#f92672>&lt;</span>a href<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;mailto:batis@foxmail.com&#34;</span><span style=color:#f92672>&gt;</span>yanxizhu<span style=color:#f92672>.</span><span style=color:#a6e22e>com</span><span style=color:#f92672>&lt;/</span>a<span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>@date</span><span style=color:#f92672>:</span> 2021<span style=color:#f92672>/</span>6<span style=color:#f92672>/</span>25 22<span style=color:#f92672>:</span>24
+</span></span><span style=display:flex><span> <span style=color:#f92672>*</span> <span style=color:#a6e22e>@version</span><span style=color:#f92672>:</span> 1<span style=color:#f92672>.</span><span style=color:#a6e22e>0</span>
+</span></span><span style=display:flex><span> <span style=color:#f92672>*/</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShiroDemoT</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    SimpleAccountRealm simpleAccountRealm <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SimpleAccountRealm<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Before</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>addUser</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        simpleAccountRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>addAccount</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;123456&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shiroDt</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//1、构建环境
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        DefaultSecurityManager securityManager <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DefaultSecurityManager<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        securityManager<span style=color:#f92672>.</span><span style=color:#a6e22e>setRealm</span><span style=color:#f92672>(</span>simpleAccountRealm<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//2、获取主体，提交认证请求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Subject subject <span style=color:#f92672>=</span> SecurityUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getSubject</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        UsernamePasswordToken token<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UsernamePasswordToken<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;123456&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//是否认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>boolean</span> authenticated <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>isAuthenticated</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;authenticated:&#34;</span><span style=color:#f92672>+</span>authenticated<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//角色校验
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//3、退出登录
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>logout</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;退出登录后-authenticated:&#34;</span><span style=color:#f92672>+</span>authenticated<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>看完这段代码有没有豁然开朗，原来就这样的啊，上面的subject就是我们的主体，就是用网管分配的账号密码，那我么是怎么认证、授权的呢？怎么用的呢?用就是subject.login(token)这个了。那认证、授权呢？认证授权就是securityManager里面的2个方法了，一个方法负责认证，一个负责授权，而我们自定义的认证、授权规则是怎么样的呢？也就是上面的securityManager.setRealm(simpleAccountRealm)中的simpleAccountRealm了，具体securityManager是怎么实现认证、授权的呢？那就可以看看认证subject.login(token)、授权subject.checkRoles(&ldquo;admin&rdquo;,&ldquo;user&rdquo;)这2方法内部源码怎么实现的了。源码后面大体看一下。</p><p><strong>完整流程应该是这样的:</strong>
+1、构建securityManager环境
+2、获得主体subject，怎么获得的，就是Shiro提供的SecurityUtils工具类型就获得了。
+3、主体subject是怎么使用认证的，非常简单subject.login(token)这样就完了。
+4、通过securityManager提供的认证、授权方法完成后，会返回主体subject拥有的角色、权限，我们通过subject.checkRoles(&ldquo;admin&rdquo;,&ldquo;user&rdquo;)就可以验证主体subject是否认证有对应的角色了，当然还有个校验是有有对应权限的方法//资源权限，删除用户权限subject.checkPermission(&ldquo;user:update&rdquo;)。</p><p>上面这个简单的Shiro就完了，以后开发中simpleAccountRealm这个Realm就要我们自己去实现了，以及后面的认证、授权、校验是否有这个角色、权限那可能就要复杂一点了。</p><p>到这里你应该明白Shiro的简单使用了吧，那我们看看另2种Realm的实现方法，一种通过读ini文件、一种通过jdbcRealm读数据库来实现simpleAccountRealm.addAccount(&ldquo;yanxi&rdquo;, &ldquo;123456&rdquo;,&ldquo;admin&rdquo;,&ldquo;user&rdquo;)的列子吧：</p><p>方式一、通过读取ini文件，实现我们的Realm，代码如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 通过inir(配置用户角色，权限)的方法验证用户角色、资源权限，前提是要先登录成功，也就是认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2021/6/25 22:24
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShiroDemoT2</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shiroDt</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        IniRealm ini <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> IniRealm<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;classpath:user.ini&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//1、构建环境
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        DefaultSecurityManager securityManager <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DefaultSecurityManager<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        ThreadContext<span style=color:#f92672>.</span><span style=color:#a6e22e>bind</span><span style=color:#f92672>(</span>securityManager<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        securityManager<span style=color:#f92672>.</span><span style=color:#a6e22e>setRealm</span><span style=color:#f92672>(</span>ini<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//2、获取主体，提交认证请求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Subject subject <span style=color:#f92672>=</span> SecurityUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getSubject</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        UsernamePasswordToken token<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UsernamePasswordToken<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;123456&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//是否认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>boolean</span> authenticated <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>isAuthenticated</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;authenticated:&#34;</span><span style=color:#f92672>+</span>authenticated<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//角色校验，是否是admin角色
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//资源权限，删除用户权限
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkPermission</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user:update&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>说明</strong> :user.ini文件是放在我们的resource资源文件夹里面的一个文件，后缀为.ini，文件内容如何:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vim data-lang=vim><span style=display:flex><span>[<span style=color:#a6e22e>users</span>]<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>yanxi</span>=<span style=color:#ae81ff>123456</span>,<span style=color:#a6e22e>admin</span><span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span>[<span style=color:#a6e22e>roles</span>]<span style=color:#960050;background-color:#1e0010>
+</span></span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010></span><span style=color:#a6e22e>admin</span>=<span style=color:#a6e22e>user</span>:<span style=color:#a6e22e>delete</span>,<span style=color:#a6e22e>user</span>:<span style=color:#a6e22e>update</span><span style=color:#960050;background-color:#1e0010>
+</span></span></span></code></pre></div><p>方式二、通过jdbcRealm读数据库来实现，代码如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 通过jdbcRealm(配置用户角色，权限)的方法验证用户角色、资源权限，前提是要先登录成功，也就是认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2021/6/25 22:24
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShiroDemoT3</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    DruidDataSource dataSource <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DruidDataSource<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        dataSource<span style=color:#f92672>.</span><span style=color:#a6e22e>setUrl</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;jdbc:mysql://localhost:3306/test&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        dataSource<span style=color:#f92672>.</span><span style=color:#a6e22e>setUsername</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;root&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        dataSource<span style=color:#f92672>.</span><span style=color:#a6e22e>setPassword</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;root&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shiroDt</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        JdbcRealm jdbcRealm <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> JdbcRealm<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        jdbcRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setDataSource</span><span style=color:#f92672>(</span>dataSource<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>      
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//1、构建环境
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        DefaultSecurityManager securityManager <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DefaultSecurityManager<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        ThreadContext<span style=color:#f92672>.</span><span style=color:#a6e22e>bind</span><span style=color:#f92672>(</span>securityManager<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        securityManager<span style=color:#f92672>.</span><span style=color:#a6e22e>setRealm</span><span style=color:#f92672>(</span>jdbcRealm<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//2、获取主体，提交认证请求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Subject subject <span style=color:#f92672>=</span> SecurityUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getSubject</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        UsernamePasswordToken token<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UsernamePasswordToken<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;123456&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//是否认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>boolean</span> authenticated <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>isAuthenticated</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;authenticated:&#34;</span><span style=color:#f92672>+</span>authenticated<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//角色校验，是否是admin角色
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//资源权限，删除用户权限
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkPermission</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user:select&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明:有人会说为什么没写sql查询就可以直接认证、授权了呢？因为jdbcRealm里面已经有这些的基本实现了，点开JdbcRealm源码，里面就可以看到如下代码了：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>JdbcRealm</span> <span style=color:#66d9ef>extends</span> AuthorizingRealm <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String DEFAULT_AUTHENTICATION_QUERY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select password from users where username = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String DEFAULT_SALTED_AUTHENTICATION_QUERY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select password, password_salt from users where username = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String DEFAULT_USER_ROLES_QUERY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select role_name from user_roles where username = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String DEFAULT_PERMISSIONS_QUERY <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select permission from roles_permissions where role_name = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> Logger log <span style=color:#f92672>=</span> LoggerFactory<span style=color:#f92672>.</span><span style=color:#a6e22e>getLogger</span><span style=color:#f92672>(</span>JdbcRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> DataSource dataSource<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> String authenticationQuery <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select password from users where username = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> String userRolesQuery <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select role_name from user_roles where username = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> String permissionsQuery <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;select permission from roles_permissions where role_name = ?&#34;</span><span style=color:#f92672>;</span>
+</span></span></code></pre></div><p>当然我们还可以自己写的sql实现，代码如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 通过jdbcRealm(配置用户角色，权限)的方法验证用户角色、资源权限，前提是要先登录成功，也就是认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2021/6/25 22:24
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ShiroDemoT3</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    DruidDataSource dataSource <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DruidDataSource<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        dataSource<span style=color:#f92672>.</span><span style=color:#a6e22e>setUrl</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;jdbc:mysql://localhost:3306/test&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        dataSource<span style=color:#f92672>.</span><span style=color:#a6e22e>setUsername</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;root&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        dataSource<span style=color:#f92672>.</span><span style=color:#a6e22e>setPassword</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;root&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shiroDt</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        JdbcRealm jdbcRealm <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> JdbcRealm<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        jdbcRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setDataSource</span><span style=color:#f92672>(</span>dataSource<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//jdbcRealm不会默认查询资源权限，需要手动开启
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        jdbcRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setPermissionsLookupEnabled</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// **这个地方就是自己写sql实现了** 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//jdbcRealm默认有查询语句，这里可以使用自己的sql查询
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//用户sql
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        String sql<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;select password from test_user where user_name=?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        jdbcRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setAuthenticationQuery</span><span style=color:#f92672>(</span>sql<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//角色sql
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        String sql2<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;select role_name from test_user_role where user_name=?&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        jdbcRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setUserRolesQuery</span><span style=color:#f92672>(</span>sql2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//1、构建环境
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        DefaultSecurityManager securityManager <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DefaultSecurityManager<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        ThreadContext<span style=color:#f92672>.</span><span style=color:#a6e22e>bind</span><span style=color:#f92672>(</span>securityManager<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        securityManager<span style=color:#f92672>.</span><span style=color:#a6e22e>setRealm</span><span style=color:#f92672>(</span>jdbcRealm<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//2、获取主体，提交认证请求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Subject subject <span style=color:#f92672>=</span> SecurityUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getSubject</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        UsernamePasswordToken token= new UsernamePasswordToken(&#34;yanxi&#34;, &#34;123456&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        UsernamePasswordToken token<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UsernamePasswordToken<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;xixi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;654321&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//是否认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>boolean</span> authenticated <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>isAuthenticated</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;authenticated:&#34;</span><span style=color:#f92672>+</span>authenticated<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//        //角色校验，是否是admin角色
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        subject.checkRoles(&#34;admin&#34;,&#34;user&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        //资源权限，删除用户权限
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        subject.checkPermission(&#34;user:select&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>权限的自定义同理，就不在写SQL建表了，贴一下数据库对应的表及结构，非常简单的表结构：
+默认的jdbcRealm使用的表：
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.3/images/uploads/2021/06/shiro/users.png alt=用户表>
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.3/images/uploads/2021/06/shiro/user_roles.png alt=用户角色表>
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.4/images/uploads/2021/06/shiro/roles_permissions.png alt=角色资源表>
+自定义sql使用的表:
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.3/images/uploads/2021/06/shiro/test_user.png alt=自定义sql用户表>
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.3/images/uploads/2021/06/shiro/test_user_role.png alt=自定义sql用户角色表>
+整体表结构:
+<img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.3/images/uploads/2021/06/shiro/table.png alt=整体表结构></p><p>好了，这个你应该明白了Shiro的整体过程了，那么我们就要写一个自定义的Realm了，一般开发中也是这样用法，代码如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 自定义Realm完整认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2021/6/26 0:16
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CustomRealmTest</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>shiroDt</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//自定义的Realm
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        CustomRealm customRealm <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CustomRealm<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//1、构建环境
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        DefaultSecurityManager securityManager <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DefaultSecurityManager<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        ThreadContext<span style=color:#f92672>.</span><span style=color:#a6e22e>bind</span><span style=color:#f92672>(</span>securityManager<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        securityManager<span style=color:#f92672>.</span><span style=color:#a6e22e>setRealm</span><span style=color:#f92672>(</span>customRealm<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        HashedCredentialsMatcher matcher <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashedCredentialsMatcher<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密的名称
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        matcher<span style=color:#f92672>.</span><span style=color:#a6e22e>setHashAlgorithmName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;md5&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密的次数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        matcher<span style=color:#f92672>.</span><span style=color:#a6e22e>setHashIterations</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密信息到Realm中
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        customRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setCredentialsMatcher</span><span style=color:#f92672>(</span>matcher<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//2、获取主体，提交认证请求
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Subject subject <span style=color:#f92672>=</span> SecurityUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>getSubject</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        UsernamePasswordToken token<span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UsernamePasswordToken<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;xixi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;654321&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//是否认证成功
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>boolean</span> authenticated <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>isAuthenticated</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;authenticated:&#34;</span><span style=color:#f92672>+</span>authenticated<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//角色校验，是否是admin角色
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//资源权限，删除用户权限
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkPermissions</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user:delete&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;user.add&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>        <span style=color:#75715e>//设置加密信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        HashedCredentialsMatcher matcher <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashedCredentialsMatcher<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密的名称
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        matcher<span style=color:#f92672>.</span><span style=color:#a6e22e>setHashAlgorithmName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;md5&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密的次数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        matcher<span style=color:#f92672>.</span><span style=color:#a6e22e>setHashIterations</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置加密信息到Realm中
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        customRealm<span style=color:#f92672>.</span><span style=color:#a6e22e>setCredentialsMatcher</span><span style=color:#f92672>(</span>matcher<span style=color:#f92672>);</span>
+</span></span></code></pre></div><p>这里就是我们设置加密的地方，具体实现在自定义Realm类中。注意这里哦customRealm.setCredentialsMatcher(matcher);不然自定义Realm类中加密算法没有用到哦。</p><p><strong>这才是自定义Realm类的地方哦：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 自定义Realm，为什么要继承AuthorizingRealm？
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *  因为默认的jdbcRealm就是重写AuthorizingRealm里面这2个方法完成认证和授权的
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2021/6/26 0:02
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CustomRealm</span> <span style=color:#66d9ef>extends</span> AuthorizingRealm <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span>String<span style=color:#f92672>&gt;</span> userMap <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span>String<span style=color:#f92672>&gt;(</span>16<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过md5加密后，就不能使用铭文了，使用md5加密后的c33367701511b4f6020ec61ded352059
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//md5加密方法，最下面的main临时方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        userMap.put(&#34;xixi&#34;, &#34;654321&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//md5加密后的密码
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        userMap.put(&#34;xixi&#34;, &#34;c33367701511b4f6020ec61ded352059&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//使用md5加盐后的密码
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        userMap<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;xixi&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;87b441673e676a402074c349ef983c07&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>super</span><span style=color:#f92672>.</span><span style=color:#a6e22e>setName</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;customRealm&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 自定义授权
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param principalCollection
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> AuthorizationInfo <span style=color:#a6e22e>doGetAuthorizationInfo</span><span style=color:#f92672>(</span>PrincipalCollection principalCollection<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        String userName <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>principalCollection<span style=color:#f92672>.</span><span style=color:#a6e22e>getPrimaryPrincipal</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过用户名查询角色信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> roles <span style=color:#f92672>=</span> getRolesByName<span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过用户名查询权限信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> permissions <span style=color:#f92672>=</span> getPermissionsByName<span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//返回角色、资源信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        SimpleAuthorizationInfo simpleAuthorizationInfo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SimpleAuthorizationInfo<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        simpleAuthorizationInfo<span style=color:#f92672>.</span><span style=color:#a6e22e>setRoles</span><span style=color:#f92672>(</span>roles<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        simpleAuthorizationInfo<span style=color:#f92672>.</span><span style=color:#a6e22e>setStringPermissions</span><span style=color:#f92672>(</span>permissions<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> simpleAuthorizationInfo<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 自定义的认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param authenticationToken
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @throws AuthenticationException
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> AuthenticationInfo <span style=color:#a6e22e>doGetAuthenticationInfo</span><span style=color:#f92672>(</span>AuthenticationToken authenticationToken<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过authenticationToken获取用户名
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        String userName <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>authenticationToken<span style=color:#f92672>.</span><span style=color:#a6e22e>getPrincipal</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//获取密码
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        String password <span style=color:#f92672>=</span> getPasswordByName<span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> password<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//第一个用户名、密码、realm名称
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        SimpleAuthenticationInfo simpleAuthenticationInfo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SimpleAuthenticationInfo<span style=color:#f92672>(</span>userName<span style=color:#f92672>,</span>password<span style=color:#f92672>,</span><span style=color:#e6db74>&#34;customRealm&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//使用md5加盐时，需要返回盐的名称，不适用盐时，不用加
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//注意：如果盐名称和使用md5加盐时用的盐名称不一样，就不同通过认证哦，因为加密用的盐名称不一样肯定得到的加密密码不一样
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        simpleAuthenticationInfo<span style=color:#f92672>.</span><span style=color:#a6e22e>setCredentialsSalt</span><span style=color:#f92672>(</span>ByteSource<span style=color:#f92672>.</span><span style=color:#a6e22e>Util</span><span style=color:#f92672>.</span><span style=color:#a6e22e>bytes</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> simpleAuthenticationInfo<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 模拟数据库查询操作
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param userName
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getPasswordByName</span><span style=color:#f92672>(</span>String userName<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//这里通过mysql的基本查询获取密码，这里模拟不操作数据库了
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> userMap<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 模拟从数据库查询角色信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param userName
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getRolesByName</span><span style=color:#f92672>(</span>String userName<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>        Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> roles <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashSet<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;(</span>16<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        roles<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        roles<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> roles<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 模拟从数据库查询权限(资源)信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param userName
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> <span style=color:#a6e22e>getPermissionsByName</span><span style=color:#f92672>(</span>String userName<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>        Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> permissions <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashSet<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;(</span>16<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        permissions<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user:delete&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        permissions<span style=color:#f92672>.</span><span style=color:#a6e22e>add</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;user.add&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> permissions<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//md5计算出加密后的密码
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//    public static void main(String[] args) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        Md5Hash md5Hash = new Md5Hash(&#34;654321&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        System.out.println(md5Hash.toString());
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//    }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//使用md5加盐后的计算结果，这种更安全.这里假设盐名称为yanxi
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        Md5Hash md5Hash <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Md5Hash<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;654321&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>md5Hash<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>这里有人肯能会问为什么要extends AuthorizingRealm，那你看看之前最简单的例子里面是不是也是继承这个类啊，最主要原因是securityManager使用login进行认证、授权的具体实现都是在这里面，而我们实现自己的Realm，那就必须继承AuthorizingRealm，并重写里面的doGetAuthenticationInfo()认证方法、doGetAuthorizationInfo()授权方法。那我把关键代码在贴一下吧。
+<strong>自定义认证、授权关键代码：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 自定义授权
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param principalCollection
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> AuthorizationInfo <span style=color:#a6e22e>doGetAuthorizationInfo</span><span style=color:#f92672>(</span>PrincipalCollection principalCollection<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        String userName <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>principalCollection<span style=color:#f92672>.</span><span style=color:#a6e22e>getPrimaryPrincipal</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过用户名查询角色信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> roles <span style=color:#f92672>=</span> getRolesByName<span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过用户名查询权限信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Set<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>&gt;</span> permissions <span style=color:#f92672>=</span> getPermissionsByName<span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//返回角色、资源信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        SimpleAuthorizationInfo simpleAuthorizationInfo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SimpleAuthorizationInfo<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        simpleAuthorizationInfo<span style=color:#f92672>.</span><span style=color:#a6e22e>setRoles</span><span style=color:#f92672>(</span>roles<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        simpleAuthorizationInfo<span style=color:#f92672>.</span><span style=color:#a6e22e>setStringPermissions</span><span style=color:#f92672>(</span>permissions<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> simpleAuthorizationInfo<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 自定义的认证
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param authenticationToken
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @throws AuthenticationException
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> AuthenticationInfo <span style=color:#a6e22e>doGetAuthenticationInfo</span><span style=color:#f92672>(</span>AuthenticationToken authenticationToken<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//通过authenticationToken获取用户名
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        String userName <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>String<span style=color:#f92672>)</span>authenticationToken<span style=color:#f92672>.</span><span style=color:#a6e22e>getPrincipal</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//获取密码
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        String password <span style=color:#f92672>=</span> getPasswordByName<span style=color:#f92672>(</span>userName<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> password<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//第一个用户名、密码、realm名称
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        SimpleAuthenticationInfo simpleAuthenticationInfo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SimpleAuthenticationInfo<span style=color:#f92672>(</span>userName<span style=color:#f92672>,</span>password<span style=color:#f92672>,</span><span style=color:#e6db74>&#34;customRealm&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//使用md5加盐时，需要返回盐的名称，不适用盐时，不用加
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//注意：如果盐名称和使用md5加盐时用的盐名称不一样，就不同通过认证哦，因为加密用的盐名称不一样肯定得到的加密密码不一样
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        simpleAuthenticationInfo<span style=color:#f92672>.</span><span style=color:#a6e22e>setCredentialsSalt</span><span style=color:#f92672>(</span>ByteSource<span style=color:#f92672>.</span><span style=color:#a6e22e>Util</span><span style=color:#f92672>.</span><span style=color:#a6e22e>bytes</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;yanxi&#34;</span><span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> simpleAuthenticationInfo<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>注意：自己看上面的自定义Realm类CustomRealm，里面的md5加密、加盐,以及模拟数据库的操作。
+<strong>代码注意点一：</strong>
+super.setName(&ldquo;customRealm&rdquo;);
+这里设置的自定义Realm名称要和认证中返回的名称一致。
+//第一个用户名、密码、realm名称
+SimpleAuthenticationInfo simpleAuthenticationInfo = new SimpleAuthenticationInfo(userName,password,&ldquo;customRealm&rdquo;);
+<strong>代码注意点二：</strong>
+Md5Hash md5Hash = new Md5Hash(&ldquo;654321&rdquo;,&ldquo;yanxi&rdquo;);
+加密时使用的盐名称要和我们认证返回信息中设置的盐名称一致。
+simpleAuthenticationInfo.setCredentialsSalt(ByteSource.Util.bytes(&ldquo;yanxi&rdquo;));</p><p>此时我们数据库存在就是md5+加盐后加密的密码87b441673e676a402074c349ef983c07，这里只是模拟了数据库的操作，实际中肯定是使用dao层的数据库操作完成。</p><p>到这里你应该知道Shiro怎么使用了，以及Shiro里面怎么实现加密，怎么自定义Realm了。</p><p>最后我们看一下subject.login(token)、subject.checkRoles(&ldquo;admin&rdquo;,&ldquo;user&rdquo;)、subject.checkPermissions(&ldquo;user:delete&rdquo;,&ldquo;user.add&rdquo;)内部源码怎么用到我们自定义Realm类CustomRealm的：
+login认证源码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>AuthenticationToken token<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>clearRunAsIdentitiesInternal</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        Subject subject <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>securityManager</span><span style=color:#f92672>.</span><span style=color:#a6e22e>login</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>,</span> token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        String host <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        PrincipalCollection principals<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>subject <span style=color:#66d9ef>instanceof</span> DelegatingSubject<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            DelegatingSubject delegating <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>DelegatingSubject<span style=color:#f92672>)</span>subject<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            principals <span style=color:#f92672>=</span> delegating<span style=color:#f92672>.</span><span style=color:#a6e22e>principals</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            host <span style=color:#f92672>=</span> delegating<span style=color:#f92672>.</span><span style=color:#a6e22e>host</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            principals <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>getPrincipals</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>principals <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span> <span style=color:#f92672>&amp;&amp;</span> <span style=color:#f92672>!</span>principals<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>principals</span> <span style=color:#f92672>=</span> principals<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>authenticated</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>token <span style=color:#66d9ef>instanceof</span> HostAuthenticationToken<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                host <span style=color:#f92672>=</span> <span style=color:#f92672>((</span>HostAuthenticationToken<span style=color:#f92672>)</span>token<span style=color:#f92672>).</span><span style=color:#a6e22e>getHost</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>host <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>host</span> <span style=color:#f92672>=</span> host<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            Session session <span style=color:#f92672>=</span> subject<span style=color:#f92672>.</span><span style=color:#a6e22e>getSession</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>session <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>session</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>decorate</span><span style=color:#f92672>(</span>session<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>session</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            String msg <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Principals returned from securityManager.login( token ) returned a null or empty value.  This value must be non null and populated with one or more elements.&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalStateException<span style=color:#f92672>(</span>msg<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>重点看：Subject subject = this.securityManager.login(this, token);点击login跟进去看代码如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Subject <span style=color:#a6e22e>login</span><span style=color:#f92672>(</span>Subject subject<span style=color:#f92672>,</span> AuthenticationToken token<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        AuthenticationInfo info<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            info <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>authenticate</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>AuthenticationException var7<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            AuthenticationException ae <span style=color:#f92672>=</span> var7<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>onFailedLogin</span><span style=color:#f92672>(</span>token<span style=color:#f92672>,</span> ae<span style=color:#f92672>,</span> subject<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>Exception var6<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>log<span style=color:#f92672>.</span><span style=color:#a6e22e>isInfoEnabled</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;onFailedLogin method threw an exception.  Logging and propagating original AuthenticationException.&#34;</span><span style=color:#f92672>,</span> var6<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> var7<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Subject loggedIn <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>createSubject</span><span style=color:#f92672>(</span>token<span style=color:#f92672>,</span> info<span style=color:#f92672>,</span> subject<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>onSuccessfulLogin</span><span style=color:#f92672>(</span>token<span style=color:#f92672>,</span> info<span style=color:#f92672>,</span> loggedIn<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> loggedIn<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>重点看：info = this.authenticate(token)；authenticate方法继续跟进代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> AuthenticationInfo <span style=color:#a6e22e>authenticate</span><span style=color:#f92672>(</span>AuthenticationToken token<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>authenticator</span><span style=color:#f92672>.</span><span style=color:#a6e22e>authenticate</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>继续跟进this.authenticator.authenticate(token);代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> AuthenticationInfo <span style=color:#a6e22e>authenticate</span><span style=color:#f92672>(</span>AuthenticationToken token<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>token <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Method argument (authentication token) cannot be null.&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>trace</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Authentication attempt received for token [{}]&#34;</span><span style=color:#f92672>,</span> token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            AuthenticationInfo info<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                info <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>doAuthenticate</span><span style=color:#f92672>(</span>token<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>info <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    String msg <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;No account information found for authentication token [&#34;</span> <span style=color:#f92672>+</span> token <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;] by this &#34;</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;Authenticator instance.  Please check that it is configured correctly.&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> AuthenticationException<span style=color:#f92672>(</span>msg<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>Throwable var8<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                AuthenticationException ae <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>var8 <span style=color:#66d9ef>instanceof</span> AuthenticationException<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    ae <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>AuthenticationException<span style=color:#f92672>)</span>var8<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>ae <span style=color:#f92672>==</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    String msg <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Authentication failed for token submission [&#34;</span> <span style=color:#f92672>+</span> token <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;].  Possible unexpected &#34;</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;error? (Typical or expected login exceptions should extend from AuthenticationException).&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>                    ae <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AuthenticationException<span style=color:#f92672>(</span>msg<span style=color:#f92672>,</span> var8<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>log<span style=color:#f92672>.</span><span style=color:#a6e22e>isWarnEnabled</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                        log<span style=color:#f92672>.</span><span style=color:#a6e22e>warn</span><span style=color:#f92672>(</span>msg<span style=color:#f92672>,</span> var8<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>notifyFailure</span><span style=color:#f92672>(</span>token<span style=color:#f92672>,</span> ae<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>Throwable var7<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>log<span style=color:#f92672>.</span><span style=color:#a6e22e>isWarnEnabled</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                        String msg <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Unable to send notification for failed authentication attempt - listener error?.  Please check your AuthenticationListener implementation(s).  Logging sending exception and propagating original AuthenticationException instead...&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>                        log<span style=color:#f92672>.</span><span style=color:#a6e22e>warn</span><span style=color:#f92672>(</span>msg<span style=color:#f92672>,</span> var7<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> ae<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>debug</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Authentication successful for token [{}].  Returned account [{}]&#34;</span><span style=color:#f92672>,</span> token<span style=color:#f92672>,</span> info<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>notifySuccess</span><span style=color:#f92672>(</span>token<span style=color:#f92672>,</span> info<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> info<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>重点看：info = this.doAuthenticate(token);继续跟进代码如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> AuthenticationInfo <span style=color:#a6e22e>doAuthenticate</span><span style=color:#f92672>(</span>AuthenticationToken authenticationToken<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthenticationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>assertRealmsConfigured</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        Collection<span style=color:#f92672>&lt;</span>Realm<span style=color:#f92672>&gt;</span> realms <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getRealms</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> realms<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()</span> <span style=color:#f92672>==</span> 1 <span style=color:#f92672>?</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>doSingleRealmAuthentication</span><span style=color:#f92672>((</span>Realm<span style=color:#f92672>)</span>realms<span style=color:#f92672>.</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>().</span><span style=color:#a6e22e>next</span><span style=color:#f92672>(),</span> authenticationToken<span style=color:#f92672>)</span> <span style=color:#f92672>:</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>doMultiRealmAuthentication</span><span style=color:#f92672>(</span>realms<span style=color:#f92672>,</span> authenticationToken<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>重点看这，这里最终还是使用realms来获取我们的角色、资源数据。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Collection<span style=color:#f92672>&lt;</span>Realm<span style=color:#f92672>&gt;</span> realms <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getRealms</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> realms<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>()</span> <span style=color:#f92672>==</span> 1 <span style=color:#f92672>?</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>doSingleRealmAuthentication</span><span style=color:#f92672>((</span>Realm<span style=color:#f92672>)</span>realms<span style=color:#f92672>.</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>().</span><span style=color:#a6e22e>next</span><span style=color:#f92672>(),</span> authenticationToken<span style=color:#f92672>)</span> <span style=color:#f92672>:</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>doMultiRealmAuthentication</span><span style=color:#f92672>(</span>realms<span style=color:#f92672>,</span> authenticationToken<span style=color:#f92672>);</span>
+</span></span></code></pre></div><p><strong>接下来看看subject.checkRoles(&ldquo;admin&rdquo;,&ldquo;user&rdquo;)的源码：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>subject<span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;admin&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;user&#34;</span><span style=color:#f92672>);</span>
+</span></span></code></pre></div><p>继续跟进代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span>String<span style=color:#f92672>...</span> roleIdentifiers<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthorizationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>assertAuthzCheckPossible</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>securityManager</span><span style=color:#f92672>.</span><span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getPrincipals</span><span style=color:#f92672>(),</span> roleIdentifiers<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>this.securityManager.checkRoles(this.getPrincipals(), roleIdentifiers);继续跟进代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>checkRoles</span><span style=color:#f92672>(</span>PrincipalCollection principals<span style=color:#f92672>,</span> String<span style=color:#f92672>...</span> roles<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthorizationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>assertRealmsConfigured</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>roles <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            String<span style=color:#f92672>[]</span> var3 <span style=color:#f92672>=</span> roles<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>int</span> var4 <span style=color:#f92672>=</span> roles<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> var5 <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> var5 <span style=color:#f92672>&lt;</span> var4<span style=color:#f92672>;</span> <span style=color:#f92672>++</span>var5<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                String role <span style=color:#f92672>=</span> var3<span style=color:#f92672>[</span>var5<span style=color:#f92672>];</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>checkRole</span><span style=color:#f92672>(</span>principals<span style=color:#f92672>,</span> role<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>this.checkRole(principals, role);继续跟进代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>checkRole</span><span style=color:#f92672>(</span>PrincipalCollection principals<span style=color:#f92672>,</span> String role<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> AuthorizationException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>assertRealmsConfigured</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(!</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>hasRole</span><span style=color:#f92672>(</span>principals<span style=color:#f92672>,</span> role<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> UnauthorizedException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Subject does not have role [&#34;</span> <span style=color:#f92672>+</span> role <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34;]&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>this.hasRole(principals, role)继续跟进代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>hasRole</span><span style=color:#f92672>(</span>PrincipalCollection principals<span style=color:#f92672>,</span> String roleIdentifier<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>assertRealmsConfigured</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        Iterator var3 <span style=color:#f92672>=</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getRealms</span><span style=color:#f92672>().</span><span style=color:#a6e22e>iterator</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        Realm realm<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>do</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>if</span> <span style=color:#f92672>(!</span>var3<span style=color:#f92672>.</span><span style=color:#a6e22e>hasNext</span><span style=color:#f92672>())</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            realm <span style=color:#f92672>=</span> <span style=color:#f92672>(</span>Realm<span style=color:#f92672>)</span>var3<span style=color:#f92672>.</span><span style=color:#a6e22e>next</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>while</span><span style=color:#f92672>(!(</span>realm <span style=color:#66d9ef>instanceof</span> Authorizer<span style=color:#f92672>)</span> <span style=color:#f92672>||</span> <span style=color:#f92672>!((</span>Authorizer<span style=color:#f92672>)</span>realm<span style=color:#f92672>).</span><span style=color:#a6e22e>hasRole</span><span style=color:#f92672>(</span>principals<span style=color:#f92672>,</span> roleIdentifier<span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>这里也可以看出是通过realm来实现授权的。所以我们只需要自定义realm中的认证、授权方法即可。
+有些理解不对的还请谅解，谢谢。</p><p>最后附上Github代码地址：https://github.com/willxwu/shiro-learn</p></div><div class=post-footer>
+</div></article></main></body></html>

@@ -1,59 +1,119 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>朱言蹊</title><link>https://www.yanxizhu.com/</link><description>Recent content on 朱言蹊</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 16 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://www.yanxizhu.com/index.xml" rel="self" type="application/rss+xml"/><item><title>JDK8新特性</title><link>https://www.yanxizhu.com/posts/jdk8/</link><pubDate>Tue, 16 Mar 2021 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/jdk8/</guid><description>一、lambda 多线程实现 /** * lambda多线程实现 */ @Test public void runnT(){ new Thread( ()-&amp;gt;{ System.out.println(&amp;#34;lambda实现多线程啦&amp;#34;); } ).start(); } 2、集合遍历 public List&amp;lt;User&amp;gt; createList(){ List&amp;lt;User&amp;gt; users = new ArrayList&amp;lt;User&amp;gt;(); User user1 = new User(); user1.setId(UUID.randomUUID().toString()); user1.setName(&amp;#34;李亦非&amp;#34;); user1.setAge(20); user1.setSex(Sex.WOMAN); User user2 = new User(); user2.setId(UUID.randomUUID().toString()); user2.setName(&amp;#34;张三&amp;#34;); user2.setAge(20); user2.setSex(Sex.MAN); User user3 = new User(); user3.setId(UUID.randomUUID().toString()); user3.setName(&amp;#34;刘三姐&amp;#34;); user3.setAge(25); user3.setSex(Sex.WOMAN); users.add(user1); users.add(user2); users.add(user3); return users; } @Test public void lambTest(){ List&amp;lt;User&amp;gt; users = createList(); Stream&amp;lt;User&amp;gt; userStream = users.</description></item><item><title>模块化开发</title><link>https://www.yanxizhu.com/posts/model/</link><pubDate>Sat, 19 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/model/</guid><description>1、新建父工程 新建maven项目，选择为pom类型的父工程。
-2、在父工程基础上分别新建entity、dao、server子工程模块。 新建maven mondel模块，选择jar类型的子工程。
-3、在父工程上新建子工程web模块， 新建maven model模块，选择war类型web子项目。
-4、有模块依赖引用时，先将父模块和需要的模块一起instal打包发布到本地仓库。然后在
-需要的子模块中引入子模块坐标。
-5、注意依赖范围对依赖传递造成的影响.
-6、最后将web项目package打成war就可以了。里面就包含了各模块发布到本地的jar包了。
-注意：在同一个工作空间，各模块项目打开时看到引入的子模块是一个工程文件夹，关闭子 模块后就会看到变成jar了。
-注意jar冲突的解决办法，见上一篇。</description></item><item><title>maven</title><link>https://www.yanxizhu.com/posts/maven/</link><pubDate>Fri, 18 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/maven/</guid><description>使用maven的好处： 大型项目的好处，建立一个父项目，各组或部门可以模块开发，不用拉取整个项目进行开发。
-创建maven项目说明： maven项目结构： Maven常用命令： 1、一键构建项目命令:
-mvn tomcat:run
-注意：该命令使用的是tomcat插件进行运行的，不需要单独安装配置tomcat。
-2、清理编译好后的文件（target文件夹及里面所有的文件）：
-mvn clean
-3、编译并运行了main里面的代码（只编译main主文件里面的java代码，test里面的java代码不编译不编译）：
-mvn compile
-4、编译并运行了test里面的代码(只编译test里面的java代码，main里面的java代码不编译)：
-mvn test
-5、打包，并将包放到tager文件夹下面。打成war或jar名称由POM文件里面的这3个标签值决定： 例如打包成这个名字:HelloWorld-0.0.2-SNAPASHOT.war HelloWorld&amp;ndash;打成包的名字 0.0.2-SNAPASHOT&amp;ndash;版本 war&amp;ndash;什么类型的包
-mvn package
-6、把项目发布到本地仓库
-mvn install
-同时运行了mvn compile、mvn test、mvn package、mvn install、mvn deploy命令。
-7、jar或war包发布到私服上
-mvn deploy
-maven生命周期有三种： 1、clean生命周期：clean 2、default生命周期：compile、test、package、install、deploy命令 3、site生命周期:site(生成项目的文档说明)
-不同的生命周期，命令可以同时运行。
-maven依赖范围： complie
-provided:编译（complie）时需要、测试时也需要、运行时不需要，打包时不需要
-runtime：例如：数据库驱动包
-test：编译时不需要，测试时需要、运行时不需要
-maven添加插件： 常见问题： 出现该提示表示jdk安装有问题，重新安装即可。
-maven整体模型也就是上面说的内容： 版本冲突解决原则：
-1、路径近者原则（比如2个坐标中有不同版本的相同的jar包，自己在加入要使用的版本的这个名称的坐标）
-2、第一声明有限原则（比如2个坐标，谁排在pom.xml文件的前面就用谁的）
-3、排除原则.（将名字和组织加入到exclusion中） 4、版本锁定 谁先传递锁定的版本，就用这个。 可以同时锁定多个版本
-锁定版本里面使用${sprint.verion}注意上面锁定了，坐标里面的version就没有了，可以去除，就算不去除也没有了。</description></item><item><title>JAVA反射</title><link>https://www.yanxizhu.com/posts/class/</link><pubDate>Thu, 17 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/class/</guid><description>获取反射对象的3种方法。通过反射创建对象、通过反射获取有参、无参、公有、私有构造方法。通过反射获取公有、私有成员变量并修改之。通过反射获取成员方法，并调用。通过反射泛型擦除，存值。通过读取配置文件运行反射方法。
-package learn.javase.mycalss; import java.lang.reflect.Constructor; import java.lang.reflect.Field; import java.lang.reflect.Method; import java.util.ArrayList; import java.util.List; /** * 一、获取class的三种方式 * * 二、获取公有构造方法 * 注意： * 1、被反射的类必须是有空参数的构造器 * 2、构造方法必须是public的才能反射获取 * * 三、获取所有构造方法 * * @author Jole * */ public class ClassDemo { public static void main(String[] args) throws Exception{ // 方式1、.getClass() Person p = new Person(); Class c = p.getClass(); System.out.println(c); //方式2、类名.class Class c3 = Person.class; System.out.println(c3); //方式3、Class.forName(类全名); Class c2 = Class.</description></item><item><title>Socket编程TCP协议实现多线程文件上传</title><link>https://www.yanxizhu.com/posts/tcp/</link><pubDate>Wed, 16 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/tcp/</guid><description>通过Java Socket编程，实现多线程文件上传。主要涉及ServerScoket服务端、Socket客户端、IO流操作、多线线程。
-客户端：
-package learn.javase.Update; import java.io.File; import java.io.FileInputStream; import java.io.IOException; import java.io.InputStream; import java.io.OutputStream; import java.net.Socket; /** * 利用TCP的Socket\ServerSocket客户端向服务器上传文件 * 客户端 * @author Jole * */ public class UpClent { public static void main(String[] args) throws IOException{ Socket socket = new Socket(&amp;#34;127.0.0.1&amp;#34;,8888); OutputStream out = socket.getOutputStream(); //读取本地文件，并通过out输出流，发送给服务端 File file = new File(&amp;#34;J:&amp;#34;+File.separator+&amp;#34;wxhandbook-master.zip&amp;#34;); FileInputStream in = new FileInputStream(file); byte[] data = new byte[1024]; int len =0; while((len=in.read(data))!=-1) { out.write(data, 0, len); } socket.</description></item><item><title>Socket编程UDP实现聊天</title><link>https://www.yanxizhu.com/posts/udp/</link><pubDate>Tue, 15 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/udp/</guid><description>通过Socket网络编程，UDP实现简单聊天。主要涉及DatagramSocket进行数据传输、DatagramPacket进行数据包封装，2个类。
-发送端:
-package learn.javase.chat; import java.net.DatagramPacket; import java.net.DatagramSocket; import java.net.InetAddress; import java.util.Scanner; /** * 控制台输入；实现聊天。 * 发送方 * @author Jole * */ public class UdpSend { public static void main(String[] args) throws Exception{ Scanner scan = new Scanner(System.in); InetAddress ia = InetAddress.getByName(&amp;#34;192.168.1.4&amp;#34;); DatagramSocket socket = new DatagramSocket(); while(true) { String chatInfo = scan.nextLine(); byte[] info = chatInfo.getBytes(); DatagramPacket pack = new DatagramPacket(info, info.length, ia, 6000); socket.send(pack); } } } 接收端：</description></item><item><title>dbcp数据库连接池</title><link>https://www.yanxizhu.com/posts/dbcp/</link><pubDate>Mon, 14 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/dbcp/</guid><description>使用dbcp连接池，进行数据库的CRUD，涉及jar包：commons-dbcp2-2.8.0.jar（连接池包）、commons-pool2-2.9.0.jar（dbcp依赖该包）、commons-logging-1.2.jar（接口日志包）、mysql-connector-java-5.1.37-bin.jar（数据库连接驱动）、commons-dbutils-1.7.jar（基本CRUD操作）
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>朱言蹊</title><link>https://www.yanxizhu.com/</link><description>Recent content on 朱言蹊</description><generator>Hugo -- gohugo.io</generator><atom:link href="https://www.yanxizhu.com/index.xml" rel="self" type="application/rss+xml"/><item><title>关于</title><link>https://www.yanxizhu.com/about/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/about/</guid><description>一名java后端程序员</description></item><item><title>友情链接</title><link>https://www.yanxizhu.com/link/</link><pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/link/</guid><description>Web前端导航
+美团技术团队 | 小米信息部技术团队 | 腾讯MDX Tencent TG ideas | Tencent AlloyTeam | 搜狐畅游视觉设计中心团队 | Glow技术团队
+国外技术团队博客：
+https://code.facebook.com
+博客上会介绍一些Facebook在Android、iOS、前端、后端以及硬件技术遇到的问题，也包括一些他们团队研究的新技术， 比如fresco等等。我最感兴趣的是他们在技术上遇到的一些问题，然后他们是怎么解决的.
+http://square.github.io/
+Square应该是业界开源项目最多的公司之一了，它的github主页上列举了好多开源项目，一个做Android的如果没用过Square的开源库的话，要么你非常非常牛逼，要么你真的不关心开源项目。
+https://blog.twitter.com/engineering
+Twitter是一家美国社交网络及微博客服务的网站，是全球互联网上访问量最大的十个网站之一。这是Twitter官方推出的技术博客， 经由Twitter工程研发团队所维护管理，第一时间发布一手的有关Twitter的技术、工具以及活动信息。向业内外人士展示Twitter背后的工具、产品。还包括受到大家强烈关注的，Twitter发布的开源产品信息介绍。
+https://engineering.linkedin.com/
+作为全球最大的职业社交网站，LinkedIn 会员人数在世界范围内已超过 3 亿。这是LinkedIn旗下的科技博客，涵盖的内容非常丰富。 从各个方面详细地介绍了LinkedIn技术人员如何使用高度结构化的数据来完成LinkedIn的搜索功能、社交图谱以及机器学习系统。 此外，还有对于其工程研发团队所创造、管理和使用的开源产品细致化讲解。另外还包含精彩博文，有关于LinkedIn背后的技术背景、 团队开发人员介绍等等您都可以在这里一网打尽，非常值得我们学习借鉴。
+http://google-opensource.blogspot.hk/
+谷歌，是一家美国的跨国科技企业，致力于互联网搜索、云计算、广告技术等领域，开发并提供大量基于互联网的产品与服务。 这个科技博客发布了Google所有的开源产品项目的新闻消息，并会及时更新开源软件的开发信息。Google是支持开源运动的最大公司之一，如果您想第一时间了解新开源的产品，学习Google的实践经验，及时掌握Google的核心关键技术，向Google开发团队表达自己的建议，那这一定会是您最好的去处
+https://www.nginx.com/blog/ Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。 中国大陆使用NGINX网站用户有：百度、新浪、网易、腾讯等。在NGINX的技术博客，您可以看到NGINX的新闻、技术信息和科技交流活动安排。对于NGINX的技术发布、核心技术信息都在这里一一呈现。关注这个微博，您可以第一时间看到有关于NGINX的技术咨询。 如果您对这个高性能的HTTP和反向代理服务器非常感兴趣，请您一定要关注它！
+http://radar.oreilly.com/ 洞悉、分析和研究新兴技术是其宗旨。该博客有请O’Reilly公司的专栏编辑，撰写各个领域的技术类文章。迎合技术开发者的需求， 追踪最前沿技术，每篇文章定位读者精确，您可以选择自己最感兴趣的方面进行阅读。
+https://engineering.opendns.com/ OpenDNS长期以来致力于为广大个人用户以及商务企业用户和公共领域提供免费的域名解析服务。在OpenDNS Engineering博客上， 您可以找到该公司设计的这个全球最大安全网络的相关技术资料。博客上提供了独家的技术见解，谈论了该公司文化，并发布技术活动信息。您可以与OpenDNS开发团队的工程师探讨如何消除恶意软件、网络钓鱼等等的技术。有关具体的技术创新和技术分析，您都可以在博文中找到线索。
+http://techblog.netflix.com/ Netflix是一家在线影片租赁提供商。公司能够提供Netflix超大数量的DVD，而且能够让顾客快速方便的挑选影片，同时免费递送。这是Netflix的博客，专注于技术和技术问题。Netflix的技术专家分享他们创造Netflix service的时候所遇到的挑战、所作出的决定以及所拥有的观点。
+http://githubengineering.com/ 作为开源代码库以及版本控制系统，Github拥有140多万开发者用户。这是由GitHub的一线技术工程师，根据自身开发GitHub环节中遇到的问题、使用的最新技术所撰写的博客。由于作者都是非常有经验的工程师，您可以深入了解GitHub后台结构，对您的相关开发一定有很大帮助。
+http://blog.parse.com/ Parse是由 YC 孵化出来的、专为移动应用提供后台服务的云计算平台，为开发者包办繁琐的后台服务，让开发者只需专注于具体的开发工作。这里分享最新的Parse开发者的开发经验。在这个博客中，你可以零距离学习Parse最新技术，深入探究Parse的技术活动，甚至可以向Parse的技术开发者提问任何你感兴趣的问题。还提供视频选段，全方位直击最新技术热点。
+https://www.buzzfeed.com/techblog BuzzFeed是一个美国的新闻聚合网站，致力于从数百个新闻博客那里获取订阅源，通过搜索、发送信息链接。BuzzFeed的技术博客，主要发布BuzzFeed的产品技术更新，当然也有对于技术核心内容的深入剖析。BuzzFeed的作者编辑们都极具灵感和技能，每篇文章都带有典型的BuzzFeed式幽默，您一定会被其色彩鲜明的配图和极富特色的语言文字所吸引，是非常具有吸引力的一个别具匠心的博客！
+https://labs.spotify.com/ Spotify是全球最大的正版流媒体音乐服务平台。截止到2015年1月，Spotify已经拥有超过6000万的用户，其中1500万为付费用户。具有如此大的用户基数，其后台技术自然不容小视。在这个Spotify的官方技术博客， 您可以看到Spotify的技术人员如何处理遇到的问题。所有的博文都由Spotify的工程技术人员亲自撰写，其专业性和权威性都得到了很大的保障。相信这些最前沿的技术分享一定能让您有所收获！
+http://www.yelp.com/engineering Yelp是美国最大的点评网站，其极快的增长速度、极大的扩张趋势都离不开背后强大的技术支持。这个Yelp的技术博客，邀请到开发团队的工程师，来分享Yelp所运用到的各项先进算法技术。您可以看到Yelp技术人员如何解决技术问题，Yelp团队发布的开源产品等等。
+http://instagram-engineering.tumblr.com/ Instagram是一款最初运行在iOS平台上的移动应用，以一种快速、美妙和有趣的方式将你随时抓拍下的图片分享彼此。Instagram旗下的科技博客，在这里分享了Instagram技术人员的开发见解。 这是最好最直接地了解Instagram背后技术的博客平台。最早仅由五名技术人员打造的系统，现在当然是今非昔比。这里提供的不仅仅是对于关键技术的介绍，更有Instagram技术人员非常值得借鉴的开发经验。</description></item><item><title/><link>https://www.yanxizhu.com/posts/dbcp%E8%BF%9E%E6%8E%A5%E6%B1%A0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/dbcp%E8%BF%9E%E6%8E%A5%E6%B1%A0/</guid><description>使用dbcp连接池，进行数据库的CRUD，涉及jar包：commons-dbcp2-2.8.0.jar（连接池包）、commons-pool2-2.9.0.jar（dbcp依赖该包）、commons-logging-1.2.jar（接口日志包）、mysql-connector-java-5.1.37-bin.jar（数据库连接驱动）、commons-dbutils-1.7.jar（基本CRUD操作）
 DbcpUtils数据库连接池配置：
 package learn.javase.dbcppool; import org.apache.commons.dbcp2.BasicDataSource; /** * 利用DBCP链接数据库 * @author Jole * */ public class DbcpUtils { private static BasicDataSource dataSource = new BasicDataSource(); static { //必配参数 dataSource.setDriverClassName(&amp;#34;com.mysql.jdbc.Driver&amp;#34;); dataSource.setUrl(&amp;#34;jdbc:mysql://localhost:3306/test&amp;#34;); dataSource.setUsername(&amp;#34;root&amp;#34;); dataSource.setPassword(&amp;#34;11111&amp;#34;); //可配参数 dataSource.setInitialSize(10); dataSource.setMaxIdle(8); dataSource.setMinIdle(2); } public static BasicDataSource getConnecton() { return dataSource; } } 利用DbcpUtils进行数据库的CRUD操作：
-package learn.javase.dbcppool; import java.sql.SQLException; import java.util.List; import org.apache.commons.dbutils.QueryRunner; import org.apache.commons.dbutils.handlers.ArrayListHandler; /** * 利用DBCP数据库连接池增加、查询 * @author Jole * */ public class DbcpUtilsDemo { private static QueryRunner qr = new QueryRunner(DbcpUtils.</description></item><item><title>commons-dbutils</title><link>https://www.yanxizhu.com/posts/commons-dbutils/</link><pubDate>Sun, 13 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/commons-dbutils/</guid><description>&lt;p>通过读取properties获取链接数据库信息，利用apache开源数据库操作工具包DBUtils进行数据库CRUD操作。&lt;/p></description></item><item><title>原生JDBC操作</title><link>https://www.yanxizhu.com/posts/jdbc/</link><pubDate>Sat, 12 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/jdbc/</guid><description>利用JAVA原生JDBC进行数据库的CRUD操作。简单记录一下。
-package learn.javase.jdbc; import java.sql.DriverManager; import java.sql.ResultSet; import java.sql.SQLException; import java.util.Scanner; import java.sql.PreparedStatement; import java.sql.Connection; /** * jdbc使用 * @author Jole * */ public class MyDriver { public static void main(String[] args) throws ClassNotFoundException, SQLException{ //1.注册驱动 Class.forName(&amp;#34;com.mysql.jdbc.Driver&amp;#34;); //2.获取数据库连接对象 String url = &amp;#34;jdbc:mysql://localhost:3306/test&amp;#34;; String user = &amp;#34;root&amp;#34;; String password = &amp;#34;111111&amp;#34;; Connection conn = DriverManager.getConnection(url, user, password); // System.out.println(conn); //3.获取连接平台的执行对象 // Statement st = conn.createStatement(); //4.执行sql,返回行数 //executeUpdate():增删改 //String sql = &amp;#34;insert into user(user_id,user_name,user_password) values(&amp;#39;1320442338427273213&amp;#39;,&amp;#39;zss&amp;#39;,&amp;#39;12&amp;#39;)&amp;#34;; //int n = st.</description></item><item><title>Map循环方式</title><link>https://www.yanxizhu.com/posts/map/</link><pubDate>Fri, 11 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/map/</guid><description>Map集合的2种循环方式。一种是通过map.entrySet()。
-另一种是map.keySet()。 所有的集合都可以通过迭代器Iterator，进行遍历。
-package learn.javase; import java.util.HashMap; import java.util.Iterator; import java.util.Map; import java.util.Map.Entry; import java.util.Set; /** * 重要 * 遍历map的两种方式map.entrySet() map.keySet() * @author Jole * */ public class MapDemo { public static void main(String[] args) { Map&amp;lt;Integer ,String &amp;gt; map = new HashMap(); map.put(1, &amp;#34;111&amp;#34;); map.put(2, &amp;#34;2222&amp;#34;); //方式一 entrySet() Set&amp;lt;Map.Entry &amp;lt;Integer, String&amp;gt;&amp;gt; sets = map.entrySet(); //获取值1，通过for for(Map.Entry &amp;lt;Integer, String&amp;gt; entry : sets) { System.out.println(&amp;#34;ssss:&amp;#34;+entry); System.out.println(&amp;#34;key:&amp;#34;+entry.getKey()+&amp;#34;value:&amp;#34;+entry.getValue()); } //获取值2，通过iterator Iterator &amp;lt;Map.</description></item><item><title>nexus私服搭建</title><link>https://www.yanxizhu.com/posts/nexus/</link><pubDate>Fri, 11 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/nexus/</guid><description>&lt;p>第一步骤：下载nexus私服软件nexus-2.12.0-01-bundle&lt;/p>
-&lt;p>第二不：安装&lt;/p>
-&lt;p>进入nexus解压目录进入到bin目录:&lt;/p>
-&lt;p>1、安装:执行nexus.bat install&lt;/p>
-&lt;p>2、启动:nexus.bat start&lt;/p>
-&lt;p>第三步：查看访问路径&lt;/p>
-&lt;p>进入config目录，打开nexus.properties即可看到端口号，项目命令nexus。&lt;/p>
-&lt;p>第四步：浏览器打开http://127.0.0.1:8081/nexus/&lt;/p>
-&lt;p>默认登录账号:admin/admin123&lt;/p></description></item><item><title>JAVA异常</title><link>https://www.yanxizhu.com/posts/exception/</link><pubDate>Thu, 10 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/exception/</guid><description>异常 Throwable Throwable类是所有错误跟异常类的超类.
+package learn.javase.dbcppool; import java.</description></item><item><title/><link>https://www.yanxizhu.com/posts/dbutils%E6%95%B0%E6%8D%AE%E5%BA%93curd/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/dbutils%E6%95%B0%E6%8D%AE%E5%BA%93curd/</guid><description>通过读取properties获取链接数据库信息，利用apache开源数据库操作工具包DBUtils进行数据库CRUD操作。
+properties文件：
+driverClass=com.mysql.jdbc.Driver url=jdbc:mysql://localhost:3306/test user=root password=11111 通过dbutils自定义获取数据库连接对象:
+package learn.javase.jdbc; import java.io.InputStream; import java.sql.Connection; import java.sql.DriverManager; import java.util.Properties; public class JdbcUtils{ private static Connection conn; private static String driverClass; private static String url; private static String user; private static String password; static { try { getReadConfig(); Class.forName(driverClass); conn = DriverManager.getConnection(url, user, password); }catch(Exception e) { new RuntimeException(&amp;#34;链接数据库失败！&amp;#34;); } } private static void getReadConfig() throws Exception{ InputStream in = JdbcUtils.</description></item><item><title/><link>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85/</guid><description>一、环境准备 备份原yum 源
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup CentOS设置新yum 源
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 使用阿里云Docker Yum源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo 生成缓存
+yum makecache 卸载旧版本Docker
+yum remove docker docker-common docker-selinux 二、安装Docker CE 安装需要的依赖包
+yum install -y yum-utils device-mapper-persistent-data lvm2 安装
+yum install docker-ce -y 启动docker
+sudo systemctl start docker 设置开机启动
+sudo systemctl enable docker 配置Docker 镜像加速</description></item><item><title/><link>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85mysql/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85mysql/</guid><description>安装前提，已经搭建好Docker环境，关于docker安装可参考我另一篇文章《Docker安装》
+一、Docker安装MySQL 拉取Docker镜像
+docker pull mysql:5.7 运行MySQL容器,参数说明见-说明1
+docker run -p 3306:3306 --name mysql \ -v /mydata/mysql/log:/var/log/mysql \ -v /mydata/mysql/data:/var/lib/mysql \ -v /mydata/mysql/conf:/etc/mysql \ -e MYSQL_ROOT_PASSWORD=密码 \ -d mysql:5.7 二、MySQL配置 修改MySQL配置文件,my.cnf内容见-说明2
+vi /mydata/mysql/conf/my.cnf 容器的mysql 命令行工具连接
+docker exec -it mysql mysql -uroot -p 注意：会提示输入密码，也就是上面2运行容器时配置的密码
+设置root 远程访问
+grant all privileges on *.* to &amp;#39;root&amp;#39;@&amp;#39;%&amp;#39; identified by &amp;#39;密码&amp;#39; with grant option; 刷新MySQL配置</description></item><item><title/><link>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85nginx/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85nginx/</guid><description>一、Docker安装Nginx 拉取Nginx镜像
+docker pull nginx:1.10 随便启动一个nginx 实例，只是为了复制出配置
+docker run -p 80:80 --name nginx -d nginx:1.10 拷贝容器内的配置文件
+docker container cp nginx:/etc/nginx . 重命名文件夹
+mv nginx conf 移动配置文件到/mydata/nginx下
+mv conf /mydata/nginx/ 终止原容器
+docker stop nginx 删除原容器
+docker rm nginx 运行Nginx容器,参数见-说明1
+docker run -d -p 80:80 -p 443:443 --name nginx -v /mydata/nginx/html:/var/www/html -v /mydata/nginx/conf/conf.d:/etc/nginx/conf.d -v /mydata/nginx/logs:/var/log/nginx --link php:phpfpm --name nginx nginx:1.</description></item><item><title/><link>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85php/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85php/</guid><description>Docker安装PHP 拉取PHP镜像
+docker pull php:7.4-fpm 运输PHP容器
+docker run -d -v /mydata/nginx/html:/var/www/html -p 9000:9000 --link mysql:mysql --name php php:7.4-fpm 进入PHP容器
+docker exec -it php /bin/bash PHP扩展安装(非必须)
+docker-php-ext-install pdo_mysql 设置随Docke启动
+docker update --restart=always php 注意：自己映射路径/mydata/nginx/html。</description></item><item><title/><link>https://www.yanxizhu.com/posts/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/docker%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>Docker常用命令
+一、镜像 查看docker容器镜像
+docker images 拉去容器镜像
+docker pull 容器 删除容器镜像
+docker rmi 容器 二、容器 安装容器，-d后台运行，-v映射路径, -name容器名称, -link链接外部容器，-p 端口号映射，-e设置密码
+docker run -d -v /mydata/nginx/html:/var/www/html -p 9000:9000 --link mysql:mysql --name php php:7.4-fpm 启动容器
+docker start 容器 关闭容器
+docker stop 容器 重启容器
+docker restart 容器 查看运行容器
+docker ps 查看所有容器
+docker ps -s 删除容器</description></item><item><title/><link>https://www.yanxizhu.com/posts/html%E5%AD%A6%E4%B9%A0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/html%E5%AD%A6%E4%B9%A0/</guid><description>1、HTML基本格式 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; html：根标签，只有一个（网页所有内容都应该写在根标签里面）
+head：子标签，用来设置头部内容
+body：子标签，网页主体,所有要显示的内容放这里面
+title：
+网页的标题标签，也就是网页显示名字。
+搜索引擎检索页面时，会首先检索titlte中的内容。
+元素：一个完整的标签&amp;lt;&amp;gt;&amp;lt;/&amp;gt;
+标签&amp;lt;&amp;gt;
+2、HTML后缀名 将编写好的文件保存为.html网页格式文件
+显示文件格式名
+3、HTML注释 &amp;lt;！-- 这是一个注释的格式，可以直接换行 继续写注释。 --&amp;gt; 注释中的内容，不会显示在页面。
+可以写注释来对代码进行描述，便于后期的维护。要养成良好的编写注释习惯。
+4、标签属性 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello &amp;lt;font color=&amp;#34;red&amp;#34;&amp;gt;World&amp;lt;/font&amp;gt; ！&amp;lt;/h1&amp;gt; &amp;lt;!</description></item><item><title/><link>https://www.yanxizhu.com/posts/java-io/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java-io/</guid><description>将自己看作为程序，将数据输出到文件中，称之为输出。 从文件读取数据到程序，称为输出。
+JAVA流操作主要分为字节流、字符流。
+字节流鼻祖：InputStream\OutpuStream
+字符流鼻祖:Reader\Writer
+File 1、File常用方法 package learn.javase; import java.io.File; /** * File常用操作 * @author Jole * */ public class FileDemo01 { public static void main(String[] args) { File file = new File(&amp;#34;H://&amp;#34;); //此抽象路径名表示的文件或目录的名称；如果路径名的名称序列为空，则返回空字符串 System.out.println(file.getName()); //返回文件大小 System.out.println(file.length()); //返回绝对路径 System.out.println(file.getAbsolutePath()); //绝对路径名 System.out.println(file.getAbsoluteFile()); //父目录 System.out.println(file.getParentFile()); //是否存在 System.out.println(file.exists()); //是否是目录 System.out.println(file.isDirectory()); //返回路径下的文件或文件夹 System.out.println(file.list()); for(String path : file.</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E5%8E%9F%E7%94%9Fjdbc%E6%93%8D%E4%BD%9C/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E5%8E%9F%E7%94%9Fjdbc%E6%93%8D%E4%BD%9C/</guid><description>利用JAVA原生JDBC进行数据库的CRUD操作。简单记录一下。
+package learn.javase.jdbc; import java.sql.DriverManager; import java.sql.ResultSet; import java.sql.SQLException; import java.util.Scanner; import java.sql.PreparedStatement; import java.sql.Connection; /** * jdbc使用 * @author Jole * */ public class MyDriver { public static void main(String[] args) throws ClassNotFoundException, SQLException{ //1.注册驱动 Class.forName(&amp;#34;com.mysql.jdbc.Driver&amp;#34;); //2.获取数据库连接对象 String url = &amp;#34;jdbc:mysql://localhost:3306/test&amp;#34;; String user = &amp;#34;root&amp;#34;; String password = &amp;#34;111111&amp;#34;; Connection conn = DriverManager.getConnection(url, user, password); // System.out.println(conn); //3.</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E5%8F%8D%E5%B0%84/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E5%8F%8D%E5%B0%84/</guid><description>获取反射对象的3种方法。通过反射创建对象、通过反射获取有参、无参、公有、私有构造方法。通过反射获取公有、私有成员变量并修改之。通过反射获取成员方法，并调用。通过反射泛型擦除，存值。通过读取配置文件运行反射方法。
+package learn.javase.mycalss; import java.lang.reflect.Constructor; import java.lang.reflect.Field; import java.lang.reflect.Method; import java.util.ArrayList; import java.util.List; /** * 一、获取class的三种方式 * * 二、获取公有构造方法 * 注意： * 1、被反射的类必须是有空参数的构造器 * 2、构造方法必须是public的才能反射获取 * * 三、获取所有构造方法 * * @author Jole * */ public class ClassDemo { public static void main(String[] args) throws Exception{ // 方式1、.getClass() Person p = new Person(); Class c = p.getClass(); System.out.println(c); //方式2、类名.class Class c3 = Person.</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E5%9F%BA%E7%A1%80%E4%B8%80/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E5%9F%BA%E7%A1%80%E4%B8%80/</guid><description>总结一下JAVA基础知识如：注释、关键字、标识符、数据类型、变量、数据类型转换等基础语法。初学者可参考看看。
+1、程序注释 单行注释：
+//xxxxxx 多行注释：
+/* xxxxxx */ 文档注释：
+/** xxxxxx */ 2、关键字 关键字：是被Java语言赋予特殊含义，具有专门用途的单词。所有的Java关键词，都是小写。关键词比较多，不用刻意去背，以后用多了自己就记住了。
+3、标识符 Java中除了关键字以外基本上都是标识符。我们自己定义的词，比如自己定义的HelloWorld。
+标志符命名规则：
+标志符组成：字母、数字、下划线、美元符号 字母：a~z、A~Z 数字：0-9 下划线：_ 美元符号：$ 注意：不能数字开头，不能是关键字，严格区分大小写，不限制长度起名时，尽量达到见名知意。
+4、数据类型 数据类型分为基本数据类型和引用数据类型。
+A、基本数据类型：4类8种（4类展开后共8种基本类型），基本数据类型是JAVA中内置的类型。
+第一类：整型
+字节
+byte 1个字节 二进制位数：8 -128～127 短整型
+short 2个字节 二进制位数：16 包装类：java.lang.Short 最小值：Short.MIN_VALUE=-32768 （-2的15此方） 最大值：Short.MAX_VALUE=32767 （2的15次方-1） 整型
+int 4个字节 二进制位数：32 包装类：java.lang.Integer 最小值：Integer.MIN_VALUE= -2147483648 （-2的31次方） 最大值：Integer.MAX_VALUE= 2147483647 （2的31次方-1） 长整型
+long 8个字节 二进制位数：64 包装类：java.</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E5%9F%BA%E7%A1%80%E4%BA%8C/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E5%9F%BA%E7%A1%80%E4%BA%8C/</guid><description>JAVA流程控制语句JAVA中非常重要的基础知识点务必完全理解掌握，总结记录一下之前学习笔记。JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
+一、选择结构if if条件语句分为三种格式。
+if语句
+如果满足某种条件就执行。
+if语句格式：
+if（条件）{ 语句的执行体 } 条件：结果必须是布尔类型 1==1 true || false 执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。
+例如：
+/** * if语句例子 */ public class IfDemo { public static void main(String[] args) { // TODO Auto-generated method stub int i = 5; if(i==5) { System.out.println(&amp;#34;if中的条件是true&amp;#34;); i++; } System.out.println(&amp;#34;i=&amp;#34;+i); } } 注意：if()括号后面没有分号&amp;quot;;&amp;quot;
+if&amp;hellip;else语句
+如果满足某种条件，就执行某种处理，否则就执行另一种处理。
+if &amp;hellip; else语法格式：
+if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时，执行if的执行体，为false时，执行else的执行体。</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid><description>进程：CPU为每个应用程序分配的独立空间，一个进程可能有多个线程。进程为线程中的摸个执行任务程序，多个进程之间可以进行共享数据。而JAVA的线程则是由JVM进程分配的，main方法所在线程，则成为主线程。
+〇、线程状态 正常情况线程执行步骤：新建-》运行-》死亡
+当CPU资源不够时，CUP分配给各个线程的资源可能不同(貌似有点像是线程在抢资源，实际是CPU分配资源给每个线程)。 因此就会出现线程的阻塞、休眠、等待3个状态。其中阻塞状态，当cpu资源够时，阻塞状态的线程可能恢复到运行状态，而休眠、等待的线程也可能进入运行状态。休眠、等待状态可能转换成阻塞状态，但是阻塞状态不会变成休眠、等待状态。
+一、多线程的实现 0、线程常用方法 package learn.javase.threads; /** * 继承Thread创建线程，设置线程名称、获取线程名称 * @author Jole * */ public class ThreadDemo01 { public static void main(String[] args) { MyThreadsDemo mt = new MyThreadsDemo(); mt.setName(&amp;#34;Hi&amp;#34;); mt.start(); //获取当前线程 Thread t = Thread.currentThread(); System.out.println(t.getName()); } } 线程实现方式主测试类：
+package learn.javase.threads; public class MyThreadsDemo extends Thread{ public MyThreadsDemo() { super(&amp;#34;Google&amp;#34;); } public void run() { for(int i=0;i&amp;lt;5;i++) { try { Thread.</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E5%BC%82%E5%B8%B8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E5%BC%82%E5%B8%B8/</guid><description>异常 Throwable Throwable类是所有错误跟异常类的超类.
 Exception Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。
 RuntimeException RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。
 特点：
@@ -77,26 +137,7 @@ Error是指程序在运行时出现的严重问题，无法处理，程序将会
 ry { //需要被检测的语句。 }catch(异常类 变量) { //参数。 //异常的处理语句。 }finally { //一定会被执行的语句。 } try：该代码块中编写可能产生异常的代码。
 catch：用来进行某种异常的捕获，实现对捕获到的异常进行处理。
 finally：有一些特定的代码无论异常是否发生，都需要执行。另外，因为异常会引发程序跳转，导致有些语句执行不到。而finally就是解决这个问题的，在finally代码块中存放的代码都是一定会被执行的。
-捕获异常的组合方式 try catch finally组合：检测异常，并传递给catch处理，并在finally中进行资源释放。 try catch组合: 对代码进行异常检测，并对检测的异常传递给catch处理。对异常进行捕获处理。 一个try 多个catch组合: 对代码进行异常检测，并对检测的异常传递给catch处理。对每种异常信息进行不同的捕获处理。注意:这种异常处理方式，要求多个catch中的异常不能相同，并且若catch中的多个异常之间有子父类异常的关系，那么子类异常要求在上面的catch处理，父类异常在下面的catch处理。 try finally 组合: 对代码进行异常检测，检测到异常后因为没有catch，所以一样会被默认jvm抛出。异常是没有捕获处理的。但是功能所开启资源需要进行关闭，所有finally。只为关闭资源。 package learn.</description></item><item><title>JAVA IO流操作</title><link>https://www.yanxizhu.com/posts/io/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/io/</guid><description>将自己看作为程序，将数据输出到文件中，称之为输出。 从文件读取数据到程序，称为输出。
-JAVA流操作主要分为字节流、字符流。
-字节流鼻祖：InputStream\OutpuStream
-字符流鼻祖:Reader\Writer
-File 1、File常用方法 package learn.javase; import java.io.File; /** * File常用操作 * @author Jole * */ public class FileDemo01 { public static void main(String[] args) { File file = new File(&amp;#34;H://&amp;#34;); //此抽象路径名表示的文件或目录的名称；如果路径名的名称序列为空，则返回空字符串 System.out.println(file.getName()); //返回文件大小 System.out.println(file.length()); //返回绝对路径 System.out.println(file.getAbsolutePath()); //绝对路径名 System.out.println(file.getAbsoluteFile()); //父目录 System.out.println(file.getParentFile()); //是否存在 System.out.println(file.exists()); //是否是目录 System.out.println(file.isDirectory()); //返回路径下的文件或文件夹 System.out.println(file.list()); for(String path : file.list()) { //获取路径 System.out.println(path); } //可用的文件系统根 System.out.println(&amp;#34;listRoots:&amp;#34;+file.listRoots()); for(File f : file.</description></item><item><title>JAVA多线程</title><link>https://www.yanxizhu.com/posts/thread/</link><pubDate>Tue, 08 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/thread/</guid><description>进程：CPU为每个应用程序分配的独立空间，一个进程可能有多个线程。进程为线程中的摸个执行任务程序，多个进程之间可以进行共享数据。而JAVA的线程则是由JVM进程分配的，main方法所在线程，则成为主线程。
-〇、线程状态 正常情况线程执行步骤：新建-》运行-》死亡
-当CPU资源不够时，CUP分配给各个线程的资源可能不同(貌似有点像是线程在抢资源，实际是CPU分配资源给每个线程)。 因此就会出现线程的阻塞、休眠、等待3个状态。其中阻塞状态，当cpu资源够时，阻塞状态的线程可能恢复到运行状态，而休眠、等待的线程也可能进入运行状态。休眠、等待状态可能转换成阻塞状态，但是阻塞状态不会变成休眠、等待状态。
-一、多线程的实现 0、线程常用方法 package learn.javase.threads; /** * 继承Thread创建线程，设置线程名称、获取线程名称 * @author Jole * */ public class ThreadDemo01 { public static void main(String[] args) { MyThreadsDemo mt = new MyThreadsDemo(); mt.setName(&amp;#34;Hi&amp;#34;); mt.start(); //获取当前线程 Thread t = Thread.currentThread(); System.out.println(t.getName()); } } 线程实现方式主测试类：
-package learn.javase.threads; public class MyThreadsDemo extends Thread{ public MyThreadsDemo() { super(&amp;#34;Google&amp;#34;); } public void run() { for(int i=0;i&amp;lt;5;i++) { try { Thread.sleep(1000); System.out.println(i); }catch(Exception e) { System.</description></item><item><title>Scanner、Random类</title><link>https://www.yanxizhu.com/posts/two/</link><pubDate>Mon, 07 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/two/</guid><description>Java的两个引用输入类型Scanner、Random类，Scanner用于接收键盘输入，Random用户产生随机数。引用类型也就是Sun公司为我们写好的类，我们直接使用就可以了。
-1、引用数据类型的使用 1. 导入包：知道用的这个类，在jdk的那个目录那个文件下。
-2. 创建对象：格式， 类 对象 = new 类型();
-3. 如何使用: 对象.类的方法()
-引用数据类型的使用与定义基本数据类型变量不同，引用数据类型的变量定义及赋值有一个相对固定的步骤或格式，如下：
-数据类型 变量名 = new 数据类型(); 每种引用数据类型都有其方法，我们可以调用该类型实例的方法。
-变量名.方法名(); 2、Scanner类 Scanner类是引用数据类型的一种，我们可以使用该类来完成用户键盘录入，获取到录入的数据。
-导包
-import java.util.Scanner; 创建对象实例
-Scanner sc = new Scanner(System.in); 调用方法
-//用来接收控制台录入的数字 int i = sc.nextInt(); //用来接收控制台录入的字符串 String s = sc.next(); Scanner使用Demo：
-package java_learn_code; //导入包，指明类所在的的文件见，关键字import import java.util.Scanner; /** * 引用数据类型,使用步骤：1、导入包 。2、创建对象 3、通过对象调用方法 * @author Jole * Scanner的使用，所在目录java文件见-util文件夹 */ public class ScannerDemo { public static void main(String[] args) { System.</description></item><item><title>JAVA数组</title><link>https://www.yanxizhu.com/posts/array/</link><pubDate>Sun, 06 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/array/</guid><description>JAVA数组重点掌握知识，以后肯定会用到的，可以了解一下底层原理。数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。
+捕获异常的组合方式 try catch finally组合：检测异常，并传递给catch处理，并在finally中进行资源释放。 try catch组合: 对代码进行异常检测，并对检测的异常传递给catch处理。对异常进行捕获处理。 一个try 多个catch组合: 对代码进行异常检测，并对检测的异常传递给catch处理。对每种异常信息进行不同的捕获处理。注意:这种异常处理方式，要求多个catch中的异常不能相同，并且若catch中的多个异常之间有子父类异常的关系，那么子类异常要求在上面的catch处理，父类异常在下面的catch处理。 try finally 组合: 对代码进行异常检测，检测到异常后因为没有catch，所以一样会被默认jvm抛出。异常是没有捕获处理的。但是功能所开启资源需要进行关闭，所有finally。只为关闭资源。 package learn.</description></item><item><title/><link>https://www.yanxizhu.com/posts/java%E6%95%B0%E7%BB%84/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/java%E6%95%B0%E7%BB%84/</guid><description>JAVA数组重点掌握知识，以后肯定会用到的，可以了解一下底层原理。数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。
 数组 数组定义格式：
 数据类型[] 数组名(变量名) = new 数据类型[元素个数或数组长度]; 实例：
 public class ArrayDemo01 { public static void main(String[] args) { int[] x = new int[100]; } } 注意：数组定长，一但定义长度为100，在使用时大小就是100了。不变量。
@@ -109,88 +150,102 @@ JVM内存划分：JVM对自己的内存进行了划分，分成5个区域。
 数组元素的访问 数组是一个容器，存储到数组中的每个元素，都有自己的自动编号/下标（专业名词：索引）。
 访问数组存储的元素，必须依赖索引。
 访问公式：数组名[索引]
-public class ArrayDemo02 { public static void main(String[] args) { int[] arr = new int[3]; System.out.println(arr[0]); System.</description></item><item><title>JAVA流程控制语句</title><link>https://www.yanxizhu.com/posts/javase2/</link><pubDate>Sat, 05 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/javase2/</guid><description>JAVA流程控制语句JAVA中非常重要的基础知识点务必完全理解掌握，总结记录一下之前学习笔记。JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
-一、选择结构if if条件语句分为三种格式。
-if语句
-如果满足某种条件就执行。
-if语句格式：
-if（条件）{ 语句的执行体 } 条件：结果必须是布尔类型 1==1 true || false 执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。
-例如：
-/** * if语句例子 */ public class IfDemo { public static void main(String[] args) { // TODO Auto-generated method stub int i = 5; if(i==5) { System.out.println(&amp;#34;if中的条件是true&amp;#34;); i++; } System.out.println(&amp;#34;i=&amp;#34;+i); } } 注意：if()括号后面没有分号&amp;quot;;&amp;quot;
-if&amp;hellip;else语句
-如果满足某种条件，就执行某种处理，否则就执行另一种处理。
-if &amp;hellip; else语法格式：
-if(条件){ if的执行体 }else{ else的执行体 } 当if中的条件为true时，执行if的执行体，为false时，执行else的执行体。
-例如：
-** * if ... else 语句 * */ public class IfElseDemo { public static void main(String[] args) { int i = 13; if(i%2==0) { System.</description></item><item><title>JAVA基础语法</title><link>https://www.yanxizhu.com/posts/javase1/</link><pubDate>Fri, 04 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/javase1/</guid><description>总结一下JAVA基础知识如：注释、关键字、标识符、数据类型、变量、数据类型转换等基础语法。初学者可参考看看。
-1、程序注释 单行注释：
-//xxxxxx 多行注释：
-/* xxxxxx */ 文档注释：
-/** xxxxxx */ 2、关键字 关键字：是被Java语言赋予特殊含义，具有专门用途的单词。所有的Java关键词，都是小写。关键词比较多，不用刻意去背，以后用多了自己就记住了。
-3、标识符 Java中除了关键字以外基本上都是标识符。我们自己定义的词，比如自己定义的HelloWorld。
-标志符命名规则：
-标志符组成：字母、数字、下划线、美元符号
-字母：a~z、A~Z
-数字：0-9 下划线：_ 美元符号：$
-注意：不能数字开头，不能是关键字，严格区分大小写，不限制长度起名时，尽量达到见名知意。
-4、数据类型 数据类型分为基本数据类型和引用数据类型。
-A、基本数据类型：4类8种（4类展开后共8种基本类型），基本数据类型是JAVA中内置的类型。
-第一类：整型
-字节
-byte 1个字节 二进制位数：8 -128～127
-短整型
-short 2个字节 二进制位数：16
-包装类：java.lang.Short 最小值：Short.MIN_VALUE=-32768 （-2的15此方）
-最大值：Short.MAX_VALUE=32767 （2的15次方-1）
-整型
-int 4个字节 二进制位数：32
-包装类：java.lang.Integer
-最小值：Integer.MIN_VALUE= -2147483648 （-2的31次方）
-最大值：Integer.MAX_VALUE= 2147483647 （2的31次方-1）
-长整型
-long 8个字节 二进制位数：64
-包装类：java.</description></item><item><title>Html</title><link>https://www.yanxizhu.com/posts/html/</link><pubDate>Thu, 03 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/html/</guid><description>1、HTML基本格式 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; html：根标签，只有一个（网页所有内容都应该写在根标签里面）
-head：子标签，用来设置头部内容
-body：子标签，网页主体,所有要显示的内容放这里面
-title：
-网页的标题标签，也就是网页显示名字。
-搜索引擎检索页面时，会首先检索titlte中的内容。
-元素：一个完整的标签&amp;lt;&amp;gt;&amp;lt;/&amp;gt;
-标签&amp;lt;&amp;gt;
-2、HTML后缀名 将编写好的文件保存为.html网页格式文件
-显示文件格式名
-3、HTML注释 &amp;lt;！-- 这是一个注释的格式，可以直接换行 继续写注释。 --&amp;gt; 注释中的内容，不会显示在页面。
-可以写注释来对代码进行描述，便于后期的维护。要养成良好的编写注释习惯。
-4、标签属性 &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;HTML入门&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;h1&amp;gt;Hello &amp;lt;font color=&amp;#34;red&amp;#34;&amp;gt;World&amp;lt;/font&amp;gt; ！&amp;lt;/h1&amp;gt; &amp;lt;!-- 这是一个注释，不会显示在网页中。 --&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 属性只能在开始标签中设置
-属性名 =&amp;ldquo;属性值&amp;rdquo;</description></item><item><title>SSH</title><link>https://www.yanxizhu.com/posts/ssh/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/ssh/</guid><description>Secure Shell is a cryptographic network protocol for operating network services securely over an unsecured network.Typical applications include remote command-line login and remote command execution,but any network service can be secured with SSH.
-1. 设置Git用user name和email git config --global user.name &amp;#34;XXX&amp;#34; git config --global user.email &amp;#34;XXX@gmail.com&amp;#34; 2. 生成密钥 ssh-keygen -t rsa -C &amp;#34;XXX@gmail.com&amp;#34; 中间连续3次Enter键.
+public class ArrayDemo02 { public static void main(String[] args) { int[] arr = new int[3]; System.</description></item><item><title/><link>https://www.yanxizhu.com/posts/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</guid><description>最近项目对接时，中间B2B服务切换了域名，导致现有项目调用接口地址需要进行切换为https，同时需要安装SSL证书，这里记录一下JAVA工具keytool导入证书的过程。
+一、问题点 切换域名后加上https，未导入证书报错:
+[ERROR] - [2022-02-25 08:49:40.861] - [http-nio-9999-exec-1] - [DealParamAction.java:needConfirmAction:133] - no confirm method, call actual method = getNSDDtailByInterface [INFO ] - [2022-02-25 08:50:04.483] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:439] - I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect [INFO ] - [2022-02-25 08:50:04.484] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:445] - Retrying request [INFO ] - [2022-02-25 08:50:25.487] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:439] - I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect [INFO ] - [2022-02-25 08:50:25.</description></item><item><title/><link>https://www.yanxizhu.com/posts/map%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/map%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/</guid><description>Map集合的2种循环方式。一种是通过map.entrySet()。
+另一种是map.keySet()。 所有的集合都可以通过迭代器Iterator，进行遍历。
+package learn.javase; import java.util.HashMap; import java.util.Iterator; import java.util.Map; import java.util.Map.Entry; import java.util.Set; /** * 重要 * 遍历map的两种方式map.entrySet() map.keySet() * @author Jole * */ public class MapDemo { public static void main(String[] args) { Map&amp;lt;Integer ,String &amp;gt; map = new HashMap(); map.put(1, &amp;#34;111&amp;#34;); map.put(2, &amp;#34;2222&amp;#34;); //方式一 entrySet() Set&amp;lt;Map.Entry &amp;lt;Integer, String&amp;gt;&amp;gt; sets = map.entrySet(); //获取值1，通过for for(Map.Entry &amp;lt;Integer, String&amp;gt; entry : sets) { System.</description></item><item><title/><link>https://www.yanxizhu.com/posts/maven%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/maven%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>使用maven的好处： 大型项目的好处，建立一个父项目，各组或部门可以模块开发，不用拉取整个项目进行开发。
+创建maven项目说明： maven项目结构： Maven常用命令： 1、一键构建项目命令:
+mvn tomcat:run 注意：该命令使用的是tomcat插件进行运行的，不需要单独安装配置tomcat。
+2、清理编译好后的文件（target文件夹及里面所有的文件）：
+mvn clean 3、编译并运行了main里面的代码（只编译main主文件里面的java代码，test里面的java代码不编译不编译）：
+mvn compile 4、编译并运行了test里面的代码(只编译test里面的java代码，main里面的java代码不编译)：
+mvn test 5、打包，并将包放到tager文件夹下面。打成war或jar名称由POM文件里面的这3个标签值决定： 例如打包成这个名字:HelloWorld-0.0.2-SNAPASHOT.war HelloWorld&amp;ndash;打成包的名字 0.0.2-SNAPASHOT&amp;ndash;版本 war&amp;ndash;什么类型的包
+mvn package 6、把项目发布到本地仓库
+mvn install 同时运行了mvn compile、mvn test、mvn package、mvn install、mvn deploy命令。
+7、jar或war包发布到私服上
+mvn deploy maven生命周期有三种： 1、clean生命周期：clean 2、default生命周期：compile、test、package、install、deploy命令 3、site生命周期:site(生成项目的文档说明)
+不同的生命周期，命令可以同时运行。
+maven依赖范围： complie
+provided:编译（complie）时需要、测试时也需要、运行时不需要，打包时不需要
+runtime：例如：数据库驱动包
+test：编译时不需要，测试时需要、运行时不需要
+maven添加插件： 常见问题： 出现该提示表示jdk安装有问题，重新安装即可。
+maven整体模型也就是上面说的内容： 版本冲突解决原则：
+1、路径近者原则（比如2个坐标中有不同版本的相同的jar包，自己在加入要使用的版本的这个名称的坐标）
+2、第一声明有限原则（比如2个坐标，谁排在pom.xml文件的前面就用谁的）
+3、排除原则.（将名字和组织加入到exclusion中） 4、版本锁定 谁先传递锁定的版本，就用这个。 可以同时锁定多个版本
+锁定版本里面使用${sprint.verion}注意上面锁定了，坐标里面的version就没有了，可以去除，就算不去除也没有了。</description></item><item><title/><link>https://www.yanxizhu.com/posts/nexus%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/nexus%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/</guid><description>&lt;p>第一步骤：下载nexus私服软件nexus-2.12.0-01-bundle&lt;/p>
+&lt;p>第二不：安装&lt;/p>
+&lt;p>进入nexus解压目录进入到bin目录:&lt;/p>
+&lt;p>1、安装:执行nexus.bat install&lt;/p>
+&lt;p>2、启动:nexus.bat start&lt;/p>
+&lt;p>第三步：查看访问路径&lt;/p>
+&lt;p>进入config目录，打开nexus.properties即可看到端口号，项目命令nexus。&lt;/p>
+&lt;p>第四步：浏览器打开http://127.0.0.1:8081/nexus/&lt;/p>
+&lt;p>默认登录账号:admin/admin123&lt;/p></description></item><item><title/><link>https://www.yanxizhu.com/posts/scannerrandom/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/scannerrandom/</guid><description>Java的两个引用输入类型Scanner、Random类，Scanner用于接收键盘输入，Random用户产生随机数。引用类型也就是Sun公司为我们写好的类，我们直接使用就可以了。
+1、引用数据类型的使用 导入包：知道用的这个类，在jdk的那个目录那个文件下。 创建对象：格式， 类 对象 = new 类型(); 如何使用: 对象.类的方法() 引用数据类型的使用与定义基本数据类型变量不同，引用数据类型的变量定义及赋值有一个相对固定的步骤或格式，如下：
+数据类型 变量名 = new 数据类型(); 每种引用数据类型都有其方法，我们可以调用该类型实例的方法。
+变量名.方法名(); 2、Scanner类 Scanner类是引用数据类型的一种，我们可以使用该类来完成用户键盘录入，获取到录入的数据。
+导包
+import java.util.Scanner; 创建对象实例
+Scanner sc = new Scanner(System.in); 调用方法
+//用来接收控制台录入的数字 int i = sc.nextInt(); //用来接收控制台录入的字符串 String s = sc.next(); Scanner使用Demo：
+package java_learn_code; //导入包，指明类所在的的文件见，关键字import import java.util.Scanner; /** * 引用数据类型,使用步骤：1、导入包 。2、创建对象 3、通过对象调用方法 * @author Jole * Scanner的使用，所在目录java文件见-util文件夹 */ public class ScannerDemo { public static void main(String[] args) { System.</description></item><item><title/><link>https://www.yanxizhu.com/posts/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/</guid><description>首先知道Shiro架构有3个主要概念：Subject、SecurityManager和Realms。
+Shiro基础架构图 ：
+基础架构说明： Subject: As we’ve mentioned in our Tutorial, the Subject is essentially a security specific ‘view’ of the the currently executing user. Whereas the word ‘User’ often implies a human being, a Subject can be a person, but it could also represent a 3rd-party service, daemon account, cron job, or anything similar - basically anything that is currently interacting with the software. Subject instances are all bound to (and require) a SecurityManager.</description></item><item><title/><link>https://www.yanxizhu.com/posts/socket%E7%BC%96%E7%A8%8Btcp%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/socket%E7%BC%96%E7%A8%8Btcp%E5%8D%8F%E8%AE%AE%E5%AE%9E%E7%8E%B0%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</guid><description>通过Java Socket编程，实现多线程文件上传。主要涉及ServerScoket服务端、Socket客户端、IO流操作、多线线程。
+客户端：
+package learn.javase.Update; import java.io.File; import java.io.FileInputStream; import java.io.IOException; import java.io.InputStream; import java.io.OutputStream; import java.net.Socket; /** * 利用TCP的Socket\ServerSocket客户端向服务器上传文件 * 客户端 * @author Jole * */ public class UpClent { public static void main(String[] args) throws IOException{ Socket socket = new Socket(&amp;#34;127.0.0.1&amp;#34;,8888); OutputStream out = socket.getOutputStream(); //读取本地文件，并通过out输出流，发送给服务端 File file = new File(&amp;#34;J:&amp;#34;+File.separator+&amp;#34;wxhandbook-master.zip&amp;#34;); FileInputStream in = new FileInputStream(file); byte[] data = new byte[1024]; int len =0; while((len=in.</description></item><item><title/><link>https://www.yanxizhu.com/posts/socket%E7%BC%96%E7%A8%8Budp%E5%AE%9E%E7%8E%B0%E8%81%8A%E5%A4%A9/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/socket%E7%BC%96%E7%A8%8Budp%E5%AE%9E%E7%8E%B0%E8%81%8A%E5%A4%A9/</guid><description>通过Socket网络编程，UDP实现简单聊天。主要涉及DatagramSocket进行数据传输、DatagramPacket进行数据包封装，2个类。
+发送端:
+package learn.javase.chat; import java.net.DatagramPacket; import java.net.DatagramSocket; import java.net.InetAddress; import java.util.Scanner; /** * 控制台输入；实现聊天。 * 发送方 * @author Jole * */ public class UdpSend { public static void main(String[] args) throws Exception{ Scanner scan = new Scanner(System.in); InetAddress ia = InetAddress.getByName(&amp;#34;192.168.1.4&amp;#34;); DatagramSocket socket = new DatagramSocket(); while(true) { String chatInfo = scan.nextLine(); byte[] info = chatInfo.getBytes(); DatagramPacket pack = new DatagramPacket(info, info.</description></item><item><title/><link>https://www.yanxizhu.com/posts/ssh%E5%88%9B%E5%BB%BA/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/ssh%E5%88%9B%E5%BB%BA/</guid><description>1. 设置Git用user name和email git config --global user.name &amp;#34;XXX&amp;#34; git config --global user.email &amp;#34;XXX@gmail.com&amp;#34; 2. 生成密钥 ssh-keygen -t rsa -C &amp;#34;XXX@gmail.com&amp;#34; 中间连续3次Enter键.
 3. 测试SSH key是否设置成功 ssh -T git@github.com 出现下面提示直接输入yes.
-The authenticity of host &amp;#39;github.com (192.30.253.113)&amp;#39; can&amp;#39;t be established. RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.</description></item><item><title>关于</title><link>https://www.yanxizhu.com/about/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/about/</guid><description>一名java后端程序员</description></item><item><title>Git</title><link>https://www.yanxizhu.com/posts/git/</link><pubDate>Tue, 01 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/git/</guid><description>create a new repository on the command line. push an existing repository from the command line. import code from another repository You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
-create a new repository on the command line git init
-git add .
-git commit -m &amp;quot;first commit&amp;quot;
-git remote add origin https://github.com/xxx/xxx.git
-git push -u origin master
-push an existing repository from the command line git remote add origin https://github.</description></item><item><title>友情链接</title><link>https://www.yanxizhu.com/link/</link><pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/link/</guid><description>Web前端导航
-美团技术团队 | 小米信息部技术团队 | 腾讯MDX Tencent TG ideas | Tencent AlloyTeam | 搜狐畅游视觉设计中心团队 | Glow技术团队
-国外技术团队博客：
-https://code.facebook.com
-博客上会介绍一些Facebook在Android、iOS、前端、后端以及硬件技术遇到的问题，也包括一些他们团队研究的新技术， 比如fresco等等。我最感兴趣的是他们在技术上遇到的一些问题，然后他们是怎么解决的.
-http://square.github.io/
-Square应该是业界开源项目最多的公司之一了，它的github主页上列举了好多开源项目，一个做Android的如果没用过Square的开源库的话，要么你非常非常牛逼，要么你真的不关心开源项目。
-https://blog.twitter.com/engineering
-Twitter是一家美国社交网络及微博客服务的网站，是全球互联网上访问量最大的十个网站之一。这是Twitter官方推出的技术博客， 经由Twitter工程研发团队所维护管理，第一时间发布一手的有关Twitter的技术、工具以及活动信息。向业内外人士展示Twitter背后的工具、产品。还包括受到大家强烈关注的，Twitter发布的开源产品信息介绍。
-https://engineering.linkedin.com/
-作为全球最大的职业社交网站，LinkedIn 会员人数在世界范围内已超过 3 亿。这是LinkedIn旗下的科技博客，涵盖的内容非常丰富。 从各个方面详细地介绍了LinkedIn技术人员如何使用高度结构化的数据来完成LinkedIn的搜索功能、社交图谱以及机器学习系统。 此外，还有对于其工程研发团队所创造、管理和使用的开源产品细致化讲解。另外还包含精彩博文，有关于LinkedIn背后的技术背景、 团队开发人员介绍等等您都可以在这里一网打尽，非常值得我们学习借鉴。
-http://google-opensource.blogspot.hk/
-谷歌，是一家美国的跨国科技企业，致力于互联网搜索、云计算、广告技术等领域，开发并提供大量基于互联网的产品与服务。 这个科技博客发布了Google所有的开源产品项目的新闻消息，并会及时更新开源软件的开发信息。Google是支持开源运动的最大公司之一，如果您想第一时间了解新开源的产品，学习Google的实践经验，及时掌握Google的核心关键技术，向Google开发团队表达自己的建议，那这一定会是您最好的去处
-https://www.nginx.com/blog/ Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。 中国大陆使用NGINX网站用户有：百度、新浪、网易、腾讯等。在NGINX的技术博客，您可以看到NGINX的新闻、技术信息和科技交流活动安排。对于NGINX的技术发布、核心技术信息都在这里一一呈现。关注这个微博，您可以第一时间看到有关于NGINX的技术咨询。 如果您对这个高性能的HTTP和反向代理服务器非常感兴趣，请您一定要关注它！
-http://radar.oreilly.com/ 洞悉、分析和研究新兴技术是其宗旨。该博客有请O’Reilly公司的专栏编辑，撰写各个领域的技术类文章。迎合技术开发者的需求， 追踪最前沿技术，每篇文章定位读者精确，您可以选择自己最感兴趣的方面进行阅读。
-https://engineering.opendns.com/ OpenDNS长期以来致力于为广大个人用户以及商务企业用户和公共领域提供免费的域名解析服务。在OpenDNS Engineering博客上， 您可以找到该公司设计的这个全球最大安全网络的相关技术资料。博客上提供了独家的技术见解，谈论了该公司文化，并发布技术活动信息。您可以与OpenDNS开发团队的工程师探讨如何消除恶意软件、网络钓鱼等等的技术。有关具体的技术创新和技术分析，您都可以在博文中找到线索。
-http://techblog.netflix.com/ Netflix是一家在线影片租赁提供商。公司能够提供Netflix超大数量的DVD，而且能够让顾客快速方便的挑选影片，同时免费递送。这是Netflix的博客，专注于技术和技术问题。Netflix的技术专家分享他们创造Netflix service的时候所遇到的挑战、所作出的决定以及所拥有的观点。
-http://githubengineering.com/ 作为开源代码库以及版本控制系统，Github拥有140多万开发者用户。这是由GitHub的一线技术工程师，根据自身开发GitHub环节中遇到的问题、使用的最新技术所撰写的博客。由于作者都是非常有经验的工程师，您可以深入了解GitHub后台结构，对您的相关开发一定有很大帮助。
-http://blog.parse.com/ Parse是由 YC 孵化出来的、专为移动应用提供后台服务的云计算平台，为开发者包办繁琐的后台服务，让开发者只需专注于具体的开发工作。这里分享最新的Parse开发者的开发经验。在这个博客中，你可以零距离学习Parse最新技术，深入探究Parse的技术活动，甚至可以向Parse的技术开发者提问任何你感兴趣的问题。还提供视频选段，全方位直击最新技术热点。
-https://www.buzzfeed.com/techblog BuzzFeed是一个美国的新闻聚合网站，致力于从数百个新闻博客那里获取订阅源，通过搜索、发送信息链接。BuzzFeed的技术博客，主要发布BuzzFeed的产品技术更新，当然也有对于技术核心内容的深入剖析。BuzzFeed的作者编辑们都极具灵感和技能，每篇文章都带有典型的BuzzFeed式幽默，您一定会被其色彩鲜明的配图和极富特色的语言文字所吸引，是非常具有吸引力的一个别具匠心的博客！
-https://labs.spotify.com/ Spotify是全球最大的正版流媒体音乐服务平台。截止到2015年1月，Spotify已经拥有超过6000万的用户，其中1500万为付费用户。具有如此大的用户基数，其后台技术自然不容小视。在这个Spotify的官方技术博客， 您可以看到Spotify的技术人员如何处理遇到的问题。所有的博文都由Spotify的工程技术人员亲自撰写，其专业性和权威性都得到了很大的保障。相信这些最前沿的技术分享一定能让您有所收获！
-http://www.yelp.com/engineering Yelp是美国最大的点评网站，其极快的增长速度、极大的扩张趋势都离不开背后强大的技术支持。这个Yelp的技术博客，邀请到开发团队的工程师，来分享Yelp所运用到的各项先进算法技术。您可以看到Yelp技术人员如何解决技术问题，Yelp团队发布的开源产品等等。
-http://instagram-engineering.tumblr.com/ Instagram是一款最初运行在iOS平台上的移动应用，以一种快速、美妙和有趣的方式将你随时抓拍下的图片分享彼此。Instagram旗下的科技博客，在这里分享了Instagram技术人员的开发见解。 这是最好最直接地了解Instagram背后技术的博客平台。最早仅由五名技术人员打造的系统，现在当然是今非昔比。这里提供的不仅仅是对于关键技术的介绍，更有Instagram技术人员非常值得借鉴的开发经验。</description></item></channel></rss>
+The authenticity of host &amp;#39;github.com (192.30.253.113)&amp;#39; can&amp;#39;t be established. RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8. Are you sure you want to continue connecting (yes/no)? yes 输出如下，则表示通过.
+Hi xxxx! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access. 使用时，会根据本地git密钥信息与git或者coding仓库密钥信息比对，本地上传时会提示登录。</description></item><item><title/><link>https://www.yanxizhu.com/posts/typora%E6%9C%80%E5%90%8E%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E4%B8%8B%E8%BD%BD/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/typora%E6%9C%80%E5%90%8E%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E4%B8%8B%E8%BD%BD/</guid><description>Typora最后免费版本下载
+Typora收费后，开始保留最后一个免费版本Version0.11.18(beta)，欢迎食用。
+阿里网盘：
+「typora-update-x64-1117.exe」https://www.aliyundrive.com/s/Xez1W6kvWZv 点击链接保存，或者复制本段内容，打开「阿里云盘」APP ，无需下载极速在线查看，视频原画倍速播放。
+百度网盘：
+链接：https://pan.baidu.com/s/1zaaqxIv99xX98Qemw9tLrw 提取码：utq4
+天翼网盘:
+https://cloud.189.cn/t/3yEJbavmieye (访问码:1oov)</description></item><item><title/><link>https://www.yanxizhu.com/posts/virtualbox%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/virtualbox%E5%AE%89%E8%A3%85/</guid><description>一、virtualbox安装 1、下载 https://www.virtualbox.org/
+2、在主板开启CPU虚拟化，自行百度
+3、安装，直接下一步，选择安装路径。
+二、安装虚拟机 1、下载虚拟系统CentOS7
+https://app.vagrantup.com/boxes/search Vagrant官方镜像仓库
+https://www.vagrantup.com/ Vagrant下载
+2、初始化虚拟系统
+打开安装好的virtualbox软件，打开window cmd窗口，运行下面命令，即可初始化一个CentOS7系统。初始化之后window用户文件夹夹会多出一个Vagrantfile文件。此时virtualbox界面就会多出一个CentOS系统了。
+Vagrant init centos/7 3、启动虚拟机，初始root用户密码vagrant，此时看到virtualbox中的CentOS正在启动。
+vagrant up 4、vagrant其他命令
+使用vagrant用户链接至CentOS虚拟机，初始root用户密码vagrant。
+vagrant ssh 上传文件
+vagrant upload source [destination][name][id] 更多命令可以访问官网文档
+5、设置固定ip，默认虚拟机ip是随机的，方式1-修改Vagrantfile，方式2-进入linx系统修改网卡配置信息
+config.vm.network &amp;#34;private_network&amp;#34;,ip:&amp;#34;192.168.10.1&amp;#34; 6、重启虚拟机
+vagrant reload 7、启动，除了上面的3启动虚拟机，也可以在virtualbox界面选择虚拟机右键开启。
+8、virtualbox界面还可以设置虚拟机内存大小等信息，更多设置可以查看官网。</description></item><item><title/><link>https://www.yanxizhu.com/posts/xshell-7xftp-7%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E4%B8%8B%E8%BD%BD/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/xshell-7xftp-7%E5%85%8D%E8%B4%B9%E7%89%88%E6%9C%AC%E4%B8%8B%E8%BD%BD/</guid><description>Xshell 7、Xftp 7免费版本下载，官网每次下载懒得找，懒得注册，这里提供官网原版下载，官网下载地址
+https://www.xshell.com/zh/free-for-home-school/
+阿里网盘：
+https://www.aliyundrive.com/s/ZV2jMWP4Fsr
+百度网盘：
+链接：https://pan.baidu.com/s/13Hx_HYbZFC4BGW56IlOdqA 提取码：xb2e
+天翼网盘：
+https://cloud.189.cn/t/ueABVvANryMn (访问码:w2se)
+https://cloud.189.cn/t/Yjymuu3EF3Az (访问码:7it5)</description></item><item><title/><link>https://www.yanxizhu.com/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>博客一直使用firekylin搭建，最近看着typecho活跃度还可以，于是本周末用docker重新搭建了博客。
+一、环境说明 操作系统：CentOS7.6
+技术：Docker、MySQL、PHP、Nginx
+使用工具：Xftp 7、Xshell 7、Notepad++
+博客系统：Typecho
+二、安装步骤 Docker环境搭建 Docker安装MySQL Docker安装PHP Docker安装Nginx 三、遇到问题 安装mysql、php、nginx时，映射文件路径错误，导致安装好后，找不到文件。
+Nginx配置时映射路径错误、80端口自动转发443端口，导致http访问一直追加路径。
+证书路径放置错误。
+Typecho初始化安装时，提示&amp;quot;对不起，无法连接数据库，请先检查数据库配置再继续进行安装&amp;quot;。
+四、解决方案 通过docker log 容器，查看日志，一步步解决。 添加异常提示代码：, $e-&amp;gt;getMessage() instal.php第56行，添加ob_start(); ip地址错误，默认localhost，docker安装时，需要改成公网ip或局域网ip。 未创建typecho数据库。 Nginx配置文件:
+server { listen 443 ssl http2 reuseport; server_name yanxizhu.com www.yanxizhu.com; root /var/www/html/yanxizhu.com; index index.php; ssl on; ssl_certificate /etc/nginx/conf.d/自己证书.crt; ssl_certificate_key /etc/nginx/conf.</description></item><item><title/><link>https://www.yanxizhu.com/posts/%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/</guid><description>1、 RabbitMQ Simulator RabbitMQ模拟器，可用于模拟MQ消息的收发消费情况。使用下面的绘图区域来表示您的消息传递拓扑。 将消息元素从左侧的工具箱拖到画布上。 要连接节点，请按住 ALT 键（或 SHIFT 键）并从源节点拖动以将其连接到目标节点。 官网地址 http://tryrabbitmq.com
+2、 draw.io draw.io 是一款免费的在线图表编辑工具, 可以用来编辑工作流, BPM, org charts, UML, ER图, 网络拓朴图等 官网地址 http://draw.io
+3、 PuTTY PuTTY 是一个 SSH 和 telnet 客户端，最初由 Simon Tatham 为 Windows 平台开发。 PuTTY 是开源软件，提供源代码，由一群志愿者开发和支持。 官网地址 https://www.putty.org/
+4、 WinSCP WinSCP 是一个 Windows 环境下使用的 SSH 的开源图形化 SFTP 客户端。同时支持 SCP 协议。它的主要功能是在本地与远程计算机间安全地复制文件，并且可以直接编辑文件。 官网地址 https://winscp.net
+5、 FastStone Capture FastStone Capture 是一款功能强大、轻巧但功能齐全的截图工具和屏幕录像机以及编辑共计。编辑工具包括注释（文本、箭头线、高光）、调整大小、裁剪、锐化、水印、应用边缘效果等等。其他功能包括图像扫描、全局热键、自动文件名生成、支持外部编辑器、颜色选择器、屏幕放大镜、屏幕十字准线和屏幕标尺等功能。 官网地址 https://www.faststone.org
+6、 potplayer 一款功能强大、界面美观、简洁的视频播放器。 官网地址 https://potplayer.daum.net
+7、 notepad++ Notepad++ 是一个免费的（如“言论自由”和“免费啤酒”）源代码编辑器和支持多种语言的记事本替代品。 在 MS Windows 环境中运行，其使用受 GNU 通用公共许可证管理。 官网地址 https://notepad-plus-plus.</description></item><item><title/><link>https://www.yanxizhu.com/posts/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</guid><description>create a new repository on the command line. push an existing repository from the command line. import code from another repository You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+create a new repository on the command line git init git add README.md git commit -m &amp;#34;first commit&amp;#34; git branch -M main git remote add origin https://github.com/willxwu/xxx.git git push -u origin main push an existing repository from the command line git remote add origin https://github.</description></item></channel></rss>

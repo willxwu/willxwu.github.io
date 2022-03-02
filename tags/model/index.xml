@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>model on 朱言蹊</title><link>https://www.yanxizhu.com/tags/model/</link><description>Recent content in model on 朱言蹊</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sat, 19 Apr 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://www.yanxizhu.com/tags/model/index.xml" rel="self" type="application/rss+xml"/><item><title>模块化开发</title><link>https://www.yanxizhu.com/posts/model/</link><pubDate>Sat, 19 Apr 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/model/</guid><description>1、新建父工程 新建maven项目，选择为pom类型的父工程。
-2、在父工程基础上分别新建entity、dao、server子工程模块。 新建maven mondel模块，选择jar类型的子工程。
-3、在父工程上新建子工程web模块， 新建maven model模块，选择war类型web子项目。
-4、有模块依赖引用时，先将父模块和需要的模块一起instal打包发布到本地仓库。然后在
-需要的子模块中引入子模块坐标。
-5、注意依赖范围对依赖传递造成的影响.
-6、最后将web项目package打成war就可以了。里面就包含了各模块发布到本地的jar包了。
-注意：在同一个工作空间，各模块项目打开时看到引入的子模块是一个工程文件夹，关闭子 模块后就会看到变成jar了。
-注意jar冲突的解决办法，见上一篇。</description></item></channel></rss>
