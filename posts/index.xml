@@ -219,7 +219,27 @@ Nginx配置时映射路径错误、80端口自动转发443端口，导致http访
 证书路径放置错误。
 Typecho初始化安装时，提示&amp;quot;对不起，无法连接数据库，请先检查数据库配置再继续进行安装&amp;quot;。
 四、解决方案 通过docker log 容器，查看日志，一步步解决。 添加异常提示代码：, $e-&amp;gt;getMessage() instal.php第56行，添加ob_start(); ip地址错误，默认localhost，docker安装时，需要改成公网ip或局域网ip。 未创建typecho数据库。 Nginx配置文件:
-server { listen 443 ssl http2 reuseport; server_name yanxizhu.com www.yanxizhu.com; root /var/www/html/yanxizhu.com; index index.php; ssl on; ssl_certificate /etc/nginx/conf.d/自己证书.crt; ssl_certificate_key /etc/nginx/conf.</description></item><item><title/><link>https://www.yanxizhu.com/posts/%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/</guid><description>1、 RabbitMQ Simulator RabbitMQ模拟器，可用于模拟MQ消息的收发消费情况。使用下面的绘图区域来表示您的消息传递拓扑。 将消息元素从左侧的工具箱拖到画布上。 要连接节点，请按住 ALT 键（或 SHIFT 键）并从源节点拖动以将其连接到目标节点。 官网地址 http://tryrabbitmq.com
+server { listen 443 ssl http2 reuseport; server_name yanxizhu.com www.yanxizhu.com; root /var/www/html/yanxizhu.com; index index.php; ssl on; ssl_certificate /etc/nginx/conf.d/自己证书.crt; ssl_certificate_key /etc/nginx/conf.</description></item><item><title/><link>https://www.yanxizhu.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA/</guid><description>一、创建仓库 注意：仓库名称、路径、选择语言、添加.gitignore、添加开源许可证、选择分支模型。
+二、拉取项目 三、创建微服务模块-记账管理微服务 选择微服务必要组件
+创建好第一个记账微服务后，项目结构。
+然后安装上述步骤，依次创建出其它微服务模块。
+各微服务共同点：
+1、都导入了必备的spring web，OpenFeign
+2、每一个服务，包名：com.yanxizhu.ifamily.xxxxx(booking/firend/。。。服务名)
+3、模块名:ifamily-xxxxx(booking/fired/&amp;hellip;&amp;hellip;.服务名)
+实例的包名：com.yanxizhu.ifamily.booking
+模块名：ifamily-booking
+四、设置总项目聚合各微服务 一、随便复制一个微服务的pom文件，粘贴到总项目中。
+本次项目，如，复制ifamily-booking微服务中的pom.xml到总项目ifamily中。
+二、修改总项目中的pom.xml文件。
+1、修改模块名、项目名、描述
+修改前：
+&amp;lt;groupId&amp;gt;com.yanxizhu.ifamily&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ifamily-booking&amp;lt;/artifactId&amp;gt;&amp;lt;!--1、模块名修改为总项目名--&amp;gt; &amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;name&amp;gt;ifamily-booking&amp;lt;/name&amp;gt;&amp;lt;!--2、修改为总项目名--&amp;gt; &amp;lt;description&amp;gt;家庭管理-记账服务&amp;lt;/description&amp;gt;&amp;lt;!--3、修改为聚合服务，把其它微服务聚合起来--&amp;gt; 修改后：
+&amp;lt;groupId&amp;gt;com.yanxizhu.ifamily&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;ifamily&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;0.0.1-SNAPSHOT&amp;lt;/version&amp;gt; &amp;lt;name&amp;gt;ifamily&amp;lt;/name&amp;gt; &amp;lt;description&amp;gt;聚合服务&amp;lt;/description&amp;gt; 2、删除服务依赖
+&amp;lt;parent&amp;gt;&amp;lt;!--删除父引用--&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-parent&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.6.4&amp;lt;/version&amp;gt; &amp;lt;relativePath/&amp;gt; &amp;lt;!-- lookup parent from repository --&amp;gt; &amp;lt;/parent&amp;gt; 3、删除多余的依赖：
+4、添加类型，为pom
+&amp;lt;packaging&amp;gt;pom&amp;lt;/packaging&amp;gt; 5、聚合其他微服务模块
+&amp;lt;modules&amp;gt;&amp;lt;!--聚合其他微服务--&amp;gt; &amp;lt;module&amp;gt;ifamily-booking&amp;lt;/module&amp;gt; &amp;lt;/modules&amp;gt; 最终的pom文件内容如下：</description></item><item><title/><link>https://www.yanxizhu.com/posts/%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/%E5%BF%85%E5%A4%87%E5%B7%A5%E5%85%B7/</guid><description>1、 RabbitMQ Simulator RabbitMQ模拟器，可用于模拟MQ消息的收发消费情况。使用下面的绘图区域来表示您的消息传递拓扑。 将消息元素从左侧的工具箱拖到画布上。 要连接节点，请按住 ALT 键（或 SHIFT 键）并从源节点拖动以将其连接到目标节点。 官网地址 http://tryrabbitmq.com
 2、 draw.io draw.io 是一款免费的在线图表编辑工具, 可以用来编辑工作流, BPM, org charts, UML, ER图, 网络拓朴图等 官网地址 http://draw.io
 3、 PuTTY PuTTY 是一个 SSH 和 telnet 客户端，最初由 Simon Tatham 为 Windows 平台开发。 PuTTY 是开源软件，提供源代码，由一群志愿者开发和支持。 官网地址 https://www.putty.org/
 4、 WinSCP WinSCP 是一个 Windows 环境下使用的 SSH 的开源图形化 SFTP 客户端。同时支持 SCP 协议。它的主要功能是在本地与远程计算机间安全地复制文件，并且可以直接编辑文件。 官网地址 https://winscp.net
