@@ -1,0 +1,249 @@
+<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.94.2"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://www.yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="Nginx反向代理微服务配置 一、本地域名服务访问过程 二、正向代理和反向代理 三、Nginx+Windows搭建域名访问环境 1、修改C:\Windows\System32\drivers\etc下hosts文件，映射本地域名和192.168.56.10ip关系。 每次通过记事本修改很麻烦，可以通过SwitchHosts软件修改。
+192.168.56.10 family.com 2、现在就可以通过family.com域名访问了。 想要访问部署在服务器上的其它端口应用也可以通过域名访问，比如：搭建的kibana是5601端口，通过域名http://family.com:5601/即可访问了(kibana时部署在56.10服务器上的)
+四、nginx.conf  user nginx; worker_processes 1;  error_log /var/log/nginx/error.log warn; pid /var/run/nginx.pid;   events {  worker_connections 1024; }   http {  include /etc/nginx/mime.types;  default_type application/octet-stream;   log_format main '$remote_addr - $remote_user [$time_local] &#34;$request&#34; '  '$status $body_bytes_sent &#34;$http_referer&#34; '  '&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;';   access_log /var/log/nginx/access.log main;   sendfile on;  #tcp_nopush on;   keepalive_timeout 65;   #gzip on;   include /etc/nginx/conf."><meta property="og:title" content><meta property="og:description" content="Nginx反向代理微服务配置 一、本地域名服务访问过程 二、正向代理和反向代理 三、Nginx+Windows搭建域名访问环境 1、修改C:\Windows\System32\drivers\etc下hosts文件，映射本地域名和192.168.56.10ip关系。 每次通过记事本修改很麻烦，可以通过SwitchHosts软件修改。
+192.168.56.10 family.com 2、现在就可以通过family.com域名访问了。 想要访问部署在服务器上的其它端口应用也可以通过域名访问，比如：搭建的kibana是5601端口，通过域名http://family.com:5601/即可访问了(kibana时部署在56.10服务器上的)
+四、nginx.conf  user nginx; worker_processes 1;  error_log /var/log/nginx/error.log warn; pid /var/run/nginx.pid;   events {  worker_connections 1024; }   http {  include /etc/nginx/mime.types;  default_type application/octet-stream;   log_format main '$remote_addr - $remote_user [$time_local] &#34;$request&#34; '  '$status $body_bytes_sent &#34;$http_referer&#34; '  '&#34;$http_user_agent&#34; &#34;$http_x_forwarded_for&#34;';   access_log /var/log/nginx/access.log main;   sendfile on;  #tcp_nopush on;   keepalive_timeout 65;   #gzip on;   include /etc/nginx/conf."><meta property="og:type" content="article"><meta property="og:url" content="https://www.yanxizhu.com/posts/nginx%E6%AD%A3%E5%90%91%E4%BB%A3%E7%90%86%E5%92%8C%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://www.yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+-
+<a class=app-header-menu-item href=/>home</a>
+-
+<a class=app-header-menu-item href=/link/>link</a>
+-
+<a class=app-header-menu-item href=/tags/>tags</a></nav><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vehicula turpis sit amet elit pretium.</p><div class=app-header-social><a target=_blank href=https://github.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a target=_blank href=https://twitter.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a></div></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title></h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Jan 1, 0001</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3 min read</div></div></header><div class=post-content><h1 id=nginx反向代理微服务配置>Nginx反向代理微服务配置</h1><h2 id=一本地域名服务访问过程>一、本地域名服务访问过程</h2><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203142138225.png alt></p><h2 id=二正向代理和反向代理>二、正向代理和反向代理</h2><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203142129184.png alt></p><h2 id=三nginxwindows搭建域名访问环境>三、Nginx+Windows搭建域名访问环境</h2><h3 id=1修改cwindowssystem32driversetc下hosts文件映射本地域名和1921685610ip关系>1、修改C:\Windows\System32\drivers\etc下hosts文件，映射本地域名和192.168.56.10ip关系。</h3><p>每次通过记事本修改很麻烦，可以通过<a href=https://swh.app/>SwitchHosts</a>软件修改。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>192.168.56.10 family.com
+</span></span></code></pre></div><h3 id=2现在就可以通过familycom域名访问了>2、现在就可以通过family.com域名访问了。</h3><p>想要访问部署在服务器上的其它端口应用也可以通过域名访问，比如：搭建的kibana是5601端口，通过域名http://family.com:5601/即可访问了(kibana时部署在56.10服务器上的)</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203142153588.png alt></p><h2 id=四nginxconf>四、nginx.conf</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>user</span>  <span style=color:#e6db74>nginx</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>worker_processes</span>  <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>error_log</span>  <span style=color:#e6db74>/var/log/nginx/error.log</span> <span style=color:#e6db74>warn</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>pid</span>        <span style=color:#e6db74>/var/run/nginx.pid</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>events</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>worker_connections</span>  <span style=color:#ae81ff>1024</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>http</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>include</span>       <span style=color:#e6db74>/etc/nginx/mime.types</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>default_type</span>  <span style=color:#e6db74>application/octet-stream</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>log_format</span>  <span style=color:#e6db74>main</span>  <span style=color:#e6db74>&#39;</span>$remote_addr <span style=color:#e6db74>-</span> $remote_user <span style=color:#e6db74>[</span>$time_local] <span style=color:#e6db74>&#34;</span>$request&#34; <span style=color:#e6db74>&#39;</span>
+</span></span><span style=display:flex><span>                      <span style=color:#e6db74>&#39;</span>$status $body_bytes_sent <span style=color:#e6db74>&#34;</span>$http_referer&#34; <span style=color:#e6db74>&#39;</span>
+</span></span><span style=display:flex><span>                      <span style=color:#e6db74>&#39;&#34;</span>$http_user_agent&#34; <span style=color:#e6db74>&#34;</span>$http_x_forwarded_for&#34;&#39;;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>access_log</span>  <span style=color:#e6db74>/var/log/nginx/access.log</span>  <span style=color:#e6db74>main</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>sendfile</span>        <span style=color:#66d9ef>on</span>;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#tcp_nopush     on;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>keepalive_timeout</span>  <span style=color:#ae81ff>65</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#gzip  on;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>include</span> <span style=color:#e6db74>/etc/nginx/conf.d/*.conf</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>Nginx配置文件说明：</strong></p><p><strong>1、全局块:</strong></p><p>配置影响nginx全局的指令。如：用户组、nginx进程pid存放路径，日志存放路径，配置文件引入，允许生成wordker process数等。</p><p><strong>2、events块：</strong></p><p>配置影响nginx服务器或用户的网络链接。如：每个进程的最大连接数，选取那种事件驱动模型处理链接请求，是否允许同时接收多个网络链接，开启多个网络链接序列化等。</p><p><strong>3、http块：</strong></p><p>可以嵌套多个server，配置代理，缓存，日志定义等绝大多数功能和第三方模块的配置。如文件引入，mime-type定义，是否使用sendfile传输文件，链接超时事件，单链接请求数等。</p><p>​ http块里面又包含：</p><p>​ **3.1、http全局块：**如upstream，错误页面，连接超时等。</p><p>​ <strong>3.2、server块：</strong> 配置虚拟注解的相关参数，一个http中可以有多个wever。</p><p>​ server块里面又包含：</p><p>​ 3.2.1、location：配置请求的路由，以及各种页面的处理情况。</p><p>​ <strong>注意： server块里面可以包含多个location。</strong></p><p>4、include /etc/nginx/conf.d/*.conf;</p><p><strong>注意：会包含所有include /etc/nginx/conf.d/这个目录下的所有配置文件。</strong></p><p>比如/etc/nginx/conf.d/默认有个default.conf配置文件，里面就只包含了server块。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listen</span>       <span style=color:#ae81ff>80</span>;   <span style=color:#f92672>-----------nginx监听的端口</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>server_name</span>  <span style=color:#e6db74>localhost</span>;  <span style=color:#f92672>------------nginx监听的端口</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#charset koi8-r;  
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#access_log  /var/log/nginx/log/host.access.log  main;  ----访问日志
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>location</span> <span style=color:#e6db74>/</span> {  <span style=color:#f92672>----------------</span> <span style=color:#e6db74>/表示上面监听域名下所有的请求，都可以在root目录下找，包括首页index</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>root</span>   <span style=color:#e6db74>/usr/share/nginx/html</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>index</span>  <span style=color:#e6db74>index.html</span> <span style=color:#e6db74>index.htm</span>; 
+</span></span><span style=display:flex><span>    } 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#error_page  404              /404.html; ----------404错误页面路径配置
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># redirect server error pages to the static page /50x.html
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>error_page</span>   <span style=color:#ae81ff>500</span> <span style=color:#ae81ff>502</span> <span style=color:#ae81ff>503</span> <span style=color:#ae81ff>504</span>  <span style=color:#e6db74>/50x.html</span>;  <span style=color:#f92672>---------500页面路径配置</span>
+</span></span><span style=display:flex><span>    <span style=color:#e6db74>location</span> = <span style=color:#e6db74>/50x.html</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>root</span>   <span style=color:#e6db74>/usr/share/nginx/html</span>;
+</span></span><span style=display:flex><span>    }
+</span></span></code></pre></div><hr><h2 id=五反向代理配置>五、反向代理配置</h2><p>配置实例：</p><p>因为上面修改了host文件映射了域名到192.168.56.10服务器，所有通过服务上nginx访问本地127.0.0.1的springboot项目就可以通过配置反向代理域名访问。</p><p>将通过nginx访问family.com的所有请求，通过nginx反向代理到本地的springboot项目地址本地springboot项目ip192.168.56.1：。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listen</span>       <span style=color:#ae81ff>80</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>server_name</span>  <span style=color:#e6db74>family.com</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#charset koi8-r;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#access_log  /var/log/nginx/log/host.access.log  main;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_pass</span>   <span style=color:#e6db74>http://192.168.56.1:40000</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#error_page  404              /404.html;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># redirect server error pages to the static page /50x.html
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>error_page</span>   <span style=color:#ae81ff>500</span> <span style=color:#ae81ff>502</span> <span style=color:#ae81ff>503</span> <span style=color:#ae81ff>504</span>  <span style=color:#e6db74>/50x.html</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> = <span style=color:#e6db74>/50x.html</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>root</span>   <span style=color:#e6db74>/usr/share/nginx/html</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># proxy the PHP scripts to Apache listening on 127.0.0.1:80
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ \.php$ {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    proxy_pass   http://127.0.0.1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ \.php$ {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    root           html;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_pass   127.0.0.1:9000;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_index  index.php;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    include        fastcgi_params;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># deny access to .htaccess files, if Apache&#39;s document root
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e># concurs with nginx&#39;s one
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ /\.ht {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    deny  all;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>梳理流程：</p><p>1、修改本地host文件，目的是模拟类似访问外网的一个域名，如果有服务器域名绑定了ip，就可以不用这步骤了。</p><p>2、修改host映射family.com &mdash;&mdash;->192.168.56.10 (服务地址)。</p><p>3、访问family.com就相当于访问192.168.56.10 (服务地址)。</p><p>4、将所有family.com(这个域名默认端口为80)的所有请求，通过nginx反向代理到局域网内的其它服务器，比如这里就是本地搭建的springboot项目端口40000。</p><p>5、通过反向代理配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>listen</span>       <span style=color:#ae81ff>80</span>; <span style=color:#66d9ef>------监控哪个端口</span>
+</span></span><span style=display:flex><span><span style=color:#e6db74>server_name</span>  <span style=color:#e6db74>family.com</span>; <span style=color:#66d9ef>------监听哪个域名</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#e6db74>location</span> <span style=color:#e6db74>/</span> {   <span style=color:#f92672>----</span> <span style=color:#e6db74>/：表示所有请求</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>proxy_pass</span>   <span style=color:#e6db74>http://192.168.56.1:40000</span>; <span style=color:#f92672>--将family.com域名80端，反向代理到http://192.168.56.1:40000</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>}</span>
+</span></span></code></pre></div><p>6、现在family.com:80端口的所有请求就会反向代理到http://192.168.56.1:40000了。</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203142326835.png alt></p><p>反向代理后访问地址：</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203142326819.png alt></p><h2 id=七nginx代理网关>七、nginx代理网关</h2><p>如果我们服务多了，每次都要修改域名，修改nginx配置反向代理到多个服务，这样比较麻烦。</p><p>那我们就可以通过配置nginx代理到微服务的网关，让网关来负载均衡到各服务。<a href=https://nginx.org/en/docs/http/load_balancing.html>nginx负载均衡参考地址</a></p><p>nginx反向代理局域网内<strong>网关服务</strong>(192.168.56.1:88)。</p><p><strong>nginx配置如下：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>user</span>  <span style=color:#e6db74>nginx</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>worker_processes</span>  <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>error_log</span>  <span style=color:#e6db74>/var/log/nginx/error.log</span> <span style=color:#e6db74>warn</span>;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>pid</span>        <span style=color:#e6db74>/var/run/nginx.pid</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>events</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>worker_connections</span>  <span style=color:#ae81ff>1024</span>;
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>http</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>include</span>       <span style=color:#e6db74>/etc/nginx/mime.types</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>default_type</span>  <span style=color:#e6db74>application/octet-stream</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>log_format</span>  <span style=color:#e6db74>main</span>  <span style=color:#e6db74>&#39;</span>$remote_addr <span style=color:#e6db74>-</span> $remote_user <span style=color:#e6db74>[</span>$time_local] <span style=color:#e6db74>&#34;</span>$request&#34; <span style=color:#e6db74>&#39;</span>
+</span></span><span style=display:flex><span>                      <span style=color:#e6db74>&#39;</span>$status $body_bytes_sent <span style=color:#e6db74>&#34;</span>$http_referer&#34; <span style=color:#e6db74>&#39;</span>
+</span></span><span style=display:flex><span>                      <span style=color:#e6db74>&#39;&#34;</span>$http_user_agent&#34; <span style=color:#e6db74>&#34;</span>$http_x_forwarded_for&#34;&#39;;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>access_log</span>  <span style=color:#e6db74>/var/log/nginx/access.log</span>  <span style=color:#e6db74>main</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>sendfile</span>        <span style=color:#66d9ef>on</span>;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#tcp_nopush     on;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>keepalive_timeout</span>  <span style=color:#ae81ff>65</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#gzip  on;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#f92672>upstream</span> <span style=color:#e6db74>family</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>server</span> 192.168.56.1:<span style=color:#ae81ff>88</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>include</span> <span style=color:#e6db74>/etc/nginx/conf.d/*.conf</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>注意修改的地方:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>upstream</span> <span style=color:#e6db74>family</span> { <span style=color:#f92672>----网关取的名字</span>
+</span></span><span style=display:flex><span>     <span style=color:#e6db74>server</span> 192.168.56.1:<span style=color:#ae81ff>88</span>; <span style=color:#f92672>-----网关服务地址</span>
+</span></span><span style=display:flex><span>     <span style=color:#e6db74>server</span> <span style=color:#e6db74>srv2.example.com</span>; <span style=color:#f92672>----可以配置多个网关地址，我这只有一个网关配一个即可</span>
+</span></span><span style=display:flex><span>     <span style=color:#e6db74>server</span> <span style=color:#e6db74>srv3.example.com</span>;
+</span></span><span style=display:flex><span>     <span style=color:#f92672>server</span> <span style=color:#e6db74>srv4.example.com</span>;
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>修改yanxizhu.nginx配置</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listen</span>       <span style=color:#ae81ff>80</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>server_name</span>  <span style=color:#e6db74>family.com</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#charset koi8-r;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#access_log  /var/log/nginx/log/host.access.log  main;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_pass</span>   <span style=color:#e6db74>http://family</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#error_page  404              /404.html;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># redirect server error pages to the static page /50x.html
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>error_page</span>   <span style=color:#ae81ff>500</span> <span style=color:#ae81ff>502</span> <span style=color:#ae81ff>503</span> <span style=color:#ae81ff>504</span>  <span style=color:#e6db74>/50x.html</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> = <span style=color:#e6db74>/50x.html</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>root</span>   <span style=color:#e6db74>/usr/share/nginx/html</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># proxy the PHP scripts to Apache listening on 127.0.0.1:80
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ \.php$ {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    proxy_pass   http://127.0.0.1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ \.php$ {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    root           html;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_pass   127.0.0.1:9000;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_index  index.php;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    include        fastcgi_params;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># deny access to .htaccess files, if Apache&#39;s document root
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e># concurs with nginx&#39;s one
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ /\.ht {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    deny  all;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>注意修改点:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>location</span> <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_pass</span>   <span style=color:#e6db74>http://family</span>; <span style=color:#f92672>---这里就反向代理到family这个网关了，也就是上面取的网关名字</span>
+</span></span><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>}</span>
+</span></span></code></pre></div><p><strong>接着就开始配置getway网关服务请求</strong>：</p><p><strong>注意：nginx代理给网关的时候会丢失host信息。</strong></p><p>解决办法；yanxizhu.conf添加代理host的header。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>proxy_set_header</span> <span style=color:#e6db74>Host</span> $proxy_host;
+</span></span></code></pre></div><p>family.conf整体如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-nginx data-lang=nginx><span style=display:flex><span><span style=color:#66d9ef>server</span> {
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listen</span>       <span style=color:#ae81ff>80</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>server_name</span>  <span style=color:#e6db74>family.com</span>;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#charset koi8-r;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#access_log  /var/log/nginx/log/host.access.log  main;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> <span style=color:#e6db74>/</span> {
+</span></span><span style=display:flex><span>	    <span style=color:#f92672>proxy_set_header</span> <span style=color:#e6db74>Host</span> $proxy_host;
+</span></span><span style=display:flex><span>        <span style=color:#f92672>proxy_pass</span>   <span style=color:#e6db74>http://family</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#error_page  404              /404.html;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># redirect server error pages to the static page /50x.html
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>error_page</span>   <span style=color:#ae81ff>500</span> <span style=color:#ae81ff>502</span> <span style=color:#ae81ff>503</span> <span style=color:#ae81ff>504</span>  <span style=color:#e6db74>/50x.html</span>;
+</span></span><span style=display:flex><span>    <span style=color:#f92672>location</span> = <span style=color:#e6db74>/50x.html</span> {
+</span></span><span style=display:flex><span>        <span style=color:#f92672>root</span>   <span style=color:#e6db74>/usr/share/nginx/html</span>;
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># proxy the PHP scripts to Apache listening on 127.0.0.1:80
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ \.php$ {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    proxy_pass   http://127.0.0.1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ \.php$ {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    root           html;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_pass   127.0.0.1:9000;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_index  index.php;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    include        fastcgi_params;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e># deny access to .htaccess files, if Apache&#39;s document root
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e># concurs with nginx&#39;s one
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#location ~ /\.ht {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#    deny  all;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>#}
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>}
+</span></span></code></pre></div><p>getway网关服务负载均衡配置：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span>        - id: family_host_route
+</span></span><span style=display:flex><span>          uri: lb://family-booking
+</span></span><span style=display:flex><span>          predicates:
+</span></span><span style=display:flex><span>            - Host=**.family.com
+</span></span></code></pre></div><p>比如访问http://family.com/时，nginx就会将请求反向代理给网关服务(192.168.56.1:88)，而网关服务通过配置的负载均衡，又会将**.family.com域名的请求，负载均衡到family-booking微服务的80端口。</p><p>以上就是nginx的反向代理配置。<strong>注意将getway网关的配置，放在最后</strong>，不然全部服务都被代理到family_host_route了。</p></div><div class=post-footer></div></article></main></body></html>
