@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        1、 beforeCreated：我们在用Vue 时都要进行实例化，因此，该函数就是在Vue 实例化时调
+        用，也可以将他理解为初始化函数比较方便一点，在Vue1.0 时，这个函数的名字就是
+        init。
+        2、 created：在创建实例之后进行调用。
+        3、 beforeMount：页面加载完成，没有渲染。如：此时页面还是{{name}}
+        4、 mounted：我们可以将他理解为原生js 中的window.onload=function({.,.}),或许大家也在
+        用jquery，所以也可以理解为jquery 中的$(document).ready(function(){….})，他的功能就
+        是：在dom 文档渲染完毕之后将要执行的函数，该函数在Vue1.0 版本中名字为
+        compiled。此时页面中的{{name}}已被渲染成张三
+        5、 beforeDestroy：该函数将在销毁实例前进行调用。
+        6、 destroyed：改函数将在销毁实例时进行调用。
+        7、 beforeUpdate：组件更新之前。
+        8、 updated：组件更新之后。
+    -->
+    <div id="app">
+        <span id="num">{{num}}</span>
+        <button v-on:click="num++">赞！</button>
+        <h2>
+            {{name}}，非常帅！！！有{{num}}个人点赞。
+        </h2>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: "#app",
+            data: {
+                name: "张三",
+                num: 100
+            },
+            methods: {
+                show() {
+                    return this.name;
+                },
+                add() {
+                    this.num++;
+                }
+            },
+            beforeCreate() {
+                console.log("=========beforeCreate=============");
+                console.log("数据模型未加载：" + this.name, this.num);
+                console.log("方法未加载：" + this.show());
+                console.log("html 模板未加载：" + document.getElementById("num"));
+            },
+            created: function () {
+                console.log("=========created=============");
+                console.log("数据模型已加载：" + this.name, this.num);
+                console.log("方法已加载：" + this.show());
+                console.log("html 模板已加载：" + document.getElementById("num"));
+                console.log("html 模板未渲染：" + document.getElementById("num").innerText);
+            },
+            beforeMount() {
+                console.log("=========beforeMount=============");
+                console.log("html 模板未渲染：" + document.getElementById("num").innerText);
+            },
+            mounted() {
+                console.log("=========mounted=============");
+                console.log("html 模板已渲染：" + document.getElementById("num").innerText);
+            },
+            beforeUpdate() {
+                console.log("=========beforeUpdate=============");
+                console.log("数据模型已更新：" + this.num);
+                console.log("html 模板未更新：" + document.getElementById("num").innerText);
+            },
+            updated() {
+                console.log("=========updated=============");
+                console.log("数据模型已更新：" + this.num);
+                console.log("html 模板已更新：" + document.getElementById("num").innerText);
+            }
+        });
+    </script>
+    });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <li v-for="(user,index) in userList">
+            {{user.id}}===>{{user.name}}====>{{user.gender}}====>{{user.gender | genderFilter}} ======>{{user.gender | gFilter}}
+        </li>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+
+        //全局过滤器
+        Vue.filter("gFilter", function (val) {
+            if (val == 1) {
+                return "男";
+            } else {
+                return "女";
+            }
+        })
+
+        new Vue({
+            el: "#app",
+            data: {
+                userList: [
+                    { id: 1, name: "jack", gender: 1 },
+                    { id: 2, name: "jimmy", gender: 0 },
+                    { id: 3, name: "john", gender: 1 }
+                ]
+            },
+            computed: {
+
+            },
+            watch: {
+
+            },
+            filters: {
+                //fileters定义局部过滤器，只可以在当前vue实列中使用
+                genderFilter(val) {
+                    if (val == 1) {
+                        return "男";
+                    } else {
+                        return "女";
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
