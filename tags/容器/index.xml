@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>容器 on 朱言蹊</title><link>https://www.yanxizhu.com/tags/%E5%AE%B9%E5%99%A8/</link><description>Recent content in 容器 on 朱言蹊</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://www.yanxizhu.com/tags/%E5%AE%B9%E5%99%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker安装</title><link>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate><guid>https://www.yanxizhu.com/posts/docker%E5%AE%89%E8%A3%85/</guid><description>一、环境准备 备份原yum 源
+mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup CentOS设置新yum 源
+wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 使用阿里云Docker Yum源
+yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo 生成缓存
+yum makecache 卸载旧版本Docker
+yum remove docker docker-common docker-selinux 二、安装Docker CE 安装需要的依赖包
+yum install -y yum-utils device-mapper-persistent-data lvm2 安装
+yum install docker-ce -y 启动docker
+sudo systemctl start docker 设置开机启动
+sudo systemctl enable docker 配置Docker 镜像加速
+mkdir -p /etc/docker 在新建目录下新建daemon.json，内容如下:
+{ &amp;#34;registry-mirrors&amp;#34;: [&amp;#34;https://bpavu6gm.mirror.aliyuncs.com&amp;#34;] } 重新加载配置文件
+systemctl daemon-reload 重启docker
+systemctl restart docker</description></item></channel></rss>

@@ -1,0 +1,217 @@
+<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.100.1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://www.yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="1、(信号量)Semaphore+(闭锁)CountDownLatch+(常用源自类)AtomicInteger package com.yanxizhu.demo.concurrency.atomic; import com.yanxizhu.demo.concurrency.annotation.ThreadSafety; import lombok.extern.slf4j.Slf4j; import java.util.concurrent.CountDownLatch; import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; import java.util.concurrent.Semaphore; import java.util.concurrent.atomic.AtomicInteger; /** * @description: 线程安全 * @author: <a href=&#34;mailto:batis@foxmail.com&#34;>清风</a> * @date: 2022/4/19 20:05 * @version: 1.0 */ @Slf4j @ThreadSafety public class DemoSemaphoreAndCountDownLatchAndAtomic { //用户数量 private static final int clientsTotal = 5000; //并发数量 private static final int concurrencyTotal = 200; //累加总和 private static AtomicInteger count = new AtomicInteger(0); public static void main(String[] args) throws InterruptedException { ExecutorService executorService = Executors."><meta property="og:title" content><meta property="og:description" content="1、(信号量)Semaphore+(闭锁)CountDownLatch+(常用源自类)AtomicInteger package com.yanxizhu.demo.concurrency.atomic; import com.yanxizhu.demo.concurrency.annotation.ThreadSafety; import lombok.extern.slf4j.Slf4j; import java.util.concurrent.CountDownLatch; import java.util.concurrent.ExecutorService; import java.util.concurrent.Executors; import java.util.concurrent.Semaphore; import java.util.concurrent.atomic.AtomicInteger; /** * @description: 线程安全 * @author: <a href=&#34;mailto:batis@foxmail.com&#34;>清风</a> * @date: 2022/4/19 20:05 * @version: 1.0 */ @Slf4j @ThreadSafety public class DemoSemaphoreAndCountDownLatchAndAtomic { //用户数量 private static final int clientsTotal = 5000; //并发数量 private static final int concurrencyTotal = 200; //累加总和 private static AtomicInteger count = new AtomicInteger(0); public static void main(String[] args) throws InterruptedException { ExecutorService executorService = Executors."><meta property="og:type" content="article"><meta property="og:url" content="https://www.yanxizhu.com/posts/%E5%8E%9F%E5%AD%90%E6%80%A7-atomic%E7%B1%BB%E5%B8%B8%E8%A7%81%E7%9A%84%E4%BD%BF%E7%94%A8/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://www.yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+-
+<a class=app-header-menu-item href=/>home</a>
+-
+<a class=app-header-menu-item href=/link/>link</a>
+-
+<a class=app-header-menu-item href=/tags/>tags</a></nav><p>I write code and I take care about my privacy // Co-founder @ Owaka // Golang lover // Open source enthusiast</p><div class=app-header-social><a target=_blank href=https://github.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a target=_blank href=https://twitter.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a></div></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title></h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Jan 1, 0001</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3 min read</div></div></header><div class=post-content><h1 id=1信号量semaphore闭锁countdownlatch常用源自类atomicinteger>1、(信号量)Semaphore+(闭锁)CountDownLatch+(常用源自类)AtomicInteger</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.atomic<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.CountDownLatch<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Semaphore<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.atomic.AtomicInteger<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 线程安全
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/19 20:05
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoSemaphoreAndCountDownLatchAndAtomic</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//用户数量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> clientsTotal <span style=color:#f92672>=</span> 5000<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//并发数量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> concurrencyTotal <span style=color:#f92672>=</span> 200<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//累加总和
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> AtomicInteger count <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicInteger<span style=color:#f92672>(</span>0<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> InterruptedException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newCachedThreadPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//信号量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> Semaphore semaphore <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Semaphore<span style=color:#f92672>(</span>concurrencyTotal<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//闭锁
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> CountDownLatch countDownLatch <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CountDownLatch<span style=color:#f92672>(</span>clientsTotal<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> clientsTotal<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()-&gt;{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    semaphore<span style=color:#f92672>.</span><span style=color:#a6e22e>acquire</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                    add<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                    semaphore<span style=color:#f92672>.</span><span style=color:#a6e22e>release</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>InterruptedException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    log<span style=color:#f92672>.</span><span style=color:#a6e22e>error</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;出现错误:【{}】&#34;</span><span style=color:#f92672>,</span> e<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessage</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>                countDownLatch<span style=color:#f92672>.</span><span style=color:#a6e22e>countDown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        countDownLatch<span style=color:#f92672>.</span><span style=color:#a6e22e>await</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;累加结果为count=【{}】&#34;</span><span style=color:#f92672>,</span>count<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 累加
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span>  <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//说明:incrementAndGet、getAndIncrement类似,i++与++i
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>incrementAndGet</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>getAndIncrement</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>运行结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>累加结果为count<span style=color:#f92672>=</span><span style=color:#960050;background-color:#1e0010>【</span>10000<span style=color:#960050;background-color:#1e0010>】</span>
+</span></span></code></pre></div><h1 id=2atomicreference>2、AtomicReference</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.atomic<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.atomic.AtomicReference<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: AtomicReference
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/20 21:09
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoAtomicReference</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> AtomicReference<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>&gt;</span> count <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicReference<span style=color:#f92672>&lt;&gt;(</span>0<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>0<span style=color:#f92672>,</span> 2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>0<span style=color:#f92672>,</span> 1<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> 3<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>2<span style=color:#f92672>,</span> 4<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>3<span style=color:#f92672>,</span> 5<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;count结果为【{}】&#34;</span><span style=color:#f92672>,</span>count<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>运行结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>count结果为<span style=color:#960050;background-color:#1e0010>【</span>4<span style=color:#960050;background-color:#1e0010>】</span>
+</span></span></code></pre></div><h1 id=3atomicintegerfieldupdater>3、AtomicIntegerFieldUpdater</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.atomic<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.Getter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.atomic.AtomicIntegerFieldUpdater<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: AtomicIntegerFieldUpdater,原子性修改
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/20 21:17
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoAtomicIntegerFieldUpdater</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> AtomicIntegerFieldUpdater<span style=color:#f92672>&lt;</span>DemoAtomicIntegerFieldUpdater<span style=color:#f92672>&gt;</span> updater <span style=color:#f92672>=</span> AtomicIntegerFieldUpdater<span style=color:#f92672>.</span><span style=color:#a6e22e>newUpdater</span><span style=color:#f92672>(</span>DemoAtomicIntegerFieldUpdater<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;count&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Getter</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>int</span> count <span style=color:#f92672>=</span> 100<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> DemoAtomicIntegerFieldUpdater demoAtomicIntegerFieldUpdater <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DemoAtomicIntegerFieldUpdater<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>updater<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>demoAtomicIntegerFieldUpdater<span style=color:#f92672>,</span> 100<span style=color:#f92672>,</span> 200<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;updater succcess1,{}&#34;</span><span style=color:#f92672>,</span> demoAtomicIntegerFieldUpdater<span style=color:#f92672>.</span><span style=color:#a6e22e>getCount</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>updater<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>demoAtomicIntegerFieldUpdater<span style=color:#f92672>,</span> 100<span style=color:#f92672>,</span> 200<span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;updater succcess2,{}&#34;</span><span style=color:#f92672>,</span> demoAtomicIntegerFieldUpdater<span style=color:#f92672>.</span><span style=color:#a6e22e>getCount</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;updater fail,{}&#34;</span><span style=color:#f92672>,</span> demoAtomicIntegerFieldUpdater<span style=color:#f92672>.</span><span style=color:#a6e22e>getCount</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>运行结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>updater succcess1<span style=color:#f92672>,</span>200
+</span></span><span style=display:flex><span>updater fail<span style=color:#f92672>,</span>200
+</span></span></code></pre></div><h1 id=4atomicstampedreference>4、AtomicStampedReference</h1><p>主要用于解决CAS中ABA问题，主要是AtomicStampedReference类中compareAndSet方法多了一个stamp的比较。stamp是每次更新来维护的。</p><pre tabindex=0><code>    public boolean compareAndSet(V   expectedReference,
+                                 V   newReference,
+                                 int expectedStamp,
+                                 int newStamp) {
+        Pair&lt;V&gt; current = pair;
+        return
+            expectedReference == current.reference &amp;&amp;
+            expectedStamp == current.stamp &amp;&amp;
+            ((newReference == current.reference &amp;&amp;
+              newStamp == current.stamp) ||
+             casPair(current, Pair.of(newReference, newStamp)));
+    }
+</code></pre><h1 id=5longadder>5、LongAdder</h1><p>JDK1.8后新增了LongAdder。</p><p><strong>AtomicLong</strong>：是基于 CAS 方式自旋更新的；</p><p><strong>LongAdder</strong>： 是把 value 分成若干cell，并发量低的时候，直接 CAS 更新值，成功即结束。并发量高的情况，CAS更新某个cell值和需要时对cell数据扩容，成功结束；更新失败自旋 CAS 更新 cell值。取值的时候，调用 sum() 方法进行每个cell累加。</p><p><strong>AtomicLong</strong>： 包含有原子性的读、写结合的api；</p><p><strong>LongAdder</strong> ：没有原子性的读、写结合的api，能保证结果最终一致性。</p><p><strong>低并发</strong>：低并发场景AtomicLong 和 LongAdder 性能相似。</p><p><strong>高并发</strong>：高并发场景 LongAdder 性能优于 AtomicLong。</p><h1 id=6atomiclongarray>6、AtomicLongArray</h1><p>主要用于原子修改数组</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>//                                  下标，      期望值               更新值
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>,</span> <span style=color:#66d9ef>long</span> expectedValue<span style=color:#f92672>,</span> <span style=color:#66d9ef>long</span> newValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> AA<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span>array<span style=color:#f92672>,</span> i<span style=color:#f92672>,</span> expectedValue<span style=color:#f92672>,</span> newValue<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>通过传入下标、期望值、要更新的值进行修改。</p><h1 id=7atomicboolean>7、AtomicBoolean</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span><span style=color:#66d9ef>boolean</span> expectedValue<span style=color:#f92672>,</span> <span style=color:#66d9ef>boolean</span> newValue<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> VALUE<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                                   <span style=color:#f92672>(</span>expectedValue <span style=color:#f92672>?</span> 1 <span style=color:#f92672>:</span> 0<span style=color:#f92672>),</span>
+</span></span><span style=display:flex><span>                                   <span style=color:#f92672>(</span>newValue <span style=color:#f92672>?</span> 1 <span style=color:#f92672>:</span> 0<span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.atomic<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.CountDownLatch<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Semaphore<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.atomic.AtomicBoolean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 结果，最后只会执行一次
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/20 22:05
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoAtomicBoolean</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> AtomicBoolean isHappen <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> AtomicBoolean<span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//用户数量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> clientsTotal <span style=color:#f92672>=</span> 5000<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//并发数量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> concurrencyTotal <span style=color:#f92672>=</span> 200<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> InterruptedException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newCachedThreadPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//信号量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> Semaphore semaphore <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Semaphore<span style=color:#f92672>(</span>concurrencyTotal<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//闭锁
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> CountDownLatch countDownLatch <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CountDownLatch<span style=color:#f92672>(</span>clientsTotal<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> clientsTotal<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()-&gt;{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    semaphore<span style=color:#f92672>.</span><span style=color:#a6e22e>acquire</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                    test<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                    semaphore<span style=color:#f92672>.</span><span style=color:#a6e22e>release</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>InterruptedException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    log<span style=color:#f92672>.</span><span style=color:#a6e22e>error</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;出现错误:【{}】&#34;</span><span style=color:#f92672>,</span> e<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessage</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>                countDownLatch<span style=color:#f92672>.</span><span style=color:#a6e22e>countDown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        countDownLatch<span style=color:#f92672>.</span><span style=color:#a6e22e>await</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;isHappen结果为count=【{}】&#34;</span><span style=color:#f92672>,</span>isHappen<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//从false变成true是一次原子操作，只会执行一次
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>isHappen<span style=color:#f92672>.</span><span style=color:#a6e22e>compareAndSet</span><span style=color:#f92672>(</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>))</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;execute .. {}&#34;</span><span style=color:#f92672>,</span> isHappen<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>运行结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>execute <span style=color:#f92672>..</span> <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>isHappen结果为count<span style=color:#f92672>=</span><span style=color:#960050;background-color:#1e0010>【</span><span style=color:#66d9ef>true</span><span style=color:#960050;background-color:#1e0010>】</span>
+</span></span></code></pre></div></div><div class=post-footer></div></article></main></body></html>
