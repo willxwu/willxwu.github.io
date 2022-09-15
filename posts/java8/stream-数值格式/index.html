@@ -6,7 +6,7 @@
 方式一：reduce实现
 //方式一：reduce实现 List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,6,5,4,3,2,1); list.stream().reduce(Integer::sum).ifPresent(System.out::println); 方式二：mapToInt
 //方式二：mapToInt list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,6,5,4,3,2,1); IntStream mapToInt = list.stream().mapToInt(i -> i.intValue()); int sum = mapToInt.sum(); System.out.println(sum); 方式三：mapToInt后用reduce实现
-//方式三：mapToInt后用reduce实现 list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,6,5,4,3,2,1); IntStream intStream = list.stream().mapToInt(i -> i.intValue()); int reduce = list."><meta property="og:type" content="article"><meta property="og:url" content="https://www.yanxizhu.com/posts/lambda/stream-%E6%95%B0%E5%80%BC%E6%A0%BC%E5%BC%8F/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://www.yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+//方式三：mapToInt后用reduce实现 list = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10,6,5,4,3,2,1); IntStream intStream = list.stream().mapToInt(i -> i.intValue()); int reduce = list."><meta property="og:type" content="article"><meta property="og:url" content="https://www.yanxizhu.com/posts/java8/stream-%E6%95%B0%E5%80%BC%E6%A0%BC%E5%BC%8F/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://www.yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
 -
 <a class=app-header-menu-item href=/>home</a>
 -
