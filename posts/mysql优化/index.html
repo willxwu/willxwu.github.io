@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://www.yanxizhu.com/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="索引 一、全表扫描 没有使用索引的时候，数据的查询需要进行多次IO读写，这样的性能较差——全表扫描的过程。
+<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="索引 一、全表扫描 没有使用索引的时候，数据的查询需要进行多次IO读写，这样的性能较差——全表扫描的过程。
 二、索引 为数据库的某个字段创建索引，相当是为这个字段的内容创建了一个目录。通过这个目录可以快速的实现数据的定位，也就是通过索引能够快速的找到某条数据所在磁盘的位置。
 三、索引存放位置 InnoDB存储引擎的表：将索引和数据存放在同一个文件里。（为什么？有什么优势？）*ibd MyISAM存储引擎的表：索引和数据分开两个文件来存储。 索引：*.MYI； 数据：MYD 四、索引分类 1、主键索引：主键自带索效果，也就意味着通过主键来查询表中的记录，性能是非常好的。
 2、普通索引：为普通列创建的索引。
@@ -34,7 +34,7 @@ MyISAM存储引擎支持全文索引。
 单向链表：能够通过当前结点找到下一个节点的位置，以此来维护链表的逻辑关系
 结点结构：数据内容+下一个数据的指针
 双向链表：能够通过当前结点找到上一个或下一个节点的位置，双向都可找。
-结点结构：上一个数据的指针+数据内容+下一个数据的指针。"><meta property="og:type" content="article"><meta property="og:url" content="https://www.yanxizhu.com/posts/mysql%E4%BC%98%E5%8C%96/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://www.yanxizhu.com><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+结点结构：上一个数据的指针+数据内容+下一个数据的指针。"><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/mysql%E4%BC%98%E5%8C%96/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
 -
 <a class=app-header-menu-item href=/>home</a>
 -
