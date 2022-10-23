@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="Docker 安装ES
+<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="Docker 安装ES
 一、下载镜像文件，存储和检索数据
 docker pull elasticsearch:7.4.2 二、创建实例
 创建文件，用于映射
@@ -12,7 +12,7 @@ docker pull elasticsearch:7.4.2 二、创建实例
 mkdir -p /mydata/elasticsearch/config mkdir -p /mydata/elasticsearch/data echo &#34;http.host: 0.0.0.0&#34; >> /mydata/elasticsearch/config/elasticsearch.yml 设置权限
 chmod -R 777 /mydata/elasticsearch/ 三、启动配置镜像
 docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \ -e &#34;discovery.type=single-node&#34; \ -e ES_JAVA_OPTS=&#34;-Xms64m -Xmx512m&#34; \ -v /mydata/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \ -v /mydata/elasticsearch/data:/usr/share/elasticsearch/data \ -v /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \ -d elasticsearch:7.4.2 以后再外面装好插件重启即可；
-特别注意： -e ES_JAVA_OPTS=&#34;-Xms64m -Xmx256m&#34; \ 测试环境下，设置ES 的初始内存和最大内存，否则导 致过大启动不了ES"><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/docker/docker-%E5%AE%89%E8%A3%85es/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+特别注意： -e ES_JAVA_OPTS=&#34;-Xms64m -Xmx256m&#34; \ 测试环境下，设置ES 的初始内存和最大内存，否则导 致过大启动不了ES"><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/docker/docker-%E5%AE%89%E8%A3%85es/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>willxwu</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
 -
 <a class=app-header-menu-item href=/>home</a>
 -

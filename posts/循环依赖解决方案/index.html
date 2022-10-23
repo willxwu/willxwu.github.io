@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="循环依赖解决方案
+<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="循环依赖解决方案
 1、查看日志，是哪个地方提示循环依赖。
 2、取消自动注入
 3、通过容器获取
@@ -10,7 +10,7 @@ public class MyRabbitConfig { //取消自动注入 // @Autowired RabbitTemplate 
 3、通过容器获取
 4、构造方法赋值
 例如：
-public class MyRabbitConfig { //取消自动注入 // @Autowired RabbitTemplate rabbitTemplate; //通过构造解决循环依赖。(RabbitTemplate rabbitTemplate)：是从springboot容器自动注入的 public MyRabbitConfig(RabbitTemplate rabbitTemplate){ this.rabbitTemplate=rabbitTemplate; } "><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+public class MyRabbitConfig { //取消自动注入 // @Autowired RabbitTemplate rabbitTemplate; //通过构造解决循环依赖。(RabbitTemplate rabbitTemplate)：是从springboot容器自动注入的 public MyRabbitConfig(RabbitTemplate rabbitTemplate){ this.rabbitTemplate=rabbitTemplate; } "><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>willxwu</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
 -
 <a class=app-header-menu-item href=/>home</a>
 -

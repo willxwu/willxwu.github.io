@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>Docker安装 // 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="Docker安装"><meta name=twitter:description content="一、环境准备 备份原yum 源
+<!doctype html><html lang=en-us><head><title>Docker安装 // willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content="Docker安装"><meta name=twitter:description content="一、环境准备 备份原yum 源
 mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup CentOS设置新yum 源
 wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo 使用阿里云Docker Yum源
 yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo 生成缓存
@@ -24,7 +24,7 @@ sudo systemctl enable docker 配置Docker 镜像加速
 mkdir -p /etc/docker 在新建目录下新建daemon.json，内容如下:
 { &#34;registry-mirrors&#34;: [&#34;https://bpavu6gm.mirror.aliyuncs.com&#34;] } 重新加载配置文件
 systemctl daemon-reload 重启docker
-systemctl restart docker "><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2014-09-28T00:00:00+00:00"><meta property="article:modified_time" content="2014-09-28T00:00:00+00:00"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+systemctl restart docker "><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85/"><meta property="article:section" content="posts"><meta property="article:published_time" content="2014-09-28T00:00:00+00:00"><meta property="article:modified_time" content="2014-09-28T00:00:00+00:00"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>willxwu</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
 -
 <a class=app-header-menu-item href=/>home</a>
 -

@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>// 朱言蹊</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="一、Docker安装Nginx 拉取Nginx镜像
+<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.104.3"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="一、Docker安装Nginx 拉取Nginx镜像
 docker pull nginx:1.10 随便启动一个nginx 实例，只是为了复制出配置
 docker run -p 80:80 --name nginx -d nginx:1.10 拷贝容器内的配置文件
 docker container cp nginx:/etc/nginx . 重命名文件夹
@@ -18,7 +18,7 @@ docker stop nginx 删除原容器
 docker rm nginx 运行Nginx容器,参数见-说明1
 docker run -d -p 80:80 -p 443:443 --name nginx -v /mydata/nginx/html:/var/www/html -v /mydata/nginx/conf/conf.d:/etc/nginx/conf.d -v /mydata/nginx/logs:/var/log/nginx --link php:phpfpm --name nginx nginx:1.10 设置随Docker启动
 docker update --restart=always nginx 二、Nginx配置 https协议SSL-443配置，在/mydata/nginx/conf/conf.d下新建配置文件yanxizhu.com.conf，内容如下：
-server { listen 443 ssl http2 reuseport; server_name yanxizhu."><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85nginx/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>朱言蹊</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+server { listen 443 ssl http2 reuseport; server_name yanxizhu."><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85nginx/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>willxwu</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
 -
 <a class=app-header-menu-item href=/>home</a>
 -
