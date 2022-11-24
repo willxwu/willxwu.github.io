@@ -1,0 +1,148 @@
+<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.106.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="CentOS安装Sentinel设置自启动 1、下载 下载地址https://github.com/alibaba/Sentinel/releases
+2、安装 提前创建好安装路径、Jar包存放文件夹、脚本执行文件夹、日志存放文件夹
+mkdir /usr/local/ sentinel mkdir /usr/local/sentinel jar mkdir /usr/local/sentinel sh mkdir /usr/local/sentinel log 将sentinel-dashboard-1.8.6.jar执行Jar包上传至jar文件夹
+3、脚本 编写脚本sentinel.sh，按照自己路径、版本号调整，存放到上面新建的sh文件夹中。脚本如下：
+#!/bin/bash #这里可替换为你自己的执行程序，其他代码无需更改 SENTINEL_NAME=sentinel-dashboard-1.8.6.jar #使用说明，用来提示输入参数 usage() { echo &#34;Usage: sh sentinel.sh [start|stop|restart|status]&#34; exit 1 } #检查程序是否在运行 is_exist(){ pid=`ps -ef|grep $SENTINEL_NAME|grep -v grep|awk '{print $2}' ` #如果不存在返回1，存在返回0 if [ -z &#34;${pid}&#34; ]; then return 1 else return 0 fi } #启动方法 start(){ is_exist if [ $? -eq &#34;0&#34; ]; then echo &#34;${SENTINEL_NAME} is already running."><meta property="og:title" content><meta property="og:description" content="CentOS安装Sentinel设置自启动 1、下载 下载地址https://github.com/alibaba/Sentinel/releases
+2、安装 提前创建好安装路径、Jar包存放文件夹、脚本执行文件夹、日志存放文件夹
+mkdir /usr/local/ sentinel mkdir /usr/local/sentinel jar mkdir /usr/local/sentinel sh mkdir /usr/local/sentinel log 将sentinel-dashboard-1.8.6.jar执行Jar包上传至jar文件夹
+3、脚本 编写脚本sentinel.sh，按照自己路径、版本号调整，存放到上面新建的sh文件夹中。脚本如下：
+#!/bin/bash #这里可替换为你自己的执行程序，其他代码无需更改 SENTINEL_NAME=sentinel-dashboard-1.8.6.jar #使用说明，用来提示输入参数 usage() { echo &#34;Usage: sh sentinel.sh [start|stop|restart|status]&#34; exit 1 } #检查程序是否在运行 is_exist(){ pid=`ps -ef|grep $SENTINEL_NAME|grep -v grep|awk '{print $2}' ` #如果不存在返回1，存在返回0 if [ -z &#34;${pid}&#34; ]; then return 1 else return 0 fi } #启动方法 start(){ is_exist if [ $? -eq &#34;0&#34; ]; then echo &#34;${SENTINEL_NAME} is already running."><meta property="og:type" content="article"><meta property="og:url" content="https://willxwu.github.io/posts/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/"><meta property="article:section" content="posts"></head><body><header class=app-header><a href=https://willxwu.github.io/><img class=app-header-avatar src=/avatar.jpg alt="John Doe"></a><h1>willxwu</h1><nav class=app-header-menu><a class=app-header-menu-item href=/about/>about</a>
+-
+<a class=app-header-menu-item href=/>home</a>
+-
+<a class=app-header-menu-item href=/link/>link</a>
+-
+<a class=app-header-menu-item href=/tags/>tags</a></nav><p>I write code and I take care about my privacy // Co-founder @ Owaka // Golang lover // Open source enthusiast</p><div class=app-header-social><a target=_blank href=https://github.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-github"><title>github</title><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37.0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44.0 0020 4.77 5.07 5.07.0 0019.91 1S18.73.65 16 2.48a13.38 13.38.0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07.0 005 4.77 5.44 5.44.0 003.5 8.55c0 5.42 3.3 6.61 6.44 7A3.37 3.37.0 009 18.13V22"/></svg></a><a target=_blank href=https://twitter.com/willxwu rel="noreferrer noopener"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-twitter"><title>twitter</title><path d="M23 3a10.9 10.9.0 01-3.14 1.53 4.48 4.48.0 00-7.86 3v1A10.66 10.66.0 013 4s-4 9 5 13a11.64 11.64.0 01-7 2c9 5 20 0 20-11.5a4.5 4.5.0 00-.08-.83A7.72 7.72.0 0023 3z"/></svg></a></div></header><main class=app-container><article class=post><header class=post-header><h1 class=post-title></h1><div class=post-meta><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-calendar"><title>calendar</title><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Jan 1, 0001</div><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-clock"><title>clock</title><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>3 min read</div></div></header><div class=post-content><h1 id=centos安装sentinel设置自启动>CentOS安装Sentinel设置自启动</h1><h2 id=1下载>1、下载</h2><p>下载地址https://github.com/alibaba/Sentinel/releases</p><h2 id=2安装>2、安装</h2><p>提前创建好安装路径、Jar包存放文件夹、脚本执行文件夹、日志存放文件夹</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>mkdir /usr/local/ sentinel
+</span></span><span style=display:flex><span>mkdir /usr/local/sentinel jar
+</span></span><span style=display:flex><span>mkdir /usr/local/sentinel sh
+</span></span><span style=display:flex><span>mkdir /usr/local/sentinel log
+</span></span></code></pre></div><p>将sentinel-dashboard-1.8.6.jar执行Jar包上传至jar文件夹</p><h2 id=3脚本>3、脚本</h2><p>编写脚本sentinel.sh，按照自己路径、版本号调整，存放到上面新建的sh文件夹中。脚本如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#75715e>#!/bin/bash
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>#这里可替换为你自己的执行程序，其他代码无需更改</span>
+</span></span><span style=display:flex><span>SENTINEL_NAME<span style=color:#f92672>=</span>sentinel-dashboard-1.8.6.jar
+</span></span><span style=display:flex><span><span style=color:#75715e>#使用说明，用来提示输入参数</span>
+</span></span><span style=display:flex><span>usage<span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;Usage: sh sentinel.sh [start|stop|restart|status]&#34;</span>
+</span></span><span style=display:flex><span> exit <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#检查程序是否在运行</span>
+</span></span><span style=display:flex><span>is_exist<span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span> pid<span style=color:#f92672>=</span><span style=color:#e6db74>`</span>ps -ef|grep $SENTINEL_NAME|grep -v grep|awk <span style=color:#e6db74>&#39;{print $2}&#39;</span> <span style=color:#e6db74>`</span>
+</span></span><span style=display:flex><span> <span style=color:#75715e>#如果不存在返回1，存在返回0 </span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> -z <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>pid<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>1</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#启动方法</span>
+</span></span><span style=display:flex><span>start<span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span> is_exist
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> $? -eq <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SENTINEL_NAME<span style=color:#e6db74>}</span><span style=color:#e6db74> is already running. pid=</span><span style=color:#e6db74>${</span>pid<span style=color:#e6db74>}</span><span style=color:#e6db74> .&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span> nohup java -Dserver.port<span style=color:#f92672>=</span><span style=color:#ae81ff>9100</span> -Dcsp.sentinel.dashboard.server<span style=color:#f92672>=</span>192.168.56.10:9100 -Dproject.name<span style=color:#f92672>=</span>sentinel-dashboard -jar /usr/local/sentinel/jar/$SENTINEL_NAME &gt; /usr/local/sentinel/log/sentinellog.file 2&gt;&amp;<span style=color:#ae81ff>1</span> &amp;
+</span></span><span style=display:flex><span> <span style=color:#75715e>#nohup java -jar /usr/local/sentinel/jar/$SENTINEL_NAME &gt; /usr/local/sentinel/log/sentinellog.file 2&gt;&amp;1 &amp;</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SENTINEL_NAME<span style=color:#e6db74>}</span><span style=color:#e6db74> start success&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#停止方法</span>
+</span></span><span style=display:flex><span>stop<span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span> is_exist
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> $? -eq <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span> kill -9 $pid
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SENTINEL_NAME<span style=color:#e6db74>}</span><span style=color:#e6db74> is not running&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#输出运行状态</span>
+</span></span><span style=display:flex><span>status<span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span> is_exist
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> $? -eq <span style=color:#e6db74>&#34;0&#34;</span> <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SENTINEL_NAME<span style=color:#e6db74>}</span><span style=color:#e6db74> is running. Pid is </span><span style=color:#e6db74>${</span>pid<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>else</span>
+</span></span><span style=display:flex><span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SENTINEL_NAME<span style=color:#e6db74>}</span><span style=color:#e6db74> is NOT running.&#34;</span>
+</span></span><span style=display:flex><span> <span style=color:#66d9ef>fi</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#重启</span>
+</span></span><span style=display:flex><span>restart<span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span> stop
+</span></span><span style=display:flex><span> start
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#根据输入参数，选择执行对应方法，不输入则执行使用说明</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>case</span> <span style=color:#e6db74>&#34;</span>$1<span style=color:#e6db74>&#34;</span> in
+</span></span><span style=display:flex><span> <span style=color:#e6db74>&#34;start&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> start
+</span></span><span style=display:flex><span> ;;
+</span></span><span style=display:flex><span> <span style=color:#e6db74>&#34;stop&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> stop
+</span></span><span style=display:flex><span> ;;
+</span></span><span style=display:flex><span> <span style=color:#e6db74>&#34;status&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> status
+</span></span><span style=display:flex><span> ;;
+</span></span><span style=display:flex><span> <span style=color:#e6db74>&#34;restart&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> restart
+</span></span><span style=display:flex><span> ;;
+</span></span><span style=display:flex><span> *<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> usage
+</span></span><span style=display:flex><span> ;;
+</span></span><span style=display:flex><span><span style=color:#66d9ef>esac</span>
+</span></span></code></pre></div><p><strong>进入/usr/local/sentinel/sh/文件夹下，执行命令修改权限</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>chmod +x sentinel.sh
+</span></span></code></pre></div><p><strong>注意：</strong></p><p><strong>1、如果直接复制到windows中文本的，注意windows和linx的换行符不同，导致启动失败，可使用notepad++中编辑&ndash;>文档格式转换&ndash;>转换成Unix格式。</strong></p><p><strong>2、注意给脚本设置权限</strong></p><h2 id=4测试>4、测试</h2><p>本地测试是否能够启动</p><p><strong>启动sentinel服务</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sh sentinel.sh start
+</span></span></code></pre></div><p><strong>停止sentinel服务</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sh sentinel.sh stop
+</span></span></code></pre></div><p><strong>重启sentinel服务</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sh sentinel.sh restart
+</span></span></code></pre></div><p><strong>查看sentinel服务状态</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>sh sentinel.sh status
+</span></span></code></pre></div><p>服务启动后，可通过IP+端口+项目名访问Sentinel登录页面</p><h2 id=5自启动>5、自启动</h2><p>本地测试可通过命令启动没问题后，编写启动服务sentinel.service，放到/usr/lib/systemd/system目录，内容如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>Unit<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Description<span style=color:#f92672>=</span>sentinel
+</span></span><span style=display:flex><span>After<span style=color:#f92672>=</span>network.target
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Service<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>Environment<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;JAVA_HOME=/usr/local/java/jdk-11.0.10&#34;</span>
+</span></span><span style=display:flex><span>Type<span style=color:#f92672>=</span>forking
+</span></span><span style=display:flex><span>ExecStart<span style=color:#f92672>=</span>/usr/local/sentinel/sh/sentinel.sh start
+</span></span><span style=display:flex><span>ExecReload<span style=color:#f92672>=</span>/usr/local/sentinel/sh/entinel.sh stop
+</span></span><span style=display:flex><span>ExecStop<span style=color:#f92672>=</span>/usr/local/sentinel/sentinel/sh/sentinel.sh restart
+</span></span><span style=display:flex><span>PrivateTmp<span style=color:#f92672>=</span>true
+</span></span><span style=display:flex><span> 
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>Install<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>WantedBy<span style=color:#f92672>=</span>multi-user.target
+</span></span></code></pre></div><p><strong>重载所有服务</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl daemon-reload
+</span></span></code></pre></div><p><strong>设置开机启动</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl enable sentinel.service
+</span></span></code></pre></div><p><strong>查看开机启动状态</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl is-enabled sentinel.service
+</span></span></code></pre></div><p><strong>查看服务状态</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl status sentinel
+</span></span></code></pre></div><p><strong>手动启动 Sentinel</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl start sentinel
+</span></span></code></pre></div><p><strong>手动停止Sentinel</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl stop sentinel
+</span></span></code></pre></div><p><strong>手动重启Sentinel</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>systemctl restart sentinel
+</span></span></code></pre></div><h2 id=6结果>6、结果</h2><p>根据启动日志</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>INFO: Sentinel log output type is: file
+</span></span><span style=display:flex><span>INFO: Sentinel log charset is: utf-8
+</span></span><span style=display:flex><span>INFO: Sentinel log base directory is: /root/logs/csp/
+</span></span><span style=display:flex><span>INFO: Sentinel log name use pid is: false
+</span></span><span style=display:flex><span>INFO: Sentinel log level is: INFO
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  .   ____          _            __ _ _
+</span></span><span style=display:flex><span> /<span style=color:#ae81ff>\\</span> / ___<span style=color:#e6db74>&#39;_ __ _ _(_)_ __  __ _ \ \ \ \
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>( ( )\___ | &#39;</span>_ | <span style=color:#e6db74>&#39;_| | &#39;</span>_ <span style=color:#ae81ff>\/</span> _<span style=color:#e6db74>`</span> | <span style=color:#ae81ff>\ \ \ \
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span> <span style=color:#ae81ff>\\</span>/  ___<span style=color:#f92672>)</span>| |_<span style=color:#f92672>)</span>| | | | | <span style=color:#f92672>||</span> <span style=color:#f92672>(</span>_| |  <span style=color:#f92672>)</span> <span style=color:#f92672>)</span> <span style=color:#f92672>)</span> <span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>  <span style=color:#e6db74>&#39;  |____| .__|_| |_|_| |_\__, | / / / /
+</span></span></span><span style=display:flex><span><span style=color:#e6db74> =========|_|==============|___/=/_/_/_/
+</span></span></span><span style=display:flex><span><span style=color:#e6db74> :: Spring Boot ::               (v2.5.12)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:07:50.068  INFO 733 --- [           main] c.a.c.s.dashboard.DashboardApplication   : Starting DashboardApplication using Java 11.0.10 on 10.0.2.15 with PID 733 (/usr/local/sentinel/jar/sentinel-dashboard-1.8.6.jar started by root in /)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:07:50.280  INFO 733 --- [           main] c.a.c.s.dashboard.DashboardApplication   : No active profile set, falling back to 1 default profile: &#34;default&#34;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:08:54.090  INFO 733 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 9100 (http)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:08:54.616  INFO 733 --- [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:08:54.616  INFO 733 --- [           main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.60]
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:08:57.256  INFO 733 --- [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:08:57.259  INFO 733 --- [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 40159 ms
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:08:58.193  INFO 733 --- [           main] c.a.c.s.dashboard.config.WebConfig       : Sentinel servlet CommonFilter registered
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:09:04.587  INFO 733 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9100 (http) with context path &#39;&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:09:04.788  INFO 733 --- [           main] c.a.c.s.dashboard.DashboardApplication   : Started DashboardApplication in 79.475 seconds (JVM running for 82.322)
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:09:13.768  INFO 733 --- [nio-9100-exec-3] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet &#39;</span>dispatcherServlet<span style=color:#e6db74>&#39;
+</span></span></span><span style=display:flex><span><span style=color:#e6db74>2022-10-27 15:09:13.807  INFO 733 --- [nio-9100-exec-3] o.s.web.servlet.DispatcherServlet        : Initializing Servlet &#39;</span>dispatcherServlet<span style=color:#960050;background-color:#1e0010>&#39;</span>
+</span></span><span style=display:flex><span>2022-10-27 15:09:14.119  INFO <span style=color:#ae81ff>733</span> --- <span style=color:#f92672>[</span>nio-9100-exec-3<span style=color:#f92672>]</span> o.s.web.servlet.DispatcherServlet        : Completed initialization in <span style=color:#ae81ff>311</span> ms
+</span></span></code></pre></div><p>启动成功，通过访问IP+端口+项目，成功访问到Sentinel登录页面，账号：sentinel,密码：sentinel</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202210272329833.png alt=sentinel></p></div><div class=post-footer></div></article></main></body></html>
