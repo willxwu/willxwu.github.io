@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.106.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="SpringBoot整合定时任务和异步任务 一、定时任务 SpringBoot整合quartz-scheduler，执行定时任务。
+<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.108.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="SpringBoot整合定时任务和异步任务 一、定时任务 SpringBoot整合quartz-scheduler，执行定时任务。
 1、开启定时任务 @EnableScheduling 2、开启一个定时任务 @Scheduled 3、编写cron表达式 cron表达式格式请参考官方文档
 4、实例 package com.yanxizhu.ifamily.booking.controller.scheduler; import lombok.extern.slf4j.Slf4j; import org.springframework.scheduling.annotation.EnableScheduling; import org.springframework.scheduling.annotation.Scheduled; import org.springframework.stereotype.Component; /** * SpringBoot整合Scheduling定时任务 * @author: <a href=&#34;mailto:batis@foxmail.com&#34;>清风</a> * @date: 2022/3/15 20:26 * @version: 1.0 */ @Slf4j @Component @EnableScheduling public class MyScheduler { /** * cron表达式 */ @Scheduled(cron = &#34;1/3 1/1 * * * ? &#34;) public void sayHell(){ log.info(&#34;Hello&#34;); } } 5、定时任务总结 1、@EnableScheduling 开启一个定时任务
 2、@Scheduled 开启一个定时任务
@@ -46,7 +46,7 @@
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@Component</span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableScheduling</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyScheduler</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newFixedThreadPool</span><span style=color:#f92672>(</span>10<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newFixedThreadPool</span><span style=color:#f92672>(</span><span style=color:#ae81ff>10</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>     * cron表达式
 </span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
@@ -173,7 +173,7 @@
 </span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pool</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> size <span style=color:#f92672>=</span> 1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> size <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Pool</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
@@ -307,11 +307,11 @@
 </span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pool</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> queueCapacity <span style=color:#f92672>=</span> 2147483647<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> coreSize <span style=color:#f92672>=</span> 8<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> maxSize <span style=color:#f92672>=</span> 2147483647<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> queueCapacity <span style=color:#f92672>=</span> <span style=color:#ae81ff>2147483647</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> coreSize <span style=color:#f92672>=</span> <span style=color:#ae81ff>8</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> maxSize <span style=color:#f92672>=</span> <span style=color:#ae81ff>2147483647</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> allowCoreThreadTimeout <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Duration keepAlive <span style=color:#f92672>=</span> Duration<span style=color:#f92672>.</span><span style=color:#a6e22e>ofSeconds</span><span style=color:#f92672>(</span>60L<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Duration keepAlive <span style=color:#f92672>=</span> Duration<span style=color:#f92672>.</span><span style=color:#a6e22e>ofSeconds</span><span style=color:#f92672>(</span><span style=color:#ae81ff>60L</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Pool</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
@@ -375,7 +375,7 @@
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableAsync</span>
 </span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableScheduling</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyScheduler</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newFixedThreadPool</span><span style=color:#f92672>(</span>10<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newFixedThreadPool</span><span style=color:#f92672>(</span><span style=color:#ae81ff>10</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>    <span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>     * cron表达式
 </span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>

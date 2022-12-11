@@ -1,4 +1,4 @@
-<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.106.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="JAVA8-default、static default方法 1.8之前出现的问题:开发了一个接口，后面实现该接口的实现类，都需要实现接口中定义的方法。1.8之后接口中使用default定义新增的方法后，其实现类可以不用实现该方法。
+<!doctype html><html lang=en-us><head><title>// willxwu</title><link rel="shortcut icon" href=/favicon.ico><meta charset=utf-8><meta name=generator content="Hugo 0.108.0"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="John Doe"><meta name=description content><link rel=stylesheet href=https://willxwu.github.io/css/main.min.68e582a4d4ed824d6b7e3b5b37cae47eb3779bd631046379d0e68b38230cc3e2.css><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="JAVA8-default、static default方法 1.8之前出现的问题:开发了一个接口，后面实现该接口的实现类，都需要实现接口中定义的方法。1.8之后接口中使用default定义新增的方法后，其实现类可以不用实现该方法。
 例如Collection接口中新增了对stream的操作方法：stream()
 public interface Collection<E> extends Iterable<E> { default Stream<E> stream() { return StreamSupport.stream(spliterator(), false); } } 其实现类就可以不用再实现stream()方法，这样对于版本兼容就比较好了。
 static 定义的方法 可以通过接口直接调用该方法，例如：
@@ -38,7 +38,7 @@ package com.example.study.java8.method; /** * default使用 */ public class Defa
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DefaultAction</span> <span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>        A a <span style=color:#f92672>=</span> <span style=color:#f92672>()-&gt;</span>10<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        A a <span style=color:#f92672>=</span> <span style=color:#f92672>()-&gt;</span><span style=color:#ae81ff>10</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>());</span>
 </span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>.</span><span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>());</span>
 </span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
@@ -47,11 +47,11 @@ package com.example.study.java8.method; /** * default使用 */ public class Defa
 </span></span><span style=display:flex><span>        <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>size</span><span style=color:#f92672>();</span>
 </span></span><span style=display:flex><span>        <span style=color:#75715e>//判断容器是否为空
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>default</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isEmpty</span><span style=color:#f92672>(){</span>
-</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> size<span style=color:#f92672>()==</span>0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> size<span style=color:#f92672>()==</span><span style=color:#ae81ff>0</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>10
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>10</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>false</span>
 </span></span></code></pre></div><p><strong>问题思考：当接口中定义default方法后，被多个类实现会不会出现冲突？</strong></p><p>问题思考，代码示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.example.study.java8.method<span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>
