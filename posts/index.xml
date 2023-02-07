@@ -55,7 +55,24 @@ mkdir /usr/local/java 3、安装 进入下载的jdk所在目录，执行安装�
 tar -zxvf jdk-11.0.10_linux-x64_bin.tar.gz -C /usr/local/java/ 4、环境配置 修改系统环境文件/etc/profile，在最后加上java环境变量配置信息。
 export JAVA_HOME=/usr/local/java/jdk-11.0.10 export JRE_HOME=${JAVA_HOME}/jre export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib export PATH=${JAVA_HOME}/bin:$PATH 5、连接 创建软连接
 ln -s /usr/local/java/jdk-11.0.10/bin/java /usr/bin/java 6、验证 java -version 输出结果：
-java version &amp;#34;11.0.10&amp;#34; 2021-01-19 LTS Java(TM) SE Runtime Environment 18.9 (build 11.0.10+8-LTS-162) Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.10+8-LTS-162, mixed mode)</description></item><item><title/><link>https://willxwu.github.io/posts/completablefuture-%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/completablefuture-%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92/</guid><description>通过线程池性能稳定，也可以获取执行结果，并捕获异常。但是，在业务复杂情况下，一个异步调用可能会依赖于另一个异步调用的执行结果。因此我们可以使用completableFuture 异步编排方案。
+java version &amp;#34;11.0.10&amp;#34; 2021-01-19 LTS Java(TM) SE Runtime Environment 18.9 (build 11.0.10+8-LTS-162) Java HotSpot(TM) 64-Bit Server VM 18.9 (build 11.0.10+8-LTS-162, mixed mode)</description></item><item><title/><link>https://willxwu.github.io/posts/chatgpt/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/chatgpt/</guid><description>OpenAI&amp;rsquo;s services are not available in your country.
+chatGpt注册，OpenAI&amp;rsquo;s services are not available in your country.解决方法。
+1、chatGpt注册 打开chatpgt官网https://chat.openai.com/auth/login，点击Sign up注册，跳转至注册页面。
+2、邮箱验证 最好使用gmail、outlook海外邮箱，注册。打开邮箱链接，即可验证。
+3、重新登录 提示设置用户姓名
+4、手机号验证 使用国内手机号会提示“OpenAI&amp;rsquo;s services are not available in your country.”
+5、OpenAI&amp;rsquo;s services are not available in your country 解决方案：
+5.1、使用公共接码号码，但是基本都被使用过了。
+5.2、使用虚拟外海号码。
+6、虚拟外海号码 1、注册账号 打开官网https://sms-activate.org/注册，最好使用海外邮箱Gmail、Outlook。
+2、账号充值 切换成中文，选择“充值”。
+选择支付宝充值
+选择充值1美元即可，大约6.46人民币。
+3、获取号码 根据需求选择需要使用的服务类型、选择号码国家。这里注册chatgpt，直接搜索OpenAI即可。
+选择要使用的国家号码，这里选择的印度。
+填写要使用的数量，然后点后面的购物车后，右边会显示号码和一会接收到的验证码。
+复制号码到chatGpt注册时，验证手机号的地方，一会就可以看到验证码了。
+后面就可以直接注册成功chatgpt了。</description></item><item><title/><link>https://willxwu.github.io/posts/completablefuture-%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/completablefuture-%E5%BC%82%E6%AD%A5%E7%BC%96%E6%8E%92/</guid><description>通过线程池性能稳定，也可以获取执行结果，并捕获异常。但是，在业务复杂情况下，一个异步调用可能会依赖于另一个异步调用的执行结果。因此我们可以使用completableFuture 异步编排方案。
 比如：一个业务场景，需要同时获取多个数据，如果同步线程挨个执行，则需要时间为所有线程执行时间的总和。
 如果我们使用异步线程执行，所需时间则为耗时最长那个异步线程的执行时间。
 如果多个异常线程之间还存在依赖关系，比如线程3需要线程1的执行结果，线程6依赖线程3、线程2，那这个问题怎么解决呢。那就可以使用completableFuture 异步编排方案实现。
@@ -419,7 +436,17 @@ tar -zxvf Mycat-server-1.6.7.5-release-20200422133810-linux.tar.gz -C /usr/local
 vi /etc/profile 添加如下配置信息： export MYCAT_HOME=/usr/local/mycat export PATH=$MYCAT_HOME/bin:$PATH:$JAVA_HOME/bin 当执行到这步的时候，其实就可以启动了，但是为了能正确显示出效果，最好修改下MyCat的具体配置，让我们能够正常进行访问。
 3、配置MyCat ​ 进入到/usr/local/mycat/conf目录下，修改该文件夹下的配置文件
 1、修改server.xml文件
-&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;!-- - - Licensed under the Apache License, Version 2.0 (the &amp;#34;License&amp;#34;); - you may not use this file except in compliance with the License. - You may obtain a copy of the License at - - http://www.</description></item><item><title/><link>https://willxwu.github.io/posts/mysql%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/mysql%E4%BC%98%E5%8C%96/</guid><description>索引 一、全表扫描 没有使用索引的时候，数据的查询需要进行多次IO读写，这样的性能较差——全表扫描的过程。
+&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;UTF-8&amp;#34;?&amp;gt; &amp;lt;!-- - - Licensed under the Apache License, Version 2.0 (the &amp;#34;License&amp;#34;); - you may not use this file except in compliance with the License. - You may obtain a copy of the License at - - http://www.</description></item><item><title/><link>https://willxwu.github.io/posts/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</guid><description>mysql-5.7.33-winx64.zip安装 一、解压到安装目录 二、编写配置文件my.ini 将编写好的配置文件放到mysql-5.7.33-winx64根目录下。
+配置文件如下：
+[mysql] # 设置mysql客户端默认字符集 default-character-set=utf8 [mysqld] # 设置3306端口 port = 3306 # 设置mysql的安装目录 basedir = D:\\tools\mysql-5.7.33-winx64 # 设置mysql数据库的数据的存放目录 datadir = D:\\tools\mysql-5.7.33-winx64\data # 允许最大连接数 max_connections=20 # 服务端使用的字符集默认为8比特编码的latin1字符集 character-set-server=utf8 # 创建新表时将使用的默认存储引擎 default-storage-engine=INNODB 注意：
+**1、修改自己安装路径 **
+2、使用管理员权限执行下面的安装命令
+三、执行安装脚本 使用管理员权限打开cmd命令工具，进入D:\tools\mysql-5.7.33-winx64\bin目录。执行安装：
+1、初始化，生成data文件夹. （建议使用，不设置root密码）
+mysqld --initialize-insecure 或者 mysqld --initialize（不建议使用，生成一个随机的root密码） 2、安装MySql服务 mysqld -install 3、启动服务 net start mysql 4、设置mysql密码 使用空密码进入mysql数据库，设置密码。
+set password for root@localhost = password(&amp;#39;helloworld&amp;#39;); 5、环境变量配置 打开电脑环境变量配置
+系统环境，PATH环境变量下，新增bing目录
+D:\tools\mysql-5.7.33-winx64\bin</description></item><item><title/><link>https://willxwu.github.io/posts/mysql%E4%BC%98%E5%8C%96/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/mysql%E4%BC%98%E5%8C%96/</guid><description>索引 一、全表扫描 没有使用索引的时候，数据的查询需要进行多次IO读写，这样的性能较差——全表扫描的过程。
 二、索引 为数据库的某个字段创建索引，相当是为这个字段的内容创建了一个目录。通过这个目录可以快速的实现数据的定位，也就是通过索引能够快速的找到某条数据所在磁盘的位置。
 三、索引存放位置 InnoDB存储引擎的表：将索引和数据存放在同一个文件里。（为什么？有什么优势？）*ibd MyISAM存储引擎的表：索引和数据分开两个文件来存储。 索引：*.MYI； 数据：MYD 四、索引分类 1、主键索引：主键自带索效果，也就意味着通过主键来查询表中的记录，性能是非常好的。
 2、普通索引：为普通列创建的索引。
