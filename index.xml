@@ -172,7 +172,33 @@ server { listen 443 ssl http2 reuseport; server_name yanxizhu.</description></it
 [Service] Type=notify # the default is not to use systemd for cgroups because the delegate issues still # exists and systemd currently does not support the cgroup feature set required # for containers run by docker ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock -H tcp://0.0.0.0:2375 ExecReload=/bin/kill -s HUP $MAINPID TimeoutSec=0 RestartSec=2 Restart=always 2、重新加载配置文件
 systemctl daemon-reload systemctl restart docker 方法二 修改配置
 sudo vim /etc/default/docker 加入下面配置
-DOCKER_OPTS=&amp;#34;-H tcp://0.0.0.0:2375&amp;#34; 重新加载配置文件</description></item><item><title/><link>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
+DOCKER_OPTS=&amp;#34;-H tcp://0.0.0.0:2375&amp;#34; 重新加载配置文件</description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E7%AC%94%E8%AE%B0/</guid><description>容器：一种打包技术。
+docker：打包技术的一种技术实现。
+一、基础知识 基础命令 查看docker相关信息
+docker versoin 查看docker环境信息
+docker info 查看命令帮助
+docker --help image镜像 image是一个只读文件，里面包含文件系统、源码、可文件、依赖、工具等一些运行application所需的文件，可以理解成一个模板。docker image具有分层的概念。
+container容器 一个运行中的“docker image”。是指是复制image并在image最上层加上一层读写的层。基于同一个image可以创建多个container。
+image获取方式 1、自己制作
+2、从registry拉取，比如docker hub
+创建容器 查看容器帮助命令
+docker container --help 当没有拉取镜像时，会自动拉取。
+查看当前运行了那些容器：
+docker container ls id:唯一的id。
+image：使用的镜像。
+command：执行的命令
+created：创建时间，这里是2分钟之前。
+status：状态
+ports：端口协议
+names: 容器名称，不设置时，随机产生一个。
+创建容器：
+docker container run 镜像命令 例如：创建nginx容器
+dockekr container run nginx 注意：此时是在窗口运行，ctrl+c会停止运行容器。
+关闭容器 docker stop 容器名称或者容器id 例如：关闭nginx
+查看容器信息：
+docker container list 关闭容器：
+docker container 7b51 查看容器 查看运行中的容器
+docker container list 查看创建过或者使用过的容器</description></item><item><title/><link>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
 四、测试 1、进入kafka容器 docker exec -it kafka bash 2、进入kafak脚本目录 cd /opt/kafka_2.13-2.8.1/bin 注意修改自己kafka版本
 3、创建主题 kafka-topics.sh --create --zookeeper 192.168.56.10:2181 --replication-factor 1 --partitions 1 --topic topic_1 这里创建了一个topic_1主题。
 4、添加消息 生产者发送消息
@@ -559,7 +585,11 @@ select sysdate from dual; 三、序列 序列作为数据库里的对象，主�
 --写了才会输出 set serverout on; --定义变量price并赋值，注意不是在语句块里面定义 declare price number:=100; --开始语句 begin --这里面开始写语句块 dbms_output.put_line(&amp;#39;Hello&amp;#39;||price); --注意&amp;#34; ; &amp;#34;不要完了 --控制语句结束 end; --在对话框执行时，需要输入/ 注意：可以一次定义多个变量，不用每次都写declare。
 示例：
 set serverout on; --定义多个变量 declare price number:=100; productName varchar(20):=&amp;#39;notebook&amp;#39;; begin -- 凭借符号|| dbms_output.put_line(price || productName); end; 4、赋值 定义变量并赋值
---定义变量price并赋值100，注意不是在语句块里面定义 declare price number:=100; 5、查询结果赋值 into：将查询结果赋值给定义的变量</description></item><item><title/><link>https://willxwu.github.io/posts/rabbitmqy%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/rabbitmqy%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</guid><description>RabbitMQ运行机制 AMQP 中的消息路由
+--定义变量price并赋值100，注意不是在语句块里面定义 declare price number:=100; 5、查询结果赋值 into：将查询结果赋值给定义的变量</description></item><item><title/><link>https://willxwu.github.io/posts/pstree%E5%AE%89%E8%A3%85/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/pstree%E5%AE%89%E8%A3%85/</guid><description>pstree安装 1、在 Mac OS上
+brew install pstree 2、在 Fedora/Red Hat/CentOS
+yum -y install psmisc 3、在 Ubuntu/Debian
+apt-get install psmisc ps显示各进程关系，列入：查看nginx进程关系。
+ps aux | grep nginx 像一棵树一样展示。</description></item><item><title/><link>https://willxwu.github.io/posts/rabbitmqy%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/rabbitmqy%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6/</guid><description>RabbitMQ运行机制 AMQP 中的消息路由
 AMQP 中消息的路由过程和 Java 开 发者熟悉的 JMS 存在一些差别， AMQP 中增加了 Exchange 和 Binding 的角色。生产者把消息发布 到 Exchange 上，消息最终到达队列 并被消费者接收，而 Binding 决定交 换器的消息应该发送到那个队列
 Exchange 类型 Exchange分发消息时根据类型的不同分发策略有区别，目前共四种类型：direct、 fanout、topic、headers 。headers 匹配 AMQP 消息的 header 而不是路由键， headers 交换器和 direct 交换器完全一致，但性能差很多，目前几乎用不到了，所以直接 看另外三种类型：
 Direct Exchange
