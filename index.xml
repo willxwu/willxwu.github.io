@@ -198,7 +198,25 @@ dockekr container run nginx 注意：此时是在窗口运行，ctrl+c会停止�
 查看容器信息：
 docker container list 关闭容器：
 docker container 7b51 查看容器 查看运行中的容器
-docker container list 查看创建过或者使用过的容器</description></item><item><title/><link>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
+docker container list 查看创建过或者使用过的容器</description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E9%95%9C%E5%83%8F%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E9%95%9C%E5%83%8F%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F/</guid><description>Docker镜像获取方式 一、pull from registry 必须在线，从registry拉取分公有和私有。公有，例如：dockerhub，私有，例如公司自己搭建的，只能公司内部访问。
+常用公有registry：需要注册账号。
+https://hub.docker.com/
+https://quay.io/
+镜像操作常用命令：
+查看镜像操作帮助：
+docker image 拉取镜像：
+docker image pull 容器名称 可以简写成 docker pull 容器命令 注意：默认拉取官方latest版本。
+例如拉取nginx：
+docker pull nginx 查看本地已经拉取的镜像：
+docker image ls 拉取指定版本镜像：
+docker image pull 容器名称：版本 例如拉取nginx1.20.0版本镜像
+docker image pull nginx:1.20.0 拉取其他registry镜像
+docker pull quay.io/jitesoft/nginx 查看镜像详细信息
+docker image inspeack 镜像id 例如查看nginx镜像详细信息：
+docker image inspect 7ab27 删除镜像
+docker image rm 镜像命令或者id 例如删除nginx镜像：
+docker image rm 7ab 注意：不能删除正在使用镜像，否则会报错。必选删除正在使用的容器，才能删除，停止容器也不行
+docker image rm 605 提示“Error response from daemon: conflict: unable to delete 605c77e624dd (cannot be forced) - image is being used by running container 3a79cefa5c8e”</description></item><item><title/><link>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
 四、测试 1、进入kafka容器 docker exec -it kafka bash 2、进入kafak脚本目录 cd /opt/kafka_2.13-2.8.1/bin 注意修改自己kafka版本
 3、创建主题 kafka-topics.sh --create --zookeeper 192.168.56.10:2181 --replication-factor 1 --partitions 1 --topic topic_1 这里创建了一个topic_1主题。
 4、添加消息 生产者发送消息
