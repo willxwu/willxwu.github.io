@@ -216,7 +216,24 @@ docker image inspeack 镜像id 例如查看nginx镜像详细信息：
 docker image inspect 7ab27 删除镜像
 docker image rm 镜像命令或者id 例如删除nginx镜像：
 docker image rm 7ab 注意：不能删除正在使用镜像，否则会报错。必选删除正在使用的容器，才能删除，停止容器也不行
-docker image rm 605 提示“Error response from daemon: conflict: unable to delete 605c77e624dd (cannot be forced) - image is being used by running container 3a79cefa5c8e”</description></item><item><title/><link>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
+docker image rm 605 提示“Error response from daemon: conflict: unable to delete 605c77e624dd (cannot be forced) - image is being used by running container 3a79cefa5c8e”</description></item><item><title/><link>https://willxwu.github.io/posts/docker/%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</guid><description>镜像创建、镜像push 是什么 Dockerfile是用于构建docker镜像的文件
+Dockerfile里包括了构建镜像所需的“指令”
+Dockerfile有其特定的语法规则
+基本结构 例如：在一台ubuntu 21.04上运行下面这个hello.py的Python程序
+不用daocker步骤：
+1、编写hello.py文件。
+print(&amp;#34;hello docker&amp;#34;) 2、准备Python环境
+apt-get update &amp;amp;&amp;amp; \ DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.9 python3-pip python3.9-dev 3、运行hello.py
+$ python3 hello.py hello docker 使用Dockerfile构建镜像后就这样
+FROM ubuntu:20.04 RUN apt-get update &amp;amp;&amp;amp; \ DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y python3.9 python3-pip python3.9-dev ADD hello.py / CMD [&amp;#34;python3&amp;#34;, &amp;#34;/hello.py&amp;#34;] 说明：
+FROM：导入一个基础镜像
+RUN：要运行的linx命令
+ADD：添加文件到docker镜像的指定目录
+CMD：使用该镜像创建容器的时候，要执行的命令。
+构建镜像 将写好的hello.py文件和Dockerfile文件放在一起进入该目录。
+构建镜像
+docker image build -t 容器名称：版本 构建镜像存放路径 例如：
+docker image build -t hello .</description></item><item><title/><link>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
 四、测试 1、进入kafka容器 docker exec -it kafka bash 2、进入kafak脚本目录 cd /opt/kafka_2.13-2.8.1/bin 注意修改自己kafka版本
 3、创建主题 kafka-topics.sh --create --zookeeper 192.168.56.10:2181 --replication-factor 1 --partitions 1 --topic topic_1 这里创建了一个topic_1主题。
 4、添加消息 生产者发送消息
