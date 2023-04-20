@@ -216,7 +216,12 @@ docker image inspeack 镜像id 例如查看nginx镜像详细信息：
 docker image inspect 7ab27 删除镜像
 docker image rm 镜像命令或者id 例如删除nginx镜像：
 docker image rm 7ab 注意：不能删除正在使用镜像，否则会报错。必选删除正在使用的容器，才能删除，停止容器也不行
-docker image rm 605 提示“Error response from daemon: conflict: unable to delete 605c77e624dd (cannot be forced) - image is being used by running container 3a79cefa5c8e”</description></item><item><title/><link>https://willxwu.github.io/posts/docker/%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</guid><description>镜像创建、镜像push 是什么 Dockerfile是用于构建docker镜像的文件
+docker image rm 605 提示“Error response from daemon: conflict: unable to delete 605c77e624dd (cannot be forced) - image is being used by running container 3a79cefa5c8e”</description></item><item><title/><link>https://willxwu.github.io/posts/docker/%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E7%9A%84%E9%80%89%E6%8B%A9-from/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E7%9A%84%E9%80%89%E6%8B%A9-from/</guid><description>基础镜像的选择 (FROM) 官方镜像优于非官方的镜像，如果没有官方镜像，则尽量选择Dockerfile开源的 固定版本tag而不是每次都使用latest 尽量选择体积小的镜像 空镜像：scratch
+最小镜像：alpine
+通过 RUN 执行指令 RUN 主要用于在Image里执行指令，比如安装软件，下载文件等。
+FROM ubuntu:20.04 RUN apt-get update RUN apt-get install -y wget RUN wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz RUN tar zxf ipinfo_2.0.1_linux_amd64.tar.gz RUN mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo RUN rm -rf ipinfo_2.0.1_linux_amd64.tar.gz 每执行一次RUN执行，就会新产生一个分层。
+一般使用，优化后的执行命令：
+FROM ubuntu:20.04 RUN apt-get update &amp;amp;&amp;amp; \ apt-get install -y wget &amp;amp;&amp;amp; \ wget https://github.com/ipinfo/cli/releases/download/ipinfo-2.0.1/ipinfo_2.0.1_linux_amd64.tar.gz &amp;amp;&amp;amp; \ tar zxf ipinfo_2.0.1_linux_amd64.tar.gz &amp;amp;&amp;amp; \ mv ipinfo_2.0.1_linux_amd64 /usr/bin/ipinfo &amp;amp;&amp;amp; \ rm -rf ipinfo_2.0.1_linux_amd64.tar.gz &amp;amp;&amp;amp;：指令拼接</description></item><item><title/><link>https://willxwu.github.io/posts/docker/%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</guid><description>镜像创建、镜像push 是什么 Dockerfile是用于构建docker镜像的文件
 Dockerfile里包括了构建镜像所需的“指令”
 Dockerfile有其特定的语法规则
 基本结构 例如：在一台ubuntu 21.04上运行下面这个hello.py的Python程序
