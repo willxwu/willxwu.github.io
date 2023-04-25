@@ -94,7 +94,242 @@ docker pull elasticsearch:7.4.2 二、创建实例
 mkdir -p /mydata/elasticsearch/config mkdir -p /mydata/elasticsearch/data echo &amp;#34;http.host: 0.0.0.0&amp;#34; &amp;gt;&amp;gt; /mydata/elasticsearch/config/elasticsearch.yml 设置权限
 chmod -R 777 /mydata/elasticsearch/ 三、启动配置镜像
 docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \ -e &amp;#34;discovery.type=single-node&amp;#34; \ -e ES_JAVA_OPTS=&amp;#34;-Xms64m -Xmx512m&amp;#34; \ -v /mydata/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \ -v /mydata/elasticsearch/data:/usr/share/elasticsearch/data \ -v /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \ -d elasticsearch:7.4.2 以后再外面装好插件重启即可；
-特别注意： -e ES_JAVA_OPTS=&amp;quot;-Xms64m -Xmx256m&amp;quot; \ 测试环境下，设置ES 的初始内存和最大内存，否则导 致过大启动不了ES</description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85jenkins/</guid><description>Docker安装Jenkins jdk安装 下载jdk解压到个人安装目录
+特别注意： -e ES_JAVA_OPTS=&amp;quot;-Xms64m -Xmx256m&amp;quot; \ 测试环境下，设置ES 的初始内存和最大内存，否则导 致过大启动不了ES</description></item><item><title/><link>https://willxwu.github.io/posts/docker/dockerfile%E9%80%82%E7%94%A8%E6%8A%80%E5%B7%A7/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/dockerfile%E9%80%82%E7%94%A8%E6%8A%80%E5%B7%A7/</guid><description>&lt;h1 id="dockerfile技巧">Dockerfile技巧&lt;/h1>
+&lt;h2 id="一docker-build缓存">一、Docker build缓存&lt;/h2>
+&lt;p>当build镜像时，如果Docker build文件发生变化或者build镜像分层某一层发生变化就不会使用cache缓存。&lt;/p>
+&lt;p>技巧：将Dockerfile中经常发生改变的放到后面，不发生改变的发前面。这样就算最后发生改变的不能使用cache缓存，但前面没变化也会加快build的速度。&lt;/p>
+&lt;h2 id="docker-build-context">Docker build context&lt;/h2>
+&lt;p>Docker是client-server架构，理论上Client和Server可以不在一台机器上。&lt;/p>
+&lt;p>在构建docker镜像的时候，需要把所需要的文件由CLI（client）发给Server，这些文件实际上就是build context。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ dockerfile-demo more Dockerfile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>FROM python:3.9.5-slim
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN pip install flask
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WORKDIR /src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ENV FLASK_APP&lt;span style="color:#f92672">=&lt;/span>app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY app.py /src/app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>EXPOSE &lt;span style="color:#ae81ff">5000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CMD &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;flask&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;run&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;-h&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;0.0.0.0&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ dockerfile-demo more app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>from flask import Flask
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>app &lt;span style="color:#f92672">=&lt;/span> Flask&lt;span style="color:#f92672">(&lt;/span>__name__&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>@app.route&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#e6db74">&amp;#39;/&amp;#39;&lt;/span>&lt;span style="color:#f92672">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>def hello_world&lt;span style="color:#f92672">()&lt;/span>:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> &lt;span style="color:#e6db74">&amp;#39;Hello, world!&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>执行镜像构建&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker image build -t demo .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sending build context to Docker daemon 11.13MB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 1/7 : FROM python:3.9.5-slim
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; 609da079b03a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 2/7 : RUN pip install flask
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; 955ce495635e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 3/7 : WORKDIR /src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; 1c2f968e9f9b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 4/7 : ENV FLASK_APP&lt;span style="color:#f92672">=&lt;/span>app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; dceb15b338cf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 5/7 : COPY app.py /src/app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; 0d4dfef28b5f
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 6/7 : EXPOSE &lt;span style="color:#ae81ff">5000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; 203e9865f0d9
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 7/7 : CMD &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;flask&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;run&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;-h&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;0.0.0.0&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ---&amp;gt; 35b5efae1293
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully built 35b5efae1293
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully tagged demo:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>.&lt;/code> 这个参数就是代表了build context所指向的目录。&lt;/p>
+&lt;p>第2行：Sending build context to Docker daemon 11.13MB，实际就是docker build context将.所指向文件夹里面所有的文件发送到Docker Server。因此当文件里面文件很多时，发送就比较大比较慢，所以进行保证指向的文件夹里面文件少一点。&lt;/p>
+&lt;h2 id="二dockerignore-文件">二、.dockerignore 文件&lt;/h2>
+&lt;p>配置需要忽略的文件，类似git里面.ignore文件一样。&lt;/p>
+&lt;p>1、可以使image变小一点。&lt;/p>
+&lt;p>2、加快build。&lt;/p>
+&lt;p>3、忽略一些私密配置文件，如密码配置等。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>.vscode/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>env/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker image build -t demo .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sending build context to Docker daemon 4.096kB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 1/7 : FROM python:3.9.5-slim
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 609da079b03a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 2/7 : RUN pip install flask
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 955ce495635e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 3/7 : WORKDIR /src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 1c2f968e9f9b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 4/7 : ENV FLASK_APP&lt;span style="color:#f92672">=&lt;/span>app.py
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; dceb15b338cf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 5/7 : COPY . /src/
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; a9a8f888fef3
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 6/7 : EXPOSE &lt;span style="color:#ae81ff">5000&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Running in c71f34d32009
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Removing intermediate container c71f34d32009
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; fed6995d5a83
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 7/7 : CMD &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;flask&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;run&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;-h&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;0.0.0.0&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Running in 7ea669f59d5e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Removing intermediate container 7ea669f59d5e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 079bae887a47
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully built 079bae887a47
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully tagged demo:latest
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>上面可以看到Sending build context to Docker daemon 4.096kB，从这里可以看到Docker build context忽略文件后，发送到docker server的文件变小了很多。&lt;/p>
+&lt;h1 id="三镜像的多阶段构建">三、镜像的多阶段构建&lt;/h1>
+&lt;p>适用于需要环境进行编译时。&lt;/p>
+&lt;p>例如要将C语言程序build成一个镜像，然后通过docker容器执行。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-c" data-lang="c">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">#include&lt;/span> &lt;span style="color:#75715e">&amp;lt;stdio.h&amp;gt;&lt;/span>&lt;span style="color:#75715e">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>(&lt;span style="color:#66d9ef">int&lt;/span> argc, &lt;span style="color:#66d9ef">char&lt;/span> &lt;span style="color:#f92672">*&lt;/span>argv[])
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>{
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#a6e22e">printf&lt;/span>(&lt;span style="color:#e6db74">&amp;#34;hello %s&lt;/span>&lt;span style="color:#ae81ff">\n&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span>, argv[argc &lt;span style="color:#f92672">-&lt;/span> &lt;span style="color:#ae81ff">1&lt;/span>]);
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>docker build:因为需要C语言环境，因此选择一个gcc基础镜像，可以看到gcc基础环境比较到，c文件其实很小。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> gcc:9.4&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> hello.c /src/hello.c&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /src&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> gcc --static -o hello hello.c&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">ENTRYPOINT&lt;/span> [ &lt;span style="color:#e6db74">&amp;#34;/src/hello&amp;#34;&lt;/span> ]&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">CMD&lt;/span> []&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>build和测试&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker build -t hello .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sending build context to Docker daemon 5.12kB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 1/6 : FROM gcc:9.4
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; be1d0d9ce039
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 2/6 : COPY hello.c /src/hello.c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 70a624e3749b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 3/6 : WORKDIR /src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 24e248c6b27c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 4/6 : RUN gcc --static -o hello hello.c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; db8ae7b42aff
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 5/6 : ENTRYPOINT &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/src/hello&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 7f307354ee45
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 6/6 : CMD &lt;span style="color:#f92672">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 7cfa0cbe4e2a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully built 7cfa0cbe4e2a
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully tagged hello:latest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker image ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REPOSITORY TAG IMAGE ID CREATED SIZE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello latest 7cfa0cbe4e2a &lt;span style="color:#ae81ff">2&lt;/span> hours ago 1.14GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gcc 9.4 be1d0d9ce039 &lt;span style="color:#ae81ff">9&lt;/span> days ago 1.14GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker run --rm -it hello docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker run --rm -it hello world
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello world
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker run --rm -it hello friends
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello friends
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>gcc 9.4 be1d0d9ce039 9 days ago 1.14GB&lt;/p>
+&lt;p>实际上当我们把hello.c编译完以后，并不需要这样一个大的GCC环境，一个小的alpine镜像就可以了。&lt;/p>
+&lt;p>因此就可以使用多阶段构建。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-dockerfile" data-lang="dockerfile">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> gcc:9.4 AS builder&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> hello.c /src/hello.c&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">WORKDIR&lt;/span>&lt;span style="color:#e6db74"> /src&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">RUN&lt;/span> gcc --static -o hello hello.c&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">FROM&lt;/span>&lt;span style="color:#e6db74"> alpine:3.13.5&lt;/span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">COPY&lt;/span> --from&lt;span style="color:#f92672">=&lt;/span>builder /src/hello /src/hello&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">ENTRYPOINT&lt;/span> [ &lt;span style="color:#e6db74">&amp;#34;/src/hello&amp;#34;&lt;/span> ]&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#960050;background-color:#1e0010">&lt;/span>&lt;span style="color:#66d9ef">CMD&lt;/span> []&lt;span style="color:#960050;background-color:#1e0010">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>说明：AS 给gcc取一个名称builder，第2阶段COPY &amp;ndash;from=builder /src/hello /src/hello，将编译好的c程序，放到新基础镜像alpine中，重新build成镜像。&lt;/p>
+&lt;p>测试&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker build -t hello-apline -f Dockerfile-new .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Sending build context to Docker daemon 5.12kB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 1/8 : FROM gcc:9.4 AS builder
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; be1d0d9ce039
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 2/8 : COPY hello.c /src/hello.c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 70a624e3749b
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 3/8 : WORKDIR /src
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 24e248c6b27c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 4/8 : RUN gcc --static -o hello hello.c
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; db8ae7b42aff
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 5/8 : FROM alpine:3.13.5
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 6dbb9cc54074
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 6/8 : COPY --from&lt;span style="color:#f92672">=&lt;/span>builder /src/hello /src/hello
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 18c2bce629fb
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 7/8 : ENTRYPOINT &lt;span style="color:#f92672">[&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/src/hello&amp;#34;&lt;/span> &lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 8dfb9d9d6010
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Step 8/8 : CMD &lt;span style="color:#f92672">[]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; Using cache
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>---&amp;gt; 446baf852214
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully built 446baf852214
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Successfully tagged hello-apline:latest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker image ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REPOSITORY TAG IMAGE ID CREATED SIZE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello-alpine latest 446baf852214 &lt;span style="color:#ae81ff">2&lt;/span> hours ago 6.55MB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello latest 7cfa0cbe4e2a &lt;span style="color:#ae81ff">2&lt;/span> hours ago 1.14GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo latest 079bae887a47 &lt;span style="color:#ae81ff">2&lt;/span> hours ago 125MB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>gcc 9.4 be1d0d9ce039 &lt;span style="color:#ae81ff">9&lt;/span> days ago 1.14GB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker run --rm -it hello-alpine docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker run --rm -it hello-alpine world
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello world
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker run --rm -it hello-alpine friends
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>hello friends
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Sending build context to Docker daemon 5.12kB 可以看到这个镜像非常小，只有6.55MB。&lt;/p>
+&lt;h1 id="四尽量使用非root用户">四、尽量使用非root用户&lt;/h1>
+&lt;h2 id="root的危险性">Root的危险性&lt;/h2>
+&lt;p>假如我们有一个用户，叫demo，它本身不具有sudo的权限，所以就有很多文件无法进行读写操作，比如/root目录它是无法查看的。但是有执行docker容器的权限，可以映射root文件路径，查看root文件。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$ sudo ls /root
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>sudo&lt;span style="color:#f92672">]&lt;/span> password &lt;span style="color:#66d9ef">for&lt;/span> demo:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo is not in the sudoers file. This incident will be reported.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是这个用户有执行docker的权限，也就是它在docker这个group里。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$ groups
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo docker
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$ docker image ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REPOSITORY TAG IMAGE ID CREATED SIZE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>busybox latest a9d583973f65 &lt;span style="color:#ae81ff">2&lt;/span> days ago 1.23MB
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这时，我们就可以通过Docker做很多越权的事情了，比如，我们可以把这个无法查看的/root目录映射到docker container里，你就可以自由进行查看了。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host vagrant&lt;span style="color:#f92672">]&lt;/span>$ docker run -it -v /root/:/root/tmp busybox sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>/ &lt;span style="color:#75715e"># cd /root/tmp&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~/tmp &lt;span style="color:#75715e"># ls&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>anaconda-ks.cfg original-ks.cfg
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~/tmp &lt;span style="color:#75715e"># ls -l&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>total &lt;span style="color:#ae81ff">16&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw------- &lt;span style="color:#ae81ff">1&lt;/span> root root &lt;span style="color:#ae81ff">5570&lt;/span> Apr &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#ae81ff">2020&lt;/span> anaconda-ks.cfg
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-rw------- &lt;span style="color:#ae81ff">1&lt;/span> root root &lt;span style="color:#ae81ff">5300&lt;/span> Apr &lt;span style="color:#ae81ff">30&lt;/span> &lt;span style="color:#ae81ff">2020&lt;/span> original-ks.cfg
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>~/tmp &lt;span style="color:#75715e">#&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>更甚至我们可以给我们自己加sudo权限。我们现在没有sudo权限。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$ sudo vim /etc/sudoers
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>sudo&lt;span style="color:#f92672">]&lt;/span> password &lt;span style="color:#66d9ef">for&lt;/span> demo:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>demo is not in the sudoers file. This incident will be reported.
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>demo@docker-host ~&lt;span style="color:#f92672">]&lt;/span>$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>但是我可以给自己添加。&lt;/p>
+&lt;div class="highlight"></description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85jenkins/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E5%AE%89%E8%A3%85jenkins/</guid><description>Docker安装Jenkins jdk安装 下载jdk解压到个人安装目录
 /mydata/jdk/jdk-11.0.10 maven安装 下载maven解压到个人安装目录
 /mydata/maven/apache-maven-3.8.5 修改mavne配置文件setting.xml，设置本地仓库目录
 &amp;lt;localRepository&amp;gt;/mydata/maven/repo&amp;lt;/localRepository&amp;gt; 添加阿里云镜像，在mirrors节点下增加以下内容
