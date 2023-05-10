@@ -384,7 +384,216 @@ server { listen 443 ssl http2 reuseport; server_name yanxizhu.</description></it
 [Service] Type=notify # the default is not to use systemd for cgroups because the delegate issues still # exists and systemd currently does not support the cgroup feature set required # for containers run by docker ExecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock -H tcp://0.0.0.0:2375 ExecReload=/bin/kill -s HUP $MAINPID TimeoutSec=0 RestartSec=2 Restart=always 2、重新加载配置文件
 systemctl daemon-reload systemctl restart docker 方法二 修改配置
 sudo vim /etc/default/docker 加入下面配置
-DOCKER_OPTS=&amp;#34;-H tcp://0.0.0.0:2375&amp;#34; 重新加载配置文件</description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E7%AC%94%E8%AE%B0/</guid><description>容器：一种打包技术。
+DOCKER_OPTS=&amp;#34;-H tcp://0.0.0.0:2375&amp;#34; 重新加载配置文件</description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</guid><description>&lt;h1 id="docker数据存储">Docker数据存储&lt;/h1>
+&lt;p>默认情况下，在运行中的容器里创建的文件，被保存在一个可写的容器层：&lt;/p>
+&lt;ul>
+&lt;li>如果容器被删除了，则数据也没有了&lt;/li>
+&lt;li>这个可写的容器层是和特定的容器绑定的，也就是这些数据无法方便的和其它容器共享&lt;/li>
+&lt;/ul>
+&lt;p>Docker主要提供了两种方式做数据的持久化&lt;/p>
+&lt;ul>
+&lt;li>Data Volume, 由Docker管理，(/var/lib/docker/volumes/ Linux), 持久化数据的最好方式&lt;/li>
+&lt;li>Bind Mount，由用户指定存储的数据具体mount在系统什么位置&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202304262015423.png" alt="docker-volume">&lt;/p>
+&lt;h1 id="一data-volume">一、Data Volume&lt;/h1>
+&lt;h2 id="环境准备">环境准备&lt;/h2>
+&lt;p>准备一个Dockerfile 和一个 my-cron的文件&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Dockerfile my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ more Dockerfile
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>FROM alpine:latest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN apk update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN apk --no-cache add curl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ENV SUPERCRONIC_URL&lt;span style="color:#f92672">=&lt;/span>https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> SUPERCRONIC&lt;span style="color:#f92672">=&lt;/span>supercronic-linux-amd64 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> SUPERCRONIC_SHA1SUM&lt;span style="color:#f92672">=&lt;/span>048b95b48b708983effb2e5c935a1ef8483d9e3e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN curl -fsSLO &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SUPERCRONIC_URL&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC_SHA1SUM&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | sha1sum -c - &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> chmod +x &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SUPERCRONIC&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> mv &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SUPERCRONIC&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> ln -s &lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> /usr/local/bin/supercronic
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY my-cron /app/my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WORKDIR /app
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>VOLUME &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/app&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># RUN cron job&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CMD &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/supercronic&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/app/my-cron&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ more my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>*/1 * * * * date &amp;gt;&amp;gt; /app/test.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="构建镜像">构建镜像&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker image build -t my-cron .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker image ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>REPOSITORY TAG IMAGE ID CREATED SIZE
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>my-cron latest e9fbd9a562c9 &lt;span style="color:#ae81ff">4&lt;/span> seconds ago 24.7MB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="创建容器不指定-v参数">创建容器(不指定-v参数)&lt;/h2>
+&lt;p>此时Docker会自动创建一个随机名字的volume，去存储我们在Dockerfile定义的volume &lt;code>VOLUME [&amp;quot;/app&amp;quot;]&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker run -d my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>9a8fa93f03c42427a498b21ac520660752122e20bcdbf939661646f71d277f8f
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker volume ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DRIVER VOLUME NAME
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>local 043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker volume inspect 043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;CreatedAt&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2021-06-22T23:06:13+02:00&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Driver&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Labels&amp;#34;&lt;/span>: null,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Mountpoint&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/var/lib/docker/volumes/043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264/_data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Options&amp;#34;&lt;/span>: null,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Scope&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>在这个Volume的mountpoint可以发现容器创建的文件。&lt;/p>
+&lt;h2 id="创建容器指定-v参数">创建容器(指定-v参数)&lt;/h2>
+&lt;p>在创建容器的时候通过 &lt;code>-v&lt;/code> 参数我们可以手动的指定需要创建Volume的名字，以及对应于容器内的路径，这个路径是可以任意的，不必需要在Dockerfile里通过VOLUME定义。&lt;/p>
+&lt;p>比如我们把上面的Dockerfile里的VOLUME删除&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>FROM alpine:latest
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN apk update
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN apk --no-cache add curl
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ENV SUPERCRONIC_URL&lt;span style="color:#f92672">=&lt;/span>https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> SUPERCRONIC&lt;span style="color:#f92672">=&lt;/span>supercronic-linux-amd64 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> SUPERCRONIC_SHA1SUM&lt;span style="color:#f92672">=&lt;/span>048b95b48b708983effb2e5c935a1ef8483d9e3e
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RUN curl -fsSLO &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SUPERCRONIC_URL&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> echo &lt;span style="color:#e6db74">&amp;#34;&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC_SHA1SUM&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74"> &lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> | sha1sum -c - &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> chmod +x &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SUPERCRONIC&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> mv &lt;span style="color:#e6db74">&amp;#34;&lt;/span>$SUPERCRONIC&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> &lt;span style="color:#f92672">&amp;amp;&amp;amp;&lt;/span> ln -s &lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/&lt;/span>&lt;span style="color:#e6db74">${&lt;/span>SUPERCRONIC&lt;span style="color:#e6db74">}&lt;/span>&lt;span style="color:#e6db74">&amp;#34;&lt;/span> /usr/local/bin/supercronic
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>COPY my-cron /app/my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>WORKDIR /app
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># RUN cron job&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>CMD &lt;span style="color:#f92672">[&lt;/span>&lt;span style="color:#e6db74">&amp;#34;/usr/local/bin/supercronic&amp;#34;&lt;/span>, &lt;span style="color:#e6db74">&amp;#34;/app/my-cron&amp;#34;&lt;/span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>重新build镜像，然后创建容器，加-v参数&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker image build -t my-cron .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker container run -d -v cron-data:/app my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>43c6d0357b0893861092a752c61ab01bdfa62ea766d01d2fcb8b3ecb6c88b3de
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker volume ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DRIVER VOLUME NAME
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>local cron-data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker volume inspect cron-data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;CreatedAt&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2021-06-22T23:25:02+02:00&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Driver&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Labels&amp;#34;&lt;/span>: null,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Mountpoint&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/var/lib/docker/volumes/cron-data/_data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;cron-data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Options&amp;#34;&lt;/span>: null,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Scope&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls /var/lib/docker/volumes/cron-data/_data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>my-cron
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ ls /var/lib/docker/volumes/cron-data/_data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>my-cron test.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="环境清理">环境清理&lt;/h2>
+&lt;p>强制删除所有容器，系统清理和volume清理&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker rm -f &lt;span style="color:#66d9ef">$(&lt;/span>docker container ps -aq&lt;span style="color:#66d9ef">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker system prune -f
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>$ docker volume prune -f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="二bind-mount">二、Bind Mount&lt;/h1>
+&lt;p>只需要将-v的data volume换成指定路径即可。windows下的linux就可以直接挂载到磁盘，linx的可以直接查看。&lt;/p>
+&lt;p>例如mysql&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -p 3306:3306 --name mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/log:/var/log/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/data:/var/lib/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/conf:/etc/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-e MYSQL_ROOT_PASSWORD&lt;span style="color:#f92672">=&lt;/span>密码 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-d mysql:5.7
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>-v /mydata/mysql/log:/var/log/mysql
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里就是将容器中/var/log/mysql日志，通过Bind Mount持久化到linux主机的/mydata/mysql/log目录。&lt;/p>
+&lt;h1 id="多个机器之间的容器共享数据">多个机器之间的容器共享数据&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202305102158433.png" alt="multi-host-volume">&lt;/p>
+&lt;p>官方参考链接 &lt;a href="https://docs.docker.com/storage/volumes/#share-data-among-machines">https://docs.docker.com/storage/volumes/#share-data-among-machines&lt;/a>&lt;/p>
+&lt;p>Docker的volume支持多种driver。默认创建的volume driver都是local&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>$ docker volume inspect vscode
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;CreatedAt&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;2021-06-23T21:33:57Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Driver&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Labels&amp;#34;&lt;/span>: null,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Mountpoint&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/var/lib/docker/volumes/vscode/_data&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;vscode&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Options&amp;#34;&lt;/span>: null,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Scope&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这一节我们看看一个叫sshfs的driver，如何让docker使用不在同一台机器上的文件系统做volume&lt;/p>
+&lt;h2 id="环境准备-1">环境准备&lt;/h2>
+&lt;p>准备三台Linux机器，之间可以通过SSH相互通信。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>hostname&lt;/th>
+&lt;th>ip&lt;/th>
+&lt;th>ssh username&lt;/th>
+&lt;th>ssh password&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>docker-host1&lt;/td>
+&lt;td>192.168.200.10&lt;/td>
+&lt;td>vagrant&lt;/td>
+&lt;td>vagrant&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>docker-host2&lt;/td>
+&lt;td>192.168.200.11&lt;/td>
+&lt;td>vagrant&lt;/td>
+&lt;td>vagrant&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>docker-host3&lt;/td>
+&lt;td>192.168.200.12&lt;/td>
+&lt;td>vagrant&lt;/td>
+&lt;td>vagrant&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="安装plugin">安装plugin&lt;/h2>
+&lt;p>在其中两台机器上安装一个plugin &lt;code>vieux/sshfs&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>vagrant@docker-host1 ~&lt;span style="color:#f92672">]&lt;/span>$ docker plugin install --grant-all-permissions vieux/sshfs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>latest: Pulling from vieux/sshfs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Digest: sha256:1d3c3e42c12138da5ef7873b97f7f32cf99fb6edde75fa4f0bcf9ed277855811
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>52d435ada6a4: Complete
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Installed plugin vieux/sshfs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>vagrant@docker-host2 ~&lt;span style="color:#f92672">]&lt;/span>$ docker plugin install --grant-all-permissions vieux/sshfs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>latest: Pulling from vieux/sshfs
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Digest: sha256:1d3c3e42c12138da5ef7873b97f7f32cf99fb6edde75fa4f0bcf9ed277855811
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>52d435ada6a4: Complete
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Installed plugin vieux/sshfs
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="创建volume">创建volume&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>vagrant@docker-host1 ~&lt;span style="color:#f92672">]&lt;/span>$ docker volume create --driver vieux/sshfs &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -o sshcmd&lt;span style="color:#f92672">=&lt;/span>vagrant@192.168.200.12:/home/vagrant &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> -o password&lt;span style="color:#f92672">=&lt;/span>vagrant &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span> sshvolume
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>查看&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>vagrant@docker-host1 ~&lt;span style="color:#f92672">]&lt;/span>$ docker volume ls
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>DRIVER VOLUME NAME
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>vieux/sshfs:latest sshvolume
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>vagrant@docker-host1 ~&lt;span style="color:#f92672">]&lt;/span>$ docker volume inspect sshvolume
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;CreatedAt&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;0001-01-01T00:00:00Z&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Driver&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;vieux/sshfs:latest&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Labels&amp;#34;&lt;/span>: &lt;span style="color:#f92672">{}&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Mountpoint&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;/mnt/volumes/f59e848643f73d73a21b881486d55b33&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Name&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;sshvolume&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Options&amp;#34;&lt;/span>: &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;password&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;vagrant&amp;#34;&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;sshcmd&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;vagrant@192.168.200.12:/home/vagrant&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#e6db74">&amp;#34;Scope&amp;#34;&lt;/span>: &lt;span style="color:#e6db74">&amp;#34;local&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="创建容器挂载volume">创建容器挂载Volume&lt;/h2>
+&lt;p>创建容器，挂载sshvolume到/app目录，然后进入容器的shell，在/app目录创建一个test.txt文件&lt;/p>
+&lt;div class="highlight"></description></item><item><title/><link>https://willxwu.github.io/posts/docker/docker%E7%AC%94%E8%AE%B0/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/docker/docker%E7%AC%94%E8%AE%B0/</guid><description>容器：一种打包技术。
 docker：打包技术的一种技术实现。
 一、基础知识 基础命令 查看docker相关信息
 docker versoin 查看docker环境信息
