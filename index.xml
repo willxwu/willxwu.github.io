@@ -1008,7 +1008,8 @@ MyISAM存储引擎支持全文索引。
 单向链表：能够通过当前结点找到下一个节点的位置，以此来维护链表的逻辑关系
 结点结构：数据内容+下一个数据的指针
 双向链表：能够通过当前结点找到上一个或下一个节点的位置，双向都可找。
-结点结构：上一个数据的指针+数据内容+下一个数据的指针。</description></item><item><title/><link>https://willxwu.github.io/posts/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>Nacos持久化MySQL问题-解决方案 一、说明 环境说明：
+结点结构：上一个数据的指针+数据内容+下一个数据的指针。</description></item><item><title/><link>https://willxwu.github.io/posts/mysql%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/mysql%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</guid><description>[ERR] 1067 - Invalid default value for &amp;lsquo;created_date_&amp;rsquo;[ERR]
+set global sql_mode = &amp;#39;ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&amp;#39;;</description></item><item><title/><link>https://willxwu.github.io/posts/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>Nacos持久化MySQL问题-解决方案 一、说明 环境说明：
 MySQL：CentOS环境通过Docker部署的MySQL5.7
 Nacos：2.0.3
 原始配置：
