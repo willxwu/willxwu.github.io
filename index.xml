@@ -22,7 +22,29 @@ docker ps -s 删除容器
 docker rm 容器 查询当前容器
 docker container ls -all 删除未启动容器映射
 docker container rm 容器 查看容器映射信息
-docker inspect 容器 | grep Mounts -A 20 进入容器内部</description></item><item><title>关于</title><link>https://willxwu.github.io/about/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/about/</guid><description>一名java后端程序员</description></item><item><title>友情链接</title><link>https://willxwu.github.io/link/</link><pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/link/</guid><description>Web前端导航
+docker inspect 容器 | grep Mounts -A 20 进入容器内部</description></item><item><title>Kafka部署及脚本使用</title><link>https://willxwu.github.io/posts/kafka%E9%83%A8%E7%BD%B2/</link><pubDate>Sun, 28 Sep 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/kafka%E9%83%A8%E7%BD%B2/</guid><description>环境版本说明 环境：CentOS7
+版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2
+JDK安装 JDK1.8安装
+rpm -ivh jdk-8u261-linux-x64.rpm 环境变量配置
+vim /etc/profile 最后一行加上配置
+export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64 export PATH=$PATH:$JAVA_HOME/bin jdk验证
+java -version Zookeeper安装 安装
+tar -zxf zookeeper-3.4.14.tar.gz -C /opt 环境变量配置
+vim /etc/profile ZOOKEEPER_PREFIX指向Zookeeper的解压目录
+export ZOOKEEPER_PREFIX=/opt/zookeeper-3.4.14 将Zookeeper的bin目录添加到PATH中
+export PATH=$PATH:$ZOOKEEPER_PREFIX/bin 设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置
+export ZOO_LOG_DIR=/var/zookeeper/log 使配置生效
+source /etc/profile 修改zookeeper配置
+cd conf cp zoo_sample.cfg zoo.cfg 修改配置文件zoo.cfg
+vi zoo.cfg 修改zookeeper数据存放位置配置
+修改前
+dataDir=/tmp/zookeeper 修改后
+dataDir=/var/zookeeper/data 启动zookeeper
+进入zookeeper安装目录
+=/var/zookeeper/bin 启动zookeeper
+zkServer.sh start 查看zookeeper状态
+zkServer.sh status Kafka安装 安装kafka
+tar -zxf kafka_2.12-1.0.2.tgz -C /opt 修改环境变量</description></item><item><title>关于</title><link>https://willxwu.github.io/about/</link><pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/about/</guid><description>一名java后端程序员</description></item><item><title>友情链接</title><link>https://willxwu.github.io/link/</link><pubDate>Wed, 08 Jan 1012 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/link/</guid><description>Web前端导航
 美团技术团队 | 小米信息部技术团队 | 腾讯MDX Tencent TG ideas | Tencent AlloyTeam | 搜狐畅游视觉设计中心团队 | Glow技术团队
 国外技术团队博客：
 https://code.facebook.com
@@ -913,29 +935,7 @@ Vagrant安装虚拟机软件：vagrant_2.2.19_i686.msi。
 2、软件安装 先安装VirtualBox、然后安装Vagrant。
 3、修改配置 虚拟机、配置存放位置如下：
 虚拟系统安装 1、创建配置文件 新建Vagrantfile文件，批量创建3台虚拟机，内容如下：该文件是放在个人用户名文件夹下的。
-Vagrant.configure(&amp;#34;2&amp;#34;) do |config| (1..3).each do |i| config.vm.define &amp;#34;k8s-node#{i}&amp;#34; do |node| # 设置虚拟机的Box node.vm.box = &amp;#34;centos/7&amp;#34; config.vm.box_url = &amp;#34;https://mirrors.ustc.edu.cn/centos-cloud/centos/7/vagrant/x86_64/images/CentOS-7.box&amp;#34; # 设置虚拟机的主机名 node.vm.hostname=&amp;#34;k8s-node#{i}&amp;#34; # 设置虚拟机的IP node.vm.network &amp;#34;private_network&amp;#34;, ip: &amp;#34;192.168.56.#{99+i}&amp;#34;, netmask: &amp;#34;255.255.255.0&amp;#34; # 设置主机与虚拟机的共享目录 # node.vm.synced_folder &amp;#34;~/Documents/vagrant/share&amp;#34;, &amp;#34;/home/vagrant/share&amp;#34; # VirtaulBox相关配置 node.vm.provider &amp;#34;virtualbox&amp;#34; do |v| # 设置虚拟机的名称 v.name = &amp;#34;k8s-node#{i}&amp;#34; # 设置虚拟机的内存大小 v.memory = 4096 # 设置虚拟机的CPU个数 v.</description></item><item><title/><link>https://willxwu.github.io/posts/kafka%E9%83%A8%E7%BD%B2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/kafka%E9%83%A8%E7%BD%B2/</guid><description>环境版本说明 环境：CentOS7
-版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2
-JDK安装 JDK1.8安装
-rpm -ivh jdk-8u261-linux-x64.rpm 环境变量配置
-vim /etc/profile 最后一行加上配置
-export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64 export PATH=$PATH:$JAVA_HOME/bin jdk验证
-java -version Zookeeper安装 安装
-tar -zxf zookeeper-3.4.14.tar.gz -C /opt 环境变量配置
-vim /etc/profile ZOOKEEPER_PREFIX指向Zookeeper的解压目录
-export ZOOKEEPER_PREFIX=/opt/zookeeper-3.4.14 将Zookeeper的bin目录添加到PATH中
-export PATH=$PATH:$ZOOKEEPER_PREFIX/bin 设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置
-export ZOO_LOG_DIR=/var/zookeeper/log 使配置生效
-source /etc/profile 修改zookeeper配置
-cd conf cp zoo_sample.cfg zoo.cfg 修改配置文件zoo.cfg
-vi zoo.cfg 修改zookeeper数据存放位置配置
-修改前
-dataDir=/tmp/zookeeper 修改后
-dataDir=/var/zookeeper/data 启动zookeeper
-进入zookeeper安装目录
-=/var/zookeeper/bin 启动zookeeper
-zkServer.sh start 查看zookeeper状态
-zkServer.sh status Kafka安装 安装kafka
-tar -zxf kafka_2.12-1.0.2.tgz -C /opt 修改环境变量</description></item><item><title/><link>https://willxwu.github.io/posts/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</guid><description>最近项目对接时，中间B2B服务切换了域名，导致现有项目调用接口地址需要进行切换为https，同时需要安装SSL证书，这里记录一下JAVA工具keytool导入证书的过程。
+Vagrant.configure(&amp;#34;2&amp;#34;) do |config| (1..3).each do |i| config.vm.define &amp;#34;k8s-node#{i}&amp;#34; do |node| # 设置虚拟机的Box node.vm.box = &amp;#34;centos/7&amp;#34; config.vm.box_url = &amp;#34;https://mirrors.ustc.edu.cn/centos-cloud/centos/7/vagrant/x86_64/images/CentOS-7.box&amp;#34; # 设置虚拟机的主机名 node.vm.hostname=&amp;#34;k8s-node#{i}&amp;#34; # 设置虚拟机的IP node.vm.network &amp;#34;private_network&amp;#34;, ip: &amp;#34;192.168.56.#{99+i}&amp;#34;, netmask: &amp;#34;255.255.255.0&amp;#34; # 设置主机与虚拟机的共享目录 # node.vm.synced_folder &amp;#34;~/Documents/vagrant/share&amp;#34;, &amp;#34;/home/vagrant/share&amp;#34; # VirtaulBox相关配置 node.vm.provider &amp;#34;virtualbox&amp;#34; do |v| # 设置虚拟机的名称 v.name = &amp;#34;k8s-node#{i}&amp;#34; # 设置虚拟机的内存大小 v.memory = 4096 # 设置虚拟机的CPU个数 v.</description></item><item><title/><link>https://willxwu.github.io/posts/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</guid><description>最近项目对接时，中间B2B服务切换了域名，导致现有项目调用接口地址需要进行切换为https，同时需要安装SSL证书，这里记录一下JAVA工具keytool导入证书的过程。
 一、问题点 切换域名后加上https，未导入证书报错:
 [ERROR] - [2022-02-25 08:49:40.861] - [http-nio-9999-exec-1] - [DealParamAction.java:needConfirmAction:133] - no confirm method, call actual method = getNSDDtailByInterface [INFO ] - [2022-02-25 08:50:04.483] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:439] - I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect [INFO ] - [2022-02-25 08:50:04.484] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:445] - Retrying request [INFO ] - [2022-02-25 08:50:25.487] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:439] - I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect [INFO ] - [2022-02-25 08:50:25.</description></item><item><title/><link>https://willxwu.github.io/posts/map%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/map%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F/</guid><description>Map集合的2种循环方式。一种是通过map.entrySet()。
 另一种是map.keySet()。 所有的集合都可以通过迭代器Iterator，进行遍历。
