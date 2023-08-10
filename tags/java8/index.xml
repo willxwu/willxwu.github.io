@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>java8 on 归去来兮</title><link>https://willxwu.github.io/tags/java8/</link><description>Recent content in java8 on 归去来兮</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Tue, 06 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/java8/index.xml" rel="self" type="application/rss+xml"/><item><title>JAVA8-Lambda表达式用法</title><link>https://willxwu.github.io/posts/java8/1java8-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/</link><pubDate>Tue, 06 Sep 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/java8/1java8-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%94%A8%E6%B3%95/</guid><description>用户范例 package com.example.study.java8.InterfaceFunction; /** * lambda表达式用法 */ public class LambdaUsage { public static void main(String[] args) { Runnable runnable1 = ()-&amp;gt; System.out.println(&amp;#34;hello&amp;#34;); Runnable runnable2 = new Runnable() { @Override public void run() { System.out.println(&amp;#34;hello&amp;#34;); } }; process(runnable1); process(runnable2); process(()-&amp;gt; System.out.println(&amp;#34;hello&amp;#34;)); } public static void process(Runnable runnable){ runnable.run(); } } 学习目标 一、Predicate：诊断，返回boolean类型
+@FunctionalInterface
+public interface Predicate {
+/** * Evaluates this predicate on the given argument. * * @param t the input argument * @return {@code true} if the input argument matches the predicate, * otherwise {@code false} */ boolean test(T t); 二、Consumer：消费者，没有返回类型</description></item><item><title>JAVA8-Lambda表达式</title><link>https://willxwu.github.io/posts/java8/0ava8-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link><pubDate>Mon, 05 Sep 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/posts/java8/0ava8-lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid><description>一、lambda语法 参数列表 lambda body部分
+(o1,o2)-&amp;gt;o1.getWeight().compareTo(o2.getWeight());
+二、 合法lamdba表达式 1、s -&amp;gt; s.length(); 或者 (String s) -&amp;gt; s.length();
+2、apple -&amp;gt; apple.getColor().equals(&amp;ldquo;great&amp;rdquo;); 或者 (Apple apple) -&amp;gt; apple.getColor().equals(&amp;ldquo;great&amp;rdquo;);
+3、(int x, int y) -&amp;gt; {
+System.out.println(x);
+System.out.println(y);
+};
+4、() -&amp;gt; 12;
+5、()-{};
+6、()-&amp;gt;“hello” 或者 ()-&amp;gt;{return &amp;ldquo;hello&amp;rdquo;}
+三、语法总结 语法一、（参数列表） -&amp;gt; 表达式
+语法二、（参数列表） -&amp;gt; {语句;}
+有效lambda表达式 1、() -&amp;gt; {}
+2、() -&amp;gt; &amp;ldquo;hello&amp;rdquo; 或者 ()-&amp;gt;{reurn &amp;ldquo;hello&amp;rdquo;}
+3、(String str) -&amp;gt; {return &amp;ldquo;hello&amp;rdquo;} 或者 (String str) -&amp;gt; &amp;ldquo;hello&amp;rdquo;;
+无效lambda表达式 (integer i)-&amp;gt;{return &amp;ldquo;错误示范&amp;rdquo;+i}</description></item></channel></rss>
