@@ -1,0 +1,207 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Java Exception</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="异常 Throwable Throwable类是所有错误跟异常类的超类.
+Exception Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。
+RuntimeException RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。
+特点：
+方法中抛出运行时期异常,方法定义中无需throws声明,调用者也无需处理此异常
+运行时期异常一旦发生,需要程序人员修改源代码
+Error Error类是与Exception的平级的类，用来表示Java中存在的严重错误，只能通过修改代码来解决问题。
+区别 Exception与Error区别：
+Exception是指程序在编译或者运行时出现的某种异常问题，我们可以对异常进行某种处理，如果不处理异常的话，程序将会停止运行。
+Error是指程序在运行时出现的严重问题，无法处理，程序将会停止运行，Error通常都是系统级别的问题，都是虚拟机jvm所在系统发生的，只能通过修改源代码解决问题。
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="Java Exception"><meta name=twitter:description content="异常 Throwable Throwable类是所有错误跟异常类的超类.
+Exception Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。
+RuntimeException RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。
+特点：
+方法中抛出运行时期异常,方法定义中无需throws声明,调用者也无需处理此异常
+运行时期异常一旦发生,需要程序人员修改源代码
+Error Error类是与Exception的平级的类，用来表示Java中存在的严重错误，只能通过修改代码来解决问题。
+区别 Exception与Error区别：
+Exception是指程序在编译或者运行时出现的某种异常问题，我们可以对异常进行某种处理，如果不处理异常的话，程序将会停止运行。
+Error是指程序在运行时出现的严重问题，无法处理，程序将会停止运行，Error通常都是系统级别的问题，都是虚拟机jvm所在系统发生的，只能通过修改源代码解决问题。
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="Java Exception"><meta property="og:description" content="异常 Throwable Throwable类是所有错误跟异常类的超类.
+Exception Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。
+RuntimeException RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。
+特点：
+方法中抛出运行时期异常,方法定义中无需throws声明,调用者也无需处理此异常
+运行时期异常一旦发生,需要程序人员修改源代码
+Error Error类是与Exception的平级的类，用来表示Java中存在的严重错误，只能通过修改代码来解决问题。
+区别 Exception与Error区别：
+Exception是指程序在编译或者运行时出现的某种异常问题，我们可以对异常进行某种处理，如果不处理异常的话，程序将会停止运行。
+Error是指程序在运行时出现的严重问题，无法处理，程序将会停止运行，Error通常都是系统级别的问题，都是虚拟机jvm所在系统发生的，只能通过修改源代码解决问题。
+"><meta property="og:url" content="https://willxwu.github.io/post/javase/04_java-exception/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/javase/04_java-exception/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>Java Exception</h1><p class=post-meta>@Come Back · Feb 4, 2022 · 2 min read</p></header><article class=post-content><h3 id=异常>异常</h3><h5 id=throwable>Throwable</h5><p>Throwable类是所有错误跟异常类的超类.</p><h5 id=exception>Exception</h5><p>Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。</p><h5 id=runtimeexception>RuntimeException</h5><p>RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。</p><p><strong>特点：</strong></p><p>　　　方法中抛出运行时期异常,方法定义中无需throws声明,调用者也无需处理此异常</p><p>　　　运行时期异常一旦发生,需要程序人员修改源代码</p><h5 id=error>Error</h5><p>Error类是与Exception的平级的类，用来表示Java中存在的严重错误，只能通过修改代码来解决问题。</p><h5 id=区别>区别</h5><p>Exception与Error区别：</p><p>Exception是指程序在编译或者运行时出现的某种异常问题，我们可以对异常进行某种处理，如果不处理异常的话，程序将会停止运行。</p><p>Error是指程序在运行时出现的严重问题，无法处理，程序将会停止运行，Error通常都是系统级别的问题，都是虚拟机jvm所在系统发生的，只能通过修改源代码解决问题。</p><h5 id=异常的产生>异常的产生</h5><ol><li>运行或编译时产生异常。</li><li>创建异常类的对象。</li><li>声明异常类。</li><li>将异常类对象传给调用者（main()方法）处理。</li><li>调用者无法处理，再将异常类对象传给jvm虚拟机。</li><li>jvm虚拟机将异常类的信息（名称、详细信息、异常所处的位置）打印在屏幕上，并且停止程序的运行。</li></ol><h5 id=抛出异常throw>抛出异常throw</h5><p>在java中，提供了一个throw关键字，用来抛出一个指定的异常。</p><p>使用方法：</p><p>1.创建一个异常对象。封装一些提示信息</p><p>2.将这个异常告知调用者</p><p>使用格式：throw new 异常类名（参数）；</p><h5 id=声明异常throws><strong>声明异常throws</strong></h5><p>声明异常格式：</p><p>修饰符 返回值类型 方法名称 （参数）throws 异常1名称，异常2名称{</p><p>}</p><p><strong>捕获异常try&mldr;catch&mldr;finally</strong></p><p>捕获异常：Java中对异常有针对性的语句进行捕获，可以对出现的异常进行指定方式的处理</p><p>语句格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ry <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>     <span style=color:#75715e>//需要被检测的语句。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>}</span><span style=color:#66d9ef>catch</span><span style=color:#f92672>(</span>异常类 变量<span style=color:#f92672>)</span> <span style=color:#f92672>{</span> <span style=color:#75715e>//参数。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>     <span style=color:#75715e>//异常的处理语句。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>}</span><span style=color:#66d9ef>finally</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>     <span style=color:#75715e>//一定会被执行的语句。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>try：该代码块中编写可能产生异常的代码。</p><p>catch：用来进行某种异常的捕获，实现对捕获到的异常进行处理。</p><p>finally：有一些特定的代码无论异常是否发生，都需要执行。另外，因为异常会引发程序跳转，导致有些语句执行不到。而finally就是解决这个问题的，在finally代码块中存放的代码都是一定会被执行的。</p><h5 id=捕获异常的组合方式>捕获异常的组合方式</h5><ol><li>try catch finally组合：检测异常，并传递给catch处理，并在finally中进行资源释放。</li><li>try catch组合: 对代码进行异常检测，并对检测的异常传递给catch处理。对异常进行捕获处理。</li><li>一个try 多个catch组合: 对代码进行异常检测，并对检测的异常传递给catch处理。对每种异常信息进行不同的捕获处理。<strong>注意</strong>:这种异常处理方式，要求多个catch中的异常不能相同，并且若catch中的多个异常之间有子父类异常的关系，那么子类异常要求在上面的catch处理，父类异常在下面的catch处理。</li><li>try finally 组合: 对代码进行异常检测，检测到异常后因为没有catch，所以一样会被默认jvm抛出。异常是没有捕获处理的。但是功能所开启资源需要进行关闭，所有finally。只为关闭资源。</li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 异常的抛出（throw）与声明（throws）
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ThrowsDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>		String<span style=color:#f92672>[]</span> str <span style=color:#f92672>=</span> <span style=color:#f92672>{};</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//		System.out.println(throwT(null));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>throwT2<span style=color:#f92672>(</span><span style=color:#66d9ef>null</span><span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>throwT</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> arr<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>arr<span style=color:#f92672>==</span><span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> NullPointerException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;数组不能为空！&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> num <span style=color:#f92672>=</span> arr<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> num<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>throwT2</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> arr<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> num <span style=color:#f92672>=</span>0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			num <span style=color:#f92672>=</span> arr<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span><span style=color:#66d9ef>catch</span><span style=color:#f92672>(</span>Exception e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>e<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span><span style=color:#66d9ef>finally</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;hhhhh&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>return</span> num<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h5 id=自定义异常>自定义异常</h5><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 自定义异常，需集成RuntimeException运行时异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TrcyTest</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		getEx<span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>getEx</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> <span style=color:#f92672>...</span> num<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>:</span> num<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>i<span style=color:#f92672>==</span>1<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> TryDemoException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;不能等于1&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>自定义异常需要继承RuntimeException</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 抛出异常  new 异常名称，继承RuntimeException运行时异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TryDemoException</span> <span style=color:#66d9ef>extends</span> RuntimeException<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TryDemoException</span><span style=color:#f92672>(</span>String s<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>super</span><span style=color:#f92672>(</span>s<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h5 id=子父类异常>子父类异常</h5><ol><li><p>子类覆盖父类方法时，如果父类的方法声明异常，子类只能声明父类异常或者该异常的子类，或者不声明。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 子夫类异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 1. 子类覆盖父类方法时，如果父类的方法声明异常，子类只能声明父类异常或者该异常的子类，或者不声明。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 2. 当父类方法声明多个异常时，子类覆盖时只能声明多个异常的子集。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 3. 当被覆盖的方法没有异常声明时，子类覆盖时无法声明异常的。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ZifuException</span> <span style=color:#66d9ef>extends</span> FuException<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//抛出父类一样的异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> RuntimeException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>  
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//抛出父类子异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method2</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>父类:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FuException</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span> <span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> RuntimeException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li><p>当父类方法声明多个异常时，子类覆盖时只能声明多个异常的子集。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 子类异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Zexception</span> <span style=color:#66d9ef>extends</span> Fexception<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//抛出父类全部异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>,</span> ClassCastException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>        
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//抛出父类异常中的一部分
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//    public void method() throws NullPointerException{
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    } 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//抛出父类异常中的一部分
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//    public void method() throws ClassCastException {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#75715e>//    } 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>父类异常：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 父类抛出多个异常
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Fexception</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	 <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span> <span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> NullPointerException<span style=color:#f92672>,</span> ClassCastException<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	 <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li><p>当被覆盖的方法没有异常声明时，子类覆盖时无法声明异常的。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Zi</span> <span style=color:#66d9ef>extends</span> Fu<span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#75715e>//错误的方式,会报错。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>()</span> <span style=color:#66d9ef>throws</span> Exception <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>父类:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> learn.javase<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Fu</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>method</span> <span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li></ol></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/javase><span class=tag>Javase</span></a></li><li><a href=https://willxwu.github.io/tags/exception><span class=tag>Exception</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>559</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//disqus_shortname.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

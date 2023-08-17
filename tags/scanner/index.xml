@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Scanner on Come Back</title><link>https://willxwu.github.io/tags/scanner/</link><description>Recent content in Scanner on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sun, 13 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/scanner/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Scanner Random</title><link>https://willxwu.github.io/post/javase/13_java-scanner-random/</link><pubDate>Sun, 13 Feb 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/javase/13_java-scanner-random/</guid><description>&lt;p>Java的两个引用输入类型Scanner、Random类，Scanner用于接收键盘输入，Random用户产生随机数。引用类型也就是Sun公司为我们写好的类，我们直接使用就可以了。&lt;/p>
+&lt;h3 id="1引用数据类型的使用">1、引用数据类型的使用&lt;/h3>
+&lt;ol>
+&lt;li>导入包：知道用的这个类，在jdk的那个目录那个文件下。&lt;/li>
+&lt;li>创建对象：格式， 类 对象 = new 类型();&lt;/li>
+&lt;li>如何使用: 对象.类的方法()&lt;/li>
+&lt;/ol>
+&lt;p>引用数据类型的使用与定义基本数据类型变量不同，引用数据类型的变量定义及赋值有一个相对固定的步骤或格式，如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span>数据类型 变量名 = new 数据类型();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>每种引用数据类型都有其方法，我们可以调用该类型实例的方法。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span>变量名.方法名();
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

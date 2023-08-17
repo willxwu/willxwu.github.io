@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>array on Come Back</title><link>https://willxwu.github.io/tags/array/</link><description>Recent content in array on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Thu, 03 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/array/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Array</title><link>https://willxwu.github.io/post/javase/03_java-array/</link><pubDate>Thu, 03 Feb 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/javase/03_java-array/</guid><description>&lt;p>JAVA数组重点掌握知识，以后肯定会用到的，可以了解一下底层原理。数组是指一组数据的集合，数组中的每个数据被称作元素。在数组中可以存放任意类型的元素，但同一个数组里存放的元素类型必须一致。&lt;/p>
+&lt;h3 id="数组">数组&lt;/h3>
+&lt;p>数组定义格式：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span>数据类型[] 数组名(变量名) = new 数据类型[元素个数或数组长度];
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>实例：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">class&lt;/span> &lt;span style="color:#a6e22e">ArrayDemo01&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">public&lt;/span> &lt;span style="color:#66d9ef">static&lt;/span> &lt;span style="color:#66d9ef">void&lt;/span> &lt;span style="color:#a6e22e">main&lt;/span>&lt;span style="color:#f92672">(&lt;/span>String&lt;span style="color:#f92672">[]&lt;/span> args&lt;span style="color:#f92672">)&lt;/span> &lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">[]&lt;/span> x &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#66d9ef">new&lt;/span> &lt;span style="color:#66d9ef">int&lt;/span>&lt;span style="color:#f92672">[&lt;/span>100&lt;span style="color:#f92672">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>注意：数组定长，一但定义长度为100，在使用时大小就是100了。不变量。&lt;/p>
+&lt;p>&lt;strong>数组特点：定长、引用类型。&lt;/strong>&lt;/p>
+&lt;h3 id="jvm">JVM&lt;/h3>
+&lt;p>java程序运行时，操作系统会给jvm虚拟机分配一块内存。JVM又会将这块内存，进行划分管理。&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.7/images/uploads/2020/javase/shuzu1.png" alt="">&lt;/p>
+&lt;p>&lt;strong>JVM内存划分&lt;/strong>：JVM对自己的内存进行了划分，分成5个区域。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-txt" data-lang="txt">&lt;span style="display:flex;">&lt;span>1、寄存器：内存和CPU之间。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2、本地方法栈：JVM调用操作系统中的功能。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>3、方法和数据共享：运行时其class文件，进入的地方。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>4、方法栈：所有的方法运行的时候，进入的内存。
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>5、堆：存储的是容器和对象。
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>开发人员主要关心：方法和数据共享、方法栈、堆。&lt;/p>
+&lt;h3 id="数组内存划分">数组内存划分&lt;/h3>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.7/images/uploads/2020/javase/shuzu2.png" alt="">&lt;/p>
+&lt;ol>
+&lt;li>首先，运行class文件，所以先进入方法区。&lt;/li>
+&lt;li>运行main方法，在方法栈中运行，但是main用不了那么多，所以方法栈中会分配一块给main方法是用。&lt;/li>
+&lt;li>执行数组，一个容器，所以JVM在堆内存，开空间，存储数组容器。&lt;/li>
+&lt;li>JVM会将该地址，给定义的数组变量arr（相当于arr引用了这个地址），所以数组是引用类型。&lt;/li>
+&lt;li>每次运行，JVM分配的地址是不同的。&lt;/li>
+&lt;li>当main方法运行完了，arr变量就没了，然后new int[3]也就没了 ，JVM垃圾回收机制，会自动帮我们回收，不用我们去处理了。&lt;/li>
+&lt;/ol>
+&lt;p>堆空间太大，怎么找到这个容器呢，所以每个数组，在内存中，都有自己的内存地址，也就是数组元素的首地址，第一个数据的地址。&lt;/p>
+&lt;p>&lt;strong>注意：arr引用类型，保存的数据，实际上是内存中的地址。&lt;/strong>&lt;/p></description></item></channel></rss>

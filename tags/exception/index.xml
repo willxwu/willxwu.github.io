@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>exception on Come Back</title><link>https://willxwu.github.io/tags/exception/</link><description>Recent content in exception on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Fri, 04 Feb 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/exception/index.xml" rel="self" type="application/rss+xml"/><item><title>Java Exception</title><link>https://willxwu.github.io/post/javase/04_java-exception/</link><pubDate>Fri, 04 Feb 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/javase/04_java-exception/</guid><description>&lt;h3 id="异常">异常&lt;/h3>
+&lt;h5 id="throwable">Throwable&lt;/h5>
+&lt;p>Throwable类是所有错误跟异常类的超类.&lt;/p>
+&lt;h5 id="exception">Exception&lt;/h5>
+&lt;p>Exception异常类及其子类都是继承自Throwable类，用来表示java中可能出现的异常，并且合理的处理这些异常。&lt;/p>
+&lt;h5 id="runtimeexception">RuntimeException&lt;/h5>
+&lt;p>RuntimeException类是运行异常类，继承自Exception类，它以及它的子类只能在运行过程中存在，当出现时，只能修改源代码，此异常无法处理。&lt;/p>
+&lt;p>&lt;strong>特点：&lt;/strong>&lt;/p>
+&lt;p>　　　方法中抛出运行时期异常,方法定义中无需throws声明,调用者也无需处理此异常&lt;/p>
+&lt;p>　　　运行时期异常一旦发生,需要程序人员修改源代码&lt;/p>
+&lt;h5 id="error">Error&lt;/h5>
+&lt;p>Error类是与Exception的平级的类，用来表示Java中存在的严重错误，只能通过修改代码来解决问题。&lt;/p>
+&lt;h5 id="区别">区别&lt;/h5>
+&lt;p>Exception与Error区别：&lt;/p>
+&lt;p>Exception是指程序在编译或者运行时出现的某种异常问题，我们可以对异常进行某种处理，如果不处理异常的话，程序将会停止运行。&lt;/p>
+&lt;p>Error是指程序在运行时出现的严重问题，无法处理，程序将会停止运行，Error通常都是系统级别的问题，都是虚拟机jvm所在系统发生的，只能通过修改源代码解决问题。&lt;/p></description></item></channel></rss>

@@ -1,0 +1,503 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Java Basics Two</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="JAVA流程控制语句JAVA中非常重要的基础知识点务必完全理解掌握，总结记录一下之前学习笔记。JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
+一、选择结构if if条件语句分为三种格式。
+if语句
+如果满足某种条件就执行。
+if语句格式：
+if（条件）{ 语句的执行体 } 条件：结果必须是布尔类型 1==1 true || false 执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。
+例如：
+/** * if语句例子 */ public class IfDemo { public static void main(String[] args) { // TODO Auto-generated method stub int i = 5; if(i==5) { System.out.println(&amp;#34;if中的条件是true&amp;#34;); i++; } System.out.println(&amp;#34;i=&amp;#34;+i); } } 注意：if()括号后面没有分号&amp;quot;;&amp;quot;
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="Java Basics Two"><meta name=twitter:description content="JAVA流程控制语句JAVA中非常重要的基础知识点务必完全理解掌握，总结记录一下之前学习笔记。JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
+一、选择结构if if条件语句分为三种格式。
+if语句
+如果满足某种条件就执行。
+if语句格式：
+if（条件）{ 语句的执行体 } 条件：结果必须是布尔类型 1==1 true || false 执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。
+例如：
+/** * if语句例子 */ public class IfDemo { public static void main(String[] args) { // TODO Auto-generated method stub int i = 5; if(i==5) { System.out.println(&amp;#34;if中的条件是true&amp;#34;); i++; } System.out.println(&amp;#34;i=&amp;#34;+i); } } 注意：if()括号后面没有分号&amp;quot;;&amp;quot;
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="Java Basics Two"><meta property="og:description" content="JAVA流程控制语句JAVA中非常重要的基础知识点务必完全理解掌握，总结记录一下之前学习笔记。JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。
+一、选择结构if if条件语句分为三种格式。
+if语句
+如果满足某种条件就执行。
+if语句格式：
+if（条件）{ 语句的执行体 } 条件：结果必须是布尔类型 1==1 true || false 执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。
+例如：
+/** * if语句例子 */ public class IfDemo { public static void main(String[] args) { // TODO Auto-generated method stub int i = 5; if(i==5) { System.out.println(&amp;#34;if中的条件是true&amp;#34;); i++; } System.out.println(&amp;#34;i=&amp;#34;+i); } } 注意：if()括号后面没有分号&amp;quot;;&amp;quot;
+"><meta property="og:url" content="https://willxwu.github.io/post/javase/02_java-basics-two/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/javase/02_java-basics-two/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>Java Basics Two</h1><p class=post-meta>@Come Back · Feb 2, 2022 · 5 min read</p></header><article class=post-content><p>JAVA流程控制语句JAVA中非常重要的基础知识点务必完全理解掌握，总结记录一下之前学习笔记。JAVA流程控制语句是编程的基础知识，主要是为了更好的组织代码的执行流程，下面将详细介绍java流程控制语句。</p><h3 id=一选择结构if>一、选择结构if</h3><p>if条件语句分为三种格式。</p><ol><li><p>if语句</p><p><strong>如果满足某种条件就执行。</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.7/images/uploads/2020/javase/liucheng1.png alt></p><p>if语句格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>if（条件）{
+</span></span><span style=display:flex><span>	语句的执行体
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>条件：结果必须是布尔类型 1==1 true || false
+执行体：当id条件为true的时候，执行大括号中的语句，否则什么都不做。</p><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * if语句例子
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>IfDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>// TODO Auto-generated method stub
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 5<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>i<span style=color:#f92672>==</span>5<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;if中的条件是true&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			i<span style=color:#f92672>++;</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>注意：if()括号后面没有分号";"</strong></p></li></ol><ol start=2><li><p>if&mldr;else语句</p><p><strong>如果满足某种条件，就执行某种处理，否则就执行另一种处理。</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.7/images/uploads/2020/javase/liucheng2.png alt></p><p>if &mldr; else语法格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>if(条件){
+</span></span><span style=display:flex><span>	if的执行体
+</span></span><span style=display:flex><span>}else{
+</span></span><span style=display:flex><span>	else的执行体
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p><strong>当if中的条件为true时，执行if的执行体，为false时，执行else的执行体。</strong></p><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>**</span>
+</span></span><span style=display:flex><span> <span style=color:#f92672>*</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>...</span> <span style=color:#66d9ef>else</span> 语句
+</span></span><span style=display:flex><span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span> <span style=color:#f92672>*/</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>IfElseDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 13<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>i<span style=color:#f92672>%</span>2<span style=color:#f92672>==</span>0<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;是偶数&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;是奇数&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></li><li><p>if&mldr;else if&mldr;else语句</p><p><strong>用于多条件进行判断，进行多种不同的处理。</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.7/images/uploads/2020/javase/liucheng3.png alt></p><p>语句格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>if(条件1){
+</span></span><span style=display:flex><span>	执行语句1
+</span></span><span style=display:flex><span>}else if(条件2){
+</span></span><span style=display:flex><span>	执行语句2
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>... 
+</span></span><span style=display:flex><span>else if(条件n){
+</span></span><span style=display:flex><span>	执行语句n
+</span></span><span style=display:flex><span>}else{
+</span></span><span style=display:flex><span>	执行语句n+1
+</span></span><span style=display:flex><span> }
+</span></span></code></pre></div></li></ol><p>当判断条件1为true时，if后面{}中的执行语句1会执行。当判断条件1为false时，会继续执行判断条件2，如果为true则执行语句2，以此类推，如果所有的判断条件都为false，则意味着所有条件均未满足，else后面{}中的执行语句n+1会执行。
+注意：条件最后都是boolean值，要么true要么false。</p><pre><code>例如： 
+  ```java
+package java_learn_code;
+
+import java.util.Scanner;
+
+/**
+* if...else if...else
+* 多条件判断
+*/
+public class IfElseIfElseDemo {
+public static void main(String[] args) {
+	while(true) {
+		System.out.print(&quot;请输入分数:&quot;);
+		Scanner scan = new Scanner(System.in);
+		double sum = scan.nextDouble();
+		if(sum&lt;90) {
+			System.out.print(&quot;可以哦&quot;);
+		}else if(sum &lt;=80) {
+			System.out.println(&quot;合格&quot;);
+		}else if(sum &lt;=60){
+			System.out.println(&quot;不及格&quot;);
+		}else {
+			System.out.println(&quot;分数有问题&quot;);
+		}
+		System.out.println(&quot;&quot;);
+	}
+}
+}
+  ```
+</code></pre><p><strong>注意:if&mldr;else只能进行单条件判断，而if&mldr;else if&mldr;else可以进行多条件进行判断了。if..else也可以实现，但是效率没有if..else .. if &mldr; else效率高。</strong></p><h3 id=二三元运算符>二、三元运算符</h3><p><strong>三元运算符得到一个结果，通常用于对某个变量进行赋值，当判断条件成立时，运算结果为表达式1的值，否则结果为表达式2的值。</strong></p><p>三元运算符和if&mldr;else类似，语法如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>判断条件 ？ 表达式1 : 表达式2
+</span></span></code></pre></div><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> java_learn_code<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * if..else 与三元运算符的转换
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>IfAllDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> m <span style=color:#f92672>=</span> 10<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> n <span style=color:#f92672>=</span> 8<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>//if...else运算
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>m<span style=color:#f92672>&gt;</span>n<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>m<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>n<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		
+</span></span><span style=display:flex><span>		<span style=color:#75715e>//三元运算符运算
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>m<span style=color:#f92672>&gt;</span>n <span style=color:#f92672>?</span> m <span style=color:#f92672>:</span> n<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>注意：如果判断条件比较多，使用三元运算符，是必须有结果的，而if语句可以没有结果的。</strong></p><h3 id=三循环语句while>三、循环语句while</h3><p><strong>while语句会反复地进行条件判断，只要条件成立，{}内的执行语句就会执行，直到条件不成立，while循环结束。</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.7/images/uploads/2020/javase/liucheng4.png alt></p><p>while循环语句的语法结构:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>while(循环条件){
+</span></span><span style=display:flex><span>执行语句
+</span></span><span style=display:flex><span>………
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>说明：{}中的执行语句被称作循环体，循环体是否执行取决于循环条件。当循环条件为true时，循环体就会执行。
+循环体执行完毕时会继续判断循环条件，如条件仍为true则会继续执行，直到循环条件为false时，整个循环过程才会结束。</p><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * while循环语句
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>WhileDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>i<span style=color:#f92672>&lt;</span>5<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			i<span style=color:#f92672>++;</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>注意：i++用于在每次循环时改变变量i的值，从而达到最终改变循环条件的目的。如果没有这行代码，整个循环会进入无限循环的状态，永远不会结束。</strong></p><h3 id=四循环语句for>四、循环语句for</h3><p>语法格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>for（初始化表达式; 循环条件; 操作表达式）{
+</span></span><span style=display:flex><span>	执行语句
+</span></span><span style=display:flex><span>	………
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>说明：</p><p>初始化变量：定义变量，用于控制循环的次数。</p><p>条件：当条件是true的时候，执行循环体，为false时，结束循环。</p><p>增量：变量自增情况</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * for循环
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author Jole
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ForDemoOne</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//1、变量  2、条件 3、增量 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>0<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>5<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span> <span style=color:#75715e>//两大括号之间：4、循环体
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>执行过程：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>第一步：变量定义i，在整个循环中，只会执行一次（int i=0,在整个过程中至执行一次）。
+</span></span><span style=display:flex><span>第二步：如果条件为false，整个循环就结束了。
+</span></span><span style=display:flex><span>第三步：如果为true时，执行循环体。
+</span></span><span style=display:flex><span>第四步：增量，i++
+</span></span><span style=display:flex><span>第五步：重复走条件(第二步或第三步)
+</span></span><span style=display:flex><span>后面继续循环
+</span></span><span style=display:flex><span>注意：int i=0；终其一生只运行一次。条件为false时，不会在走增量，而是直接结束了
+</span></span></code></pre></div><p><strong>注意：int i=0；终其一生只运行一次。条件为false时，不会在走增量，而是直接结束了。</strong></p><p>分析for循环的执行流程：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>for（1 ; 2 ; 3）{
+</span></span><span style=display:flex><span>	4
+</span></span><span style=display:flex><span>}
+</span></span><span style=display:flex><span>第一步，执行1
+</span></span><span style=display:flex><span>第二步，执行2，如果判断结果为true，执行第三步，如果判断结果为false，执行第五步
+</span></span><span style=display:flex><span>第三步，执行4
+</span></span><span style=display:flex><span>第四步，执行3，然后重复执行第二步
+</span></span><span style=display:flex><span>第五步，退出循环
+</span></span></code></pre></div><p><strong>注意事项：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>1、初始化表达式、循环条件和操作表达式，它们之间用“;”分隔，{}中的执行语句为循环体。
+</span></span><span style=display:flex><span>2、int i=0；终其一生只运行一次。
+</span></span><span style=display:flex><span>3、条件为false时，不会在走增量i++，而是直接结束了。
+</span></span></code></pre></div><p>实例：用for循环进行累加求和。1+2+3+4&mldr;+100=?</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 用for循环进行累加求和，1+2+3+4...+100=?
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ForSum</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> sum <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;=</span>100<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			sum <span style=color:#f92672>+=</span> i<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;sum=&#34;</span><span style=color:#f92672>+</span>sum<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h3 id=五dowhile循环>五、do&mldr;while()循环</h3><p>do…while循环语句和while循环语句功能类似。</p><p>语法格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>do {
+</span></span><span style=display:flex><span>执行语句
+</span></span><span style=display:flex><span>………
+</span></span><span style=display:flex><span>} while(循环条件);
+</span></span></code></pre></div><p>说明：
+关键字do后面{}中的执行语句是循环体。do…while循环语句将循环条件放在了循环体的后面。意味着，循环体会无条件执行一次，然后再根据循环条件来决定是否继续执行。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DowhileDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>do</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			i<span style=color:#f92672>++;</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span><span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>i<span style=color:#f92672>&lt;</span>0<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>注意：无论条件是否成立，都会执行一次循环体</strong>。</p><p><strong>do …while循环和while循环能实现同样的功能，区别在于，如果循环条件在循环语句开始时就不成立，那么while循环的循环体一次都不会执行，而do…while循环的循环体还是会执行一次。（无论条件是否成立，do&mldr;while都会执行一次循环体）</strong></p><h3 id=六死循环无限循环>六、死循环(无限循环)</h3><p>最简单无限循环格式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>while(true){} 
+</span></span><span style=display:flex><span>或
+</span></span><span style=display:flex><span>for(;;){}
+</span></span></code></pre></div><p><strong>注意：无限循环存在的原因是并不知道循环多少次，而是根据某些条件，来控制循环。</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>* while、for死循环
+</span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DeadDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>//while死循环
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#75715e>//for死循环(注意：上面的while死循环，这个for死循环不会执行)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span> <span style=color:#f92672>;</span><span style=color:#66d9ef>true</span> <span style=color:#f92672>;</span> <span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>注意：上面的while死循环，这个for死循环不会执行。</p><h3 id=七循环嵌套>七、循环嵌套</h3><p>嵌套循环是指在一个循环语句的循环体中再定义一个循环语句的语法结构。while、do…while、for循环语句都可以进行嵌套，并且它们之间也可以互相嵌套。</p><p>在for循环中嵌套for循环，格式如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>for(初始化表达式; 循环条件; 操作表达式) {
+</span></span><span style=display:flex><span>	………
+</span></span><span style=display:flex><span>	for(初始化表达式; 循环条件; 操作表达式) {
+</span></span><span style=display:flex><span>		执行语句
+</span></span><span style=display:flex><span>		………
+</span></span><span style=display:flex><span>	}
+</span></span><span style=display:flex><span>	………
+</span></span><span style=display:flex><span>}
+</span></span></code></pre></div><p>嵌套循环的执行顺序：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ForForDemoTwo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>i <span style=color:#f92672>&lt;</span> 2<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> j<span style=color:#f92672>&lt;</span>2 <span style=color:#f92672>;</span>j<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>				
+</span></span><span style=display:flex><span>			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>执行顺序说明:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>1.i=0
+</span></span><span style=display:flex><span>2.i&lt;2
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>3.执行循环体j=0
+</span></span><span style=display:flex><span>4.j&lt;2
+</span></span><span style=display:flex><span>5.执行内循环的循环体
+</span></span><span style=display:flex><span>6.j++ 1
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>7.j&lt;2
+</span></span><span style=display:flex><span>8.执行内循环的循环体
+</span></span><span style=display:flex><span>9.j++
+</span></span><span style=display:flex><span>10.j&lt;2 内循环结束
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>11.外循环的增量i++ 1
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>12.i&lt;2
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>执行3到10步骤
+</span></span><span style=display:flex><span>13.外循环的增量i++ 2
+</span></span><span style=display:flex><span>14.i&lt;2
+</span></span></code></pre></div><p><strong>注意：循环次数=外循环次数*内循环次数。内循环是外循环的一个循环体。嵌套循环：主要是理解执行顺序</strong></p><p>实例：打印三角形</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ForForDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;=</span>5<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>j<span style=color:#f92672>&lt;</span>i<span style=color:#f92672>;</span>j<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;* &#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;*&#34;</span><span style=color:#f92672>);</span>	
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#960050;background-color:#1e0010>```</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>*</span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>*</span> <span style=color:#f92672>*</span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>*</span> <span style=color:#f92672>*</span> <span style=color:#f92672>*</span> <span style=color:#f92672>*</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>*</span> <span style=color:#f92672>*</span> <span style=color:#f92672>*</span> <span style=color:#f92672>*</span> <span style=color:#f92672>*</span>
+</span></span></code></pre></div><h3 id=八跳转语句breakcontinue>八、跳转语句(break、continue)</h3><p><strong>跳转语句用于实现循环执行过程中程序流程的跳转，在Java中的跳转语句有break语句和continue语句。</strong></p><ol><li><strong>break语句</strong></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>1、在switch条件语句和循环语句中都可以使用break语句。当它出现在switch条件语句中时，作用是终止某个case并跳出switch结构。
+</span></span><span style=display:flex><span>2、当它出现在循环语句中，作用是跳出循环语句，执行后面的代码。
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>BreakDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   		<span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   		<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>i<span style=color:#f92672>==</span>3<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			i<span style=color:#f92672>++;</span>
+</span></span><span style=display:flex><span>   		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>i<span style=color:#f92672>=</span>1
+</span></span><span style=display:flex><span>i<span style=color:#f92672>=</span>2
+</span></span></code></pre></div><p><strong>多循环，break是结束的哪个循环?</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MostForBreakDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   		<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>5<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>j<span style=color:#f92672>&lt;</span>7<span style=color:#f92672>;</span>j<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>j<span style=color:#f92672>==</span>4<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   					<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   				<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   					System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34; j=&#34;</span><span style=color:#f92672>+</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34; i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>注意：当break语句出现在嵌套循环中的内层循环时，它只能跳出内层循环，如果想使用break语句跳出外层循环则需要对外层循环添加标记。
+标记:当多层循环时，想在内循环结束外循环通过加标记结束。</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>   <span style=color:#f92672>package</span> java_learn_code<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MostForBreakDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   		a<span style=color:#f92672>:</span><span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>4<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>j<span style=color:#f92672>&lt;</span>7<span style=color:#f92672>;</span>j<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>j<span style=color:#f92672>==</span>4<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   					<span style=color:#66d9ef>break</span> a<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   				<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   					System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34; j=&#34;</span><span style=color:#f92672>+</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34; i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> j<span style=color:#f92672>=</span>1 j<span style=color:#f92672>=</span>2 j<span style=color:#f92672>=</span>3
+</span></span></code></pre></div><p><strong>switch或循环遇到break就全结束。</strong></p><ol start=2><li><p><strong>continue语句</strong></p><p><strong>continue语句用在循环语句中，它的作用是终止本次循环，执行下一次循环。</strong></p></li></ol><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ContinueDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   		<span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> 1<span style=color:#f92672>;</span> j <span style=color:#f92672>&lt;</span> 7<span style=color:#f92672>;</span> j<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>j <span style=color:#f92672>==</span> 4<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				<span style=color:#66d9ef>continue</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;  j=&#34;</span> <span style=color:#f92672>+</span> j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>  j<span style=color:#f92672>=</span>1  j<span style=color:#f92672>=</span>2  j<span style=color:#f92672>=</span>3  j<span style=color:#f92672>=</span>5  j<span style=color:#f92672>=</span>6
+</span></span></code></pre></div><p>多层循环，通过标记，跳过外层其中一次循环。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ContinueDemoTwo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   		a<span style=color:#f92672>:</span><span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>i<span style=color:#f92672>&lt;</span>7<span style=color:#f92672>;</span>i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>for</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>j<span style=color:#f92672>&lt;</span>4<span style=color:#f92672>;</span>j<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>i<span style=color:#f92672>==</span>3<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   					<span style=color:#66d9ef>continue</span> a<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   				<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   					System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;  j=&#34;</span><span style=color:#f92672>+</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34; i=&#34;</span><span style=color:#f92672>+</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>  j<span style=color:#f92672>=</span>1  j<span style=color:#f92672>=</span>2  j<span style=color:#f92672>=</span>3 i<span style=color:#f92672>=</span>1
+</span></span><span style=display:flex><span>  j<span style=color:#f92672>=</span>1  j<span style=color:#f92672>=</span>2  j<span style=color:#f92672>=</span>3 i<span style=color:#f92672>=</span>2
+</span></span><span style=display:flex><span>  j<span style=color:#f92672>=</span>1  j<span style=color:#f92672>=</span>2  j<span style=color:#f92672>=</span>3 i<span style=color:#f92672>=</span>4
+</span></span><span style=display:flex><span>  j<span style=color:#f92672>=</span>1  j<span style=color:#f92672>=</span>2  j<span style=color:#f92672>=</span>3 i<span style=color:#f92672>=</span>5
+</span></span><span style=display:flex><span>  j<span style=color:#f92672>=</span>1  j<span style=color:#f92672>=</span>2  j<span style=color:#f92672>=</span>3 i<span style=color:#f92672>=</span>6
+</span></span></code></pre></div><p><strong>注意：同样支持标记，跳过某一次循环。</strong></p><h3 id=九综合实例随机猜数字>九、综合实例：随机猜数字</h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>   <span style=color:#f92672>import</span> java.util.Random<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>import</span> java.util.Scanner<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   
+</span></span><span style=display:flex><span>   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoOne</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   		<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;请输入猜的数字：&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   			Scanner scan <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>int</span> number <span style=color:#f92672>=</span> scan<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>   			Random ran <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Random<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>int</span> yourNum <span style=color:#f92672>=</span> ran<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>(</span>10<span style=color:#f92672>)+</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   			<span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>number<span style=color:#f92672>==</span>yourNum<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;恭喜你猜对了，么么哒！&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span>number<span style=color:#f92672>&gt;</span>yourNum<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;输入的值：&#34;</span><span style=color:#f92672>+</span>number<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;随机值：&#34;</span><span style=color:#f92672>+</span>yourNum<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;sorry....猜大了哦&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span><span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;输入值：&#34;</span><span style=color:#f92672>+</span>number<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;随机值：&#34;</span><span style=color:#f92672>+</span>yourNum<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;sorry....猜小洛&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>   		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>   <span style=color:#f92672>}</span>
+</span></span></code></pre></div><h3 id=十选择结构switch>十、选择结构switch</h3><p>选择结构switch，switch 条件语句也是一种很常用的选择语句，它和if条件语句不同，它只能针对某个表达式的值作出判断，从而决定程序执行哪一段代码。</p><p>Switch语法格式:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>switch</span> <span style=color:#f92672>(</span>表达式<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>case</span> 目标值1<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>		执行语句1
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>case</span> 目标值2<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>		执行语句2
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#960050;background-color:#1e0010>．．．．．．</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>case</span> 目标值n<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>		执行语句n
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>default</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>		执行语句n<span style=color:#f92672>+</span>1
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：</p><p>switch语句将表达式的值与每个case中的目标值进行匹配，如果找到了匹配的值，会执行对应case后的语句，如果没找到任何匹配的值，就会执行default后的语句。break的作用是跳出switch语句。在switch语句中的表达式只能是byte、short、char、int类型的值，如果传入其它类型的值，程序会报错。</p><p>但上述说法并不严谨，实际上在JDK5.0中引入的新特性enum枚举也可以作为switch语句表达式的值，在JDK7.0中也引入了新特性，switch语句可以接收一个String类型的值。</p><p>实例：数字转星期</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SwitchDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>boolean</span> flag<span style=color:#f92672>=</span><span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>flag<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期转换：&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			Scanner scan <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>int</span> num <span style=color:#f92672>=</span> scan<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>num<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期一&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期二&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期三&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 4<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期四&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 5<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期五&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 6<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期六&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 7<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期日&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>default</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				flag <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;退出成功！&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>Case的穿透性：在使用switch语句的过程中，如果多个case条件后面的执行语句是一样的，则该执行语句只需书写一次即可，这是一种简写的方式。</p><p>实例：判断一周中的某一天是否为工作日</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Scanner<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SwitchCaseDemo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>boolean</span> flag<span style=color:#f92672>=</span><span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>while</span><span style=color:#f92672>(</span>flag<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>print</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;星期转换：&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			Scanner scan <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Scanner<span style=color:#f92672>(</span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>in</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>int</span> num <span style=color:#f92672>=</span> scan<span style=color:#f92672>.</span><span style=color:#a6e22e>nextInt</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>switch</span><span style=color:#f92672>(</span>num<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 1<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 2<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 3<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 4<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 5<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;工作日&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 6<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>case</span> 7<span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;休息日&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>				<span style=color:#66d9ef>break</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>default</span><span style=color:#f92672>:</span>
+</span></span><span style=display:flex><span>				flag <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>				System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;推出成功！&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>			<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>			System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>没有break就会一直往下穿透。</p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/javase><span class=tag>Javase</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>561</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//disqus_shortname.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
