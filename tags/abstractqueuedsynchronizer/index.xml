@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>AbstractQueuedSynchronizer on Come Back</title><link>https://willxwu.github.io/tags/abstractqueuedsynchronizer/</link><description>Recent content in AbstractQueuedSynchronizer on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Thu, 24 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/abstractqueuedsynchronizer/index.xml" rel="self" type="application/rss+xml"/><item><title>Java J.U.C之AQS</title><link>https://willxwu.github.io/post/lock/j.u.c%E4%B9%8Baqs/</link><pubDate>Thu, 24 Mar 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/lock/j.u.c%E4%B9%8Baqs/</guid><description>&lt;h1 id="aqs">AQS&lt;/h1>
+&lt;p>J.U.C之AQS，底层由线程队列实现。AbstractQueuedSynchronizer简称AQS，JUC的核心。&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202204252000380.png" alt="">&lt;/p>
+&lt;p>使用Node实现FIFO队列，可以用于构建锁或者其他同步装置的基础框架。
+利用了一个int类型表示状态。
+使用方法是继承。
+子类通过继承并通过实现它的方法管理其状态{acquire和release}的方法操纵状态。
+可以同时实现排它锁和共享锁模式（独占、共享）。&lt;/p></description></item></channel></rss>

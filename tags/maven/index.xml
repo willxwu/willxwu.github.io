@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>maven on Come Back</title><link>https://willxwu.github.io/tags/maven/</link><description>Recent content in maven on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Fri, 25 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/maven/index.xml" rel="self" type="application/rss+xml"/><item><title>maven的使用</title><link>https://willxwu.github.io/post/tool/maven%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 25 Mar 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/tool/maven%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>使用maven的好处：
+&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/cdn@1.1.9/images/uploads/2020/tool/upload_c8101b18c706b9fae7cb7572ddce0e90.png" alt="使用maven好处.png">&lt;/p>
+&lt;p>大型项目的好处，建立一个父项目，各组或部门可以模块开发，不用拉取整个项目进行开发。&lt;/p></description></item><item><title>nexus私服搭建</title><link>https://willxwu.github.io/post/project/nexus%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/</link><pubDate>Mon, 28 Feb 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/project/nexus%E7%A7%81%E6%9C%8D%E6%90%AD%E5%BB%BA/</guid><description>&lt;p>第一步骤：下载nexus私服软件nexus-2.12.0-01-bundle&lt;/p>
+&lt;p>第二不：安装&lt;/p>
+&lt;p>进入nexus解压目录进入到bin目录:&lt;/p>
+&lt;p>1、安装:执行nexus.bat install&lt;/p>
+&lt;p>2、启动:nexus.bat start&lt;/p>
+&lt;p>第三步：查看访问路径&lt;/p>
+&lt;p>进入config目录，打开nexus.properties即可看到端口号，项目命令nexus。&lt;/p>
+&lt;p>第四步：浏览器打开http://127.0.0.1:8081/nexus/&lt;/p>
+&lt;p>默认登录账号:admin/admin123&lt;/p></description></item></channel></rss>

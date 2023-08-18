@@ -1,0 +1,445 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Java Synchronized</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="Atomic原子性提供了互斥访问。同一时刻只能由一个线程来操作。除了Atomic原子性，还有锁。
+jdk提供的锁主要分2类 1、Synchronized：一种依赖JVM去实现锁的关键字，Synchronized，在这个对象作用的范围内，都是同一时刻，只能有一个线程去操作。注意是，作用对象的作用范围内。
+2、另一种jdk代码层面的锁，jdk里面提供了一个Lock的接口，主要是依赖特殊的CPU指令，实现类中比较有代表性的是ReentrantLock。
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="Java Synchronized"><meta name=twitter:description content="Atomic原子性提供了互斥访问。同一时刻只能由一个线程来操作。除了Atomic原子性，还有锁。
+jdk提供的锁主要分2类 1、Synchronized：一种依赖JVM去实现锁的关键字，Synchronized，在这个对象作用的范围内，都是同一时刻，只能有一个线程去操作。注意是，作用对象的作用范围内。
+2、另一种jdk代码层面的锁，jdk里面提供了一个Lock的接口，主要是依赖特殊的CPU指令，实现类中比较有代表性的是ReentrantLock。
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="Java Synchronized"><meta property="og:description" content="Atomic原子性提供了互斥访问。同一时刻只能由一个线程来操作。除了Atomic原子性，还有锁。
+jdk提供的锁主要分2类 1、Synchronized：一种依赖JVM去实现锁的关键字，Synchronized，在这个对象作用的范围内，都是同一时刻，只能有一个线程去操作。注意是，作用对象的作用范围内。
+2、另一种jdk代码层面的锁，jdk里面提供了一个Lock的接口，主要是依赖特殊的CPU指令，实现类中比较有代表性的是ReentrantLock。
+"><meta property="og:url" content="https://willxwu.github.io/post/lock/synchronized/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/lock/synchronized/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>Java Synchronized</h1><p class=post-meta>@Come Back · Mar 17, 2022 · 7 min read</p></header><article class=post-content><p>Atomic原子性提供了互斥访问。同一时刻只能由一个线程来操作。除了Atomic原子性，还有锁。</p><h1 id=jdk提供的锁主要分2类>jdk提供的锁主要分2类</h1><p>1、<strong>Synchronized</strong>：一种依赖JVM去实现锁的关键字，<strong>Synchronized</strong>，在这个对象作用的范围内，都是同一时刻，只能有一个线程去操作。注意是，<strong>作用对象的作用范围内。</strong></p><p>2、另一种jdk代码层面的锁，jdk里面提供了一个Lock的接口，主要是依赖特殊的CPU指令，实现类中比较有代表性的是ReentrantLock。</p><h1 id=synchronized>Synchronized</h1><p><strong>一种同步锁，修改的对象主要有4种：</strong></p><ol><li>修饰代码块：大括号括起来的代码，也就是同步语句块，它的作用范围是<strong>大括号括起来的代码</strong>，作用对象是<strong>调用代码块的对象</strong>。</li><li>修饰方法：被称为同步方法，作用范围为<strong>整个方法</strong>，作用对象是也是<strong>调用该方法的对象</strong>。</li><li>修饰静态方法：作用范围整个<strong>静态方法</strong>，作用对象是<strong>这个类的所有对象</strong>。</li><li>修饰类：修饰内容是后面Synchronized括号<strong>括起来的部分</strong>，作用对象也是<strong>这个类的所有对象</strong>。</li></ol><h2 id=代码说明>代码说明:</h2><h4 id=一启用不同进程同一对象调用调用同一方法><strong>一、启用不同进程，同一对象调用，调用同一方法。</strong></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.sync<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: Synchronized修饰代码块、修改方法，作用对象为调用对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 这里测试，同一对象，启动不同进程，调同一方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/20 22:44
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoSynchronizedOne</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 修饰代码块，大括号被称为 同步代码块，
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作用范围：代码块内
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作用对象：调用代码块的对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test1</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>synchronized</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>                log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test1 ...i={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 修饰方法，该方法被称为同步方
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作为范围：整个test2方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作用对象：调用代码块的对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test2</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test2 ...i={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        DemoSynchronizedOne demoSynchronized <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DemoSynchronizedOne<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//线程池
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newCachedThreadPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 说明: 为什么执行2次
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 如果不用线程池，下面2次调用都是同一线程，不能验证。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 使用线程池，相当于用了2各进程去执行test1，不用等一个进程执行完，在执行第二个线程，
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 这样才能看到同一个对象的不同进程的执行情况。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         */</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//-----------------------------------测试同一对象的方法test1-------------------------------------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        测试1：
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>       executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()</span> <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>           demoSynchronized<span style=color:#f92672>.</span><span style=color:#a6e22e>test1</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()</span> <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            demoSynchronized<span style=color:#f92672>.</span><span style=color:#a6e22e>test1</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/*        输出结果：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.670 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=5
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=6
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=7
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=8
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=9
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.674 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=5
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=6
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=7
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=8
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:52.675 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test1 ...i=9*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//-----------------------------------测试同一对象的方法test2-------------------------------------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        测试2：
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()</span> <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            demoSynchronized<span style=color:#f92672>.</span><span style=color:#a6e22e>test2</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()</span> <span style=color:#f92672>-&gt;</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            demoSynchronized<span style=color:#f92672>.</span><span style=color:#a6e22e>test2</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/*        输出结果：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.291 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.295 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=5
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=6
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=7
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=8
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=9
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=0
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=5
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=6
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=7
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=8
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:33:24.296 [pool-1-thread-2] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedOne - test2 ...i=9*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h4 id=二启动不同进程不同对象调用同一方法><strong>二、启动不同进程，不同对象，调用同一方法</strong></h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.sync<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: Synchronized修饰代码块、修改方法，作用对象为调用对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 这里测试，不同对象，启动不同进程，调同一方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/20 22:44
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoSynchronizedTwo</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 修饰代码块，大括号被称为 同步代码块，
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作用范围：代码块内
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作用对象：调用代码块的对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test1</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>synchronized</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>                log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test1 ...i={},j={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>,</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 修饰方法，该方法被称为同步方
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作为范围：整个test2方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 作用对象：调用代码块的对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test2</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test2 ...i={},j={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>,</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        DemoSynchronizedTwo demoSynchronizedTwo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DemoSynchronizedTwo<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        DemoSynchronizedTwo demoSynchronizedTwo2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DemoSynchronizedTwo<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//线程池
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newCachedThreadPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//-----------------------------------测试同一对象的方法test1,作用代码块-------------------------------------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        executorService.execute(()-&gt;{
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//            demoSynchronizedTwo.test1(1);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//            demoSynchronizedTwo2.test1(2);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>/*        输出结果:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.763 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=0,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.768 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=1,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.768 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=2,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.768 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=3,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.768 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=4,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.768 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=5,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.768 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=6,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=7,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=8,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=9,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=0,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=1,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=2,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=3,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=4,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=5,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=6,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=7,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=8,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:28:57.769 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test1 ...i=9,j=2*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        * 结论：说明作用于同步代码，不同对象的调用是相互不影响的
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        * */</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//-----------------------------------测试同一对象的方法test2，作用方法-------------------------------------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()-&gt;{</span>
+</span></span><span style=display:flex><span>            demoSynchronizedTwo<span style=color:#f92672>.</span><span style=color:#a6e22e>test2</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            demoSynchronizedTwo2<span style=color:#f92672>.</span><span style=color:#a6e22e>test2</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/*        输出结果：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.130 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=0,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=1,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=2,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=3,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=4,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=5,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=6,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=7,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=8,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=9,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=0,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=1,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=2,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=3,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=4,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=5,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=6,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=7,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=8,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        23:34:56.135 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedTwo - test2 ...i=9,j=2*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/*
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 结论：说明作用于方法，不同对象的调用是相互不影响的
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * */</span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>1和2对别结论：修饰带块和修改方法对别结论</strong></p><p><strong>1、当一个方法内都是用同步代码块修饰的，和修饰方法是一样的。</strong></p><p>例如上面的：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test1</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>synchronized</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>                log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test1 ...i={},j={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>,</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>等同与下面的修饰方法<span style=color:#960050;background-color:#1e0010>：</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test2</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test2 ...i={},j={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>,</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>2、修饰静态代码块和修饰方法，作用对象都是调用对象。</strong></p><p><strong>3、如果某个子类继承了上面的类，子类种test2方法是不带synchronized关键字的，因为synchronized不输入方法申明的一部分，如果子类想使用，则需要显示自己加synchronized。</strong></p><hr><h4 id=三不同对象调用同一方法synchronized修改类和方法>三、不同对象调用同一方法，synchronized修改类和方法：</h4><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.sync<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: Synchronized修饰静态方法、类
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/20 22:44
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoSynchronizedThredd</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//修饰类
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test1</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>synchronized</span> <span style=color:#f92672>(</span>DemoSynchronizedThredd<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>                log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test1 ...i={},j={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>,</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//修饰静态方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test2</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> j<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> 10 <span style=color:#f92672>;</span>i <span style=color:#f92672>++){</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;test2 ...i={},j={}&#34;</span><span style=color:#f92672>,</span>i<span style=color:#f92672>,</span>j<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        DemoSynchronizedThredd demoSynchronizedTwo <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DemoSynchronizedThredd<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        DemoSynchronizedThredd demoSynchronizedTwo2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DemoSynchronizedThredd<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//线程池
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newCachedThreadPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//-----------------------------------测试同一对象的方法test1,作用代码块-------------------------------------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()-&gt;{</span>
+</span></span><span style=display:flex><span>            demoSynchronizedTwo<span style=color:#f92672>.</span><span style=color:#a6e22e>test1</span><span style=color:#f92672>(</span>1<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            demoSynchronizedTwo2<span style=color:#f92672>.</span><span style=color:#a6e22e>test1</span><span style=color:#f92672>(</span>2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/*        输出结果:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.176 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=0,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=1,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=2,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=3,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=4,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=5,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=6,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=7,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=8,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=9,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=0,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=1,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=2,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=3,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=4,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=5,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=6,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=7,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=8,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:49:32.181 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test1 ...i=9,j=2*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//-----------------------------------测试同一对象的方法test2，作用方法-------------------------------------------
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span><span style=color:#75715e>/*        executorService.execute(()-&gt;{
+</span></span></span><span style=display:flex><span><span style=color:#75715e>            demoSynchronizedTwo.test2(1);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>            demoSynchronizedTwo2.test2(2);
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        });*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/*        输出结果：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.674 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=0,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=1,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=2,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=3,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=4,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=5,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=6,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=7,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=8,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=9,j=1
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=0,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=1,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=2,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=3,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=4,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=5,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=6,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=7,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=8,j=2
+</span></span></span><span style=display:flex><span><span style=color:#75715e>23:47:13.681 [pool-1-thread-1] INFO com.yanxizhu.demo.concurrency.sync.DemoSynchronizedThredd - test2 ...i=9,j=2*/</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 说明：修饰类和修改静态方法是一样的
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         */</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>结论：修改类和静态方法，作用效果是一样的。</strong></p><hr><h2 id=测试>测试：</h2><p><strong>之前计数<a href=https://www.yanxizhu.com/index.php/archives/115/>通过Atomic原子保证互斥性</a>，现在通过Synchronized保证互斥性。</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.sync<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.CountDownLatch<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Semaphore<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 线程不安全，不正确的
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/19 19:28
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoSemaphoreAndCountDownLatch</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//用户数量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> clientsTotal <span style=color:#f92672>=</span> 5000<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//并发数量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> concurrencyTotal <span style=color:#f92672>=</span> 200<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//累加总和
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>int</span> count <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> InterruptedException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newCachedThreadPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//信号量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> Semaphore semaphore <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Semaphore<span style=color:#f92672>(</span>concurrencyTotal<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//闭锁
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>final</span> CountDownLatch countDownLatch <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> CountDownLatch<span style=color:#f92672>(</span>clientsTotal<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>for</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span> i <span style=color:#f92672>&lt;</span> clientsTotal<span style=color:#f92672>;</span> i<span style=color:#f92672>++)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>execute</span><span style=color:#f92672>(()-&gt;{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    semaphore<span style=color:#f92672>.</span><span style=color:#a6e22e>acquire</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                    add<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                    semaphore<span style=color:#f92672>.</span><span style=color:#a6e22e>release</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>InterruptedException e<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    log<span style=color:#f92672>.</span><span style=color:#a6e22e>error</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;出现错误:【{}】&#34;</span><span style=color:#f92672>,</span> e<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessage</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>                countDownLatch<span style=color:#f92672>.</span><span style=color:#a6e22e>countDown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        countDownLatch<span style=color:#f92672>.</span><span style=color:#a6e22e>await</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        executorService<span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;累加结果为count=【{}】&#34;</span><span style=color:#f92672>,</span>count<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 累加
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>synchronized</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>add</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        count<span style=color:#f92672>++;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h1 id=原子性对比>原子性对比</h1><p><strong>synchronized</strong>：不可中断锁，适合竞争不激烈，可读性好</p><p><strong>Lock</strong>：可中断锁，多样化同步，竞争激烈时能维持常态</p><p><strong>Atomic</strong>：竞争激烈时能维持常态，比Lock性能好；只能同步一个值</p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/thread><span class=tag>Thread</span></a></li><li><a href=https://willxwu.github.io/tags/lock><span class=tag>Lock</span></a></li><li><a href=https://willxwu.github.io/tags/synchronized><span class=tag>Synchronized</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>519</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
