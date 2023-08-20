@@ -1,0 +1,433 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Kafka部署及脚本使用</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="环境版本说明 环境：CentOS7
+版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2
+JDK安装 JDK1.8安装
+rpm -ivh jdk-8u261-linux-x64.rpm 环境变量配置
+vim /etc/profile 最后一行加上配置
+export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64 export PATH=$PATH:$JAVA_HOME/bin jdk验证
+java -version Zookeeper安装 安装
+tar -zxf zookeeper-3.4.14.tar.gz -C /opt 环境变量配置
+vim /etc/profile ZOOKEEPER_PREFIX指向Zookeeper的解压目录
+export ZOOKEEPER_PREFIX=/opt/zookeeper-3.4.14 将Zookeeper的bin目录添加到PATH中
+export PATH=$PATH:$ZOOKEEPER_PREFIX/bin 设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置
+export ZOO_LOG_DIR=/var/zookeeper/log 使配置生效
+source /etc/profile 修改zookeeper配置
+cd conf cp zoo_sample.cfg zoo.cfg 修改配置文件zoo.cfg
+vi zoo.cfg 修改zookeeper数据存放位置配置
+修改前
+dataDir=/tmp/zookeeper 修改后
+dataDir=/var/zookeeper/data 启动zookeeper
+进入zookeeper安装目录
+=/var/zookeeper/bin 启动zookeeper
+zkServer.sh start 查看zookeeper状态
+zkServer.sh status Kafka安装 安装kafka
+tar -zxf kafka_2.12-1.0.2.tgz -C /opt 修改环境变量"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="Kafka部署及脚本使用"><meta name=twitter:description content="环境版本说明 环境：CentOS7
+版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2
+JDK安装 JDK1.8安装
+rpm -ivh jdk-8u261-linux-x64.rpm 环境变量配置
+vim /etc/profile 最后一行加上配置
+export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64 export PATH=$PATH:$JAVA_HOME/bin jdk验证
+java -version Zookeeper安装 安装
+tar -zxf zookeeper-3.4.14.tar.gz -C /opt 环境变量配置
+vim /etc/profile ZOOKEEPER_PREFIX指向Zookeeper的解压目录
+export ZOOKEEPER_PREFIX=/opt/zookeeper-3.4.14 将Zookeeper的bin目录添加到PATH中
+export PATH=$PATH:$ZOOKEEPER_PREFIX/bin 设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置
+export ZOO_LOG_DIR=/var/zookeeper/log 使配置生效
+source /etc/profile 修改zookeeper配置
+cd conf cp zoo_sample.cfg zoo.cfg 修改配置文件zoo.cfg
+vi zoo.cfg 修改zookeeper数据存放位置配置
+修改前
+dataDir=/tmp/zookeeper 修改后
+dataDir=/var/zookeeper/data 启动zookeeper
+进入zookeeper安装目录
+=/var/zookeeper/bin 启动zookeeper
+zkServer.sh start 查看zookeeper状态
+zkServer.sh status Kafka安装 安装kafka
+tar -zxf kafka_2.12-1.0.2.tgz -C /opt 修改环境变量"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="Kafka部署及脚本使用"><meta property="og:description" content="环境版本说明 环境：CentOS7
+版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2
+JDK安装 JDK1.8安装
+rpm -ivh jdk-8u261-linux-x64.rpm 环境变量配置
+vim /etc/profile 最后一行加上配置
+export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64 export PATH=$PATH:$JAVA_HOME/bin jdk验证
+java -version Zookeeper安装 安装
+tar -zxf zookeeper-3.4.14.tar.gz -C /opt 环境变量配置
+vim /etc/profile ZOOKEEPER_PREFIX指向Zookeeper的解压目录
+export ZOOKEEPER_PREFIX=/opt/zookeeper-3.4.14 将Zookeeper的bin目录添加到PATH中
+export PATH=$PATH:$ZOOKEEPER_PREFIX/bin 设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置
+export ZOO_LOG_DIR=/var/zookeeper/log 使配置生效
+source /etc/profile 修改zookeeper配置
+cd conf cp zoo_sample.cfg zoo.cfg 修改配置文件zoo.cfg
+vi zoo.cfg 修改zookeeper数据存放位置配置
+修改前
+dataDir=/tmp/zookeeper 修改后
+dataDir=/var/zookeeper/data 启动zookeeper
+进入zookeeper安装目录
+=/var/zookeeper/bin 启动zookeeper
+zkServer.sh start 查看zookeeper状态
+zkServer.sh status Kafka安装 安装kafka
+tar -zxf kafka_2.12-1.0.2.tgz -C /opt 修改环境变量"><meta property="og:url" content="https://willxwu.github.io/post/centos/kafka%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/centos/kafka%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>Kafka部署及脚本使用</h1><p class=post-meta>@Come Back · Jun 5, 2022 · 8 min read</p></header><article class=post-content><h1 id=环境版本说明>环境版本说明</h1><p>环境：CentOS7</p><p>版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2</p><h1 id=jdk安装>JDK安装</h1><ol><li><p>JDK1.8安装</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>rpm -ivh jdk-8u261-linux-x64.rpm
+</span></span></code></pre></div></li><li><p>环境变量配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>vim /etc/profile
+</span></span></code></pre></div><p>最后一行加上配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>export JAVA_HOME<span style=color:#f92672>=</span>/usr/java/jdk1.8.0_261-amd64
+</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span>$PATH:$JAVA_HOME/bin
+</span></span></code></pre></div></li><li><p>jdk验证</p><pre tabindex=0><code>java -version
+</code></pre></li></ol><h1 id=zookeeper安装>Zookeeper安装</h1><ol><li><p>安装</p><pre tabindex=0><code>tar -zxf zookeeper-3.4.14.tar.gz -C /opt
+</code></pre></li><li><p>环境变量配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>vim /etc/profile
+</span></span></code></pre></div><p>ZOOKEEPER_PREFIX指向Zookeeper的解压目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>export ZOOKEEPER_PREFIX<span style=color:#f92672>=</span>/opt/zookeeper-3.4.14
+</span></span></code></pre></div><p>将Zookeeper的bin目录添加到PATH中</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>export PATH<span style=color:#f92672>=</span>$PATH:$ZOOKEEPER_PREFIX/bin
+</span></span></code></pre></div><p>设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>export ZOO_LOG_DIR<span style=color:#f92672>=</span>/var/zookeeper/log
+</span></span></code></pre></div><p>使配置生效</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>source /etc/profile
+</span></span></code></pre></div></li><li><p>修改zookeeper配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cd conf
+</span></span><span style=display:flex><span>cp zoo_sample.cfg zoo.cfg
+</span></span></code></pre></div><p>修改配置文件zoo.cfg</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>vi zoo.cfg
+</span></span></code></pre></div><p>修改zookeeper数据存放位置配置</p><p>修改前</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dataDir<span style=color:#f92672>=</span>/tmp/zookeeper
+</span></span></code></pre></div><p>修改后</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>dataDir<span style=color:#f92672>=</span>/var/zookeeper/data
+</span></span></code></pre></div></li><li><p>启动zookeeper</p><p>进入zookeeper安装目录</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>=</span>/var/zookeeper/bin
+</span></span></code></pre></div><p>启动zookeeper</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>zkServer.sh start
+</span></span></code></pre></div><p>查看zookeeper状态</p><pre tabindex=0><code>zkServer.sh status
+</code></pre></li></ol><h1 id=kafka安装>Kafka安装</h1><ol><li><p>安装kafka</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>tar -zxf kafka_2.12-1.0.2.tgz -C /opt
+</span></span></code></pre></div></li><li><p>修改环境变量</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>vi /etc/profile
+</span></span></code></pre></div><p>最后加上配置</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>export KAFKA_HOME<span style=color:#f92672>=</span>/opt/kafka_2.12-1.0.2
+</span></span><span style=display:flex><span>export PATH<span style=color:#f92672>=</span>$PATH:$KAFKA_HOME/bin
+</span></span></code></pre></div><p>使配置生效</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>source /etc/profile
+</span></span></code></pre></div></li><li><p>修改kafka配置</p><p>修改server.properties配置文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>vi server.properties
+</span></span></code></pre></div><ol><li><p>修改链接zookeeper地址：123行</p><p>修改前</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>zookeeper.connect<span style=color:#f92672>=</span>localhost:2181
+</span></span></code></pre></div><p>修改后</p><pre tabindex=0><code>zookeeper.connect=localhost:2181/mykafka
+</code></pre><p>说明：表示在zookeeper目录下会创建一个mykafka节点</p></li><li><p>修改消息持久化目录：60行</p><p>修改前</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>log.dirs<span style=color:#f92672>=</span>/tmp/kafka-logs
+</span></span></code></pre></div><p>修改后</p><pre tabindex=0><code>log.dirs=/var/kafka/kafka-logs
+</code></pre></li><li><p>创建持久化目录文件夹</p><pre tabindex=0><code>mkdir -p /var/kafka/kafka-logs
+</code></pre></li></ol></li><li><p>脚本说明</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cd /opt/kafka_2.12-1.0.2/bin
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308051938561.png alt=image-20230805193837517></p><p>说明：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh  操作主题的
+</span></span><span style=display:flex><span>kafka-server-start.sh   kafka启动
+</span></span><span style=display:flex><span>kafka-server-stop.sh kafka关闭
+</span></span><span style=display:flex><span>kafka-console-consumer.sh  命令行里使用消费者
+</span></span><span style=display:flex><span>kafka-console-producer.sh 命令行里面使用的生产者
+</span></span></code></pre></div></li><li><p>启动kafka</p><p>注意是进入到bin目录下的</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-server-start.sh ../config/server.properties
+</span></span></code></pre></div></li><li><p>客户端测试</p><p>使用zookeeper客户端登录zookeeper，复制启动窗口执行zkCli.sh。（注意：必须复制服务器启动窗口来执行，不然没有脚本。）</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>zkCli.sh
+</span></span></code></pre></div><ol><li><p>查看zookeeper的根节点</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308051941803.png alt=image-20230805194107774></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ls /
+</span></span></code></pre></div></li><li><p>查看mykafka</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ls /mykafka
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308051942273.png alt=image-20230805194252247></p><p>说明：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>cluster 集群
+</span></span><span style=display:flex><span>controller 控制器
+</span></span><span style=display:flex><span>controller_epoch 控制器纪元数据
+</span></span><span style=display:flex><span>brokers broker
+</span></span><span style=display:flex><span>admin 管理者
+</span></span><span style=display:flex><span>isr_change_notification 同步的副本
+</span></span><span style=display:flex><span>consumers 消费者
+</span></span><span style=display:flex><span>log_dir_event_notification log_dir事件通知
+</span></span><span style=display:flex><span>latest_producer_id_block 最后一个生产者
+</span></span><span style=display:flex><span>config 配置
+</span></span></code></pre></div></li><li><p>客户端退出zookeeper</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>quit
+</span></span></code></pre></div></li></ol></li><li><p>关闭kafka</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-server-stop.sh
+</span></span></code></pre></div></li></ol><h1 id=主题>主题</h1><ol><li><p>后台启动kafka</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-server-start.sh -daemon /opt/kafka_2.12-1.0.2/config/server.properties
+</span></span></code></pre></div></li><li><p>查看kafka进程信息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ps aux | grep kafka
+</span></span></code></pre></div></li><li><p>主题脚本使用帮助，直接执行脚本，显示主题脚本使用参数。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh
+</span></span></code></pre></div><p>使用参数如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>root@default-dev bin<span style=color:#f92672>]</span><span style=color:#75715e># kafka-topics.sh </span>
+</span></span><span style=display:flex><span>Create, delete, describe, or change a topic.
+</span></span><span style=display:flex><span>Option                                   Description                            
+</span></span><span style=display:flex><span>------                                   -----------                            
+</span></span><span style=display:flex><span>--alter                                  Alter the number of partitions,        
+</span></span><span style=display:flex><span>                                           replica assignment, and/or           
+</span></span><span style=display:flex><span>                                           configuration <span style=color:#66d9ef>for</span> the topic.         
+</span></span><span style=display:flex><span>--config &lt;String: name<span style=color:#f92672>=</span>value&gt;            A topic configuration override <span style=color:#66d9ef>for</span> the 
+</span></span><span style=display:flex><span>                                           topic being created or altered.The   
+</span></span><span style=display:flex><span>                                           following is a list of valid         
+</span></span><span style=display:flex><span>                                           configurations:                      
+</span></span><span style=display:flex><span>                                         	cleanup.policy                        
+</span></span><span style=display:flex><span>                                         	compression.type                      
+</span></span><span style=display:flex><span>                                         	delete.retention.ms                   
+</span></span><span style=display:flex><span>                                         	file.delete.delay.ms                  
+</span></span><span style=display:flex><span>                                         	flush.messages                        
+</span></span><span style=display:flex><span>                                         	flush.ms                              
+</span></span><span style=display:flex><span>                                         	follower.replication.throttled.       
+</span></span><span style=display:flex><span>                                           replicas                             
+</span></span><span style=display:flex><span>                                         	index.interval.bytes                  
+</span></span><span style=display:flex><span>                                         	leader.replication.throttled.replicas 
+</span></span><span style=display:flex><span>                                         	max.message.bytes                     
+</span></span><span style=display:flex><span>                                         	message.format.version                
+</span></span><span style=display:flex><span>                                         	message.timestamp.difference.max.ms   
+</span></span><span style=display:flex><span>                                         	message.timestamp.type                
+</span></span><span style=display:flex><span>                                         	min.cleanable.dirty.ratio             
+</span></span><span style=display:flex><span>                                         	min.compaction.lag.ms                 
+</span></span><span style=display:flex><span>                                         	min.insync.replicas                   
+</span></span><span style=display:flex><span>                                         	preallocate                           
+</span></span><span style=display:flex><span>                                         	retention.bytes                       
+</span></span><span style=display:flex><span>                                         	retention.ms                          
+</span></span><span style=display:flex><span>                                         	segment.bytes                         
+</span></span><span style=display:flex><span>                                         	segment.index.bytes                   
+</span></span><span style=display:flex><span>                                         	segment.jitter.ms                     
+</span></span><span style=display:flex><span>                                         	segment.ms                            
+</span></span><span style=display:flex><span>                                         	unclean.leader.election.enable        
+</span></span><span style=display:flex><span>                                         See the Kafka documentation <span style=color:#66d9ef>for</span> full   
+</span></span><span style=display:flex><span>                                           details on the topic configs.        
+</span></span><span style=display:flex><span>--create                                 Create a new topic.                    
+</span></span><span style=display:flex><span>--delete                                 Delete a topic                         
+</span></span><span style=display:flex><span>--delete-config &lt;String: name&gt;           A topic configuration override to be   
+</span></span><span style=display:flex><span>                                           removed <span style=color:#66d9ef>for</span> an existing topic <span style=color:#f92672>(</span>see   
+</span></span><span style=display:flex><span>                                           the list of configurations under the 
+</span></span><span style=display:flex><span>                                           --config option<span style=color:#f92672>)</span>.                    
+</span></span><span style=display:flex><span>--describe                               List details <span style=color:#66d9ef>for</span> the given topics.     
+</span></span><span style=display:flex><span>--disable-rack-aware                     Disable rack aware replica assignment  
+</span></span><span style=display:flex><span>--force                                  Suppress console prompts               
+</span></span><span style=display:flex><span>--help                                   Print usage information.               
+</span></span><span style=display:flex><span>--if-exists                              <span style=color:#66d9ef>if</span> set when altering or deleting       
+</span></span><span style=display:flex><span>                                           topics, the action will only execute 
+</span></span><span style=display:flex><span>                                           <span style=color:#66d9ef>if</span> the topic exists                  
+</span></span><span style=display:flex><span>--if-not-exists                          <span style=color:#66d9ef>if</span> set when creating topics, the       
+</span></span><span style=display:flex><span>                                           action will only execute <span style=color:#66d9ef>if</span> the      
+</span></span><span style=display:flex><span>                                           topic does not already exist         
+</span></span><span style=display:flex><span>--list                                   List all available topics.             
+</span></span><span style=display:flex><span>--partitions &lt;Integer: <span style=color:#75715e># of partitions&gt;  The number of partitions for the topic </span>
+</span></span><span style=display:flex><span>                                           being created or altered <span style=color:#f92672>(</span>WARNING:   
+</span></span><span style=display:flex><span>                                           If partitions are increased <span style=color:#66d9ef>for</span> a    
+</span></span><span style=display:flex><span>                                           topic that has a key, the partition  
+</span></span><span style=display:flex><span>                                           logic or ordering of the messages    
+</span></span><span style=display:flex><span>                                           will be affected                     
+</span></span><span style=display:flex><span>--replica-assignment &lt;String:            A list of manual partition-to-broker   
+</span></span><span style=display:flex><span>  broker_id_for_part1_replica1 :           assignments <span style=color:#66d9ef>for</span> the topic being      
+</span></span><span style=display:flex><span>  broker_id_for_part1_replica2 ,           created or altered.                  
+</span></span><span style=display:flex><span>  broker_id_for_part2_replica1 :                                                
+</span></span><span style=display:flex><span>  broker_id_for_part2_replica2 , ...&gt;                                           
+</span></span><span style=display:flex><span>--replication-factor &lt;Integer:           The replication factor <span style=color:#66d9ef>for</span> each        
+</span></span><span style=display:flex><span>  replication factor&gt;                      partition in the topic being created.
+</span></span><span style=display:flex><span>--topic &lt;String: topic&gt;                  The topic to be create, alter or       
+</span></span><span style=display:flex><span>                                           describe. Can also accept a regular  
+</span></span><span style=display:flex><span>                                           expression except <span style=color:#66d9ef>for</span> --create option
+</span></span><span style=display:flex><span>--topics-with-overrides                  <span style=color:#66d9ef>if</span> set when describing topics, only    
+</span></span><span style=display:flex><span>                                           show topics that have overridden     
+</span></span><span style=display:flex><span>                                           configs                              
+</span></span><span style=display:flex><span>--unavailable-partitions                 <span style=color:#66d9ef>if</span> set when describing topics, only    
+</span></span><span style=display:flex><span>                                           show partitions whose leader is not  
+</span></span><span style=display:flex><span>                                           available                            
+</span></span><span style=display:flex><span>--under-replicated-partitions            <span style=color:#66d9ef>if</span> set when describing topics, only    
+</span></span><span style=display:flex><span>                                           show under replicated partitions     
+</span></span><span style=display:flex><span>--zookeeper &lt;String: urls&gt;               REQUIRED: The connection string <span style=color:#66d9ef>for</span>    
+</span></span><span style=display:flex><span>                                           the zookeeper connection in the form 
+</span></span><span style=display:flex><span>                                           host:port. Multiple URLS can be      
+</span></span><span style=display:flex><span>                                           given to allow fail-over.    
+</span></span></code></pre></div><p>注意：REQUIRED为必选参数，如上面的&ndash;zookeeper链接地址。</p></li><li><p>查看所有可用主题</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost:2181/mykafka --list
+</span></span></code></pre></div></li><li><p>创建主题</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost/mykafka --create --topic topic_1 --partitions <span style=color:#ae81ff>1</span> --replication-factor <span style=color:#ae81ff>1</span>
+</span></span></code></pre></div><p>说明：zookeeper端口可省略，使用的是默认的。</p><p>&ndash;topic： 创建主题名字</p><p>&ndash;partitions：创建几个分区，便于横向扩展。</p><p>&ndash;replication-factor：一个分区创建几个副本，高可用。</p><p><strong>注意：当只有一个服务一个broker时，是没有意义的，当服务宕机了，数据也没了。因此&ndash;replication-factor副本必须在不同的kafka服务器上，才能实现高可用。</strong></p><p>再次查看可用主题</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost:2181/mykafka --list
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308052022133.png alt=image-20230805202249086></p></li><li><p>查看主题详细信息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost/mykafka --describe --topic topic_1
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308052023029.png alt=image-20230805202303000></p><p>说明：topic_1有一个0号分区，在0号服务器上。</p></li><li><p>实例</p><p>创建一个topc_2主题，5个分区，每个分区1个副本.</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost/mykafka --create --topic topic_2 --partitions <span style=color:#ae81ff>5</span> --replication-factor <span style=color:#ae81ff>1</span>
+</span></span></code></pre></div><p>查看可用主题</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost:2181/mykafka --list
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308052029400.png alt=image-20230805202917366></p><p>查看topic_2主题详情</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost/mykafka --describe --topic topic_2
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308052030900.png alt=image-20230805203001867></p><p>说明：5个分区都在0号服务器上。</p></li></ol><h1 id=消费>消费</h1><p>消费脚本使用帮助：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-console-consumer.sh
+</span></span></code></pre></div><p>使用参数：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>The console consumer is a tool that reads data from Kafka and outputs it to standard output.
+</span></span><span style=display:flex><span>Option                                   Description                            
+</span></span><span style=display:flex><span>------                                   -----------                            
+</span></span><span style=display:flex><span>--blacklist &lt;String: blacklist&gt;          Blacklist of topics to exclude from    
+</span></span><span style=display:flex><span>                                           consumption.                         
+</span></span><span style=display:flex><span>--bootstrap-server &lt;String: server to    REQUIRED <span style=color:#f92672>(</span>unless old consumer is       
+</span></span><span style=display:flex><span>  connect to&gt;                              used<span style=color:#f92672>)</span>: The server to connect to.     
+</span></span><span style=display:flex><span>--consumer-property &lt;String:             A mechanism to pass user-defined       
+</span></span><span style=display:flex><span>  consumer_prop&gt;                           properties in the form key<span style=color:#f92672>=</span>value to  
+</span></span><span style=display:flex><span>                                           the consumer.                        
+</span></span><span style=display:flex><span>--consumer.config &lt;String: config file&gt;  Consumer config properties file. Note  
+</span></span><span style=display:flex><span>                                           that <span style=color:#f92672>[</span>consumer-property<span style=color:#f92672>]</span> takes       
+</span></span><span style=display:flex><span>                                           precedence over this config.         
+</span></span><span style=display:flex><span>--csv-reporter-enabled                   If set, the CSV metrics reporter will  
+</span></span><span style=display:flex><span>                                           be enabled                           
+</span></span><span style=display:flex><span>--delete-consumer-offsets                If specified, the consumer path in     
+</span></span><span style=display:flex><span>                                           zookeeper is deleted when starting up
+</span></span><span style=display:flex><span>--enable-systest-events                  Log lifecycle events of the consumer   
+</span></span><span style=display:flex><span>                                           in addition to logging consumed      
+</span></span><span style=display:flex><span>                                           messages. <span style=color:#f92672>(</span>This is specific <span style=color:#66d9ef>for</span>      
+</span></span><span style=display:flex><span>                                           system tests.<span style=color:#f92672>)</span>                       
+</span></span><span style=display:flex><span>--formatter &lt;String: class&gt;              The name of a class to use <span style=color:#66d9ef>for</span>         
+</span></span><span style=display:flex><span>                                           formatting kafka messages <span style=color:#66d9ef>for</span>        
+</span></span><span style=display:flex><span>                                           display. <span style=color:#f92672>(</span>default: kafka.tools.      
+</span></span><span style=display:flex><span>                                           DefaultMessageFormatter<span style=color:#f92672>)</span>             
+</span></span><span style=display:flex><span>--from-beginning                         If the consumer does not already have  
+</span></span><span style=display:flex><span>                                           an established offset to consume     
+</span></span><span style=display:flex><span>                                           from, start with the earliest        
+</span></span><span style=display:flex><span>                                           message present in the log rather    
+</span></span><span style=display:flex><span>                                           than the latest message.             
+</span></span><span style=display:flex><span>--group &lt;String: consumer group id&gt;      The consumer group id of the consumer. 
+</span></span><span style=display:flex><span>--isolation-level &lt;String&gt;               Set to read_committed in order to      
+</span></span><span style=display:flex><span>                                           filter out transactional messages    
+</span></span><span style=display:flex><span>                                           which are not committed. Set to      
+</span></span><span style=display:flex><span>                                           read_uncommittedto read all          
+</span></span><span style=display:flex><span>                                           messages. <span style=color:#f92672>(</span>default: read_uncommitted<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>--key-deserializer &lt;String:                                                     
+</span></span><span style=display:flex><span>  deserializer <span style=color:#66d9ef>for</span> key&gt;                                                         
+</span></span><span style=display:flex><span>--max-messages &lt;Integer: num_messages&gt;   The maximum number of messages to      
+</span></span><span style=display:flex><span>                                           consume before exiting. If not set,  
+</span></span><span style=display:flex><span>                                           consumption is continual.            
+</span></span><span style=display:flex><span>--metrics-dir &lt;String: metrics           If csv-reporter-enable is set, and     
+</span></span><span style=display:flex><span>  directory&gt;                               this parameter isset, the csv        
+</span></span><span style=display:flex><span>                                           metrics will be output here          
+</span></span><span style=display:flex><span>--new-consumer                           Use the new consumer implementation.   
+</span></span><span style=display:flex><span>                                           This is the default, so this option  
+</span></span><span style=display:flex><span>                                           is deprecated and will be removed in 
+</span></span><span style=display:flex><span>                                           a future release.                    
+</span></span><span style=display:flex><span>--offset &lt;String: consume offset&gt;        The offset id to consume from <span style=color:#f92672>(</span>a non-  
+</span></span><span style=display:flex><span>                                           negative number<span style=color:#f92672>)</span>, or <span style=color:#e6db74>&#39;earliest&#39;</span>      
+</span></span><span style=display:flex><span>                                           which means from beginning, or       
+</span></span><span style=display:flex><span>                                           <span style=color:#e6db74>&#39;latest&#39;</span> which means from end        
+</span></span><span style=display:flex><span>                                           <span style=color:#f92672>(</span>default: latest<span style=color:#f92672>)</span>                    
+</span></span><span style=display:flex><span>--partition &lt;Integer: partition&gt;         The partition to consume from.         
+</span></span><span style=display:flex><span>                                           Consumption starts from the end of   
+</span></span><span style=display:flex><span>                                           the partition unless <span style=color:#e6db74>&#39;--offset&#39;</span> is   
+</span></span><span style=display:flex><span>                                           specified.                           
+</span></span><span style=display:flex><span>--property &lt;String: prop&gt;                The properties to initialize the       
+</span></span><span style=display:flex><span>                                           message formatter.                   
+</span></span><span style=display:flex><span>--skip-message-on-error                  If there is an error when processing a 
+</span></span><span style=display:flex><span>                                           message, skip it instead of halt.    
+</span></span><span style=display:flex><span>--timeout-ms &lt;Integer: timeout_ms&gt;       If specified, exit <span style=color:#66d9ef>if</span> no message is    
+</span></span><span style=display:flex><span>                                           available <span style=color:#66d9ef>for</span> consumption <span style=color:#66d9ef>for</span> the    
+</span></span><span style=display:flex><span>                                           specified interval.                  
+</span></span><span style=display:flex><span>--topic &lt;String: topic&gt;                  The topic id to consume on.            
+</span></span><span style=display:flex><span>--value-deserializer &lt;String:                                                   
+</span></span><span style=display:flex><span>  deserializer <span style=color:#66d9ef>for</span> values&gt;                                                      
+</span></span><span style=display:flex><span>--whitelist &lt;String: whitelist&gt;          Whitelist of topics to include <span style=color:#66d9ef>for</span>     
+</span></span><span style=display:flex><span>                                           consumption.                         
+</span></span><span style=display:flex><span>--zookeeper &lt;String: urls&gt;               REQUIRED <span style=color:#f92672>(</span>only when using old          
+</span></span><span style=display:flex><span>                                           consumer<span style=color:#f92672>)</span>: The connection string <span style=color:#66d9ef>for</span> 
+</span></span><span style=display:flex><span>                                           the zookeeper connection in the form 
+</span></span><span style=display:flex><span>                                           host:port. Multiple URLS can be      
+</span></span><span style=display:flex><span>                                           given to allow fail-over. 
+</span></span></code></pre></div><p>REQUIRED：必填参数</p><p>unless old consumer is used:使用老消费者</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>--bootstrap-server &lt;String: server to    REQUIRED <span style=color:#f92672>(</span>unless old consumer is       
+</span></span><span style=display:flex><span>  connect to&gt;                              used<span style=color:#f92672>)</span>: The server to connect to.  
+</span></span></code></pre></div><p>only when using old consumer：使用旧消费时使用</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>--zookeeper &lt;String: urls&gt;               REQUIRED <span style=color:#f92672>(</span>only when using old          
+</span></span><span style=display:flex><span>                                           consumer<span style=color:#f92672>)</span>: The connection string <span style=color:#66d9ef>for</span> 
+</span></span><span style=display:flex><span>                                           the zookeeper connection in the form 
+</span></span><span style=display:flex><span>                                           host:port. Multiple URLS can be      
+</span></span><span style=display:flex><span>                                           given to allow fail-over.
+</span></span></code></pre></div><p>消费者消费</p><p>链接Kafka服务端，当有多台Kafka时，只需要链接其中一台服务即可。注意，消费者消费端口是9092了。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic_1
+</span></span></code></pre></div><p>说明：</p><p>&ndash;bootstrap-server localhost:9092：指定kafka服务地址端口</p><p>&ndash;topic topic_1：指定消费的主题</p><p>测试界面像是卡住了，不管。</p><p><strong>消费者API使用参数配置说明</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061033680.png alt=image-20230806103335594></p><h1 id=生产>生产</h1><p>生产脚本使用帮助</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-console-producer.sh
+</span></span></code></pre></div><p>使用参数：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>Read data from standard input and publish it to Kafka.
+</span></span><span style=display:flex><span>Option                                   Description                            
+</span></span><span style=display:flex><span>------                                   -----------                            
+</span></span><span style=display:flex><span>--batch-size &lt;Integer: size&gt;             Number of messages to send in a single 
+</span></span><span style=display:flex><span>                                           batch <span style=color:#66d9ef>if</span> they are not being sent     
+</span></span><span style=display:flex><span>                                           synchronously. <span style=color:#f92672>(</span>default: 200<span style=color:#f92672>)</span>        
+</span></span><span style=display:flex><span>--broker-list &lt;String: broker-list&gt;      REQUIRED: The broker list string in    
+</span></span><span style=display:flex><span>                                           the form HOST1:PORT1,HOST2:PORT2.    
+</span></span><span style=display:flex><span>--compression-codec <span style=color:#f92672>[</span>String:             The compression codec: either <span style=color:#e6db74>&#39;none&#39;</span>,  
+</span></span><span style=display:flex><span>  compression-codec<span style=color:#f92672>]</span>                       <span style=color:#e6db74>&#39;gzip&#39;</span>, <span style=color:#e6db74>&#39;snappy&#39;</span>, or <span style=color:#e6db74>&#39;lz4&#39;</span>.If        
+</span></span><span style=display:flex><span>                                           specified without value, <span style=color:#66d9ef>then</span> it     
+</span></span><span style=display:flex><span>                                           defaults to <span style=color:#e6db74>&#39;gzip&#39;</span>                   
+</span></span><span style=display:flex><span>--key-serializer &lt;String:                The class name of the message encoder  
+</span></span><span style=display:flex><span>  encoder_class&gt;                           implementation to use <span style=color:#66d9ef>for</span>            
+</span></span><span style=display:flex><span>                                           serializing keys. <span style=color:#f92672>(</span>default: kafka.   
+</span></span><span style=display:flex><span>                                           serializer.DefaultEncoder<span style=color:#f92672>)</span>           
+</span></span><span style=display:flex><span>--line-reader &lt;String: reader_class&gt;     The class name of the class to use <span style=color:#66d9ef>for</span> 
+</span></span><span style=display:flex><span>                                           reading lines from standard in. By   
+</span></span><span style=display:flex><span>                                           default each line is read as a       
+</span></span><span style=display:flex><span>                                           separate message. <span style=color:#f92672>(</span>default: kafka.   
+</span></span><span style=display:flex><span>                                           tools.                               
+</span></span><span style=display:flex><span>                                           ConsoleProducer$LineMessageReader<span style=color:#f92672>)</span>   
+</span></span><span style=display:flex><span>--max-block-ms &lt;Long: max block on       The max time that the producer will    
+</span></span><span style=display:flex><span>  send&gt;                                    block <span style=color:#66d9ef>for</span> during a send request      
+</span></span><span style=display:flex><span>                                           <span style=color:#f92672>(</span>default: 60000<span style=color:#f92672>)</span>                     
+</span></span><span style=display:flex><span>--max-memory-bytes &lt;Long: total memory   The total memory used by the producer  
+</span></span><span style=display:flex><span>  in bytes&gt;                                to buffer records waiting to be sent 
+</span></span><span style=display:flex><span>                                           to the server. <span style=color:#f92672>(</span>default: 33554432<span style=color:#f92672>)</span>   
+</span></span><span style=display:flex><span>--max-partition-memory-bytes &lt;Long:      The buffer size allocated <span style=color:#66d9ef>for</span> a        
+</span></span><span style=display:flex><span>  memory in bytes per partition&gt;           partition. When records are received 
+</span></span><span style=display:flex><span>                                           which are smaller than this size the 
+</span></span><span style=display:flex><span>                                           producer will attempt to             
+</span></span><span style=display:flex><span>                                           optimistically group them together   
+</span></span><span style=display:flex><span>                                           <span style=color:#66d9ef>until</span> this size is reached.          
+</span></span><span style=display:flex><span>                                           <span style=color:#f92672>(</span>default: 16384<span style=color:#f92672>)</span>                     
+</span></span><span style=display:flex><span>--message-send-max-retries &lt;Integer&gt;     Brokers can fail receiving the message 
+</span></span><span style=display:flex><span>                                           <span style=color:#66d9ef>for</span> multiple reasons, and being      
+</span></span><span style=display:flex><span>                                           unavailable transiently is just one  
+</span></span><span style=display:flex><span>                                           of them. This property specifies the 
+</span></span><span style=display:flex><span>                                           number of retires before the         
+</span></span><span style=display:flex><span>                                           producer give up and drop this       
+</span></span><span style=display:flex><span>                                           message. <span style=color:#f92672>(</span>default: 3<span style=color:#f92672>)</span>                
+</span></span><span style=display:flex><span>--metadata-expiry-ms &lt;Long: metadata     The period of time in milliseconds     
+</span></span><span style=display:flex><span>  expiration interval&gt;                     after which we force a refresh of    
+</span></span><span style=display:flex><span>                                           metadata even <span style=color:#66d9ef>if</span> we haven<span style=color:#960050;background-color:#1e0010>&#39;</span>t seen any 
+</span></span><span style=display:flex><span>                                           leadership changes. <span style=color:#f92672>(</span>default: 300000<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>--old-producer                           Use the old producer implementation.   
+</span></span><span style=display:flex><span>--producer-property &lt;String:             A mechanism to pass user-defined       
+</span></span><span style=display:flex><span>  producer_prop&gt;                           properties in the form key<span style=color:#f92672>=</span>value to  
+</span></span><span style=display:flex><span>                                           the producer.                        
+</span></span><span style=display:flex><span>--producer.config &lt;String: config file&gt;  Producer config properties file. Note  
+</span></span><span style=display:flex><span>                                           that <span style=color:#f92672>[</span>producer-property<span style=color:#f92672>]</span> takes       
+</span></span><span style=display:flex><span>                                           precedence over this config.         
+</span></span><span style=display:flex><span>--property &lt;String: prop&gt;                A mechanism to pass user-defined       
+</span></span><span style=display:flex><span>                                           properties in the form key<span style=color:#f92672>=</span>value to  
+</span></span><span style=display:flex><span>                                           the message reader. This allows      
+</span></span><span style=display:flex><span>                                           custom configuration <span style=color:#66d9ef>for</span> a user-     
+</span></span><span style=display:flex><span>                                           defined message reader.              
+</span></span><span style=display:flex><span>--queue-enqueuetimeout-ms &lt;Integer:      Timeout <span style=color:#66d9ef>for</span> event enqueue <span style=color:#f92672>(</span>default:    
+</span></span><span style=display:flex><span>  queue enqueuetimeout ms&gt;                 2147483647<span style=color:#f92672>)</span>                          
+</span></span><span style=display:flex><span>--queue-size &lt;Integer: queue_size&gt;       If set and the producer is running in  
+</span></span><span style=display:flex><span>                                           asynchronous mode, this gives the    
+</span></span><span style=display:flex><span>                                           maximum amount of  messages will     
+</span></span><span style=display:flex><span>                                           queue awaiting sufficient batch      
+</span></span><span style=display:flex><span>                                           size. <span style=color:#f92672>(</span>default: 10000<span style=color:#f92672>)</span>               
+</span></span><span style=display:flex><span>--request-required-acks &lt;String:         The required acks of the producer      
+</span></span><span style=display:flex><span>  request required acks&gt;                   requests <span style=color:#f92672>(</span>default: 1<span style=color:#f92672>)</span>                
+</span></span><span style=display:flex><span>--request-timeout-ms &lt;Integer: request   The ack timeout of the producer        
+</span></span><span style=display:flex><span>  timeout ms&gt;                              requests. Value must be non-negative 
+</span></span><span style=display:flex><span>                                           and non-zero <span style=color:#f92672>(</span>default: 1500<span style=color:#f92672>)</span>         
+</span></span><span style=display:flex><span>--retry-backoff-ms &lt;Integer&gt;             Before each retry, the producer        
+</span></span><span style=display:flex><span>                                           refreshes the metadata of relevant   
+</span></span><span style=display:flex><span>                                           topics. Since leader election takes  
+</span></span><span style=display:flex><span>                                           a bit of time, this property         
+</span></span><span style=display:flex><span>                                           specifies the amount of time that    
+</span></span><span style=display:flex><span>                                           the producer waits before refreshing 
+</span></span><span style=display:flex><span>                                           the metadata. <span style=color:#f92672>(</span>default: 100<span style=color:#f92672>)</span>         
+</span></span><span style=display:flex><span>--socket-buffer-size &lt;Integer: size&gt;     The size of the tcp RECV size.         
+</span></span><span style=display:flex><span>                                           <span style=color:#f92672>(</span>default: 102400<span style=color:#f92672>)</span>                    
+</span></span><span style=display:flex><span>--sync                                   If set message send requests to the    
+</span></span><span style=display:flex><span>                                           brokers are synchronously, one at a  
+</span></span><span style=display:flex><span>                                           time as they arrive.                 
+</span></span><span style=display:flex><span>--timeout &lt;Integer: timeout_ms&gt;          If set and the producer is running in  
+</span></span><span style=display:flex><span>                                           asynchronous mode, this gives the    
+</span></span><span style=display:flex><span>                                           maximum amount of time a message     
+</span></span><span style=display:flex><span>                                           will queue awaiting sufficient batch 
+</span></span><span style=display:flex><span>                                           size. The value is given in ms.      
+</span></span><span style=display:flex><span>                                           <span style=color:#f92672>(</span>default: 1000<span style=color:#f92672>)</span>                      
+</span></span><span style=display:flex><span>--topic &lt;String: topic&gt;                  REQUIRED: The topic id to produce      
+</span></span><span style=display:flex><span>                                           messages to.                         
+</span></span><span style=display:flex><span>--value-serializer &lt;String:              The class name of the message encoder  
+</span></span><span style=display:flex><span>  encoder_class&gt;                           implementation to use <span style=color:#66d9ef>for</span>            
+</span></span><span style=display:flex><span>                                           serializing values. <span style=color:#f92672>(</span>default: kafka. 
+</span></span><span style=display:flex><span>                                           serializer.DefaultEncoder<span style=color:#f92672>)</span> 
+</span></span></code></pre></div><p>注意：REQUIRED必填参数</p><p>生产者链接kafka服务</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-console-producer.sh --broker-list localhost:9092 --topic topic_1
+</span></span></code></pre></div><p>说明：</p><p>&ndash;broker-list：指定broker，如果有很多太kafka服务器，只需要指定2个地址接口，这里只有一台kafka服务器，只指定一个。</p><p>&ndash;topic：指定要发送消息到那个topic主题。</p><p>此时生产者窗口也像卡住了，说明进入了发送消息界面。</p><p><strong>生产者API使用参数配置说明</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061035710.png alt=image-20230806103540617></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061036567.png alt=image-20230806103636518></p><h1 id=消息发送接收测试>消息发送接收测试</h1><p>注意：提示如下信息检查主题名称是否错误</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>WARN <span style=color:#f92672>[</span>Producer clientId<span style=color:#f92672>=</span>console-producer<span style=color:#f92672>]</span> Error <span style=color:#66d9ef>while</span> fetching metadata with correlation id <span style=color:#ae81ff>8</span>
+</span></span></code></pre></div><p>可查看可用主题：明确消费主题和生产者是否是使用的一个主题。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost:2181/mykafka --list
+</span></span></code></pre></div><p><strong>消息的发送与接受</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061034409.png alt=image-20230806103448344></p><p>测试结果：</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308052122624.png alt=image-20230805212246536></p><p><strong>注意：当关闭消费者后，生产者继续发送消息，当生产者重新链接后，只能接受到后面生产者重新发送的消息。</strong></p><p><strong>消费历史消息</strong></p><p>如果要消费以前的消息可以指定参数&ndash;from-beginning</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic topic_1 --from-beginning
+</span></span></code></pre></div><h1 id=查看持久化数据>查看持久化数据</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>ca /var/kafka/kafka-logs
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308052130695.png alt=image-20230805213006649></p><p>可以看到很多偏移量的文件。</p><h1 id=服务端参数配置>服务端参数配置</h1><p>主要是服务器kafka配置文件server.properties的配置</p><p><strong>zookeeper.connect</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061816521.png alt=image-20230806161325006></p><p>该参数用于配置kafka要链接的Zookeeper/集群地址。</p><p>它的值是一个字符串，使用都好分割zookeeper的多个地址。Zookeeper的单个地址是host:port形式的，可以在最后添加kafka在zookeeper中的根节点路径。</p><p>例如：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span> zookeeper.connect<span style=color:#f92672>=</span>192.1681.1:2181，192.1681.2:2181，192.1681.3:2181，192.1681.4:2181/mykafka
+</span></span></code></pre></div><p>最好服务器地址数量过半，后面zookeeper存放路径/mykafka写一个就好了。</p><p><strong>listeners</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061817215.png alt=image-20230806162541253></p><p>用于指定当前Broker向外发布服务的地址和端口。</p><p>与advertised.listeners配合，用于做内外网隔离。</p><p>注意：端口号也是可以修改的。</p><h1 id=内外网隔离配置>内外网隔离配置</h1><p><strong>listeners</strong></p><p>用于配置broker监听的URL以及监听器名称列表，使用逗号隔开多个URL及监听器名称。</p><p>例如：服务器有2个ip，ip如下</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061818177.png alt=image-20230806163506717></p><p>则配置如下：</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061818548.png alt=image-20230806172401223></p><p><strong>listeners配置：注意监听器名称不能相同，端口不能相同。PLAINTEXT代表了都使用PLAINTEXT协议，也代表了监听器的名称，但是名称又不能相同，因此使用映射配置参数listner.sercurity.protocol.map。</strong></p><p>加上上面配置后，启动还是会报错，因此必须加上如下配置：</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061819691.png alt=image-20230806172606989></p><p>整体说明：注意kafka是使用的PLAINTEXT协议</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>listener.security.protocol.map<span style=color:#f92672>=</span>INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT    
+</span></span><span style=display:flex><span>listeners<span style=color:#f92672>=</span>INTERNAL://10.0.2.15:9000,EXTERNAL://192.168.56.30:9001
+</span></span><span style=display:flex><span>advertised.listeners<span style=color:#f92672>=</span>EXTERNAL://192.168.56.30:9001
+</span></span><span style=display:flex><span>inter.broker.listener.name<span style=color:#f92672>=</span>EXTERNAL
+</span></span></code></pre></div><p>listener.security.protocol.map：解决监听协议、监听器名称一样问题。</p><p>listeners：集群多台服务地址</p><p>advertised.listeners：暴露给消费者生产者,以及节点间通讯使用的地址和端口(需要将该地址发布到zookeeper供客户端使用，如果客户端使用的地址与listeners配置不同)，而另一个地址端口INTERNAL://10.0.2.15:9000则可用于内部管理kafka。</p><p>inter.broker.listener.name：暴力给消费者生产者使用监听的监听器名称，<strong>如果要暴露多个直接可以逗号隔开多加几个，前提是listeners里面有的。</strong></p><p><strong>listener.security.protocol.map</strong></p><p>用于内外网隔离配置，监听器名称和安全协议的映射配置。</p><p>例如：将内外网隔离，即使他们都使用SSL，上面的配置问题就可以加下面参数解决。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>listener.security.protocol.map<span style=color:#f92672>=</span>INTERNAL:SSL,EXTERNAL:SSL
+</span></span></code></pre></div><p>说明：</p><p>INTERNAL，EXTERNAL：代表监听器名称</p><p>SSL：代表都是使用SSL协议。</p><p>加上这个参数配置，就可以解决上面的监听器名称和协议冲突的问题了。</p><p><strong>注意：每个监听器的名称只能在map中出现一次。如果监听器名称代表的不是安全协议，必须配置listener.security.protocol.map。</strong></p><p><strong>每个监听器必须使用不同的网络端口。</strong></p><p>查看zoopeeper信息：</p><p>客户端脚本链接zookeeper：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>zkCli.sh
+</span></span></code></pre></div><p>查看kafka信息</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>get /mykafka/brokers/ids/0
+</span></span></code></pre></div><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202308061819153.png alt=image-20230806174813999></p><p>查看可用主题：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>kafka-topics.sh --zookeeper localhost:2181/mykafka --list
+</span></span></code></pre></div><p><strong>broker.id</strong></p><p>该属性用于唯一标记一个kafka的Broker，它的值是一个任意integer值。</p><p>当kafka以分布式集群部署使用时，非常重要。最好该值只跟该Broker所在的物理主机有关的，如主机名为host1.yanxizhu.com，则broker.id=1，如果主机名为192.168.56.30，则broker.id=30.</p><p><strong>log.dir</strong></p><p>通过该属性的值，指定kafka在磁盘上保存消息的日志片段的目录。</p><p>它时一组用逗号分隔的本地文件系统路径。</p><p>如果指定了多个路径，那么broker会根据”最少使用“原则，把同一个分区的日志片段保存到同一个路径下。</p><p>broker会往拥有最少数目分区的路径新增分区，而不是往拥有最小磁盘空间的路径新增分区。</p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/kafka><span class=tag>Kafka</span></a></li><li><a href=https://willxwu.github.io/tags/cicd><span class=tag>CICD</span></a></li><li><a href=https://willxwu.github.io/tags/zookeeper><span class=tag>Zookeeper</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>441</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

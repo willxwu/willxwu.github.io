@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>线程安全 on Come Back</title><link>https://willxwu.github.io/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/</link><description>Recent content in 线程安全 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 08 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>线程安全策略</title><link>https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/</link><pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/</guid><description>&lt;p>线程安全策略&lt;/p>
+&lt;h1 id="不可变对象">不可变对象&lt;/h1>
+&lt;p>&lt;strong>不可变对象需要满足的条件：&lt;/strong>
+对象创建以后其状态就不能修改
+对象所有域都是final类型
+对象是正确创建的（在对象创建期间，this引用没有逸出）&lt;/p>
+&lt;hr>
+&lt;h2 id="一final关键字">&lt;strong>一、final关键字&lt;/strong>&lt;/h2>
+&lt;p>final关键字：可修饰类、方法、变量。&lt;/p>
+&lt;p>&lt;strong>修饰类&lt;/strong>：不能被继承&lt;/p>
+&lt;p>&lt;strong>修饰方法&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>锁定方法不被继承类修改；&lt;/li>
+&lt;li>效率&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>修饰变量&lt;/strong>：基本数据类型变量、引用类型变量&lt;/p></description></item></channel></rss>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>kubesphere on Come Back</title><link>https://willxwu.github.io/tags/kubesphere/</link><description>Recent content in kubesphere on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 04 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/kubesphere/index.xml" rel="self" type="application/rss+xml"/><item><title>K8S集群部署</title><link>https://willxwu.github.io/post/k8s/k8s%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</link><pubDate>Sat, 04 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/k8s/k8s%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="k8s集群部署">K8S集群部署&lt;/h1>
+&lt;h1 id="一virtualbox虚拟机搭建">一、VirtualBox虚拟机搭建&lt;/h1>
+&lt;p>通过Oracle VM VirtualBox，Vagrant搭建三台虚拟机。&lt;/p>
+&lt;h2 id="准备工作">准备工作&lt;/h2>
+&lt;h3 id="1准备软件">1、准备软件&lt;/h3>
+&lt;p>CentOS虚拟系统：CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box&lt;/p>
+&lt;p>虚拟软件(VirtualBox)：VirtualBox-6.1.34-150636-Win.exe&lt;/p>
+&lt;p>Vagrant安装虚拟机软件：vagrant_2.2.19_i686.msi。&lt;/p></description></item></channel></rss>

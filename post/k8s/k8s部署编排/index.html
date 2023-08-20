@@ -1,0 +1,83 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>初识k8s</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="初识k8s 简介： Kubernetes 简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。 中文官网：https://kubernetes.io/zh/ 中文社区：https://www.kubernetes.org.cn/ 官方文档：https://kubernetes.io/zh/docs/home/ 社区文档：http://docs.kubernetes.org.cn/
+部署方式的进化 https://kubernetes.io/zh/docs/concepts/overview/
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="初识k8s"><meta name=twitter:description content="初识k8s 简介： Kubernetes 简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。 中文官网：https://kubernetes.io/zh/ 中文社区：https://www.kubernetes.org.cn/ 官方文档：https://kubernetes.io/zh/docs/home/ 社区文档：http://docs.kubernetes.org.cn/
+部署方式的进化 https://kubernetes.io/zh/docs/concepts/overview/
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="初识k8s"><meta property="og:description" content="初识k8s 简介： Kubernetes 简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。 中文官网：https://kubernetes.io/zh/ 中文社区：https://www.kubernetes.org.cn/ 官方文档：https://kubernetes.io/zh/docs/home/ 社区文档：http://docs.kubernetes.org.cn/
+部署方式的进化 https://kubernetes.io/zh/docs/concepts/overview/
+"><meta property="og:url" content="https://willxwu.github.io/post/k8s/k8s%E9%83%A8%E7%BD%B2%E7%BC%96%E6%8E%92/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/k8s/k8s%E9%83%A8%E7%BD%B2%E7%BC%96%E6%8E%92/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>初识k8s</h1><p class=post-meta>@Come Back · Jun 3, 2022 · 1 min read</p></header><article class=post-content><h1 id=初识k8s>初识k8s</h1><h1 id=简介><strong>简介</strong>：</h1><p>Kubernetes 简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。
+中文官网：https://kubernetes.io/zh/
+中文社区：https://www.kubernetes.org.cn/
+官方文档：https://kubernetes.io/zh/docs/home/
+社区文档：http://docs.kubernetes.org.cn/</p><h1 id=部署方式的进化><strong>部署方式的进化</strong></h1><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112019717.png alt></p><p><a href=https://kubernetes.io/zh/docs/concepts/overview/>https://kubernetes.io/zh/docs/concepts/overview/</a></p><h1 id=功能><strong>功能</strong></h1><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112020357.png alt></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112021860.png alt></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112022602.png alt></p><h1 id=架构><strong>架构</strong></h1><h2 id=整体主从方式>整体主从方式</h2><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112025982.png alt></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112025961.png alt></p><h2 id=master-节点架构><strong>Master 节点架构</strong></h2><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112026193.png alt></p><h3 id=kube-apiserver><strong>kube-apiserver</strong></h3><p>对外暴露K8S 的api 接口，是外界进行资源操作的唯一入口。</p><p>提供认证、授权、访问控制、API 注册和发现等机制。</p><h3 id=etcd><strong>etcd</strong></h3><p>etcd 是兼具一致性和高可用性的键值数据库，可以作为保存Kubernetes 所有集
+群数据的后台数据库。
+Kubernetes 集群的etcd 数据库通常需要有个备份计划</p><h3 id=kube-scheduler><strong>kube-scheduler</strong></h3><p>主节点上的组件，该组件监视那些新创建的未指定运行节点的Pod，并选择节点
+让Pod 在上面运行。
+所有对k8s 的集群操作，都必须经过主节点进行调度</p><h3 id=kube-controller-manager><strong>kube-controller-manager</strong></h3><p>在主节点上运行控制器的组件
+这些控制器包括:
+节点控制器（Node Controller）: 负责在节点出现故障时进行通知和响应。
+副本控制器（Replication Controller）: 负责为系统中的每个副本控制器对象维
+护正确数量的Pod。
+端点控制器（Endpoints Controller）: 填充端点(Endpoints)对象(即加入Service
+与Pod)。
+服务帐户和令牌控制器（Service Account & Token Controllers）: 为新的命名
+空间创建默认帐户和API 访问令牌</p><h2 id=node-节点架构><strong>Node 节点架构</strong></h2><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112028719.png alt></p><h3 id=kubelet><strong>kubelet</strong></h3><p>一个在集群中每个节点上运行的代理。它保证容器都运行在Pod 中。
+负责维护容器的生命周期，同时也负责Volume（CSI）和网络（CNI）的管理；</p><h3 id=kube-proxy><strong>kube-proxy</strong></h3><p>负责为Service 提供cluster 内部的服务发现和负载均衡；</p><h3 id=容器运行环境container-runtime><strong>容器运行环境(Container Runtime)</strong></h3><p>容器运行环境是负责运行容器的软件。
+Kubernetes 支持多个容器运行环境: Docker、containerd、cri-o、rktlet 以及任
+何实现Kubernetes CRI (容器运行环境接口)。</p><h3 id=fluentd><strong>fluentd</strong></h3><p>是一个守护进程，它有助于提供集群层面日志集群层面的日志</p><h1 id=概念><strong>概念</strong></h1><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112030694.png alt></p><h2 id=container容器可以是docker-启动的一个容器><strong>Container</strong>：容器，可以是docker 启动的一个容器</h2><h2 id=pod><strong>Pod</strong>：</h2><p>k8s 使用Pod 来组织一组容器
+一个Pod 中的所有容器共享同一网络。
+Pod 是k8s 中的最小部署单元</p><h2 id=volume><strong>Volume</strong></h2><p>声明在Pod 容器中可访问的文件目录
+可以被挂载在Pod 中一个或多个容器指定路径下
+支持多种后端存储抽象(本地存储，分布式存储，云存
+储…)</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112031724.png alt></p><h2 id=controllers更高层次对象部署和管理pod><strong>Controllers</strong>：更高层次对象，部署和管理Pod；</h2><p>ReplicaSet：确保预期的Pod 副本数量
+Deplotment：无状态应用部署
+StatefulSet：有状态应用部署
+DaemonSet：确保所有Node 都运行一个指定Pod
+Job：一次性任务
+Cronjob：定时任务</p><h2 id=deployment><strong>Deployment</strong>：</h2><p>定义一组Pod 的副本数目、版本等
+通过控制器（Controller）维持Pod 数目(自动回
+复失败的Pod)
+通过控制器以指定的策略控制版本（滚动升级，回滚等）</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112033197.png alt></p><h2 id=service><strong>Service</strong></h2><p>定义一组Pod 的访问策略
+Pod 的负载均衡，提供一个或者多个Pod 的稳定访问地址</p><p>支持多种方式（ClusterIP、NodePort、LoadBalance）</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112033137.png alt></p><h2 id=label标签用于对象资源的查询筛选><strong>Label</strong>：标签，用于对象资源的查询，筛选</h2><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112034404.png alt></p><h2 id=namespace命名空间逻辑隔离><strong>Namespace</strong>：命名空间，逻辑隔离</h2><p>一个集群内部的逻辑隔离机制（鉴权，资源）</p><p>每个资源都属于一个namespace</p><p>同一个namespace 所有资源名不能重复</p><p>不同namespace 可以资源名重复</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112035801.png alt></p><h2 id=api><strong>API</strong></h2><p>我们通过kubernetes 的API 来操作整个集群。
+可以通过kubectl、ui、curl 最终发送http+json/yaml 方式的请求给API Server，然后控制k8s集群。</p><h1 id=注意>注意</h1><p><strong>k8s 里的所有的资源对象都可以采用yaml 或JSON 格式的文件定义或描述</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112036114.png alt></p><h1 id=流程叙述>流程叙述</h1><p>1、通过Kubectl 提交一个创建RC（Replication Controller）的请求，该请求通过APIServer
+被写入etcd 中
+2、此时Controller Manager 通过API Server 的监听资源变化的接口监听到此RC 事件</p><p>3、分析之后，发现当前集群中还没有它所对应的Pod 实例，
+4、于是根据RC 里的Pod 模板定义生成一个Pod 对象，通过APIServer 写入etcd
+5、此事件被Scheduler 发现，它立即执行一个复杂的调度流程，为这个新Pod 选定一
+个落户的Node，然后通过API Server 讲这一结果写入到etcd 中，
+6、目标Node 上运行的Kubelet 进程通过APIServer 监测到这个“新生的”Pod，并按照它
+的定义，启动该Pod 并任劳任怨地负责它的下半生，直到Pod 的生命结束。
+7、随后，我们通过Kubectl 提交一个新的映射到该Pod 的Service 的创建请求
+8、ControllerManager 通过Label 标签查询到关联的Pod 实例，然后生成Service 的
+Endpoints 信息，并通过APIServer 写入到etcd 中，
+9、接下来，所有Node 上运行的Proxy 进程通过APIServer 查询并监听Service 对象与
+其对应的Endpoints 信息，建立一个软件方式的负载均衡器来实现Service 访问到后端
+Pod 的流量转发功能。</p><p><strong>k8s 里的所有的资源对象都可以采用yaml 或JSON 格式的文件定义或描述</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112107697.png alt></p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/k8s><span class=tag>K8s</span></a></li><li><a href=https://willxwu.github.io/tags/kubernetes><span class=tag>Kubernetes</span></a></li><li><a href=https://willxwu.github.io/tags/kubelet><span class=tag>Kubelet</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>443</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

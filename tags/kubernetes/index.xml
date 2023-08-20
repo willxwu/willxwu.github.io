@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Kubernetes on Come Back</title><link>https://willxwu.github.io/tags/kubernetes/</link><description>Recent content in Kubernetes on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 04 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/kubernetes/index.xml" rel="self" type="application/rss+xml"/><item><title>K8S集群部署</title><link>https://willxwu.github.io/post/k8s/k8s%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</link><pubDate>Sat, 04 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/k8s/k8s%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="k8s集群部署">K8S集群部署&lt;/h1>
+&lt;h1 id="一virtualbox虚拟机搭建">一、VirtualBox虚拟机搭建&lt;/h1>
+&lt;p>通过Oracle VM VirtualBox，Vagrant搭建三台虚拟机。&lt;/p>
+&lt;h2 id="准备工作">准备工作&lt;/h2>
+&lt;h3 id="1准备软件">1、准备软件&lt;/h3>
+&lt;p>CentOS虚拟系统：CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box&lt;/p>
+&lt;p>虚拟软件(VirtualBox)：VirtualBox-6.1.34-150636-Win.exe&lt;/p>
+&lt;p>Vagrant安装虚拟机软件：vagrant_2.2.19_i686.msi。&lt;/p></description></item><item><title>初识k8s</title><link>https://willxwu.github.io/post/k8s/k8s%E9%83%A8%E7%BD%B2%E7%BC%96%E6%8E%92/</link><pubDate>Fri, 03 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/k8s/k8s%E9%83%A8%E7%BD%B2%E7%BC%96%E6%8E%92/</guid><description>&lt;h1 id="初识k8s">初识k8s&lt;/h1>
+&lt;h1 id="简介">&lt;strong>简介&lt;/strong>：&lt;/h1>
+&lt;p>Kubernetes 简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。
+中文官网：https://kubernetes.io/zh/
+中文社区：https://www.kubernetes.org.cn/
+官方文档：https://kubernetes.io/zh/docs/home/
+社区文档：http://docs.kubernetes.org.cn/&lt;/p>
+&lt;h1 id="部署方式的进化">&lt;strong>部署方式的进化&lt;/strong>&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112019717.png" alt="">&lt;/p>
+&lt;p>&lt;a href="https://kubernetes.io/zh/docs/concepts/overview/">https://kubernetes.io/zh/docs/concepts/overview/&lt;/a>&lt;/p></description></item></channel></rss>

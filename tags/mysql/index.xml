@@ -1,4 +1,20 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mysql on Come Back</title><link>https://willxwu.github.io/tags/mysql/</link><description>Recent content in mysql on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>MyCat的安装及使用</title><link>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid><description>&lt;h1 id="mycat的安装及使用">MyCat的安装及使用&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mysql on Come Back</title><link>https://willxwu.github.io/tags/mysql/</link><description>Recent content in mysql on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Mon, 06 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>Nacos持久化MySQL问题-解决方案</title><link>https://willxwu.github.io/post/problem/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 06 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>&lt;h1 id="nacos持久化mysql问题-解决方案">Nacos持久化MySQL问题-解决方案&lt;/h1>
+&lt;h2 id="一说明">一、说明&lt;/h2>
+&lt;p>环境说明：&lt;/p>
+&lt;p>MySQL：CentOS环境通过Docker部署的MySQL5.7&lt;/p>
+&lt;p>Nacos：2.0.3&lt;/p>
+&lt;p>原始配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### If use MySQL as datasource:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># spring.datasource.platform=mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Count of DB:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.num=1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Connect URL of DB:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.url.0=jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&amp;amp;connectTimeout=1000&amp;amp;socketTimeout=3000&amp;amp;autoReconnect=true&amp;amp;useUnicode=true&amp;amp;useSSL=false&amp;amp;serverTimezone=UTC&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.user.0=nacos&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.password.0=nacos&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MyCat的安装及使用</title><link>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid><description>&lt;h1 id="mycat的安装及使用">MyCat的安装及使用&lt;/h1>
 &lt;h1 id="一mycat的安装">一、MyCat的安装&lt;/h1>
 &lt;h4 id="1环境准备">1、环境准备&lt;/h4>
 &lt;p>​ 本次课程使用的虚拟机环境是centos6.5，首先准备四台虚拟机，安装好mysql，方便后续做读写分离和主从复制。&lt;/p>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>blog on Come Back</title><link>https://willxwu.github.io/tags/blog/</link><description>Recent content in blog on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Mon, 30 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>博客搭建问题记录</title><link>https://willxwu.github.io/post/blog/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/blog/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>博客一直使用firekylin搭建，最近看着typecho活跃度还可以，于是本周末用docker重新搭建了博客。
+一、环境说明 操作系统：CentOS7.6
+技术：Docker、MySQL、PHP、Nginx
+使用工具：Xftp 7、Xshell 7、Notepad++
+博客系统：Typecho
+二、安装步骤 Docker环境搭建 Docker安装MySQL Docker安装PHP Docker安装Nginx 三、遇到问题 安装mysql、php、nginx时，映射文件路径错误，导致安装好后，找不到文件。
+Nginx配置时映射路径错误、80端口自动转发443端口，导致http访问一直追加路径。
+证书路径放置错误。
+Typecho初始化安装时，提示&amp;quot;对不起，无法连接数据库，请先检查数据库配置再继续进行安装&amp;quot;。
+四、解决方案 通过docker log 容器，查看日志，一步步解决。 添加异常提示代码：, $e-&amp;gt;getMessage() instal.php第56行，添加ob_start(); ip地址错误，默认localhost，docker安装时，需要改成公网ip或局域网ip。 未创建typecho数据库。 Nginx配置文件:
+server { listen 443 ssl http2 reuseport; server_name yanxizhu.com www.yanxizhu.com; root /var/www/html/yanxizhu.com; index index.php; ssl on; ssl_certificate /etc/nginx/conf.d/自己证书.crt; ssl_certificate_key /etc/nginx/conf.d/自己证书key.key; ssl_session_cache shared:SSL:1m; ssl_session_timeout 5m; ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_prefer_server_ciphers on; access_log /var/log/nginx/typecho_access.log main; if (!-e $request_filename) { rewrite ^(.*)$ /index.php$1 last; } location ~ .</description></item></channel></rss>

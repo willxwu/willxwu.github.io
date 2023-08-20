@@ -1,4 +1,99 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Come Back</title><link>https://willxwu.github.io/post/</link><description>Recent content in Posts on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 28 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>初识RabbitMQ</title><link>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</link><pubDate>Sat, 28 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</guid><description>&lt;h1 id="rabbitmq作用">RabbitMQ作用&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Come Back</title><link>https://willxwu.github.io/post/</link><description>Recent content in Posts on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Thu, 09 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>提交代码到github</title><link>https://willxwu.github.io/post/git/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</link><pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/git/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</guid><description>create a new repository on the command line. push an existing repository from the command line. import code from another repository You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+create a new repository on the command line git init git add README.md git commit -m &amp;#34;first commit&amp;#34; git branch -M main git remote add origin https://github.com/willxwu/xxx.git git push -u origin main push an existing repository from the command line git remote add origin https://github.</description></item><item><title>线程安全策略</title><link>https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/</link><pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/</guid><description>&lt;p>线程安全策略&lt;/p>
+&lt;h1 id="不可变对象">不可变对象&lt;/h1>
+&lt;p>&lt;strong>不可变对象需要满足的条件：&lt;/strong>
+对象创建以后其状态就不能修改
+对象所有域都是final类型
+对象是正确创建的（在对象创建期间，this引用没有逸出）&lt;/p>
+&lt;hr>
+&lt;h2 id="一final关键字">&lt;strong>一、final关键字&lt;/strong>&lt;/h2>
+&lt;p>final关键字：可修饰类、方法、变量。&lt;/p>
+&lt;p>&lt;strong>修饰类&lt;/strong>：不能被继承&lt;/p>
+&lt;p>&lt;strong>修饰方法&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>锁定方法不被继承类修改；&lt;/li>
+&lt;li>效率&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>修饰变量&lt;/strong>：基本数据类型变量、引用类型变量&lt;/p></description></item><item><title>openFeign远程调用丢失请求头-解决方案</title><link>https://willxwu.github.io/post/problem/openfeign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E4%B8%A2%E5%A4%B1%E8%AF%B7%E6%B1%82%E5%A4%B4/</link><pubDate>Tue, 07 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/openfeign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E4%B8%A2%E5%A4%B1%E8%AF%B7%E6%B1%82%E5%A4%B4/</guid><description>&lt;p>openFeign远程调用丢失请求头&lt;/p>
+&lt;p>feign在远程调用之前要构造请求，调用会经过很多拦截器。丢失请求头原因，是远程调用重新构建了request请求，新的request没有请求头headr。&lt;/p>
+&lt;p>&lt;strong>解决方案：定义一个feign的拦截器&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>先来看一下feign远程调用类SynchronousMethodHandler&lt;/strong>&lt;/p></description></item><item><title>Nacos持久化MySQL问题-解决方案</title><link>https://willxwu.github.io/post/problem/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 06 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>&lt;h1 id="nacos持久化mysql问题-解决方案">Nacos持久化MySQL问题-解决方案&lt;/h1>
+&lt;h2 id="一说明">一、说明&lt;/h2>
+&lt;p>环境说明：&lt;/p>
+&lt;p>MySQL：CentOS环境通过Docker部署的MySQL5.7&lt;/p>
+&lt;p>Nacos：2.0.3&lt;/p>
+&lt;p>原始配置：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-properties" data-lang="properties">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### If use MySQL as datasource:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># spring.datasource.platform=mysql&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Count of DB:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.num=1&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">### Connect URL of DB:&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.url.0=jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding=utf8&amp;amp;connectTimeout=1000&amp;amp;socketTimeout=3000&amp;amp;autoReconnect=true&amp;amp;useUnicode=true&amp;amp;useSSL=false&amp;amp;serverTimezone=UTC&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.user.0=nacos&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># db.password.0=nacos&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Kafka部署及脚本使用</title><link>https://willxwu.github.io/post/centos/kafka%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8/</link><pubDate>Sun, 05 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/kafka%E9%83%A8%E7%BD%B2%E5%8F%8A%E8%84%9A%E6%9C%AC%E4%BD%BF%E7%94%A8/</guid><description>环境版本说明 环境：CentOS7
+版本：JDK1.8、Zookeeper-3.4.14、Kafka2.12-1.0.2
+JDK安装 JDK1.8安装
+rpm -ivh jdk-8u261-linux-x64.rpm 环境变量配置
+vim /etc/profile 最后一行加上配置
+export JAVA_HOME=/usr/java/jdk1.8.0_261-amd64 export PATH=$PATH:$JAVA_HOME/bin jdk验证
+java -version Zookeeper安装 安装
+tar -zxf zookeeper-3.4.14.tar.gz -C /opt 环境变量配置
+vim /etc/profile ZOOKEEPER_PREFIX指向Zookeeper的解压目录
+export ZOOKEEPER_PREFIX=/opt/zookeeper-3.4.14 将Zookeeper的bin目录添加到PATH中
+export PATH=$PATH:$ZOOKEEPER_PREFIX/bin 设置环境变量ZOO_LOG_DIR，指定Zookeeper保存日志的位置
+export ZOO_LOG_DIR=/var/zookeeper/log 使配置生效
+source /etc/profile 修改zookeeper配置
+cd conf cp zoo_sample.cfg zoo.cfg 修改配置文件zoo.cfg
+vi zoo.cfg 修改zookeeper数据存放位置配置
+修改前
+dataDir=/tmp/zookeeper 修改后
+dataDir=/var/zookeeper/data 启动zookeeper
+进入zookeeper安装目录
+=/var/zookeeper/bin 启动zookeeper
+zkServer.sh start 查看zookeeper状态
+zkServer.sh status Kafka安装 安装kafka
+tar -zxf kafka_2.12-1.0.2.tgz -C /opt 修改环境变量</description></item><item><title>K8S集群部署</title><link>https://willxwu.github.io/post/k8s/k8s%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</link><pubDate>Sat, 04 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/k8s/k8s%E9%9B%86%E7%BE%A4%E9%83%A8%E7%BD%B2/</guid><description>&lt;h1 id="k8s集群部署">K8S集群部署&lt;/h1>
+&lt;h1 id="一virtualbox虚拟机搭建">一、VirtualBox虚拟机搭建&lt;/h1>
+&lt;p>通过Oracle VM VirtualBox，Vagrant搭建三台虚拟机。&lt;/p>
+&lt;h2 id="准备工作">准备工作&lt;/h2>
+&lt;h3 id="1准备软件">1、准备软件&lt;/h3>
+&lt;p>CentOS虚拟系统：CentOS-7-x86_64-Vagrant-2004_01.VirtualBox.box&lt;/p>
+&lt;p>虚拟软件(VirtualBox)：VirtualBox-6.1.34-150636-Win.exe&lt;/p>
+&lt;p>Vagrant安装虚拟机软件：vagrant_2.2.19_i686.msi。&lt;/p></description></item><item><title>初识k8s</title><link>https://willxwu.github.io/post/k8s/k8s%E9%83%A8%E7%BD%B2%E7%BC%96%E6%8E%92/</link><pubDate>Fri, 03 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/k8s/k8s%E9%83%A8%E7%BD%B2%E7%BC%96%E6%8E%92/</guid><description>&lt;h1 id="初识k8s">初识k8s&lt;/h1>
+&lt;h1 id="简介">&lt;strong>简介&lt;/strong>：&lt;/h1>
+&lt;p>Kubernetes 简称k8s。是用于自动部署，扩展和管理容器化应用程序的开源系统。
+中文官网：https://kubernetes.io/zh/
+中文社区：https://www.kubernetes.org.cn/
+官方文档：https://kubernetes.io/zh/docs/home/
+社区文档：http://docs.kubernetes.org.cn/&lt;/p>
+&lt;h1 id="部署方式的进化">&lt;strong>部署方式的进化&lt;/strong>&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203112019717.png" alt="">&lt;/p>
+&lt;p>&lt;a href="https://kubernetes.io/zh/docs/concepts/overview/">https://kubernetes.io/zh/docs/concepts/overview/&lt;/a>&lt;/p></description></item><item><title>SSH创建</title><link>https://willxwu.github.io/post/git/ssh%E5%88%9B%E5%BB%BA/</link><pubDate>Thu, 02 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/git/ssh%E5%88%9B%E5%BB%BA/</guid><description>1. 设置Git用user name和email git config --global user.name &amp;#34;XXX&amp;#34; git config --global user.email &amp;#34;XXX@gmail.com&amp;#34; 2. 生成密钥 ssh-keygen -t rsa -C &amp;#34;XXX@gmail.com&amp;#34; 中间连续3次Enter键.
+3. 测试SSH key是否设置成功 ssh -T git@github.com 出现下面提示直接输入yes.
+The authenticity of host &amp;#39;github.com (192.30.253.113)&amp;#39; can&amp;#39;t be established. RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8. Are you sure you want to continue connecting (yes/no)? yes 输出如下，则表示通过.
+Hi xxxx! You&amp;#39;ve successfully authenticated, but GitHub does not provide shell access. 使用时，会根据本地git密钥信息与git或者coding仓库密钥信息比对，本地上传时会提示登录。</description></item><item><title>Widnows常用命令</title><link>https://willxwu.github.io/post/tool/widnows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link><pubDate>Wed, 01 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/tool/widnows%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid><description>Widnows常用命令 查看所有端口号情况
+netstat -ano 搜索查看指定端口
+netstat -ano|findstr 端口号 查看所有程序占用端口信息
+tasklist 搜索指定端口被那个程序占用
+tasklist|findstr 端口号</description></item><item><title>Docker启动Jenkins报错</title><link>https://willxwu.github.io/post/problem/iptables-failed-iptables--wait-t-nat-a-docker-p-tcp-d-00--dport-10241-j-dnat--to-destination-172/</link><pubDate>Tue, 31 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/iptables-failed-iptables--wait-t-nat-a-docker-p-tcp-d-00--dport-10241-j-dnat--to-destination-172/</guid><description>iptables failed: iptables &amp;ndash;wait -t nat -A DOCKER -p tcp -d 0/0 &amp;ndash;dport 10241 -j DNAT &amp;ndash;to-destination 172.17.0.5:50000 ! -i docker0: iptables: No chain/target/match by that name.
+docker启动Jenkins报错：
+iptables failed: iptables --wait -t nat -A DOCKER -p tcp -d 0/0 --dport 10241 -j DNAT --to-destination 172.17.0.5:50000 ! -i docker0: iptables: No chain/target/match by that name. 解决办法：重启docker
+systemctl restart docker</description></item><item><title>博客搭建问题记录</title><link>https://willxwu.github.io/post/blog/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 30 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/blog/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>博客一直使用firekylin搭建，最近看着typecho活跃度还可以，于是本周末用docker重新搭建了博客。
+一、环境说明 操作系统：CentOS7.6
+技术：Docker、MySQL、PHP、Nginx
+使用工具：Xftp 7、Xshell 7、Notepad++
+博客系统：Typecho
+二、安装步骤 Docker环境搭建 Docker安装MySQL Docker安装PHP Docker安装Nginx 三、遇到问题 安装mysql、php、nginx时，映射文件路径错误，导致安装好后，找不到文件。
+Nginx配置时映射路径错误、80端口自动转发443端口，导致http访问一直追加路径。
+证书路径放置错误。
+Typecho初始化安装时，提示&amp;quot;对不起，无法连接数据库，请先检查数据库配置再继续进行安装&amp;quot;。
+四、解决方案 通过docker log 容器，查看日志，一步步解决。 添加异常提示代码：, $e-&amp;gt;getMessage() instal.php第56行，添加ob_start(); ip地址错误，默认localhost，docker安装时，需要改成公网ip或局域网ip。 未创建typecho数据库。 Nginx配置文件:
+server { listen 443 ssl http2 reuseport; server_name yanxizhu.com www.yanxizhu.com; root /var/www/html/yanxizhu.com; index index.php; ssl on; ssl_certificate /etc/nginx/conf.d/自己证书.crt; ssl_certificate_key /etc/nginx/conf.d/自己证书key.key; ssl_session_cache shared:SSL:1m; ssl_session_timeout 5m; ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_prefer_server_ciphers on; access_log /var/log/nginx/typecho_access.log main; if (!-e $request_filename) { rewrite ^(.*)$ /index.php$1 last; } location ~ .</description></item><item><title>keytool证书导入</title><link>https://willxwu.github.io/post/problem/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</link><pubDate>Sun, 29 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/keytool%E8%AF%81%E4%B9%A6%E5%AF%BC%E5%85%A5/</guid><description>最近项目对接时，中间B2B服务切换了域名，导致现有项目调用接口地址需要进行切换为https，同时需要安装SSL证书，这里记录一下JAVA工具keytool导入证书的过程。
+一、问题点 切换域名后加上https，未导入证书报错:
+[ERROR] - [2022-02-25 08:49:40.861] - [http-nio-9999-exec-1] - [DealParamAction.java:needConfirmAction:133] - no confirm method, call actual method = getNSDDtailByInterface [INFO ] - [2022-02-25 08:50:04.483] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:439] - I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect [INFO ] - [2022-02-25 08:50:04.484] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:445] - Retrying request [INFO ] - [2022-02-25 08:50:25.487] - [http-nio-9999-exec-1] - [HttpMethodDirector.java:executeWithRetry:439] - I/O exception (java.net.ConnectException) caught when processing request: Connection timed out: connect [INFO ] - [2022-02-25 08:50:25.</description></item><item><title>初识RabbitMQ</title><link>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</link><pubDate>Sat, 28 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</guid><description>&lt;h1 id="rabbitmq作用">RabbitMQ作用&lt;/h1>
 &lt;p>&lt;strong>异步处理、应用解耦、流量控制&lt;/strong>&lt;/p>
 &lt;h1 id="概述">概述&lt;/h1>
 &lt;p>1、大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力&lt;/p>
@@ -967,14 +1062,4 @@ Collections.synchronizedXXX（List、Set、Map）&lt;/p>
 &lt;li>
 &lt;p>标签&amp;lt;&amp;gt;&lt;/p>
 &lt;/li>
-&lt;/ol></description></item><item><title/><link>https://willxwu.github.io/post/blog/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/blog/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>博客一直使用firekylin搭建，最近看着typecho活跃度还可以，于是本周末用docker重新搭建了博客。
-一、环境说明 操作系统：CentOS7.6
-技术：Docker、MySQL、PHP、Nginx
-使用工具：Xftp 7、Xshell 7、Notepad++
-博客系统：Typecho
-二、安装步骤 Docker环境搭建 Docker安装MySQL Docker安装PHP Docker安装Nginx 三、遇到问题 安装mysql、php、nginx时，映射文件路径错误，导致安装好后，找不到文件。
-Nginx配置时映射路径错误、80端口自动转发443端口，导致http访问一直追加路径。
-证书路径放置错误。
-Typecho初始化安装时，提示&amp;quot;对不起，无法连接数据库，请先检查数据库配置再继续进行安装&amp;quot;。
-四、解决方案 通过docker log 容器，查看日志，一步步解决。 添加异常提示代码：, $e-&amp;gt;getMessage() instal.php第56行，添加ob_start(); ip地址错误，默认localhost，docker安装时，需要改成公网ip或局域网ip。 未创建typecho数据库。 Nginx配置文件:
-server { listen 443 ssl http2 reuseport; server_name yanxizhu.com www.yanxizhu.com; root /var/www/html/yanxizhu.com; index index.php; ssl on; ssl_certificate /etc/nginx/conf.d/自己证书.crt; ssl_certificate_key /etc/nginx/conf.d/自己证书key.key; ssl_session_cache shared:SSL:1m; ssl_session_timeout 5m; ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4; ssl_protocols TLSv1 TLSv1.1 TLSv1.2; ssl_prefer_server_ciphers on; access_log /var/log/nginx/typecho_access.log main; if (!-e $request_filename) { rewrite ^(.*)$ /index.php$1 last; } location ~ .</description></item></channel></rss>
+&lt;/ol></description></item></channel></rss>

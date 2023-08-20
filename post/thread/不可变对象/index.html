@@ -1,0 +1,180 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>线程安全策略</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="线程安全策略
+不可变对象 不可变对象需要满足的条件： 对象创建以后其状态就不能修改 对象所有域都是final类型 对象是正确创建的（在对象创建期间，this引用没有逸出）
+一、final关键字 final关键字：可修饰类、方法、变量。
+修饰类：不能被继承
+修饰方法：
+锁定方法不被继承类修改； 效率 修饰变量：基本数据类型变量、引用类型变量
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="线程安全策略"><meta name=twitter:description content="线程安全策略
+不可变对象 不可变对象需要满足的条件： 对象创建以后其状态就不能修改 对象所有域都是final类型 对象是正确创建的（在对象创建期间，this引用没有逸出）
+一、final关键字 final关键字：可修饰类、方法、变量。
+修饰类：不能被继承
+修饰方法：
+锁定方法不被继承类修改； 效率 修饰变量：基本数据类型变量、引用类型变量
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="线程安全策略"><meta property="og:description" content="线程安全策略
+不可变对象 不可变对象需要满足的条件： 对象创建以后其状态就不能修改 对象所有域都是final类型 对象是正确创建的（在对象创建期间，this引用没有逸出）
+一、final关键字 final关键字：可修饰类、方法、变量。
+修饰类：不能被继承
+修饰方法：
+锁定方法不被继承类修改； 效率 修饰变量：基本数据类型变量、引用类型变量
+"><meta property="og:url" content="https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>线程安全策略</h1><p class=post-meta>@Come Back · Jun 8, 2022 · 2 min read</p></header><article class=post-content><p>线程安全策略</p><h1 id=不可变对象>不可变对象</h1><p><strong>不可变对象需要满足的条件：</strong>
+对象创建以后其状态就不能修改
+对象所有域都是final类型
+对象是正确创建的（在对象创建期间，this引用没有逸出）</p><hr><h2 id=一final关键字><strong>一、final关键字</strong></h2><p>final关键字：可修饰类、方法、变量。</p><p><strong>修饰类</strong>：不能被继承</p><p><strong>修饰方法</strong>：</p><ol><li>锁定方法不被继承类修改；</li><li>效率</li></ol><p><strong>修饰变量</strong>：基本数据类型变量、引用类型变量</p><p><strong>代码示例</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.finals<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.google.common.collect.Maps<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Map<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 不可变对象 final修饰
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/22 20:35
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@UnThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoFinal</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//普通类型，final修饰后，修改直接提示错误
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> Integer a <span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//普通类型，final修饰后，修改直接提示错误
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> String b <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;hello&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//final修饰后不能在执行新的对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> Map<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span> map <span style=color:#f92672>=</span> Maps<span style=color:#f92672>.</span><span style=color:#a6e22e>newHashMap</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> 2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>2<span style=color:#f92672>,</span> 3<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>4<span style=color:#f92672>,</span> 5<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//指向新的对象，直接报错
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        map = new Maps.newHashMap();
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//值可以修改，但是线程不安全
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> 6<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;{}&#34;</span><span style=color:#f92672>,</span> map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 输出结果：- 6
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//fina修饰形参，传入后也不能修改
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>test</span><span style=color:#f92672>(</span><span style=color:#66d9ef>final</span> <span style=color:#66d9ef>int</span> a<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//报错
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        a =2;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#f92672>-</span> 6
+</span></span></code></pre></div><h2 id=二collectionsunmodifiablexxxxx>二、Collections.unmodifiableXXXXX</h2><p><strong>代码示例</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.finals<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.google.common.collect.Maps<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Collections<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Map<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: Collections.unmodifiableXXXXX,值是不能修改的，但是是线程安全的
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/22 21:12
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@UnThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoCollections</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> Map<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span> map <span style=color:#f92672>=</span> Maps<span style=color:#f92672>.</span><span style=color:#a6e22e>newHashMap</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>static</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> 2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>3<span style=color:#f92672>,</span> 4<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>5<span style=color:#f92672>,</span> 6<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        map <span style=color:#f92672>=</span> Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>unmodifiableMap</span><span style=color:#f92672>(</span>map<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> 8<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;{}&#34;</span><span style=color:#f92672>,</span> map<span style=color:#f92672>.</span><span style=color:#a6e22e>get</span><span style=color:#f92672>(</span>1<span style=color:#f92672>));</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Exception in thread <span style=color:#e6db74>&#34;main&#34;</span> java<span style=color:#f92672>.</span><span style=color:#a6e22e>lang</span><span style=color:#f92672>.</span><span style=color:#a6e22e>UnsupportedOperationException</span>
+</span></span><span style=display:flex><span>	at java<span style=color:#f92672>.</span><span style=color:#a6e22e>base</span><span style=color:#f92672>/</span>java<span style=color:#f92672>.</span><span style=color:#a6e22e>util</span><span style=color:#f92672>.</span><span style=color:#a6e22e>Collections$UnmodifiableMap</span><span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>Collections<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>1457<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>	at com<span style=color:#f92672>.</span><span style=color:#a6e22e>yanxizhu</span><span style=color:#f92672>.</span><span style=color:#a6e22e>demo</span><span style=color:#f92672>.</span><span style=color:#a6e22e>concurrency</span><span style=color:#f92672>.</span><span style=color:#a6e22e>finals</span><span style=color:#f92672>.</span><span style=color:#a6e22e>DemoCollections</span><span style=color:#f92672>.</span><span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>DemoCollections<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>28<span style=color:#f92672>)</span>
+</span></span></code></pre></div><p>Collections.unmodifiableXXXXX创建的不能修改，修改提示"UnsupportedOperationException"。但是是线程安全的。</p><p>常见方法有</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202204222124198.png alt></p><h2 id=三google的guava工具类immutablexxx>三、google的Guava工具类，ImmutableXXX</h2><p>代码示例</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.finals<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.google.common.collect.ImmutableList<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.google.common.collect.ImmutableMap<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.google.common.collect.ImmutableSet<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: google Guava工具类实现对象不可变，线程安全，但是不能修改值
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/22 21:39
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoGuavaImmutableXXX</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//ImmutableList会提示不能修改,建议用这个
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> ImmutableList list <span style=color:#f92672>=</span> ImmutableList<span style=color:#f92672>.</span><span style=color:#a6e22e>of</span><span style=color:#f92672>(</span>2<span style=color:#f92672>,</span>3<span style=color:#f92672>,</span>5<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//list不会提示不能修改
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//    private final static List&lt;Integer&gt; list = ImmutableList.of(2,3,5);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//set同理不能修改值
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> ImmutableSet set <span style=color:#f92672>=</span> ImmutableSet<span style=color:#f92672>.</span><span style=color:#a6e22e>copyOf</span><span style=color:#f92672>(</span>list<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//map方式一，map用法有点区别，是key，value的形式                                           //（key1,value1,key2,value2,.......）
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> ImmutableMap<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span> map <span style=color:#f92672>=</span> ImmutableMap<span style=color:#f92672>.</span><span style=color:#a6e22e>of</span><span style=color:#f92672>(</span>1<span style=color:#f92672>,</span>2<span style=color:#f92672>,</span>3<span style=color:#f92672>,</span>4<span style=color:#f92672>,</span>5<span style=color:#f92672>,</span>6<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//map方法二,初始值有点不同
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>static</span> ImmutableMap<span style=color:#f92672>&lt;</span>Integer<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span> map2 <span style=color:#f92672>=</span> ImmutableMap<span style=color:#f92672>.&lt;</span>Integer<span style=color:#f92672>,</span> Integer<span style=color:#f92672>&gt;</span>builder<span style=color:#f92672>().</span>
+</span></span><span style=display:flex><span>            put<span style=color:#f92672>(</span>1<span style=color:#f92672>,</span> 2<span style=color:#f92672>).</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>3<span style=color:#f92672>,</span> 4<span style=color:#f92672>).</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>5<span style=color:#f92672>,</span> 6<span style=color:#f92672>).</span><span style=color:#a6e22e>build</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//提示错误：UnsupportedOperationException
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        list.add(4);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//set同样会提示不能修改,提示&#34;.UnsupportedOperationException&#34;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        set.add(4);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//map同理，不能修改值，否则也提示 UnsupportedOperationException
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        map<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>3<span style=color:#f92672>,</span> 2<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Exception in thread <span style=color:#e6db74>&#34;main&#34;</span> java<span style=color:#f92672>.</span><span style=color:#a6e22e>lang</span><span style=color:#f92672>.</span><span style=color:#a6e22e>UnsupportedOperationException</span>
+</span></span><span style=display:flex><span>	at com<span style=color:#f92672>.</span><span style=color:#a6e22e>google</span><span style=color:#f92672>.</span><span style=color:#a6e22e>common</span><span style=color:#f92672>.</span><span style=color:#a6e22e>collect</span><span style=color:#f92672>.</span><span style=color:#a6e22e>ImmutableMap</span><span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span>ImmutableMap<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>780<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>	at com<span style=color:#f92672>.</span><span style=color:#a6e22e>yanxizhu</span><span style=color:#f92672>.</span><span style=color:#a6e22e>demo</span><span style=color:#f92672>.</span><span style=color:#a6e22e>concurrency</span><span style=color:#f92672>.</span><span style=color:#a6e22e>finals</span><span style=color:#f92672>.</span><span style=color:#a6e22e>DemoGuavaImmutableXXX</span><span style=color:#f92672>.</span><span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>DemoGuavaImmutableXXX<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>40<span style=color:#f92672>)</span>
+</span></span></code></pre></div><p>注意：是不能修改，读取是没问题的。</p><p>使用不可变对象时，注意实际业务看法种，对象是否不可以变，不可变才使用上面3种方法，实现不可变对象。</p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/thread><span class=tag>Thread</span></a></li><li><a href=https://willxwu.github.io/tags/%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8><span class=tag>线程安全</span></a></li><li><a href=https://willxwu.github.io/tags/%E7%AD%96%E7%95%A5><span class=tag>策略</span></a></li><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/javase><span class=tag>Javase</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>438</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
