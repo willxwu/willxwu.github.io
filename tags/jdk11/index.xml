@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>JDK11 on Come Back</title><link>https://willxwu.github.io/tags/jdk11/</link><description>Recent content in JDK11 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sun, 01 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/jdk11/index.xml" rel="self" type="application/rss+xml"/><item><title>CentOS环境JDK11安装</title><link>https://willxwu.github.io/post/centos/centos%E7%8E%AF%E5%A2%83jdk11%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E7%8E%AF%E5%A2%83jdk11%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="centos环境jdk11安装">CentOS环境JDK11安装&lt;/h1>
+&lt;h2 id="1下载">1、下载&lt;/h2>
+&lt;p>JDK11下载地址：https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html&lt;/p>
+&lt;h2 id="2路径">2、路径&lt;/h2>
+&lt;p>创建jdk安装文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /usr/local/java
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3安装">3、安装&lt;/h2>
+&lt;p>进入下载的jdk所在目录，执行安装命令。&lt;/p></description></item></channel></rss>

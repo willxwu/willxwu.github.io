@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Explain on Come Back</title><link>https://willxwu.github.io/tags/explain/</link><description>Recent content in Explain on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 14 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/explain/index.xml" rel="self" type="application/rss+xml"/><item><title>MySQL优化</title><link>https://willxwu.github.io/post/mysql/mysql%E4%BC%98%E5%8C%96/</link><pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mysql%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="索引">索引&lt;/h1>
+&lt;h2 id="一全表扫描">&lt;strong>一、全表扫描&lt;/strong>&lt;/h2>
+&lt;p>没有使用索引的时候，数据的查询需要进行多次IO读写，这样的性能较差——全表扫描的过程。&lt;/p>
+&lt;h2 id="二索引">&lt;strong>二、索引&lt;/strong>&lt;/h2>
+&lt;p>为数据库的某个字段创建索引，相当是为这个字段的内容创建了一个目录。通过这个目录可以快速的实现数据的定位，也就是通过索引能够快速的找到某条数据所在磁盘的位置。&lt;/p>
+&lt;h2 id="三索引存放位置">&lt;strong>三、索引存放位置&lt;/strong>&lt;/h2></description></item></channel></rss>

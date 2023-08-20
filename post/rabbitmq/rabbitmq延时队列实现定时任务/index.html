@@ -1,0 +1,201 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>RabbitMQ延时队列</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="RabbitMQ延时队列（实现定时任务） 场景： 比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 常用解决方案： spring的 schedule 定时任务轮询数据库 缺点： 消耗系统内存、增加了数据库的压力、存在较大的时间误差 解决：rabbitmq的消息TTL和死信Exchange结合
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="RabbitMQ延时队列"><meta name=twitter:description content="RabbitMQ延时队列（实现定时任务） 场景： 比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 常用解决方案： spring的 schedule 定时任务轮询数据库 缺点： 消耗系统内存、增加了数据库的压力、存在较大的时间误差 解决：rabbitmq的消息TTL和死信Exchange结合
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="RabbitMQ延时队列"><meta property="og:description" content="RabbitMQ延时队列（实现定时任务） 场景： 比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 常用解决方案： spring的 schedule 定时任务轮询数据库 缺点： 消耗系统内存、增加了数据库的压力、存在较大的时间误差 解决：rabbitmq的消息TTL和死信Exchange结合
+"><meta property="og:url" content="https://willxwu.github.io/post/rabbitmq/rabbitmq%E5%BB%B6%E6%97%B6%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/rabbitmq/rabbitmq%E5%BB%B6%E6%97%B6%E9%98%9F%E5%88%97%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>RabbitMQ延时队列</h1><p class=post-meta>@Come Back · May 18, 2022 · 2 min read</p></header><article class=post-content><h1 id=rabbitmq延时队列实现定时任务>RabbitMQ延时队列（实现定时任务）</h1><p>场景： 比如未付款订单，超过一定时间后，系统自动取消订单并释放占有物品。 常用解决方案： spring的 schedule 定时任务轮询数据库 缺点： 消耗系统内存、增加了数据库的压力、存在较大的时间误差 解决：rabbitmq的消息TTL和死信Exchange结合</p><p><strong>消息的TTL（Time To Live)</strong></p><p>• 消息的TTL就是消息的存活时间。
+• RabbitMQ可以对队列和消息分别设置TTL。
+• 对队列设置就是队列没有消费者连着的保留时间，也可以对每一个单独的消息做单独的
+设置。超过了这个时间，我们认为这个消息就死了，称之为死信。
+• 如果队列设置了，消息也设置了，那么会取小的。所以一个消息如果被路由到不同的队
+列中，这个消息死亡的时间有可能不一样（不同的队列设置）。这里单讲单个消息的
+TTL，因为它才是实现延迟任务的关键。可以通过设置消息的expiration字段或者x- message-ttl属性来设置时间，两者是一样的效果。</p><p><strong>Dead Letter Exchanges（DLX）</strong></p><p>• 一个消息在满足如下条件下，会进死信路由，记住这里是路由而不是队列，
+一个路由可以对应很多队列。（什么是死信）
+• 一个消息被Consumer拒收了，并且reject方法的参数里requeue是false。也就是说不
+会被再次放在队列里，被其他消费者使用。（basic.reject/ basic.nack）requeue=false
+• 上面的消息的TTL到了，消息过期了。
+• 队列的长度限制满了。排在前面的消息会被丢弃或者扔到死信路由上
+• Dead Letter Exchange其实就是一种普通的exchange，和创建其他
+exchange没有两样。只是在某一个设置Dead Letter Exchange的队列中有
+消息过期了，会自动触发消息的转发，发送到Dead Letter Exchange中去。
+• 我们既可以控制消息在一段时间后变成死信，又可以控制变成死信的消息
+被路由到某一个指定的交换机，结合二者，其实就可以实现一个延时队列</p><p>• 手动ack&异常消息统一放在一个队列处理建议的两种方式
+• catch异常后，手动发送到指定队列，然后使用channel给rabbitmq确认消息已消费
+• 给Queue绑定死信队列，使用nack（requque为false）确认消息消费失败</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203131534378.png alt></p><p><strong>延时队列实现</strong></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203131535117.png alt></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203131535510.png alt></p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203131536501.png alt></p><h1 id=springboot中使用延时队列>SpringBoot中使用延时队列</h1><p>• 1、Queue、Exchange、Binding可以@Bean进去
+• 2、监听消息的方法可以有三种参数（不分数量，顺序）
+• Object content, Message message, Channel channel
+• 3、channel可以用来拒绝消息，否则自动ack；</p><h1 id=代码实现>代码实现</h1><p>发送消息到MQ：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.rabbit.core.RabbitTemplate<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.beans.factory.annotation.Autowired<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.web.bind.annotation.GetMapping<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.web.bind.annotation.ResponseBody<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.web.bind.annotation.RestController<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Date<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.UUID<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: TODO
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/3/13 15:41
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@RestController</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RabbitMQControoler</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    RabbitTemplate rabbitTemplate<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ResponseBody</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@GetMapping</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;/createOrder&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>sendMessage</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        OrderEntity entity <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> OrderEntity<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        entity<span style=color:#f92672>.</span><span style=color:#a6e22e>setOrderEn</span><span style=color:#f92672>(</span>UUID<span style=color:#f92672>.</span><span style=color:#a6e22e>randomUUID</span><span style=color:#f92672>().</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        entity<span style=color:#f92672>.</span><span style=color:#a6e22e>setModifyTime</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Date<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送消息到MQ
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>convertAndSend</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;order-event-exchange&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;order.create.order&#34;</span><span style=color:#f92672>,</span>entity<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;OK&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>通过延迟队列，将延迟的订单，发送到另一个队列，通过监听过期延迟的队列,接收延迟的订单。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> com.rabbitmq.client.Channel<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.core.*<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.rabbit.annotation.RabbitListener<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Bean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Configuration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.io.IOException<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.HashMap<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Map<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 延迟队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/3/13 13:27
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyRabbitMQConfig</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@RabbitListener</span><span style=color:#f92672>(</span>queues<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;order.release.order.queue&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>listener</span><span style=color:#f92672>(</span>OrderEntity entity<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>,</span> Message message<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IOException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;收到过期的订单信息：准备关闭订单&#34;</span><span style=color:#f92672>+</span>entity<span style=color:#f92672>.</span><span style=color:#a6e22e>getOrderSn</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        channel<span style=color:#f92672>.</span><span style=color:#a6e22e>basicAck</span><span style=color:#f92672>(</span>message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getDeliveryTag</span><span style=color:#f92672>(),</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 容器中的Binding、Queue、Exchange都会自动创建(RabbitMQ没有的情况)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//死信队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Queue <span style=color:#a6e22e>orderDelayQueue</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> Object<span style=color:#f92672>&gt;</span> arguments <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        arguments<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;x-dead-Letter-exchange&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;order-event-exchange&#34;</span><span style=color:#f92672>);</span><span style=color:#75715e>//交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        arguments<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;x-dead-letter-routing-key&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;order.release.order&#34;</span><span style=color:#f92672>);</span><span style=color:#75715e>//路由键
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        arguments<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;x-message-ttl&#34;</span><span style=color:#f92672>,</span> 60000<span style=color:#f92672>);</span><span style=color:#75715e>//过期时间
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//public Queue(String name, boolean durable, boolean exclusive, boolean autoDelete, @Nullable Map&lt;String, Object&gt; arguments)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Queue queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Queue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;order.delay.queue&#34;</span><span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span>arguments<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> queue<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//最后过期的队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Queue <span style=color:#a6e22e>orderReleaseQueue</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        Queue queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Queue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;order.release.order.queue&#34;</span><span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> queue<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Exchange <span style=color:#a6e22e>orderEventExchange</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TopicExchange<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;order-event-exchange&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//绑定交换机和死信队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Binding <span style=color:#a6e22e>orderCreateOrderBingding</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//public Binding(String destination, Binding.DestinationType destinationType, String exchange, String routingKey, @Nullable Map&lt;String, Object&gt; arguments)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Binding<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;order-event-exchange&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                Binding<span style=color:#f92672>.</span><span style=color:#a6e22e>DestinationType</span><span style=color:#f92672>.</span><span style=color:#a6e22e>QUEUE</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;order-event-exchange&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;order.create.order&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//绑定交换机和最后过期的队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Binding <span style=color:#a6e22e>orderReleaseOrderBingding</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Binding<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;order-event-exchange&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                Binding<span style=color:#f92672>.</span><span style=color:#a6e22e>DestinationType</span><span style=color:#f92672>.</span><span style=color:#a6e22e>QUEUE</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;order.release.order.queue&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;order.release.order&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h1 id=如何保证消息可靠性-消息丢失>如何保证消息可靠性-消息丢失</h1><p>• 1、消息丢失
+• 消息发送出去，由于网络问题没有抵达服务器
+• 做好容错方法（try-catch），发送消息可能会网络失败，失败后要有重试机
+制，可记录到数据库，采用定期扫描重发的方式
+• 做好日志记录，每个消息状态是否都被服务器收到都应该记录
+• 做好定期重发，如果消息没有发送成功，定期去数据库扫描未成功的消息进
+行重发
+• 消息抵达Broker，Broker要将消息写入磁盘（持久化）才算成功。此时Broker尚
+未持久化完成，宕机。
+• publisher也必须加入确认回调机制，确认成功的消息，修改数据库消息状态。
+• 自动ACK的状态下。消费者收到消息，但没来得及消息然后宕机
+• 一定开启手动ACK，消费成功才移除，失败或者没来得及处理就noAck并重
+新入队</p><h1 id=如何保证消息可靠性-消息重复>如何保证消息可靠性-消息重复</h1><p>• 2、消息重复
+• 消息消费成功，事务已经提交，ack时，机器宕机。导致没有ack成功，Broker的消息
+重新由unack变为ready，并发送给其他消费者
+• 消息消费失败，由于重试机制，自动又将消息发送出去
+• 成功消费，ack时宕机，消息由unack变为ready，Broker又重新发送
+• 消费者的业务消费接口应该设计为幂等性的。比如扣库存有
+工作单的状态标志
+• 使用防重表（redis/mysql），发送消息每一个都有业务的唯
+一标识，处理过就不用处理
+• rabbitMQ的每一个消息都有redelivered字段，可以获取是否
+是被重新投递过来的，而不是第一次投递过来的</p><p>• 2、消息重复
+• 消息消费成功，事务已经提交，ack时，机器宕机。导致没有ack成功，Broker的消息
+重新由unack变为ready，并发送给其他消费者
+• 消息消费失败，由于重试机制，自动又将消息发送出去
+• 成功消费，ack时宕机，消息由unack变为ready，Broker又重新发送
+• 消费者的业务消费接口应该设计为幂等性的。比如扣库存有
+工作单的状态标志
+• 使用防重表（redis/mysql），发送消息每一个都有业务的唯
+一标识，处理过就不用处理
+• rabbitMQ的每一个消息都有redelivered字段，可以获取是否</p><h1 id=是被重新投递过来的而不是第一次投递过来的>是被重新投递过来的，而不是第一次投递过来的</h1><p>• 3、消息积压
+• 消费者宕机积压
+• 消费者消费能力不足积压
+• 发送者发送流量太大
+• 上线更多的消费者，进行正常消费
+• 上线专门的队列消费服务，将消息先批量取出来，记录数据库，离线慢慢处理</p><p>代码使用，请参考<a href=https://www.yanxizhu.com/index.php/archives/89/>RabbitMQ运行机制</a> 安装请参考<a href=https://www.yanxizhu.com/index.php/archives/86/>docker安装RabbitMQ</a> 学习RabbitMQ请参看<a href=https://www.yanxizhu.com/index.php/archives/85/>初识RabbitMQ</a></p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/rabbitmq><span class=tag>RabbitMQ</span></a></li><li><a href=https://willxwu.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6><span class=tag>中间件</span></a></li><li><a href=https://willxwu.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6><span class=tag>消息中间件</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1><span class=tag>定时任务</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>459</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

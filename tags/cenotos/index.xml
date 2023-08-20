@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CenotOS on Come Back</title><link>https://willxwu.github.io/tags/cenotos/</link><description>Recent content in CenotOS on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/cenotos/index.xml" rel="self" type="application/rss+xml"/><item><title>CentOS pstree安装</title><link>https://willxwu.github.io/post/centos/pstree%E5%AE%89%E8%A3%85/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/pstree%E5%AE%89%E8%A3%85/</guid><description>pstree安装 1、在 Mac OS上
+brew install pstree 2、在 Fedora/Red Hat/CentOS
+yum -y install psmisc 3、在 Ubuntu/Debian
+apt-get install psmisc ps显示各进程关系，列入：查看nginx进程关系。
+ps aux | grep nginx 像一棵树一样展示。</description></item><item><title>mysql-5.7.33-winx64.zip安装</title><link>https://willxwu.github.io/post/centos/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</link><pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="mysql-5733-winx64zip安装">mysql-5.7.33-winx64.zip安装&lt;/h1>
+&lt;h1 id="一解压到安装目录">一、解压到安装目录&lt;/h1>
+&lt;h1 id="二编写配置文件myini">二、编写配置文件my.ini&lt;/h1>
+&lt;p>将编写好的配置文件放到mysql-5.7.33-winx64根目录下。&lt;/p>
+&lt;p>配置文件如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>mysql&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql客户端默认字符集&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default-character-set&lt;span style="color:#f92672">=&lt;/span>utf8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>mysqld&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置3306端口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3306&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql的安装目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>basedir &lt;span style="color:#f92672">=&lt;/span> D:&lt;span style="color:#ae81ff">\\&lt;/span>tools&lt;span style="color:#ae81ff">\m&lt;/span>ysql-5.7.33-winx64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql数据库的数据的存放目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datadir &lt;span style="color:#f92672">=&lt;/span> D:&lt;span style="color:#ae81ff">\\&lt;/span>tools&lt;span style="color:#ae81ff">\m&lt;/span>ysql-5.7.33-winx64&lt;span style="color:#ae81ff">\d&lt;/span>ata
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 允许最大连接数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>max_connections&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">20&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 服务端使用的字符集默认为8比特编码的latin1字符集&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>character-set-server&lt;span style="color:#f92672">=&lt;/span>utf8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建新表时将使用的默认存储引擎&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default-storage-engine&lt;span style="color:#f92672">=&lt;/span>INNODB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CentOS安装hugo</title><link>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85hugo/</link><pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85hugo/</guid><description>CentOS安装hugo 1、yum无法直接安装hugo，首先添加repo
+[daftaupe-hugo] name=Copr repo for hugo owned by daftaupe baseurl=https://copr-be.cloud.fedoraproject.org/results/daftaupe/hugo/epel-7-$basearch/ type=rpm-md skip_if_unavailable=True gpgcheck=1 gpgkey=https://copr-be.cloud.fedoraproject.org/results/daftaupe/hugo/pubkey.gpg repo_gpgcheck=0 enabled=1 2、安装hugo
+yum -y install hugo 3、创建博客
+hugo new site blog</description></item><item><title>CentOS环境JDK11安装</title><link>https://willxwu.github.io/post/centos/centos%E7%8E%AF%E5%A2%83jdk11%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E7%8E%AF%E5%A2%83jdk11%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="centos环境jdk11安装">CentOS环境JDK11安装&lt;/h1>
+&lt;h2 id="1下载">1、下载&lt;/h2>
+&lt;p>JDK11下载地址：https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html&lt;/p>
+&lt;h2 id="2路径">2、路径&lt;/h2>
+&lt;p>创建jdk安装文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /usr/local/java
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3安装">3、安装&lt;/h2>
+&lt;p>进入下载的jdk所在目录，执行安装命令。&lt;/p></description></item><item><title>CentOS安装Sentinel设置自启动</title><link>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/</link><pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/</guid><description>&lt;h1 id="centos安装sentinel设置自启动">CentOS安装Sentinel设置自启动&lt;/h1>
+&lt;h2 id="1下载">1、下载&lt;/h2>
+&lt;p>下载地址https://github.com/alibaba/Sentinel/releases&lt;/p>
+&lt;h2 id="2安装">2、安装&lt;/h2>
+&lt;p>提前创建好安装路径、Jar包存放文件夹、脚本执行文件夹、日志存放文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /usr/local/ sentinel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel jar
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CenotOS环境Nacos安装，设置开机自启动</title><link>https://willxwu.github.io/post/centos/cenotos%E7%8E%AF%E5%A2%83nacos%E5%AE%89%E8%A3%85/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/cenotos%E7%8E%AF%E5%A2%83nacos%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="cenotos环境nacos安装设置开机自启动">CenotOS环境Nacos安装，设置开机自启动&lt;/h1>
+&lt;h1 id="1下载">1、下载&lt;/h1>
+&lt;p>nacos下载地址：https://github.com/alibaba/nacos/releases&lt;/p>
+&lt;h1 id="2安装">2、安装&lt;/h1>
+&lt;p>进入nacos所在目录，执行如下命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tar -zxvf nacos-server-2.0.3.tar.gz -C /usr/local/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="3单机启动">3、单机启动&lt;/h1>
+&lt;p>修改/usr/local/nacos/bin目录下startup.sh启动文件设置单机启动，修改export MODE=&amp;ldquo;cluster&amp;quot;值为standalone&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>export MODE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;standalone&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

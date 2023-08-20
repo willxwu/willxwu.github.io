@@ -1,0 +1,546 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>ES6语法</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="ES6语法 一、let &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=edge&amp;#34;&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;script&amp;gt; // { // //var 声明的变量往往会跨域 // //let 声明的变量有严格局部作用域 // var a = 1; // let b = 2; // } // console.log(a); //1 // console.log(b); //Uncaught ReferenceError: b is not defined // //var 可以声明多次 // //let 只能声明一次 // var m = 3; // var m = 4; // let n = 5; // // let n=5; // console."><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="ES6语法"><meta name=twitter:description content="ES6语法 一、let &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=edge&amp;#34;&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;script&amp;gt; // { // //var 声明的变量往往会跨域 // //let 声明的变量有严格局部作用域 // var a = 1; // let b = 2; // } // console.log(a); //1 // console.log(b); //Uncaught ReferenceError: b is not defined // //var 可以声明多次 // //let 只能声明一次 // var m = 3; // var m = 4; // let n = 5; // // let n=5; // console."><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="ES6语法"><meta property="og:description" content="ES6语法 一、let &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html lang=&amp;#34;en&amp;#34;&amp;gt; &amp;lt;head&amp;gt; &amp;lt;meta charset=&amp;#34;UTF-8&amp;#34;&amp;gt; &amp;lt;meta http-equiv=&amp;#34;X-UA-Compatible&amp;#34; content=&amp;#34;IE=edge&amp;#34;&amp;gt; &amp;lt;meta name=&amp;#34;viewport&amp;#34; content=&amp;#34;width=device-width, initial-scale=1.0&amp;#34;&amp;gt; &amp;lt;title&amp;gt;Document&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;script&amp;gt; // { // //var 声明的变量往往会跨域 // //let 声明的变量有严格局部作用域 // var a = 1; // let b = 2; // } // console.log(a); //1 // console.log(b); //Uncaught ReferenceError: b is not defined // //var 可以声明多次 // //let 只能声明一次 // var m = 3; // var m = 4; // let n = 5; // // let n=5; // console."><meta property="og:url" content="https://willxwu.github.io/post/es6/es6%E8%AF%AD%E6%B3%95/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/es6/es6%E8%AF%AD%E6%B3%95/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>ES6语法</h1><p class=post-meta>@Come Back · Apr 28, 2022 · 6 min read</p></header><article class=post-content><h1 id=es6语法>ES6语法</h1><h1 id=一let>一、let</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     //var 声明的变量往往会跨域
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     //let 声明的变量有严格局部作用域
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     var a = 1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     let b = 2;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(a);  //1
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(b);  //Uncaught ReferenceError: b is not defined
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //var 可以声明多次
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //let 只能声明一次
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var m = 3;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var m = 4;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let n = 5;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // let n=5;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(m); //3
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(n); //Identifier &#39;n&#39; has already been declared
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //var 会变量提升
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //let 不存在变量提升
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(x); //undefined
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var x = 10;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(y); //Cannot access &#39;y&#39; before initialization
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let y = 20;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// // const 用于定义常量
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //1、声明之后不允许改变。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //2、一旦声明必须初始化，否则会报错
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const a = 1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// a = 3; //Assignment to constant variable.
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=二解构表达式>二、解构表达式</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //数组结构
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let arr =[1,2,3];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // let a = arr[0];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // let b = arr[1];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // let c = arr[2];
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //快速复制
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let [a,b,c] = arr;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(a,b,c);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //对象结构
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const person = {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     name: &#34;jack&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     age: 21,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     language: [&#39;java&#39;,&#39;js&#39;,&#39;css&#39;]
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// // const name = person.name;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // const age = person.age;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // const language = person.language;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //新语法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const {name:abc, age, language} = person;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(abc,age,language);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //字符串扩展
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let str =&#34;hello.vue&#34;;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(str.startsWith(&#34;hello&#34;));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(str.endsWith(&#34;.vue&#34;));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(str.includes(&#34;e&#34;));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(str.includes(&#34;hello&#34;));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //字符串模板
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let ss = 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         `
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         &lt;div&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             &lt;span&gt;Hello World&lt;/span&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         &lt;/div&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         `;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(ss);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//字符串插入变量和表达式。变量名写在${}中，在${}中可以放入JavaScript表达式。注意符号是·不是单引号
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>fun</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;这是一个函数&#34;</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>abc</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;zhangsan&#34;</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>age</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>20</span>;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>info</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>`我是</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>abc</span><span style=color:#e6db74>}</span><span style=color:#e6db74>,今年</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>age</span><span style=color:#f92672>+</span><span style=color:#ae81ff>10</span><span style=color:#e6db74>}</span><span style=color:#e6db74>岁了，我想说:</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>fun</span>()<span style=color:#e6db74>}</span><span style=color:#e6db74>`</span>;
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>abc</span>,<span style=color:#a6e22e>age</span>,<span style=color:#a6e22e>info</span>);
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=三函数优化>三、函数优化</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //在SE6，我们无法给一个函数参数设置默认值，只能采用变通写法；
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// function add(a, b){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     //判断是否为空，为空就给默认值1
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     b = b || 1;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return a + b;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// console.log(add(10));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //现在可以这么写：直接给参数写上默认值，没传就会自动使用默认值
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// function add2(a, b = 1){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return a + b;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// console.log(add2(10));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //不定参数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// function fun(... values){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//      console.log(values.length);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(fun(&#34;1111&#34;,&#34;22&#34;,33));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //箭头函数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // var print = function (obj){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //     console.log(obj);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// // console.log(print(&#34;Hello&#34;));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //现在写法，一个参数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var print = obj =&gt; console.log(obj);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// print(&#34;China&#34;)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //多个参数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var sum = function(a, b){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return a + b;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(sum(1,9));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// var sum2 = (a, b) =&gt; a+b;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(sum2(1,9));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //以前写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var sum3 = function(a, b){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     c = a +b; //多了一步操作
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return a + c;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(sum3(1,9));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// //新写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// var sum4 = (a, b) =&gt;{
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     c = a + b;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return a + c;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(sum4(1,9));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//实战：箭头函数结合解构表达式
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>person</span> <span style=color:#f92672>=</span> {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;jack&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>age</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>20</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>language</span><span style=color:#f92672>:</span> [<span style=color:#e6db74>&#39;java&#39;</span>,<span style=color:#e6db74>&#39;js&#39;</span>,<span style=color:#e6db74>&#39;css&#39;</span>]
+</span></span><span style=display:flex><span>        };
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>hello</span>(<span style=color:#a6e22e>person</span>){
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;你好：&#34;</span><span style=color:#f92672>+</span><span style=color:#a6e22e>person</span>.<span style=color:#a6e22e>name</span>);
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>hello</span>(<span style=color:#a6e22e>person</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>hello2</span> <span style=color:#f92672>=</span> (<span style=color:#a6e22e>person</span>)=&gt;<span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;你好哟：&#34;</span><span style=color:#f92672>+</span><span style=color:#a6e22e>person</span>.<span style=color:#a6e22e>name</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>hello2</span>(<span style=color:#a6e22e>person</span>);
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//箭头函数+解构表达式
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>hello3</span> <span style=color:#f92672>=</span> ({<span style=color:#a6e22e>name</span>})=&gt;<span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;你好哟：&#34;</span><span style=color:#f92672>+</span> <span style=color:#a6e22e>name</span>);
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>hello3</span>(<span style=color:#a6e22e>person</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=四对象优化>四、对象优化</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// const person = {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     name: &#34;jack&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     age : 20,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     fun : [&#39;jva&#39;,&#39;css&#39;,&#39;html&#39;]
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// };
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// console.log(Object.keys(person));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(Object.values(person));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// console.log(Object.entries(person));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// const a ={aa: 1};
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const b ={bb: 2};
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const c ={cc: 3};
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// console.log(Object.assign(a,b,c));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //声明对象简写
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const name =&#34;zhangsan&#34;;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const age =10;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const person = {name, age};
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// console.log(person);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// //对象大的函数属性简写
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// let person = {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     name: &#34;jack&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     //以前
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     eat: function(food){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         console.log(this.name+ &#34;在吃&#34;+ food);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     //箭头函数this不能使用
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     eat2: food =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         console.log(this.name+ &#34;在吃&#34;+ food); 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     eat3: food =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         console.log(person.name+ &#34;在吃&#34;+ food); 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     eat4(food){
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         console.log(person.name+ &#34;在吃&#34;+ food); 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// person.eat(&#34;香蕉&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// person.eat2(&#34;苹果&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// person.eat3(&#34;草莓&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// person.eat3(&#34;芒果&#34;);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//对象拓展运算符
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//1、拷贝对象(深拷贝)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>p1</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;zhangsan&#34;</span>, <span style=color:#a6e22e>age</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>19</span>};
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>p2</span> <span style=color:#f92672>=</span> {... <span style=color:#a6e22e>p1</span>};
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>p2</span>)
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//2、合并对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>a</span> <span style=color:#f92672>=</span>{<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;lisi&#34;</span>}
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>const</span> <span style=color:#a6e22e>b</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>age</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>20</span>};
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//后面的name会覆盖之前的name
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>person</span> <span style=color:#f92672>=</span> {<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;wangwu&#34;</span>};
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>person</span> <span style=color:#f92672>=</span> {...<span style=color:#a6e22e>a</span>, ... <span style=color:#a6e22e>b</span>};
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>person</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=五map和reduce>五、map和reduce</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//数组中新增了map和reduce方法。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//map():接收一个函数，将原数组中的所有袁术用这个函数处理后放入新数组返回。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>arr</span> <span style=color:#f92672>=</span> [<span style=color:#e6db74>&#39;1&#39;</span>,<span style=color:#e6db74>&#39;2&#39;</span>,<span style=color:#e6db74>&#39;-3&#39;</span>,<span style=color:#e6db74>&#39;4&#39;</span>];
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// arr = arr.map((item)=&gt;{
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return item * 2;
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>arr</span> <span style=color:#f92672>=</span>  <span style=color:#a6e22e>arr</span>.<span style=color:#a6e22e>map</span>(<span style=color:#a6e22e>item</span> =&gt; <span style=color:#a6e22e>item</span><span style=color:#f92672>*</span><span style=color:#ae81ff>2</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>arr</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//reduce()为数组中的每一个袁术一次执行回调函数，不包括数组中被删除或从未被赋值的元素。\
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//arr.reduce(callback,[initialValue])
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 1、previousValue(上一次调用回调返回的值，或者是提供的初始值(initialValue))
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 2、currentValue（数组中当前被处理的元素）
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 3、index（当前元素在数组中的索引）
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * 4、array（调用reduce的数组）
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         **/</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>result</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>arr</span>.<span style=color:#a6e22e>reduce</span>((<span style=color:#a6e22e>a</span>,<span style=color:#a6e22e>b</span> )=&gt;{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;上一次处理后：&#34;</span><span style=color:#f92672>+</span><span style=color:#a6e22e>a</span>);
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;当前正在处理：&#34;</span><span style=color:#f92672>+</span><span style=color:#a6e22e>b</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>a</span><span style=color:#f92672>+</span><span style=color:#a6e22e>b</span>;
+</span></span><span style=display:flex><span>        },<span style=color:#ae81ff>100</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>result</span>);
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=六promise>六、promise</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>&lt;!-- 
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        案例：用户登录，并展示该用户的各科成绩。在页面发送两次请求：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        1. 查询用户，查询成功说明可以登录
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        2. 查询用户成功，查询科目
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        3. 根据科目的查询结果，获取去成绩
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        分析：此时后台应该提供三个接口，一个提供用户查询接口，一个提供科目的接口，一个提
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        供各科成绩的接口，为了渲染方便，最好响应json 数据。在这里就不编写后台接口了，而
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        是提供三个json 文件，直接提供json 数据，模拟后台接口：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     --&gt;</span>
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//原始写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// $.ajax({
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     url: &#34;mock/user.json&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     success(data) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         console.log(&#34;查询用户：&#34;, data);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         $.ajax({
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             url: `mock/user_corse_${data.id}.json`,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             success(data) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 console.log(&#34;查询到课程：&#34;, data);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 $.ajax({
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                     url: `mock/corse_score_${data.id}.json`,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                     success(data) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                         console.log(&#34;查询到分数：&#34;, data);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                     },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                     error(error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                         console.log(&#34;出现异常了：&#34; + error);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                     }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             error(error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 console.log(&#34;出现异常了：&#34; + error);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     error(error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         console.log(&#34;出现异常了：&#34; + error);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//promise写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// const promise = new Promise(function (resolve, reject) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     // 执行异步操作
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     if (/* 异步操作成功*/) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         resolve(value);// 调用resolve，代表Promise 将返回成功的结果
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     } else {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         reject(error);// 调用reject，代表Promise 会返回失败结果
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// const promise = new Promise((resolve, reject) =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     // 执行异步操作
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     if (/* 异步操作成功*/) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         resolve(value);// 调用resolve，代表Promise 将返回成功的结果
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     } else {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         reject(error);// 调用reject，代表Promise 会返回失败结果
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// promise.then(function (value) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     // 异步执行成功后的回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }).catch(function (error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     // 异步执行失败后的回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// })
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// new Promise((resolve, reject) =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     $.ajax({
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         url: &#34;mock/user.json&#34;,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         success(data) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             console.log(&#34;查询用户：&#34;, data);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             resolve(data.id);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         error(error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             console.log(&#34;出现异常了：&#34; + error);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }).then((userId) =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     return new Promise((resolve, reject) =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         $.ajax({
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             url: `mock/user_corse_${userId}.json`,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             success(data) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 console.log(&#34;查询到课程：&#34;, data);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 resolve(data.id);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             error(error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//                 console.log(&#34;出现异常了：&#34; + error);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// }).then((corseId) =&gt; {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     console.log(corseId);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     $.ajax({
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         url: `mock/corse_score_${corseId}.json`,
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         success(data) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             console.log(&#34;查询到分数：&#34;, data);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         },
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         error(error) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//             console.log(&#34;出现异常了：&#34; + error);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//         }
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//     });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// });
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// promise优化处理后写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>let</span> <span style=color:#a6e22e>get</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span> (<span style=color:#a6e22e>url</span>, <span style=color:#a6e22e>data</span>) { <span style=color:#75715e>// 实际开发中会单独放到common.js 中
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Promise((<span style=color:#a6e22e>resolve</span>, <span style=color:#a6e22e>reject</span>) =&gt; {
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>$</span>.<span style=color:#a6e22e>ajax</span>({
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>url</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>url</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>type</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;GET&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>data</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>data</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>success</span>(<span style=color:#a6e22e>result</span>) {
+</span></span><span style=display:flex><span>                        <span style=color:#a6e22e>resolve</span>(<span style=color:#a6e22e>result</span>);
+</span></span><span style=display:flex><span>                    },
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>error</span>(<span style=color:#a6e22e>error</span>) {
+</span></span><span style=display:flex><span>                        <span style=color:#a6e22e>reject</span>(<span style=color:#a6e22e>error</span>);
+</span></span><span style=display:flex><span>                    }
+</span></span><span style=display:flex><span>                });
+</span></span><span style=display:flex><span>            })
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        <span style=color:#75715e>// 使用封装的get 方法，实现查询分数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#a6e22e>get</span>(<span style=color:#e6db74>&#34;mock/user.json&#34;</span>).<span style=color:#a6e22e>then</span>((<span style=color:#a6e22e>result</span>) =&gt; {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;查询用户~~：&#34;</span>, <span style=color:#a6e22e>result</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>get</span>(<span style=color:#e6db74>`mock/user_corse_</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>result</span>.<span style=color:#a6e22e>id</span><span style=color:#e6db74>}</span><span style=color:#e6db74>.json`</span>);
+</span></span><span style=display:flex><span>        }).<span style=color:#a6e22e>then</span>((<span style=color:#a6e22e>result</span>) =&gt; {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;查询到课程~~：&#34;</span>, <span style=color:#a6e22e>result</span>);
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>get</span>(<span style=color:#e6db74>`mock/corse_score_</span><span style=color:#e6db74>${</span><span style=color:#a6e22e>result</span>.<span style=color:#a6e22e>id</span><span style=color:#e6db74>}</span><span style=color:#e6db74>.json`</span>)
+</span></span><span style=display:flex><span>        }).<span style=color:#a6e22e>then</span>((<span style=color:#a6e22e>result</span>) =&gt; {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;查询到分数~~：&#34;</span>, <span style=color:#a6e22e>result</span>);
+</span></span><span style=display:flex><span>        }).<span style=color:#66d9ef>catch</span>(() =&gt; {
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#e6db74>&#34;出现异常了~~：&#34;</span> <span style=color:#f92672>+</span> <span style=color:#a6e22e>error</span>);
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=七模块化>七、模块化</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-html data-lang=html><span style=display:flex><span><span style=color:#75715e>&lt;!DOCTYPE html&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>html</span> <span style=color:#a6e22e>lang</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;en&#34;</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>charset</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;UTF-8&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>http-equiv</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;X-UA-Compatible&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;IE=edge&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>meta</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;viewport&#34;</span> <span style=color:#a6e22e>content</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;width=device-width, initial-scale=1.0&#34;</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;Document&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    <span style=color:#75715e>&lt;!-- 
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        模块化就是把代码进行拆分，方便重复利用。类似java 中的导包：要使用一个包，必须先
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        导包。而JS 中没有包的概念，换来的是模块。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        
+</span></span></span><span style=display:flex><span><span style=color:#75715e>        模块功能主要由两个命令构成：`export`和`import`。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         `export`命令用于规定模块的对外接口。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         `import`命令用于导入其他模块提供的功能。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     --&gt;</span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/es6><span class=tag>ES6</span></a></li><li><a href=https://willxwu.github.io/tags/web><span class=tag>Web</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>479</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

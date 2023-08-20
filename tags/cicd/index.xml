@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>cicd on Come Back</title><link>https://willxwu.github.io/tags/cicd/</link><description>Recent content in cicd on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/cicd/index.xml" rel="self" type="application/rss+xml"/><item><title>CentOS pstree安装</title><link>https://willxwu.github.io/post/centos/pstree%E5%AE%89%E8%A3%85/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/pstree%E5%AE%89%E8%A3%85/</guid><description>pstree安装 1、在 Mac OS上
+brew install pstree 2、在 Fedora/Red Hat/CentOS
+yum -y install psmisc 3、在 Ubuntu/Debian
+apt-get install psmisc ps显示各进程关系，列入：查看nginx进程关系。
+ps aux | grep nginx 像一棵树一样展示。</description></item><item><title>mysql-5.7.33-winx64.zip安装</title><link>https://willxwu.github.io/post/centos/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</link><pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="mysql-5733-winx64zip安装">mysql-5.7.33-winx64.zip安装&lt;/h1>
+&lt;h1 id="一解压到安装目录">一、解压到安装目录&lt;/h1>
+&lt;h1 id="二编写配置文件myini">二、编写配置文件my.ini&lt;/h1>
+&lt;p>将编写好的配置文件放到mysql-5.7.33-winx64根目录下。&lt;/p>
+&lt;p>配置文件如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>mysql&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql客户端默认字符集&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default-character-set&lt;span style="color:#f92672">=&lt;/span>utf8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>mysqld&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置3306端口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3306&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql的安装目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>basedir &lt;span style="color:#f92672">=&lt;/span> D:&lt;span style="color:#ae81ff">\\&lt;/span>tools&lt;span style="color:#ae81ff">\m&lt;/span>ysql-5.7.33-winx64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql数据库的数据的存放目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datadir &lt;span style="color:#f92672">=&lt;/span> D:&lt;span style="color:#ae81ff">\\&lt;/span>tools&lt;span style="color:#ae81ff">\m&lt;/span>ysql-5.7.33-winx64&lt;span style="color:#ae81ff">\d&lt;/span>ata
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 允许最大连接数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>max_connections&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">20&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 服务端使用的字符集默认为8比特编码的latin1字符集&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>character-set-server&lt;span style="color:#f92672">=&lt;/span>utf8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建新表时将使用的默认存储引擎&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default-storage-engine&lt;span style="color:#f92672">=&lt;/span>INNODB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CentOS安装hugo</title><link>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85hugo/</link><pubDate>Mon, 02 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85hugo/</guid><description>CentOS安装hugo 1、yum无法直接安装hugo，首先添加repo
+[daftaupe-hugo] name=Copr repo for hugo owned by daftaupe baseurl=https://copr-be.cloud.fedoraproject.org/results/daftaupe/hugo/epel-7-$basearch/ type=rpm-md skip_if_unavailable=True gpgcheck=1 gpgkey=https://copr-be.cloud.fedoraproject.org/results/daftaupe/hugo/pubkey.gpg repo_gpgcheck=0 enabled=1 2、安装hugo
+yum -y install hugo 3、创建博客
+hugo new site blog</description></item><item><title>CentOS环境JDK11安装</title><link>https://willxwu.github.io/post/centos/centos%E7%8E%AF%E5%A2%83jdk11%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 01 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E7%8E%AF%E5%A2%83jdk11%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="centos环境jdk11安装">CentOS环境JDK11安装&lt;/h1>
+&lt;h2 id="1下载">1、下载&lt;/h2>
+&lt;p>JDK11下载地址：https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html&lt;/p>
+&lt;h2 id="2路径">2、路径&lt;/h2>
+&lt;p>创建jdk安装文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /usr/local/java
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3安装">3、安装&lt;/h2>
+&lt;p>进入下载的jdk所在目录，执行安装命令。&lt;/p></description></item><item><title>CentOS安装Sentinel设置自启动</title><link>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/</link><pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/</guid><description>&lt;h1 id="centos安装sentinel设置自启动">CentOS安装Sentinel设置自启动&lt;/h1>
+&lt;h2 id="1下载">1、下载&lt;/h2>
+&lt;p>下载地址https://github.com/alibaba/Sentinel/releases&lt;/p>
+&lt;h2 id="2安装">2、安装&lt;/h2>
+&lt;p>提前创建好安装路径、Jar包存放文件夹、脚本执行文件夹、日志存放文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /usr/local/ sentinel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel jar
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>CenotOS环境Nacos安装，设置开机自启动</title><link>https://willxwu.github.io/post/centos/cenotos%E7%8E%AF%E5%A2%83nacos%E5%AE%89%E8%A3%85/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/cenotos%E7%8E%AF%E5%A2%83nacos%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="cenotos环境nacos安装设置开机自启动">CenotOS环境Nacos安装，设置开机自启动&lt;/h1>
+&lt;h1 id="1下载">1、下载&lt;/h1>
+&lt;p>nacos下载地址：https://github.com/alibaba/nacos/releases&lt;/p>
+&lt;h1 id="2安装">2、安装&lt;/h1>
+&lt;p>进入nacos所在目录，执行如下命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tar -zxvf nacos-server-2.0.3.tar.gz -C /usr/local/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="3单机启动">3、单机启动&lt;/h1>
+&lt;p>修改/usr/local/nacos/bin目录下startup.sh启动文件设置单机启动，修改export MODE=&amp;ldquo;cluster&amp;quot;值为standalone&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>export MODE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;standalone&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker开启Remote API访问</title><link>https://willxwu.github.io/post/cicd/docker%E5%BC%80%E5%90%AFremote-api%E8%AE%BF%E9%97%AE-2375%E7%AB%AF%E5%8F%A3/</link><pubDate>Tue, 19 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%BC%80%E5%90%AFremote-api%E8%AE%BF%E9%97%AE-2375%E7%AB%AF%E5%8F%A3/</guid><description>&lt;h1 id="docker开启remote-api访问">Docker开启Remote API访问&lt;/h1>
+&lt;h2 id="方法一">方法一&lt;/h2>
+&lt;p>1、修改/usr/lib/systemd/system/docker.service配置，在[Service]部分ExecStart后面添加配置。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>-H tcp://0.0.0.0:2375
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>修改后如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>Service&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Type&lt;span style="color:#f92672">=&lt;/span>notify
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># the default is not to use systemd for cgroups because the delegate issues still&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># exists and systemd currently does not support the cgroup feature set required&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># for containers run by docker&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecStart&lt;span style="color:#f92672">=&lt;/span>/usr/bin/dockerd -H fd:// --containerd&lt;span style="color:#f92672">=&lt;/span>/run/containerd/containerd.sock -H tcp://0.0.0.0:2375
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>ExecReload&lt;span style="color:#f92672">=&lt;/span>/bin/kill -s HUP $MAINPID
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>TimeoutSec&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">0&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>RestartSec&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>Restart&lt;span style="color:#f92672">=&lt;/span>always
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker安装Jenkins自动部署SpringBoot项目</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85jenkins%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/</link><pubDate>Mon, 18 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85jenkins%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2springboot%E9%A1%B9%E7%9B%AE/</guid><description>&lt;h1 id="docker安装jenkins自动部署springboot项目">Docker安装Jenkins自动部署SpringBoot项目&lt;/h1>
+&lt;p>根据之前文章《&lt;a href="https://www.yanxizhu.com/index.php/archives/138/">使用Docker安装好Jenkins&lt;/a>》为前提搭建好Jenkins，不明白请看https://www.yanxizhu.com/index.php/archives/138/。&lt;/p>
+&lt;p>环境说明：jenkins为docker部署，Docker+Jenkins+Gitee+JDK11+Maven3.8.5。&lt;/p>
+&lt;p>&lt;strong>以后每次改动代码，push提交到giee码云后会自动部署，不用手动点击部署。&lt;/strong>&lt;/p>
+&lt;h1 id="一全局工具配置">一、全局工具配置&lt;/h1>
+&lt;p>【首页】-【系统管理】-【全局工具配置】&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202205092255415.png" alt="">&lt;/p>
+&lt;p>我之前启动jenkins容器映射参数如下，根据自己映射路径自行修改。&lt;/p></description></item><item><title>Docker安装Jenkins</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85jenkins/</link><pubDate>Sat, 16 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85jenkins/</guid><description>Docker安装Jenkins jdk安装 下载jdk解压到个人安装目录
+/mydata/jdk/jdk-11.0.10 maven安装 下载maven解压到个人安装目录
+/mydata/maven/apache-maven-3.8.5 修改mavne配置文件setting.xml，设置本地仓库目录
+&amp;lt;localRepository&amp;gt;/mydata/maven/repo&amp;lt;/localRepository&amp;gt; 添加阿里云镜像，在mirrors节点下增加以下内容
+&amp;lt;mirrors&amp;gt; &amp;lt;mirror&amp;gt; &amp;lt;id&amp;gt;alimaven&amp;lt;/id&amp;gt; &amp;lt;mirrorOf&amp;gt;central&amp;lt;/mirrorOf&amp;gt; &amp;lt;name&amp;gt;aliyun maven&amp;lt;/name&amp;gt; &amp;lt;url&amp;gt;http://maven.aliyun.com/nexus/content/repositories/central/&amp;lt;/url&amp;gt; &amp;lt;/mirror&amp;gt; &amp;lt;/mirrors&amp;gt; 开启Docker Remote API 关闭防火墙 或者 开启防火墙的端口 #关闭防火墙 systemctl stop firewalld.service # 禁止firewall开机启动 systemctl disable firewalld.service # 或者允许固定端口 firewall-cmd --zone=public --add-port=2375/tcp --permanent firewall-cmd --reload Docker环境下安装Jenkins 拉取最新的Jenkins的docker镜像
+docker pull jenkins/jenkins:lts 启动Jenkins容器
+docker run -p 10240:8080 -p 10241:50000 --name jenkins \ -u root \ -v /mydata/jenkins_home:/var/jenkins_home \ -v /mydata/maven/apache-maven-3.8.5:/maven/apache-maven-3.8.5 \ -v /mydata/jdk/jdk-11.0.10/:/jdk/jdk-11.0.10 \ -v /mydata/maven/repo:/mydata/maven/repo \ -d jenkins/jenkins:lts 注意：自己的目录和端口是否相同，不同请求修改。</description></item><item><title>Docker部署Kafka</title><link>https://willxwu.github.io/post/cicd/docker%E9%83%A8%E7%BD%B2kafka/</link><pubDate>Fri, 15 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E9%83%A8%E7%BD%B2kafka/</guid><description>Docker部署Kafka 一、拉取镜像 docker pull wurstmeister/zookeeper docker pull wurstmeister/kafka 二、启动zookpeer docker run -d --name zookeeper -p 2181:2181 -t wurstmeister/zookeeper 三、启动kafka docker run -d --name kafka \ -p 9092:9092 \ -e KAFKA_BROKER_ID=0 \ -e KAFKA_ZOOKEEPER_CONNECT=192.168.56.10:2181 \ -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://192.168.56.10:9092 \ -e KAFKA_LISTENERS=PLAINTEXT://0.0.0.0:9092 wurstmeister/kafka 注意修改自己ip地址
+四、测试 1、进入kafka容器 docker exec -it kafka bash 2、进入kafak脚本目录 cd /opt/kafka_2.13-2.8.1/bin 注意修改自己kafka版本
+3、创建主题 kafka-topics.sh --create --zookeeper 192.168.56.10:2181 --replication-factor 1 --partitions 1 --topic topic_1 这里创建了一个topic_1主题。
+4、添加消息 生产者发送消息
+kafka-console-producer.sh --broker-list 192.168.56.10:9092 --topic topic_1 此时进入发送消息界面：</description></item><item><title>Docker安装Kibana</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85kibana/</link><pubDate>Thu, 14 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85kibana/</guid><description>Docker安装Kibana
+一、拉取镜像，可视化检索数据
+docker pull kibana:7.4.2 二、启动运行容器
+docker run --name kibana -e ELASTICSEARCH_HOSTS=http://192.168.1.10:9200 -p 5601:5601 \ -d kibana:7.4.2 注意：更改自己的ip，es端口，以及和es版本号对应。</description></item><item><title>Docker安装ES</title><link>https://willxwu.github.io/post/cicd/docker-%E5%AE%89%E8%A3%85es/</link><pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker-%E5%AE%89%E8%A3%85es/</guid><description>&lt;hr>
+&lt;p>一、下载镜像文件，存储和检索数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull elasticsearch:7.4.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>二、创建实例&lt;/p>
+&lt;p>创建文件，用于映射&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir -p /mydata/elasticsearch/config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -p /mydata/elasticsearch/data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;http.host: 0.0.0.0&amp;#34;&lt;/span> &amp;gt;&amp;gt; /mydata/elasticsearch/config/elasticsearch.yml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker安装RabbitMQ</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85rabbitmq/</link><pubDate>Tue, 12 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85rabbitmq/</guid><description>Docker安装RabbitMQ 运行RabbitMQ容器 第一次运行没有RabbitMQ镜像，会自动下载。
+docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 -p 4369:4369 -p 25672:25672 -p 15671:15671 -p 15672:15672 rabbitmq:management 说明：
+4369, 25672 (Erlang发现&amp;amp;集群端口) 5672, 5671 (AMQP端口) 15672 (web管理后台端口) 61613, 61614 (STOMP协议端口) 1883, 8883 (MQTT协议端口) https://www.rabbitmq.com/networking.html
+设置随docker启动 docker update --restart=always rabbitmq 访问RabbitMQ 通过ip地址加15672端口即可访问，初始账号密码guest</description></item><item><title>docker安装redis</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85redis/</link><pubDate>Mon, 11 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85redis/</guid><description>&lt;h1 id="docker安装redis">docker安装redis&lt;/h1>
+&lt;hr>
+&lt;h1 id="一docker拉取redis镜像">一、docker拉取redis镜像&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull redis
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="二创建实例并启动">二、创建实例并启动&lt;/h1>
+&lt;p>创建映射配置文件路径&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir -p /mydata/redis/conf
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>touch /mydata/redis/conf/redis.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>创建启动&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -p 6379:6379 --name redis -v /mydata/redis/data:/data &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-d redis redis-server /etc/redis/redis.conf
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker安装Nginx</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85nginx/</link><pubDate>Sat, 09 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85nginx/</guid><description>&lt;h1 id="一docker安装nginx">一、Docker安装Nginx&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>拉取Nginx镜像&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull nginx:1.10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>随便启动一个nginx 实例，只是为了复制出配置&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -p 80:80 --name nginx -d nginx:1.10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item><item><title>Docker安装PHP</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85php/</link><pubDate>Fri, 08 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85php/</guid><description>&lt;h1 id="docker安装php">Docker安装PHP&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>拉取PHP镜像&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull php:7.4-fpm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>运输PHP容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -d -v /mydata/nginx/html:/var/www/html -p 9000:9000 --link mysql:mysql --name php php:7.4-fpm
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>进入PHP容器&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker exec -it php /bin/bash
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item><item><title>Docker安装MySQL</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85mysql/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85mysql/</guid><description>&lt;p>安装前提，已经搭建好Docker环境，关于docker安装可参考我另一篇文章&lt;a href="https://www.yanxizhu.com/index.php/archives/6/">《Docker安装》&lt;/a>&lt;/p>
+&lt;h1 id="一docker安装mysql">一、Docker安装MySQL&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>拉取Docker镜像&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull mysql:5.7
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>运行MySQL容器,参数说明见-说明1&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -p 3306:3306 --name mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/log:/var/log/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/data:/var/lib/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/conf:/etc/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-e MYSQL_ROOT_PASSWORD&lt;span style="color:#f92672">=&lt;/span>密码 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-d mysql:5.7
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item></channel></rss>

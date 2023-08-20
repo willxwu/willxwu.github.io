@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sentinel on Come Back</title><link>https://willxwu.github.io/tags/sentinel/</link><description>Recent content in Sentinel on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 30 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/sentinel/index.xml" rel="self" type="application/rss+xml"/><item><title>CentOS安装Sentinel设置自启动</title><link>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/</link><pubDate>Sat, 30 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/centos%E5%AE%89%E8%A3%85sentinel%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%90%AF%E5%8A%A8/</guid><description>&lt;h1 id="centos安装sentinel设置自启动">CentOS安装Sentinel设置自启动&lt;/h1>
+&lt;h2 id="1下载">1、下载&lt;/h2>
+&lt;p>下载地址https://github.com/alibaba/Sentinel/releases&lt;/p>
+&lt;h2 id="2安装">2、安装&lt;/h2>
+&lt;p>提前创建好安装路径、Jar包存放文件夹、脚本执行文件夹、日志存放文件夹&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir /usr/local/ sentinel
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel jar
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel sh
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir /usr/local/sentinel log
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

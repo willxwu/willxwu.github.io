@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // //数组结构
+        // let arr =[1,2,3];
+        // // let a = arr[0];
+        // // let b = arr[1];
+        // // let c = arr[2];
+
+        // //快速复制
+        // let [a,b,c] = arr;
+        // console.log(a,b,c);
+
+
+
+        // //对象结构
+        // const person = {
+        //     name: "jack",
+        //     age: 21,
+        //     language: ['java','js','css']
+        // }
+
+        // // const name = person.name;
+        // // const age = person.age;
+        // // const language = person.language;
+        // //新语法
+        // const {name:abc, age, language} = person;
+        // console.log(abc,age,language);
+
+
+
+
+        // //字符串扩展
+        // let str ="hello.vue";
+        // console.log(str.startsWith("hello"));
+        // console.log(str.endsWith(".vue"));
+        // console.log(str.includes("e"));
+        // console.log(str.includes("hello"));
+
+
+
+
+        // //字符串模板
+        // let ss = 
+        //         `
+        //         <div>
+        //             <span>Hello World</span>
+        //         </div>
+        //         `;
+        // console.log(ss);
+
+
+        //字符串插入变量和表达式。变量名写在${}中，在${}中可以放入JavaScript表达式。注意符号是·不是单引号
+        function fun(){
+            return "这是一个函数";
+        }
+        let abc = "zhangsan";
+        let age = 20;
+        let info = `我是${abc},今年${age+10}岁了，我想说:${fun()}`;
+        console.log(abc,age,info);
+        
+    </script>
+
+</body>
+</html>

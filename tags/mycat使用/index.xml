@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>MyCat使用 on Come Back</title><link>https://willxwu.github.io/tags/mycat%E4%BD%BF%E7%94%A8/</link><description>Recent content in MyCat使用 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/mycat%E4%BD%BF%E7%94%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>MyCat的安装及使用</title><link>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid><description>&lt;h1 id="mycat的安装及使用">MyCat的安装及使用&lt;/h1>
+&lt;h1 id="一mycat的安装">一、MyCat的安装&lt;/h1>
+&lt;h4 id="1环境准备">1、环境准备&lt;/h4>
+&lt;p>​ 本次课程使用的虚拟机环境是centos6.5，首先准备四台虚拟机，安装好mysql，方便后续做读写分离和主从复制。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>192.168.85.111 node01
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.85.112 node02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.85.113 node03
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.85.114 node04
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MyCat的基本介绍及安装</title><link>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="mycat">MyCat&lt;/h1>
+&lt;h1 id="一基础知识">一、基础知识&lt;/h1>
+&lt;h2 id="1分布式系统">1、分布式系统&lt;/h2>
+&lt;p>​ 分布式系统是指其组件分布在网络上，组件之间通过传递消息进行通信和动作协调的系统。它的核心理念是让多台服务器协同工作，完成单台服务器无法处理的任务，尤其是高并发或者大数据量的额任务。它的特点是：&lt;/p>
+&lt;p>​ **透明性：**分布式系统对于用户是透明的，一个分布式系统在用户面前的表现就像一个传统的单处理机分时系统，可用用户不必了解其内部结构就能使用;&lt;/p>
+&lt;p>​ **扩展性：**分布式系统的最大特点是可扩展性，它能够根据需求的增加而扩展，可以通过横向扩展使集群的整体性能得到线性提升，也可以通过纵向扩展单台服务器的性能使服务器集群的性能得到提升;&lt;/p>
+&lt;p>​ **可靠性：**分布式系统不允许单点失效的问题存在，它的基本思想是，如果一台机器坏了，则其他机器能够接替它进行工作，具有持续服务的特性;&lt;/p>
+&lt;p>​ **高性能：**高性能才是设计分布式系统的初衷.&lt;/p></description></item></channel></rss>

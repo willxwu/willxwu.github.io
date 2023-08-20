@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>mysql on Come Back</title><link>https://willxwu.github.io/tags/mysql/</link><description>Recent content in mysql on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Mon, 16 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/mysql/index.xml" rel="self" type="application/rss+xml"/><item><title>MyCat的安装及使用</title><link>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 16 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%AE%89%E8%A3%85%E5%8F%8A%E4%BD%BF%E7%94%A8/</guid><description>&lt;h1 id="mycat的安装及使用">MyCat的安装及使用&lt;/h1>
+&lt;h1 id="一mycat的安装">一、MyCat的安装&lt;/h1>
+&lt;h4 id="1环境准备">1、环境准备&lt;/h4>
+&lt;p>​ 本次课程使用的虚拟机环境是centos6.5，首先准备四台虚拟机，安装好mysql，方便后续做读写分离和主从复制。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>192.168.85.111 node01
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.85.112 node02
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.85.113 node03
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>192.168.85.114 node04
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>MyCat的基本介绍及安装</title><link>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/</link><pubDate>Sun, 15 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mycat%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BB%8B%E7%BB%8D%E5%8F%8A%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="mycat">MyCat&lt;/h1>
+&lt;h1 id="一基础知识">一、基础知识&lt;/h1>
+&lt;h2 id="1分布式系统">1、分布式系统&lt;/h2>
+&lt;p>​ 分布式系统是指其组件分布在网络上，组件之间通过传递消息进行通信和动作协调的系统。它的核心理念是让多台服务器协同工作，完成单台服务器无法处理的任务，尤其是高并发或者大数据量的额任务。它的特点是：&lt;/p>
+&lt;p>​ **透明性：**分布式系统对于用户是透明的，一个分布式系统在用户面前的表现就像一个传统的单处理机分时系统，可用用户不必了解其内部结构就能使用;&lt;/p>
+&lt;p>​ **扩展性：**分布式系统的最大特点是可扩展性，它能够根据需求的增加而扩展，可以通过横向扩展使集群的整体性能得到线性提升，也可以通过纵向扩展单台服务器的性能使服务器集群的性能得到提升;&lt;/p>
+&lt;p>​ **可靠性：**分布式系统不允许单点失效的问题存在，它的基本思想是，如果一台机器坏了，则其他机器能够接替它进行工作，具有持续服务的特性;&lt;/p>
+&lt;p>​ **高性能：**高性能才是设计分布式系统的初衷.&lt;/p></description></item><item><title>MySQL优化</title><link>https://willxwu.github.io/post/mysql/mysql%E4%BC%98%E5%8C%96/</link><pubDate>Sat, 14 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/mysql/mysql%E4%BC%98%E5%8C%96/</guid><description>&lt;h1 id="索引">索引&lt;/h1>
+&lt;h2 id="一全表扫描">&lt;strong>一、全表扫描&lt;/strong>&lt;/h2>
+&lt;p>没有使用索引的时候，数据的查询需要进行多次IO读写，这样的性能较差——全表扫描的过程。&lt;/p>
+&lt;h2 id="二索引">&lt;strong>二、索引&lt;/strong>&lt;/h2>
+&lt;p>为数据库的某个字段创建索引，相当是为这个字段的内容创建了一个目录。通过这个目录可以快速的实现数据的定位，也就是通过索引能够快速的找到某条数据所在磁盘的位置。&lt;/p>
+&lt;h2 id="三索引存放位置">&lt;strong>三、索引存放位置&lt;/strong>&lt;/h2></description></item><item><title>Invalid default value for 'created_date_'</title><link>https://willxwu.github.io/post/problem/mysql%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</link><pubDate>Tue, 10 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/mysql%E6%97%B6%E9%97%B4%E9%97%AE%E9%A2%98%E5%A4%84%E7%90%86/</guid><description>[ERR] 1067 - Invalid default value for &amp;lsquo;created_date_&amp;rsquo;[ERR]
+set global sql_mode = &amp;#39;ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&amp;#39;;</description></item><item><title>mysql-5.7.33-winx64.zip安装</title><link>https://willxwu.github.io/post/centos/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</link><pubDate>Tue, 03 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/mysql-5.7.33-winx64.zip%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="mysql-5733-winx64zip安装">mysql-5.7.33-winx64.zip安装&lt;/h1>
+&lt;h1 id="一解压到安装目录">一、解压到安装目录&lt;/h1>
+&lt;h1 id="二编写配置文件myini">二、编写配置文件my.ini&lt;/h1>
+&lt;p>将编写好的配置文件放到mysql-5.7.33-winx64根目录下。&lt;/p>
+&lt;p>配置文件如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>mysql&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql客户端默认字符集&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default-character-set&lt;span style="color:#f92672">=&lt;/span>utf8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">[&lt;/span>mysqld&lt;span style="color:#f92672">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置3306端口&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>port &lt;span style="color:#f92672">=&lt;/span> &lt;span style="color:#ae81ff">3306&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql的安装目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>basedir &lt;span style="color:#f92672">=&lt;/span> D:&lt;span style="color:#ae81ff">\\&lt;/span>tools&lt;span style="color:#ae81ff">\m&lt;/span>ysql-5.7.33-winx64
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 设置mysql数据库的数据的存放目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>datadir &lt;span style="color:#f92672">=&lt;/span> D:&lt;span style="color:#ae81ff">\\&lt;/span>tools&lt;span style="color:#ae81ff">\m&lt;/span>ysql-5.7.33-winx64&lt;span style="color:#ae81ff">\d&lt;/span>ata
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 允许最大连接数&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>max_connections&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">20&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 服务端使用的字符集默认为8比特编码的latin1字符集&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>character-set-server&lt;span style="color:#f92672">=&lt;/span>utf8
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e"># 创建新表时将使用的默认存储引擎&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>default-storage-engine&lt;span style="color:#f92672">=&lt;/span>INNODB
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Docker安装MySQL</title><link>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85mysql/</link><pubDate>Thu, 07 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker%E5%AE%89%E8%A3%85mysql/</guid><description>&lt;p>安装前提，已经搭建好Docker环境，关于docker安装可参考我另一篇文章&lt;a href="https://www.yanxizhu.com/index.php/archives/6/">《Docker安装》&lt;/a>&lt;/p>
+&lt;h1 id="一docker安装mysql">一、Docker安装MySQL&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>拉取Docker镜像&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull mysql:5.7
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>运行MySQL容器,参数说明见-说明1&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker run -p 3306:3306 --name mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/log:/var/log/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/data:/var/lib/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-v /mydata/mysql/conf:/etc/mysql &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-e MYSQL_ROOT_PASSWORD&lt;span style="color:#f92672">=&lt;/span>密码 &lt;span style="color:#ae81ff">\
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&lt;/span>-d mysql:5.7
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item></channel></rss>

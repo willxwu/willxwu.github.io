@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>pstree on Come Back</title><link>https://willxwu.github.io/tags/pstree/</link><description>Recent content in pstree on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 04 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/pstree/index.xml" rel="self" type="application/rss+xml"/><item><title>CentOS pstree安装</title><link>https://willxwu.github.io/post/centos/pstree%E5%AE%89%E8%A3%85/</link><pubDate>Wed, 04 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/pstree%E5%AE%89%E8%A3%85/</guid><description>pstree安装 1、在 Mac OS上
+brew install pstree 2、在 Fedora/Red Hat/CentOS
+yum -y install psmisc 3、在 Ubuntu/Debian
+apt-get install psmisc ps显示各进程关系，列入：查看nginx进程关系。
+ps aux | grep nginx 像一棵树一样展示。</description></item></channel></rss>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>循环依赖 on Come Back</title><link>https://willxwu.github.io/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/</link><description>Recent content in 循环依赖 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 30 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/index.xml" rel="self" type="application/rss+xml"/><item><title>循环依赖解决方案</title><link>https://willxwu.github.io/post/problem/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 30 Mar 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid><description>循环依赖解决方案
+1、查看日志，是哪个地方提示循环依赖。
+2、取消自动注入
+3、通过容器获取
+4、构造方法赋值
+例如：
+public class MyRabbitConfig { //取消自动注入 // @Autowired RabbitTemplate rabbitTemplate; //通过构造解决循环依赖。(RabbitTemplate rabbitTemplate)：是从springboot容器自动注入的 public MyRabbitConfig(RabbitTemplate rabbitTemplate){ this.rabbitTemplate=rabbitTemplate; }</description></item></channel></rss>

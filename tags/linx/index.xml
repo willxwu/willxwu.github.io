@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>linx on Come Back</title><link>https://willxwu.github.io/tags/linx/</link><description>Recent content in linx on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sun, 03 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/linx/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker基础镜像的选择</title><link>https://willxwu.github.io/post/docker/04_docker%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E7%9A%84%E9%80%89%E6%8B%A9-from/</link><pubDate>Sun, 03 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/04_docker%E5%9F%BA%E7%A1%80%E9%95%9C%E5%83%8F%E7%9A%84%E9%80%89%E6%8B%A9-from/</guid><description>&lt;h1 id="基础镜像的选择-from">基础镜像的选择 (FROM)&lt;/h1>
+&lt;ul>
+&lt;li>官方镜像优于非官方的镜像，如果没有官方镜像，则尽量选择Dockerfile开源的&lt;/li>
+&lt;li>固定版本tag而不是每次都使用latest&lt;/li>
+&lt;li>尽量选择体积小的镜像&lt;/li>
+&lt;/ul>
+&lt;p>空镜像：scratch&lt;/p>
+&lt;p>最小镜像：alpine&lt;/p></description></item><item><title>Docker镜像获取方式</title><link>https://willxwu.github.io/post/docker/03_docker%E9%95%9C%E5%83%8F%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F/</link><pubDate>Sun, 03 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/03_docker%E9%95%9C%E5%83%8F%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F/</guid><description>&lt;h1 id="docker镜像获取方式">Docker镜像获取方式&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202303181827457.png" alt="image-20230318182710371">&lt;/p>
+&lt;h2 id="一pull-from-registry">一、pull from registry&lt;/h2>
+&lt;p>必须在线，从registry拉取分公有和私有。公有，例如：dockerhub，私有，例如公司自己搭建的，只能公司内部访问。&lt;/p>
+&lt;p>常用公有registry：需要注册账号。&lt;/p></description></item><item><title>Docker入门</title><link>https://willxwu.github.io/post/docker/02_docker%E5%85%A5%E9%97%A8/</link><pubDate>Sat, 02 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/02_docker%E5%85%A5%E9%97%A8/</guid><description>&lt;p>&lt;strong>容器&lt;/strong>：一种打包技术。&lt;/p>
+&lt;p>&lt;strong>docker&lt;/strong>：打包技术的一种技术实现。&lt;/p>
+&lt;h1 id="一基础知识">一、基础知识&lt;/h1>
+&lt;h2 id="基础命令">&lt;strong>基础命令&lt;/strong>&lt;/h2>
+&lt;ol>
+&lt;li>
+&lt;p>查看docker相关信息&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker versoin
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>查看docker环境信息&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item><item><title>Docker安装</title><link>https://willxwu.github.io/post/docker/01_docker%E5%AE%89%E8%A3%85/</link><pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/01_docker%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="一环境准备">一、环境准备&lt;/h1>
+&lt;ol>
+&lt;li>
+&lt;p>备份原yum 源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo.backup
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>CentOS设置新yum 源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>使用阿里云Docker Yum源&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;/li>
+&lt;/ol></description></item></channel></rss>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>ES on Come Back</title><link>https://willxwu.github.io/tags/es/</link><description>Recent content in ES on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 13 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/es/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker安装ES</title><link>https://willxwu.github.io/post/cicd/docker-%E5%AE%89%E8%A3%85es/</link><pubDate>Wed, 13 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/cicd/docker-%E5%AE%89%E8%A3%85es/</guid><description>&lt;hr>
+&lt;p>一、下载镜像文件，存储和检索数据&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>docker pull elasticsearch:7.4.2
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>二、创建实例&lt;/p>
+&lt;p>创建文件，用于映射&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>mkdir -p /mydata/elasticsearch/config
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>mkdir -p /mydata/elasticsearch/data
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>echo &lt;span style="color:#e6db74">&amp;#34;http.host: 0.0.0.0&amp;#34;&lt;/span> &amp;gt;&amp;gt; /mydata/elasticsearch/config/elasticsearch.yml
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

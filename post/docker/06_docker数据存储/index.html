@@ -1,0 +1,197 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Docker数据存储</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="Docker数据存储 默认情况下，在运行中的容器里创建的文件，被保存在一个可写的容器层：
+如果容器被删除了，则数据也没有了 这个可写的容器层是和特定的容器绑定的，也就是这些数据无法方便的和其它容器共享 Docker主要提供了两种方式做数据的持久化
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="Docker数据存储"><meta name=twitter:description content="Docker数据存储 默认情况下，在运行中的容器里创建的文件，被保存在一个可写的容器层：
+如果容器被删除了，则数据也没有了 这个可写的容器层是和特定的容器绑定的，也就是这些数据无法方便的和其它容器共享 Docker主要提供了两种方式做数据的持久化
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="Docker数据存储"><meta property="og:description" content="Docker数据存储 默认情况下，在运行中的容器里创建的文件，被保存在一个可写的容器层：
+如果容器被删除了，则数据也没有了 这个可写的容器层是和特定的容器绑定的，也就是这些数据无法方便的和其它容器共享 Docker主要提供了两种方式做数据的持久化
+"><meta property="og:url" content="https://willxwu.github.io/post/docker/06_docker%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/docker/06_docker%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>Docker数据存储</h1><p class=post-meta>@Come Back · Apr 5, 2022 · 3 min read</p></header><article class=post-content><h1 id=docker数据存储>Docker数据存储</h1><p>默认情况下，在运行中的容器里创建的文件，被保存在一个可写的容器层：</p><ul><li>如果容器被删除了，则数据也没有了</li><li>这个可写的容器层是和特定的容器绑定的，也就是这些数据无法方便的和其它容器共享</li></ul><p>Docker主要提供了两种方式做数据的持久化</p><ul><li>Data Volume, 由Docker管理，(/var/lib/docker/volumes/ Linux), 持久化数据的最好方式</li><li>Bind Mount，由用户指定存储的数据具体mount在系统什么位置</li></ul><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202304262015423.png alt=docker-volume></p><h1 id=一data-volume>一、Data Volume</h1><h2 id=环境准备>环境准备</h2><p>准备一个Dockerfile 和一个 my-cron的文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ ls
+</span></span><span style=display:flex><span>Dockerfile  my-cron
+</span></span><span style=display:flex><span>$ more Dockerfile
+</span></span><span style=display:flex><span>FROM alpine:latest
+</span></span><span style=display:flex><span>RUN apk update
+</span></span><span style=display:flex><span>RUN apk --no-cache add curl
+</span></span><span style=display:flex><span>ENV SUPERCRONIC_URL<span style=color:#f92672>=</span>https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    SUPERCRONIC<span style=color:#f92672>=</span>supercronic-linux-amd64 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    SUPERCRONIC_SHA1SUM<span style=color:#f92672>=</span>048b95b48b708983effb2e5c935a1ef8483d9e3e
+</span></span><span style=display:flex><span>RUN curl -fsSLO <span style=color:#e6db74>&#34;</span>$SUPERCRONIC_URL<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SUPERCRONIC_SHA1SUM<span style=color:#e6db74>}</span><span style=color:#e6db74>  </span><span style=color:#e6db74>${</span>SUPERCRONIC<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> | sha1sum -c - <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> chmod +x <span style=color:#e6db74>&#34;</span>$SUPERCRONIC<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> mv <span style=color:#e6db74>&#34;</span>$SUPERCRONIC<span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;/usr/local/bin/</span><span style=color:#e6db74>${</span>SUPERCRONIC<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> ln -s <span style=color:#e6db74>&#34;/usr/local/bin/</span><span style=color:#e6db74>${</span>SUPERCRONIC<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> /usr/local/bin/supercronic
+</span></span><span style=display:flex><span>COPY my-cron /app/my-cron
+</span></span><span style=display:flex><span>WORKDIR /app
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>VOLUME <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;/app&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># RUN cron job</span>
+</span></span><span style=display:flex><span>CMD <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;/usr/local/bin/supercronic&#34;</span>, <span style=color:#e6db74>&#34;/app/my-cron&#34;</span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>$
+</span></span><span style=display:flex><span>$ more my-cron
+</span></span><span style=display:flex><span>*/1 * * * * date &gt;&gt; /app/test.txt
+</span></span></code></pre></div><h2 id=构建镜像>构建镜像</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ docker image build -t my-cron .
+</span></span><span style=display:flex><span>$ docker image ls
+</span></span><span style=display:flex><span>REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+</span></span><span style=display:flex><span>my-cron      latest    e9fbd9a562c9   <span style=color:#ae81ff>4</span> seconds ago   24.7MB
+</span></span></code></pre></div><h2 id=创建容器不指定-v参数>创建容器(不指定-v参数)</h2><p>此时Docker会自动创建一个随机名字的volume，去存储我们在Dockerfile定义的volume <code>VOLUME ["/app"]</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ docker run -d my-cron
+</span></span><span style=display:flex><span>9a8fa93f03c42427a498b21ac520660752122e20bcdbf939661646f71d277f8f
+</span></span><span style=display:flex><span>$ docker volume ls
+</span></span><span style=display:flex><span>DRIVER    VOLUME NAME
+</span></span><span style=display:flex><span>local     043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264
+</span></span><span style=display:flex><span>$ docker volume inspect 043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;CreatedAt&#34;</span>: <span style=color:#e6db74>&#34;2021-06-22T23:06:13+02:00&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Driver&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Labels&#34;</span>: null,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Mountpoint&#34;</span>: <span style=color:#e6db74>&#34;/var/lib/docker/volumes/043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264/_data&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Name&#34;</span>: <span style=color:#e6db74>&#34;043a196c21202c484c69f2098b6b9ec22b9a9e4e4bb8d4f55a4c3dce13c15264&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Options&#34;</span>: null,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Scope&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>在这个Volume的mountpoint可以发现容器创建的文件。</p><h2 id=创建容器指定-v参数>创建容器(指定-v参数)</h2><p>在创建容器的时候通过 <code>-v</code> 参数我们可以手动的指定需要创建Volume的名字，以及对应于容器内的路径，这个路径是可以任意的，不必需要在Dockerfile里通过VOLUME定义。</p><p>比如我们把上面的Dockerfile里的VOLUME删除</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>FROM alpine:latest
+</span></span><span style=display:flex><span>RUN apk update
+</span></span><span style=display:flex><span>RUN apk --no-cache add curl
+</span></span><span style=display:flex><span>ENV SUPERCRONIC_URL<span style=color:#f92672>=</span>https://github.com/aptible/supercronic/releases/download/v0.1.12/supercronic-linux-amd64 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    SUPERCRONIC<span style=color:#f92672>=</span>supercronic-linux-amd64 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    SUPERCRONIC_SHA1SUM<span style=color:#f92672>=</span>048b95b48b708983effb2e5c935a1ef8483d9e3e
+</span></span><span style=display:flex><span>RUN curl -fsSLO <span style=color:#e6db74>&#34;</span>$SUPERCRONIC_URL<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> echo <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>${</span>SUPERCRONIC_SHA1SUM<span style=color:#e6db74>}</span><span style=color:#e6db74>  </span><span style=color:#e6db74>${</span>SUPERCRONIC<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> | sha1sum -c - <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> chmod +x <span style=color:#e6db74>&#34;</span>$SUPERCRONIC<span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> mv <span style=color:#e6db74>&#34;</span>$SUPERCRONIC<span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;/usr/local/bin/</span><span style=color:#e6db74>${</span>SUPERCRONIC<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>    <span style=color:#f92672>&amp;&amp;</span> ln -s <span style=color:#e6db74>&#34;/usr/local/bin/</span><span style=color:#e6db74>${</span>SUPERCRONIC<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span> /usr/local/bin/supercronic
+</span></span><span style=display:flex><span>COPY my-cron /app/my-cron
+</span></span><span style=display:flex><span>WORKDIR /app
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e># RUN cron job</span>
+</span></span><span style=display:flex><span>CMD <span style=color:#f92672>[</span><span style=color:#e6db74>&#34;/usr/local/bin/supercronic&#34;</span>, <span style=color:#e6db74>&#34;/app/my-cron&#34;</span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>重新build镜像，然后创建容器，加-v参数</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ docker image build -t my-cron .
+</span></span><span style=display:flex><span>$ docker container run -d -v cron-data:/app my-cron
+</span></span><span style=display:flex><span>43c6d0357b0893861092a752c61ab01bdfa62ea766d01d2fcb8b3ecb6c88b3de
+</span></span><span style=display:flex><span>$ docker volume ls
+</span></span><span style=display:flex><span>DRIVER    VOLUME NAME
+</span></span><span style=display:flex><span>local     cron-data
+</span></span><span style=display:flex><span>$ docker volume inspect cron-data
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;CreatedAt&#34;</span>: <span style=color:#e6db74>&#34;2021-06-22T23:25:02+02:00&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Driver&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Labels&#34;</span>: null,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Mountpoint&#34;</span>: <span style=color:#e6db74>&#34;/var/lib/docker/volumes/cron-data/_data&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Name&#34;</span>: <span style=color:#e6db74>&#34;cron-data&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Options&#34;</span>: null,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Scope&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>$ ls /var/lib/docker/volumes/cron-data/_data
+</span></span><span style=display:flex><span>my-cron
+</span></span><span style=display:flex><span>$ ls /var/lib/docker/volumes/cron-data/_data
+</span></span><span style=display:flex><span>my-cron  test.txt
+</span></span></code></pre></div><h2 id=环境清理>环境清理</h2><p>强制删除所有容器，系统清理和volume清理</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ docker rm -f <span style=color:#66d9ef>$(</span>docker container ps -aq<span style=color:#66d9ef>)</span>
+</span></span><span style=display:flex><span>$ docker system prune -f
+</span></span><span style=display:flex><span>$ docker volume prune -f
+</span></span></code></pre></div><h1 id=二bind-mount>二、Bind Mount</h1><p>只需要将-v的data volume换成指定路径即可。windows下的linux就可以直接挂载到磁盘，linx的可以直接查看。</p><p>例如mysql</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>docker run -p 3306:3306 --name mysql <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v /mydata/mysql/log:/var/log/mysql <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v /mydata/mysql/data:/var/lib/mysql <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-v /mydata/mysql/conf:/etc/mysql <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-e MYSQL_ROOT_PASSWORD<span style=color:#f92672>=</span>密码 <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>-d mysql:5.7
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>-v /mydata/mysql/log:/var/log/mysql
+</span></span></code></pre></div><p>这里就是将容器中/var/log/mysql日志，通过Bind Mount持久化到linux主机的/mydata/mysql/log目录。</p><h1 id=多个机器之间的容器共享数据>多个机器之间的容器共享数据</h1><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202305102158433.png alt=multi-host-volume></p><p>官方参考链接 <a href=https://docs.docker.com/storage/volumes/#share-data-among-machines>https://docs.docker.com/storage/volumes/#share-data-among-machines</a></p><p>Docker的volume支持多种driver。默认创建的volume driver都是local</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>$ docker volume inspect vscode
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;CreatedAt&#34;</span>: <span style=color:#e6db74>&#34;2021-06-23T21:33:57Z&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Driver&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Labels&#34;</span>: null,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Mountpoint&#34;</span>: <span style=color:#e6db74>&#34;/var/lib/docker/volumes/vscode/_data&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Name&#34;</span>: <span style=color:#e6db74>&#34;vscode&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Options&#34;</span>: null,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Scope&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>这一节我们看看一个叫sshfs的driver，如何让docker使用不在同一台机器上的文件系统做volume</p><h2 id=环境准备-1>环境准备</h2><p>准备三台Linux机器，之间可以通过SSH相互通信。</p><table><thead><tr><th>hostname</th><th>ip</th><th>ssh username</th><th>ssh password</th></tr></thead><tbody><tr><td>docker-host1</td><td>192.168.200.10</td><td>vagrant</td><td>vagrant</td></tr><tr><td>docker-host2</td><td>192.168.200.11</td><td>vagrant</td><td>vagrant</td></tr><tr><td>docker-host3</td><td>192.168.200.12</td><td>vagrant</td><td>vagrant</td></tr></tbody></table><h2 id=安装plugin>安装plugin</h2><p>在其中两台机器上安装一个plugin <code>vieux/sshfs</code></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host1 ~<span style=color:#f92672>]</span>$ docker plugin install --grant-all-permissions vieux/sshfs
+</span></span><span style=display:flex><span>latest: Pulling from vieux/sshfs
+</span></span><span style=display:flex><span>Digest: sha256:1d3c3e42c12138da5ef7873b97f7f32cf99fb6edde75fa4f0bcf9ed277855811
+</span></span><span style=display:flex><span>52d435ada6a4: Complete
+</span></span><span style=display:flex><span>Installed plugin vieux/sshfs
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host2 ~<span style=color:#f92672>]</span>$ docker plugin install --grant-all-permissions vieux/sshfs
+</span></span><span style=display:flex><span>latest: Pulling from vieux/sshfs
+</span></span><span style=display:flex><span>Digest: sha256:1d3c3e42c12138da5ef7873b97f7f32cf99fb6edde75fa4f0bcf9ed277855811
+</span></span><span style=display:flex><span>52d435ada6a4: Complete
+</span></span><span style=display:flex><span>Installed plugin vieux/sshfs
+</span></span></code></pre></div><h2 id=创建volume>创建volume</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host1 ~<span style=color:#f92672>]</span>$ docker volume create --driver vieux/sshfs <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>                          -o sshcmd<span style=color:#f92672>=</span>vagrant@192.168.200.12:/home/vagrant <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>                          -o password<span style=color:#f92672>=</span>vagrant <span style=color:#ae81ff>\
+</span></span></span><span style=display:flex><span><span style=color:#ae81ff></span>                          sshvolume
+</span></span></code></pre></div><p>查看</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host1 ~<span style=color:#f92672>]</span>$ docker volume ls
+</span></span><span style=display:flex><span>DRIVER               VOLUME NAME
+</span></span><span style=display:flex><span>vieux/sshfs:latest   sshvolume
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host1 ~<span style=color:#f92672>]</span>$ docker volume inspect sshvolume
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;CreatedAt&#34;</span>: <span style=color:#e6db74>&#34;0001-01-01T00:00:00Z&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Driver&#34;</span>: <span style=color:#e6db74>&#34;vieux/sshfs:latest&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Labels&#34;</span>: <span style=color:#f92672>{}</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Mountpoint&#34;</span>: <span style=color:#e6db74>&#34;/mnt/volumes/f59e848643f73d73a21b881486d55b33&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Name&#34;</span>: <span style=color:#e6db74>&#34;sshvolume&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Options&#34;</span>: <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;password&#34;</span>: <span style=color:#e6db74>&#34;vagrant&#34;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#e6db74>&#34;sshcmd&#34;</span>: <span style=color:#e6db74>&#34;vagrant@192.168.200.12:/home/vagrant&#34;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>,
+</span></span><span style=display:flex><span>        <span style=color:#e6db74>&#34;Scope&#34;</span>: <span style=color:#e6db74>&#34;local&#34;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>]</span>
+</span></span></code></pre></div><h2 id=创建容器挂载volume>创建容器挂载Volume</h2><p>创建容器，挂载sshvolume到/app目录，然后进入容器的shell，在/app目录创建一个test.txt文件</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host1 ~<span style=color:#f92672>]</span>$ docker run -it -v sshvolume:/app busybox sh
+</span></span><span style=display:flex><span>Unable to find image <span style=color:#e6db74>&#39;busybox:latest&#39;</span> locally
+</span></span><span style=display:flex><span>latest: Pulling from library/busybox
+</span></span><span style=display:flex><span>b71f96345d44: Pull complete
+</span></span><span style=display:flex><span>Digest: sha256:930490f97e5b921535c153e0e7110d251134cc4b72bbb8133c6a5065cc68580d
+</span></span><span style=display:flex><span>Status: Downloaded newer image <span style=color:#66d9ef>for</span> busybox:latest
+</span></span><span style=display:flex><span>/ <span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span>/ <span style=color:#75715e># ls</span>
+</span></span><span style=display:flex><span>app   bin   dev   etc   home  proc  root  sys   tmp   usr   var
+</span></span><span style=display:flex><span>/ <span style=color:#75715e># cd /app</span>
+</span></span><span style=display:flex><span>/app <span style=color:#75715e># ls</span>
+</span></span><span style=display:flex><span>/app <span style=color:#75715e># echo &#34;this is ssh volume&#34;&gt; test.txt</span>
+</span></span><span style=display:flex><span>/app <span style=color:#75715e># ls</span>
+</span></span><span style=display:flex><span>test.txt
+</span></span><span style=display:flex><span>/app <span style=color:#75715e># more test.txt</span>
+</span></span><span style=display:flex><span>this is ssh volume
+</span></span><span style=display:flex><span>/app <span style=color:#75715e>#</span>
+</span></span><span style=display:flex><span>/app <span style=color:#75715e>#</span>
+</span></span></code></pre></div><p>这个文件我们可以在docker-host3上看到</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host3 ~<span style=color:#f92672>]</span>$ pwd
+</span></span><span style=display:flex><span>/home/vagrant
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host3 ~<span style=color:#f92672>]</span>$ ls
+</span></span><span style=display:flex><span>test.txt
+</span></span><span style=display:flex><span><span style=color:#f92672>[</span>vagrant@docker-host3 ~<span style=color:#f92672>]</span>$ more test.txt
+</span></span><span style=display:flex><span>this is ssh volume
+</span></span></code></pre></div></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/docker><span class=tag>Docker</span></a></li><li><a href=https://willxwu.github.io/tags/image><span class=tag>Image</span></a></li><li><a href=https://willxwu.github.io/tags/dockerhub><span class=tag>Dockerhub</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>502</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

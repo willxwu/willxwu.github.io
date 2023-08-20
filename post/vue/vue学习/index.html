@@ -1,0 +1,421 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>Vue学习</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="一、vue的基本使用 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;vue的基本使用&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt; &amp;lt;!-- 模板语法--插值{{}} --&amp;gt; &amp;lt;!-- 优先加载template里面的内容，如果为空也加载#app，在加载#app --&amp;gt; &amp;lt;h1&amp;gt;{{msg}}&amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;./node_modules/vue/dist/vue.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; new Vue({ el: &amp;#39;#app&amp;#39;, data: { msg: &amp;#39;黄瓜&amp;#39; }, template: &amp;#39;&amp;lt;div&amp;gt;&amp;lt;h5&amp;gt;{{msg}}&amp;lt;/h5&amp;gt;&amp;lt;/div&amp;gt;&amp;#39; }); &amp;lt;/script&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 二、vue指令 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;vue指令&amp;lt;/title&amp;gt; &amp;lt;style&amp;gt; .box{ width: 300px; height: 300px; background-color: red; } .active{ background-color: green; } &amp;lt;/style&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt;{{msg}}&amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;./node_modules/vue/dist/vue.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; var vm = new Vue({ el: &amp;#34;#app&amp;#34;, data:function(){ return{ msg: &amp;#39;vue指令&amp;#39;, msg2: &amp;#39;vue的3种{{}}插值，1、{{}} 2、v-text=&amp;#34;&amp;#34; 3\v-html=&amp;#34;&amp;#34;&amp;#39;, isShow: true, isActive: true, frut: [ {id:1,name:&amp;#34;苹果&amp;#34;,price:20}, {id:2,name:&amp;#34;火龙果&amp;#34;,price:40}, {id:3,name:&amp;#34;西瓜&amp;#34;,price:30}, {id:4,name:&amp;#34;荔枝&amp;#34;,price:60} ], person:{ name:&amp;#34;zhangsan&amp;#34;, age:30, sex:&amp;#34;boy&amp;#34; } } }, template: &amp;#39;&amp;lt;div&amp;gt;{{msg}} &amp;lt;p v-text=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;p v-html=&amp;#34;msg2&amp;#34;&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;div v-if=&amp;#34;isShow&amp;#34;&amp;gt;v-if的使用&amp;lt;/div&amp;gt; &amp;lt;div v-if=&amp;#34;Math."><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="Vue学习"><meta name=twitter:description content="一、vue的基本使用 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;vue的基本使用&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt; &amp;lt;!-- 模板语法--插值{{}} --&amp;gt; &amp;lt;!-- 优先加载template里面的内容，如果为空也加载#app，在加载#app --&amp;gt; &amp;lt;h1&amp;gt;{{msg}}&amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;./node_modules/vue/dist/vue.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; new Vue({ el: &amp;#39;#app&amp;#39;, data: { msg: &amp;#39;黄瓜&amp;#39; }, template: &amp;#39;&amp;lt;div&amp;gt;&amp;lt;h5&amp;gt;{{msg}}&amp;lt;/h5&amp;gt;&amp;lt;/div&amp;gt;&amp;#39; }); &amp;lt;/script&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 二、vue指令 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;vue指令&amp;lt;/title&amp;gt; &amp;lt;style&amp;gt; .box{ width: 300px; height: 300px; background-color: red; } .active{ background-color: green; } &amp;lt;/style&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt;{{msg}}&amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;./node_modules/vue/dist/vue.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; var vm = new Vue({ el: &amp;#34;#app&amp;#34;, data:function(){ return{ msg: &amp;#39;vue指令&amp;#39;, msg2: &amp;#39;vue的3种{{}}插值，1、{{}} 2、v-text=&amp;#34;&amp;#34; 3\v-html=&amp;#34;&amp;#34;&amp;#39;, isShow: true, isActive: true, frut: [ {id:1,name:&amp;#34;苹果&amp;#34;,price:20}, {id:2,name:&amp;#34;火龙果&amp;#34;,price:40}, {id:3,name:&amp;#34;西瓜&amp;#34;,price:30}, {id:4,name:&amp;#34;荔枝&amp;#34;,price:60} ], person:{ name:&amp;#34;zhangsan&amp;#34;, age:30, sex:&amp;#34;boy&amp;#34; } } }, template: &amp;#39;&amp;lt;div&amp;gt;{{msg}} &amp;lt;p v-text=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;p v-html=&amp;#34;msg2&amp;#34;&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;div v-if=&amp;#34;isShow&amp;#34;&amp;gt;v-if的使用&amp;lt;/div&amp;gt; &amp;lt;div v-if=&amp;#34;Math."><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="Vue学习"><meta property="og:description" content="一、vue的基本使用 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;vue的基本使用&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt; &amp;lt;!-- 模板语法--插值{{}} --&amp;gt; &amp;lt;!-- 优先加载template里面的内容，如果为空也加载#app，在加载#app --&amp;gt; &amp;lt;h1&amp;gt;{{msg}}&amp;lt;/h1&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;./node_modules/vue/dist/vue.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; new Vue({ el: &amp;#39;#app&amp;#39;, data: { msg: &amp;#39;黄瓜&amp;#39; }, template: &amp;#39;&amp;lt;div&amp;gt;&amp;lt;h5&amp;gt;{{msg}}&amp;lt;/h5&amp;gt;&amp;lt;/div&amp;gt;&amp;#39; }); &amp;lt;/script&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 二、vue指令 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;vue指令&amp;lt;/title&amp;gt; &amp;lt;style&amp;gt; .box{ width: 300px; height: 300px; background-color: red; } .active{ background-color: green; } &amp;lt;/style&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div id=&amp;#34;app&amp;#34;&amp;gt;{{msg}}&amp;lt;/div&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34; src=&amp;#34;./node_modules/vue/dist/vue.js&amp;#34;&amp;gt;&amp;lt;/script&amp;gt; &amp;lt;script type=&amp;#34;text/javascript&amp;#34;&amp;gt; var vm = new Vue({ el: &amp;#34;#app&amp;#34;, data:function(){ return{ msg: &amp;#39;vue指令&amp;#39;, msg2: &amp;#39;vue的3种{{}}插值，1、{{}} 2、v-text=&amp;#34;&amp;#34; 3\v-html=&amp;#34;&amp;#34;&amp;#39;, isShow: true, isActive: true, frut: [ {id:1,name:&amp;#34;苹果&amp;#34;,price:20}, {id:2,name:&amp;#34;火龙果&amp;#34;,price:40}, {id:3,name:&amp;#34;西瓜&amp;#34;,price:30}, {id:4,name:&amp;#34;荔枝&amp;#34;,price:60} ], person:{ name:&amp;#34;zhangsan&amp;#34;, age:30, sex:&amp;#34;boy&amp;#34; } } }, template: &amp;#39;&amp;lt;div&amp;gt;{{msg}} &amp;lt;p v-text=&amp;#34;msg&amp;#34;&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;p v-html=&amp;#34;msg2&amp;#34;&amp;gt;&amp;lt;/p&amp;gt; &amp;lt;div v-if=&amp;#34;isShow&amp;#34;&amp;gt;v-if的使用&amp;lt;/div&amp;gt; &amp;lt;div v-if=&amp;#34;Math."><meta property="og:url" content="https://willxwu.github.io/post/vue/vue%E5%AD%A6%E4%B9%A0/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/vue/vue%E5%AD%A6%E4%B9%A0/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>Vue学习</h1><p class=post-meta>@Come Back · Apr 27, 2022 · 3 min read</p></header><article class=post-content><h1 id=一vue的基本使用>一、vue的基本使用</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>vue的基本使用</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#75715e>&lt;!--</span> <span style=color:#a6e22e>模板语法</span><span style=color:#f92672>--</span><span style=color:#a6e22e>插值</span>{{}} <span style=color:#f92672>--&gt;</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>&lt;!--</span> <span style=color:#a6e22e>优先加载template里面的内容</span><span style=color:#960050;background-color:#1e0010>，</span><span style=color:#a6e22e>如果为空也加载</span><span style=color:#960050;background-color:#1e0010>#</span><span style=color:#a6e22e>app</span><span style=color:#960050;background-color:#1e0010>，</span><span style=color:#a6e22e>在加载</span><span style=color:#960050;background-color:#1e0010>#</span><span style=color:#a6e22e>app</span> <span style=color:#f92672>--&gt;</span>
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>h1</span>&gt;{{<span style=color:#a6e22e>msg</span>}}&lt;/<span style=color:#f92672>h1</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;#app&#39;</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>data</span><span style=color:#f92672>:</span> {
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;黄瓜&#39;</span>
+</span></span><span style=display:flex><span>            },
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&lt;div&gt;&lt;h5&gt;{{msg}}&lt;/h5&gt;&lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>        });
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=二vue指令>二、vue指令</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>vue指令</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>style</span>&gt;
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>box</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>width</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>300</span><span style=color:#a6e22e>px</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>height</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>300</span><span style=color:#a6e22e>px</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>background</span><span style=color:#f92672>-</span><span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>red</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>active</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>background</span><span style=color:#f92672>-</span><span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>green</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>style</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;{{<span style=color:#a6e22e>msg</span>}}&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>vm</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;#app&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span><span style=color:#f92672>:</span><span style=color:#66d9ef>function</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;vue指令&#39;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg2</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;vue的3种{{}}插值，1、{{}} 2、v-text=&#34;&#34; 3\v-html=&#34;&#34;&#39;</span>,
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>isShow</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>isActive</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>,
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>frut</span><span style=color:#f92672>:</span> [
+</span></span><span style=display:flex><span>                    {<span style=color:#a6e22e>id</span><span style=color:#f92672>:</span><span style=color:#ae81ff>1</span>,<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;苹果&#34;</span>,<span style=color:#a6e22e>price</span><span style=color:#f92672>:</span><span style=color:#ae81ff>20</span>},
+</span></span><span style=display:flex><span>                    {<span style=color:#a6e22e>id</span><span style=color:#f92672>:</span><span style=color:#ae81ff>2</span>,<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;火龙果&#34;</span>,<span style=color:#a6e22e>price</span><span style=color:#f92672>:</span><span style=color:#ae81ff>40</span>},
+</span></span><span style=display:flex><span>                    {<span style=color:#a6e22e>id</span><span style=color:#f92672>:</span><span style=color:#ae81ff>3</span>,<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;西瓜&#34;</span>,<span style=color:#a6e22e>price</span><span style=color:#f92672>:</span><span style=color:#ae81ff>30</span>},
+</span></span><span style=display:flex><span>                    {<span style=color:#a6e22e>id</span><span style=color:#f92672>:</span><span style=color:#ae81ff>4</span>,<span style=color:#a6e22e>name</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;荔枝&#34;</span>,<span style=color:#a6e22e>price</span><span style=color:#f92672>:</span><span style=color:#ae81ff>60</span>}
+</span></span><span style=display:flex><span>                ],
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>person</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>name</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;zhangsan&#34;</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>age</span><span style=color:#f92672>:</span><span style=color:#ae81ff>30</span>,
+</span></span><span style=display:flex><span>                    <span style=color:#a6e22e>sex</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;boy&#34;</span>
+</span></span><span style=display:flex><span>                }
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&lt;div&gt;{{msg}} &lt;p v-text=&#34;msg&#34;&gt;&lt;/p&gt; &lt;p v-html=&#34;msg2&#34;&gt;&lt;/p&gt; &lt;div v-if=&#34;isShow&#34;&gt;v-if的使用&lt;/div&gt; &lt;div v-if=&#34;Math.random()&gt;0.5&#34;&gt;显示&lt;/div&gt;&lt;div v-else&gt;隐藏&lt;/div&gt; &lt;div v-show=&#34;true&#34;&gt;v-show显示&lt;/div&gt; &lt;div class=&#34;box&#34; v-on:click=&#34;clickHander&#34; v-bind:class=&#34;{active:isActive}&#34;&gt;&lt;/div&gt; &lt;ul&gt;&lt;li v-for=&#34;(item,index) in frut&#34;&gt;&lt;h1&gt;{{index}}&lt;/h1&gt;&lt;h3&gt;{{item.id}}&lt;/h3&gt;&lt;h2&gt;{{item.name}}&lt;/h2&gt;&lt;h1&gt;{{item.price}}&lt;/h1&gt;&lt;/li&gt;&lt;/ul&gt; &lt;ul&gt;&lt;li v-for=&#34;(value,key) in person&#34;&gt;{{value}}==={{key}}&lt;/li&gt;&lt;/ul&gt;  &lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>clickHander</span>(<span style=color:#a6e22e>e</span>){
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#66d9ef>this</span>);
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>isActive</span><span style=color:#f92672>=!</span><span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>isActive</span>;
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>vm</span>);
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=三vue的双向绑定>三、vue的双向绑定</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>vue的双向绑定</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span> <span style=color:#f92672>v-model</span><span style=color:#e6db74>=&#34;msg&#34;</span>&gt;
+</span></span><span style=display:flex><span>        &lt;<span style=color:#f92672>h3</span> &gt;{{<span style=color:#a6e22e>msg</span>}}&lt;/<span style=color:#f92672>h3</span>&gt;
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;#app&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span><span style=color:#f92672>:</span><span style=color:#66d9ef>function</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Hello World&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>           
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=四局部组件的创建>四、局部组件的创建</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>vue局部组件的创建</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;&lt;<span style=color:#f92672>h1</span>&gt;{{<span style=color:#a6e22e>msg</span>}}&lt;/<span style=color:#f92672>h1</span>&gt;&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>App</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>                
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;VUE  Hello &lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;#app&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#34;Hello  ---- World&#34;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;App/&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>           
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>components</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>App</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=五全局组件>五、全局组件</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>vue全局组件的创建</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(<span style=color:#e6db74>&#39;Vquanju&#39;</span>,{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;button&gt;全局组件按钮&lt;/button&gt;&lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>Vjubu</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;h2&gt;我是局部组件&lt;/h2&gt;&lt;Vquanju/&gt;&lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>Vju</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;h2&gt;我是局部组件2&lt;/h2&gt;&lt;Vquanju/&gt;&lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;#app&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&lt;div&gt;&lt;Vjubu/&gt;&lt;Vju/&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>components</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Vjubu</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Vju</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=六通过prop往子组件通信>六、通过prop往子组件通信</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>通过prop往子组件通信</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;{{<span style=color:#a6e22e>msg</span>}}&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(<span style=color:#e6db74>&#39;Vchild&#39;</span>,{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;p&gt;我是子组件&lt;p/&gt;&lt;input type=&#34;text&#34; v-model=&#34;bdata&#34; &gt;&lt;/input&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>props</span><span style=color:#f92672>:</span>[<span style=color:#e6db74>&#39;bdata&#39;</span>]
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(<span style=color:#e6db74>&#39;Vparent&#39;</span>,{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>bmsg</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Hello,绑定数据&#39;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;p&gt;我是父组件&lt;/p&gt;&lt;Vchild :bdata=&#34;bmsg&#34;/&gt;&lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>App</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;h1&gt;&lt;Vparent/&gt;&lt;/h1&gt;&#39;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;#app&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;好罗&#39;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>components</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>App</span>
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;App/&gt;&#39;</span>
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=七通过事件向子组件发送消息>七、通过事件向子组件发送消息</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>通过prop往子组件通信</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;{{<span style=color:#a6e22e>msg</span>}}&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(<span style=color:#e6db74>&#39;Vchild&#39;</span>,{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>newData</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&#39;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;p&gt;我是子组件{{childData}}&lt;p/&gt;&lt;input type=&#34;text&#34; v-model=&#34;newData&#34; @input=&#34;changeValue(newData)&#34; /&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>props</span><span style=color:#f92672>:</span>[<span style=color:#e6db74>&#39;childData&#39;</span>],
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>changeValue</span>(<span style=color:#a6e22e>val</span>){
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>this</span>.<span style=color:#a6e22e>$emit</span>(<span style=color:#e6db74>&#39;childHandler&#39;</span>,<span style=color:#a6e22e>val</span>);
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(<span style=color:#e6db74>&#39;Vparent&#39;</span>,{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>bmsg</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;Hello,绑定数据&#39;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;p&gt;我是父组件&lt;/p&gt;&lt;Vchild :childData=&#34;bmsg&#34; @childHandler=&#34;childHandler&#34;/&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>methods</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>childHandler</span>(<span style=color:#a6e22e>val</span>){
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>console</span>.<span style=color:#a6e22e>log</span>(<span style=color:#a6e22e>val</span><span style=color:#f92672>+</span><span style=color:#e6db74>&#34;-------------------&#34;</span>)
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>App</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;h1&gt;&lt;Vparent/&gt;&lt;/h1&gt;&#39;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;#app&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>                <span style=color:#a6e22e>msg</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;好罗&#39;</span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>components</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>App</span>
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;App/&gt;&#39;</span>
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div><h1 id=八全局组件的使用>八、全局组件的使用</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-vue data-lang=vue><span style=display:flex><span><span style=color:#f92672>&lt;!</span><span style=color:#a6e22e>DOCTYPE</span> <span style=color:#a6e22e>html</span><span style=color:#f92672>&gt;</span>
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>title</span>&gt;<span style=color:#a6e22e>vue全局组件的创建</span>&lt;/<span style=color:#f92672>title</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>style</span>&gt;
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>buttons</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>display</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>inline</span><span style=color:#f92672>-</span><span style=color:#a6e22e>block</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>line</span><span style=color:#f92672>-</span><span style=color:#a6e22e>height</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>1</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>white</span><span style=color:#f92672>-</span><span style=color:#a6e22e>space</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>nowrap</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>cursor</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>pointer</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>background</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#a6e22e>fff</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>border</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>1</span><span style=color:#a6e22e>px</span> <span style=color:#a6e22e>solid</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#a6e22e>dcdfe6</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#ae81ff>606266</span>;
+</span></span><span style=display:flex><span>            <span style=color:#f92672>-</span><span style=color:#a6e22e>webkit</span><span style=color:#f92672>-</span><span style=color:#a6e22e>appearance</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>none</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>text</span><span style=color:#f92672>-</span><span style=color:#a6e22e>align</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>center</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>box</span><span style=color:#f92672>-</span><span style=color:#a6e22e>sizing</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>border</span><span style=color:#f92672>-</span><span style=color:#a6e22e>box</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>outline</span><span style=color:#f92672>:</span> <span style=color:#a6e22e>none</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>margin</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>0</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>transition</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>.1</span><span style=color:#a6e22e>s</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>font</span><span style=color:#f92672>-</span><span style=color:#a6e22e>weight</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>500</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>padding</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>12</span><span style=color:#a6e22e>px</span> <span style=color:#ae81ff>20</span><span style=color:#a6e22e>px</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>font</span><span style=color:#f92672>-</span><span style=color:#a6e22e>size</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>14</span><span style=color:#a6e22e>px</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>border</span><span style=color:#f92672>-</span><span style=color:#a6e22e>radius</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>4</span><span style=color:#a6e22e>px</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>successs</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#a6e22e>fff</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>background</span><span style=color:#f92672>-</span><span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#ae81ff>67</span><span style=color:#a6e22e>c23a</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>border</span><span style=color:#f92672>-</span><span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#ae81ff>67</span><span style=color:#a6e22e>c23a</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>        .<span style=color:#a6e22e>defaults</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#a6e22e>fff</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>background</span><span style=color:#f92672>-</span><span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#ae81ff>409</span><span style=color:#a6e22e>eff</span>;
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>border</span><span style=color:#f92672>-</span><span style=color:#a6e22e>color</span><span style=color:#f92672>:</span> <span style=color:#960050;background-color:#1e0010>#</span><span style=color:#ae81ff>409</span><span style=color:#a6e22e>eff</span>;
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>style</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>head</span>&gt;
+</span></span><span style=display:flex><span>&lt;<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>div</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;app&#34;</span>&gt;&lt;/<span style=color:#f92672>div</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span> <span style=color:#a6e22e>src</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;./node_modules/vue/dist/vue.js&#34;</span>&gt;&lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>    &lt;<span style=color:#f92672>script</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text/javascript&#34;</span>&gt;
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>component</span>(<span style=color:#e6db74>&#39;Vquanju&#39;</span>,{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;button class=&#34;buttons&#34; :class=&#34;type&#34;&gt;全局组件按钮&lt;slot&gt;&lt;/slot&gt;&lt;/button&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>props</span><span style=color:#f92672>:</span>[<span style=color:#e6db74>&#39;type&#39;</span>]
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//利用父向子传值，自己封装组件，例如按钮
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>Vjubu</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;h2&gt;我是局部组件  &lt;/h2&gt;&lt;Vquanju&gt;slot覆盖内容&lt;/Vquanju&gt;  &lt;Vquanju type=&#34;successs&#34;&gt;默认&lt;/Vquanju &gt; &lt;Vquanju type=&#34;defaults&#34;&gt;成功&lt;/Vquanju&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>Vju</span><span style=color:#f92672>=</span>{
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span>{
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span><span style=color:#e6db74>&#39;&lt;div&gt;&lt;h2&gt;我是局部组件2&lt;/h2&gt;&lt;Vquanju/&gt;&lt;/div&gt;&#39;</span>
+</span></span><span style=display:flex><span>    }
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Vue</span>({
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>el</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;#app&#34;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>data</span>(){
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> {
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            }
+</span></span><span style=display:flex><span>        },
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>template</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#39;&lt;div&gt;&lt;Vjubu/&gt;&lt;Vju/&gt;&lt;/div&gt;&#39;</span>,
+</span></span><span style=display:flex><span>        <span style=color:#a6e22e>components</span><span style=color:#f92672>:</span>{
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Vjubu</span>,
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>Vju</span>
+</span></span><span style=display:flex><span>        }
+</span></span><span style=display:flex><span>    });
+</span></span><span style=display:flex><span>    &lt;/<span style=color:#f92672>script</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>body</span>&gt;
+</span></span><span style=display:flex><span>&lt;/<span style=color:#f92672>html</span>&gt;
+</span></span></code></pre></div></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/vue><span class=tag>Vue</span></a></li><li><a href=https://willxwu.github.io/tags/web><span class=tag>Web</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>480</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

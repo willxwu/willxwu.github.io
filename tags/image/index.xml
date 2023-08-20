@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>image on Come Back</title><link>https://willxwu.github.io/tags/image/</link><description>Recent content in image on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Tue, 05 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/image/index.xml" rel="self" type="application/rss+xml"/><item><title>Docker数据存储</title><link>https://willxwu.github.io/post/docker/06_docker%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</link><pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/06_docker%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8/</guid><description>&lt;h1 id="docker数据存储">Docker数据存储&lt;/h1>
+&lt;p>默认情况下，在运行中的容器里创建的文件，被保存在一个可写的容器层：&lt;/p>
+&lt;ul>
+&lt;li>如果容器被删除了，则数据也没有了&lt;/li>
+&lt;li>这个可写的容器层是和特定的容器绑定的，也就是这些数据无法方便的和其它容器共享&lt;/li>
+&lt;/ul>
+&lt;p>Docker主要提供了两种方式做数据的持久化&lt;/p></description></item><item><title>Docker镜像创建、镜像push</title><link>https://willxwu.github.io/post/docker/05_docker%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</link><pubDate>Mon, 04 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/05_docker%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E9%95%9C%E5%83%8Fpush/</guid><description>&lt;h1 id="镜像创建镜像push">镜像创建、镜像push&lt;/h1>
+&lt;h1 id="是什么">是什么&lt;/h1>
+&lt;p>Dockerfile是用于构建docker镜像的文件&lt;/p>
+&lt;p>Dockerfile里包括了构建镜像所需的“指令”&lt;/p>
+&lt;p>Dockerfile有其特定的语法规则&lt;/p></description></item><item><title>Docker镜像获取方式</title><link>https://willxwu.github.io/post/docker/03_docker%E9%95%9C%E5%83%8F%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F/</link><pubDate>Sun, 03 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/docker/03_docker%E9%95%9C%E5%83%8F%E8%8E%B7%E5%8F%96%E6%96%B9%E5%BC%8F/</guid><description>&lt;h1 id="docker镜像获取方式">Docker镜像获取方式&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202303181827457.png" alt="image-20230318182710371">&lt;/p>
+&lt;h2 id="一pull-from-registry">一、pull from registry&lt;/h2>
+&lt;p>必须在线，从registry拉取分公有和私有。公有，例如：dockerhub，私有，例如公司自己搭建的，只能公司内部访问。&lt;/p>
+&lt;p>常用公有registry：需要注册账号。&lt;/p></description></item></channel></rss>

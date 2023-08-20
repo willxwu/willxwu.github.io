@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Nacos on Come Back</title><link>https://willxwu.github.io/tags/nacos/</link><description>Recent content in Nacos on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Fri, 29 Apr 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/nacos/index.xml" rel="self" type="application/rss+xml"/><item><title>CenotOS环境Nacos安装，设置开机自启动</title><link>https://willxwu.github.io/post/centos/cenotos%E7%8E%AF%E5%A2%83nacos%E5%AE%89%E8%A3%85/</link><pubDate>Fri, 29 Apr 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/centos/cenotos%E7%8E%AF%E5%A2%83nacos%E5%AE%89%E8%A3%85/</guid><description>&lt;h1 id="cenotos环境nacos安装设置开机自启动">CenotOS环境Nacos安装，设置开机自启动&lt;/h1>
+&lt;h1 id="1下载">1、下载&lt;/h1>
+&lt;p>nacos下载地址：https://github.com/alibaba/nacos/releases&lt;/p>
+&lt;h1 id="2安装">2、安装&lt;/h1>
+&lt;p>进入nacos所在目录，执行如下命令&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>tar -zxvf nacos-server-2.0.3.tar.gz -C /usr/local/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="3单机启动">3、单机启动&lt;/h1>
+&lt;p>修改/usr/local/nacos/bin目录下startup.sh启动文件设置单机启动，修改export MODE=&amp;ldquo;cluster&amp;quot;值为standalone&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>export MODE&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#e6db74">&amp;#34;standalone&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>
