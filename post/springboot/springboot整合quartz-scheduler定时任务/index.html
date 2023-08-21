@@ -1,0 +1,407 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>SpringBoot整合定时任务和异步任务</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="SpringBoot整合定时任务和异步任务 一、定时任务 SpringBoot整合quartz-scheduler，执行定时任务。
+1、开启定时任务 @EnableScheduling 2、开启一个定时任务 @Scheduled 3、编写cron表达式 cron表达式格式请参考官方文档
+"><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="SpringBoot整合定时任务和异步任务"><meta name=twitter:description content="SpringBoot整合定时任务和异步任务 一、定时任务 SpringBoot整合quartz-scheduler，执行定时任务。
+1、开启定时任务 @EnableScheduling 2、开启一个定时任务 @Scheduled 3、编写cron表达式 cron表达式格式请参考官方文档
+"><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="SpringBoot整合定时任务和异步任务"><meta property="og:description" content="SpringBoot整合定时任务和异步任务 一、定时任务 SpringBoot整合quartz-scheduler，执行定时任务。
+1、开启定时任务 @EnableScheduling 2、开启一个定时任务 @Scheduled 3、编写cron表达式 cron表达式格式请参考官方文档
+"><meta property="og:url" content="https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88quartz-scheduler%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88quartz-scheduler%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>SpringBoot整合定时任务和异步任务</h1><p class=post-meta>@Come Back · Jun 17, 2022 · 4 min read</p></header><article class=post-content><h1 id=springboot整合定时任务和异步任务>SpringBoot整合定时任务和异步任务</h1><h1 id=一定时任务>一、定时任务</h1><p><strong>SpringBoot整合quartz-scheduler，执行定时任务。</strong></p><h2 id=1开启定时任务>1、开启定时任务</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@EnableScheduling</span>
+</span></span></code></pre></div><h2 id=2开启一个定时任务>2、开启一个定时任务</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Scheduled</span>
+</span></span></code></pre></div><h2 id=3编写cron表达式>3、编写cron表达式</h2><p>cron表达式格式请参考<a href=http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html>官方文档</a></p><h2 id=4实例>4、实例</h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.ifamily.booking.controller.scheduler<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.EnableScheduling<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.Scheduled<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.stereotype.Component<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * SpringBoot整合Scheduling定时任务
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/3/15 20:26
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Component</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableScheduling</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyScheduler</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * cron表达式
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Scheduled</span><span style=color:#f92672>(</span>cron <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;1/3 1/1 * * * ? &#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>sayHell</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Hello&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h2 id=5定时任务总结>5、定时任务总结</h2><p>1、@EnableScheduling 开启一个定时任务</p><p>2、@Scheduled 开启一个定时任务</p><p>3、编写定时规则，也就是cron表达式。</p><h2 id=6注意事项>6、注意事项</h2><ol><li><strong>spring中6位组成，不允许第7位的年。</strong></li><li><strong>在周几的位置，1-7代表周一到周日，MON-SUN</strong></li><li><strong>定时任务不应该阻塞，默认时阻塞的，应该以异步任务执行。</strong></li></ol><h2 id=7解决方案>7、解决方案</h2><p><strong>解决定时任务阻塞问题：使用异步+定时任务</strong></p><h1 id=二异步任务执行几种方式>二、异步任务执行几种方式</h1><h2 id=1异步方式提交线程池>1、异步方式提交线程池</h2><p>可以让业务运行以异步的方式，自己提交到线程池(<strong>CompletableFuture异步编排</strong>)。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Component</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableScheduling</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyScheduler</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newFixedThreadPool</span><span style=color:#f92672>(</span>10<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * cron表达式
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Scheduled</span><span style=color:#f92672>(</span>cron <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;1/3 1/1 * * * ? &#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>sayHell</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        CompletableFuture<span style=color:#f92672>.</span><span style=color:#a6e22e>runAsync</span><span style=color:#f92672>(()-&gt;{</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>//调用server业务方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#f92672>},</span> executorService<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h2 id=2定时任务线程池>2、定时任务线程池</h2><p>支持定时任务线程池(<strong>定时任务线程池</strong>)。Scheduling自动配置类，默认只有1个线程。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// Source code recreated from a .class file by IntelliJ IDEA
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// (powered by FernFlower decompiler)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> org.springframework.boot.autoconfigure.task<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ScheduledExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.beans.factory.ObjectProvider<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.LazyInitializationExcludeFilter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.AutoConfigureAfter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.condition.ConditionalOnBean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.condition.ConditionalOnClass<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.task.TaskSchedulingProperties.Shutdown<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.context.properties.EnableConfigurationProperties<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.task.TaskSchedulerBuilder<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.task.TaskSchedulerCustomizer<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Bean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Configuration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.TaskScheduler<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.SchedulingConfigurer<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConditionalOnClass</span><span style=color:#f92672>({</span>ThreadPoolTaskScheduler<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Configuration</span><span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>    proxyBeanMethods <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableConfigurationProperties</span><span style=color:#f92672>({</span>TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@AutoConfigureAfter</span><span style=color:#f92672>({</span>TaskExecutionAutoConfiguration<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TaskSchedulingAutoConfiguration</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TaskSchedulingAutoConfiguration</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ConditionalOnBean</span><span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>        name <span style=color:#f92672>=</span> <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;org.springframework.context.annotation.internalScheduledAnnotationProcessor&#34;</span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ConditionalOnMissingBean</span><span style=color:#f92672>({</span>SchedulingConfigurer<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> TaskScheduler<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> ScheduledExecutorService<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> ThreadPoolTaskScheduler <span style=color:#a6e22e>taskScheduler</span><span style=color:#f92672>(</span>TaskSchedulerBuilder builder<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>build</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> LazyInitializationExcludeFilter <span style=color:#a6e22e>scheduledBeanLazyInitializationExcludeFilter</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> ScheduledBeanLazyInitializationExcludeFilter<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ConditionalOnMissingBean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TaskSchedulerBuilder <span style=color:#a6e22e>taskSchedulerBuilder</span><span style=color:#f92672>(</span>TaskSchedulingProperties properties<span style=color:#f92672>,</span> ObjectProvider<span style=color:#f92672>&lt;</span>TaskSchedulerCustomizer<span style=color:#f92672>&gt;</span> taskSchedulerCustomizers<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        TaskSchedulerBuilder builder <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskSchedulerBuilder<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>poolSize</span><span style=color:#f92672>(</span>properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getPool</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getSize</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        Shutdown shutdown <span style=color:#f92672>=</span> properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getShutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTermination</span><span style=color:#f92672>(</span>shutdown<span style=color:#f92672>.</span><span style=color:#a6e22e>isAwaitTermination</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTerminationPeriod</span><span style=color:#f92672>(</span>shutdown<span style=color:#f92672>.</span><span style=color:#a6e22e>getAwaitTerminationPeriod</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>threadNamePrefix</span><span style=color:#f92672>(</span>properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getThreadNamePrefix</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>customizers</span><span style=color:#f92672>(</span>taskSchedulerCustomizers<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> builder<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>默认只有一个线程</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> org.springframework.boot.autoconfigure.task<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.time.Duration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.context.properties.ConfigurationProperties<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConfigurationProperties</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;spring.task.scheduling&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TaskSchedulingProperties</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Pool</span> pool <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Pool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Shutdown</span> shutdown <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> String threadNamePrefix <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;scheduling-&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TaskSchedulingProperties</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Pool</span> <span style=color:#a6e22e>getPool</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>pool</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TaskSchedulingProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Shutdown</span> <span style=color:#a6e22e>getShutdown</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getThreadNamePrefix</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>threadNamePrefix</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setThreadNamePrefix</span><span style=color:#f92672>(</span>String threadNamePrefix<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>threadNamePrefix</span> <span style=color:#f92672>=</span> threadNamePrefix<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shutdown</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> awaitTermination<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Duration awaitTerminationPeriod<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Shutdown</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isAwaitTermination</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTermination</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAwaitTermination</span><span style=color:#f92672>(</span><span style=color:#66d9ef>boolean</span> awaitTermination<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTermination</span> <span style=color:#f92672>=</span> awaitTermination<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Duration <span style=color:#a6e22e>getAwaitTerminationPeriod</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTerminationPeriod</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAwaitTerminationPeriod</span><span style=color:#f92672>(</span>Duration awaitTerminationPeriod<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTerminationPeriod</span> <span style=color:#f92672>=</span> awaitTerminationPeriod<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pool</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> size <span style=color:#f92672>=</span> 1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Pool</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getSize</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>size</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setSize</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> size<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>size</span> <span style=color:#f92672>=</span> size<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>配置线程池数量</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span>spring.task.scheduling.pool.size=5
+</span></span></code></pre></div><p>这样定时任务就有5个线程可以执行了，如果1个线程，定时任务就会阻塞。</p><h2 id=3让定时任务执行>3、让定时任务执行</h2><p>@EnableAsync 开启异步任务功能</p><p>@Async 在希望异步执行的方法开启异步执行注解，普通方法也可以使用。</p><p>默认线程数8</p><p>异步任务自动配置类源码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>//
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// Source code recreated from a .class file by IntelliJ IDEA
+</span></span></span><span style=display:flex><span><span style=color:#75715e>// (powered by FernFlower decompiler)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span><span style=color:#f92672>package</span> org.springframework.boot.autoconfigure.task<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executor<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.stream.Stream<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.beans.factory.ObjectProvider<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.condition.ConditionalOnClass<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Pool<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.autoconfigure.task.TaskExecutionProperties.Shutdown<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.context.properties.EnableConfigurationProperties<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.task.TaskExecutorBuilder<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.task.TaskExecutorCustomizer<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Bean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Configuration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Lazy<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.core.task.TaskDecorator<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConditionalOnClass</span><span style=color:#f92672>({</span>ThreadPoolTaskExecutor<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Configuration</span><span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>    proxyBeanMethods <span style=color:#f92672>=</span> <span style=color:#66d9ef>false</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableConfigurationProperties</span><span style=color:#f92672>({</span>TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TaskExecutionAutoConfiguration</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>final</span> String APPLICATION_TASK_EXECUTOR_BEAN_NAME <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;applicationTaskExecutor&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TaskExecutionAutoConfiguration</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ConditionalOnMissingBean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TaskExecutorBuilder <span style=color:#a6e22e>taskExecutorBuilder</span><span style=color:#f92672>(</span>TaskExecutionProperties properties<span style=color:#f92672>,</span> ObjectProvider<span style=color:#f92672>&lt;</span>TaskExecutorCustomizer<span style=color:#f92672>&gt;</span> taskExecutorCustomizers<span style=color:#f92672>,</span> ObjectProvider<span style=color:#f92672>&lt;</span>TaskDecorator<span style=color:#f92672>&gt;</span> taskDecorator<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        Pool pool <span style=color:#f92672>=</span> properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getPool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        TaskExecutorBuilder builder <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskExecutorBuilder<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>queueCapacity</span><span style=color:#f92672>(</span>pool<span style=color:#f92672>.</span><span style=color:#a6e22e>getQueueCapacity</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>corePoolSize</span><span style=color:#f92672>(</span>pool<span style=color:#f92672>.</span><span style=color:#a6e22e>getCoreSize</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>maxPoolSize</span><span style=color:#f92672>(</span>pool<span style=color:#f92672>.</span><span style=color:#a6e22e>getMaxSize</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>allowCoreThreadTimeOut</span><span style=color:#f92672>(</span>pool<span style=color:#f92672>.</span><span style=color:#a6e22e>isAllowCoreThreadTimeout</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>keepAlive</span><span style=color:#f92672>(</span>pool<span style=color:#f92672>.</span><span style=color:#a6e22e>getKeepAlive</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        Shutdown shutdown <span style=color:#f92672>=</span> properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getShutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTermination</span><span style=color:#f92672>(</span>shutdown<span style=color:#f92672>.</span><span style=color:#a6e22e>isAwaitTermination</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTerminationPeriod</span><span style=color:#f92672>(</span>shutdown<span style=color:#f92672>.</span><span style=color:#a6e22e>getAwaitTerminationPeriod</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>threadNamePrefix</span><span style=color:#f92672>(</span>properties<span style=color:#f92672>.</span><span style=color:#a6e22e>getThreadNamePrefix</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        Stream var10001 <span style=color:#f92672>=</span> taskExecutorCustomizers<span style=color:#f92672>.</span><span style=color:#a6e22e>orderedStream</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        var10001<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>customizers</span><span style=color:#f92672>(</span>var10001<span style=color:#f92672>::</span>iterator<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        builder <span style=color:#f92672>=</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>taskDecorator</span><span style=color:#f92672>((</span>TaskDecorator<span style=color:#f92672>)</span>taskDecorator<span style=color:#f92672>.</span><span style=color:#a6e22e>getIfUnique</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> builder<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Lazy</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span><span style=color:#f92672>(</span>
+</span></span><span style=display:flex><span>        name <span style=color:#f92672>=</span> <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;applicationTaskExecutor&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;taskExecutor&#34;</span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@ConditionalOnMissingBean</span><span style=color:#f92672>({</span>Executor<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> ThreadPoolTaskExecutor <span style=color:#a6e22e>applicationTaskExecutor</span><span style=color:#f92672>(</span>TaskExecutorBuilder builder<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> builder<span style=color:#f92672>.</span><span style=color:#a6e22e>build</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>默认线程8</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> org.springframework.boot.autoconfigure.task<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.time.Duration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.boot.context.properties.ConfigurationProperties<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConfigurationProperties</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;spring.task.execution&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>TaskExecutionProperties</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Pool</span> pool <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Pool</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>final</span> TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Shutdown</span> shutdown <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Shutdown</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> String threadNamePrefix <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;task-&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>TaskExecutionProperties</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Pool</span> <span style=color:#a6e22e>getPool</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>pool</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> TaskExecutionProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>Shutdown</span> <span style=color:#a6e22e>getShutdown</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>shutdown</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>getThreadNamePrefix</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>threadNamePrefix</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setThreadNamePrefix</span><span style=color:#f92672>(</span>String threadNamePrefix<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>threadNamePrefix</span> <span style=color:#f92672>=</span> threadNamePrefix<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Shutdown</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> awaitTermination<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Duration awaitTerminationPeriod<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Shutdown</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isAwaitTermination</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTermination</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAwaitTermination</span><span style=color:#f92672>(</span><span style=color:#66d9ef>boolean</span> awaitTermination<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTermination</span> <span style=color:#f92672>=</span> awaitTermination<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Duration <span style=color:#a6e22e>getAwaitTerminationPeriod</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTerminationPeriod</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAwaitTerminationPeriod</span><span style=color:#f92672>(</span>Duration awaitTerminationPeriod<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>awaitTerminationPeriod</span> <span style=color:#f92672>=</span> awaitTerminationPeriod<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Pool</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> queueCapacity <span style=color:#f92672>=</span> 2147483647<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> coreSize <span style=color:#f92672>=</span> 8<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> maxSize <span style=color:#f92672>=</span> 2147483647<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>boolean</span> allowCoreThreadTimeout <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> Duration keepAlive <span style=color:#f92672>=</span> Duration<span style=color:#f92672>.</span><span style=color:#a6e22e>ofSeconds</span><span style=color:#f92672>(</span>60L<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Pool</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getQueueCapacity</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>queueCapacity</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setQueueCapacity</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> queueCapacity<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>queueCapacity</span> <span style=color:#f92672>=</span> queueCapacity<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getCoreSize</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>coreSize</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setCoreSize</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> coreSize<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>coreSize</span> <span style=color:#f92672>=</span> coreSize<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>int</span> <span style=color:#a6e22e>getMaxSize</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>maxSize</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setMaxSize</span><span style=color:#f92672>(</span><span style=color:#66d9ef>int</span> maxSize<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>maxSize</span> <span style=color:#f92672>=</span> maxSize<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>boolean</span> <span style=color:#a6e22e>isAllowCoreThreadTimeout</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>allowCoreThreadTimeout</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setAllowCoreThreadTimeout</span><span style=color:#f92672>(</span><span style=color:#66d9ef>boolean</span> allowCoreThreadTimeout<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>allowCoreThreadTimeout</span> <span style=color:#f92672>=</span> allowCoreThreadTimeout<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> Duration <span style=color:#a6e22e>getKeepAlive</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>keepAlive</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>setKeepAlive</span><span style=color:#f92672>(</span>Duration keepAlive<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>keepAlive</span> <span style=color:#f92672>=</span> keepAlive<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>通过配置线程池线程数</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span>spring.task.execution.pool.core-size=5
+</span></span><span style=display:flex><span>spring.task.execution.pool.max-size=50
+</span></span></code></pre></div><p>实列</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.Async<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.EnableAsync<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.EnableScheduling<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.scheduling.annotation.Scheduled<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.stereotype.Component<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.ExecutorService<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.concurrent.Executors<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Component</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableAsync</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@EnableScheduling</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyScheduler</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> ExecutorService executorService <span style=color:#f92672>=</span> Executors<span style=color:#f92672>.</span><span style=color:#a6e22e>newFixedThreadPool</span><span style=color:#f92672>(</span>10<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * cron表达式
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Async</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Scheduled</span><span style=color:#f92672>(</span>cron <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;1/3 1/1 * * * ? &#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>sayHell</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Hello ....&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>要用线程池的时候，自己注入即可用了。</p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/spring><span class=tag>Spring</span></a></li><li><a href=https://willxwu.github.io/tags/springboot><span class=tag>Springboot</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1><span class=tag>定时任务</span></a></li><li><a href=https://willxwu.github.io/tags/frame><span class=tag>Frame</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%BC%82%E6%AD%A5%E4%BB%BB%E5%8A%A1><span class=tag>异步任务</span></a></li><li><a href=https://willxwu.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6><span class=tag>中间件</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>430</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

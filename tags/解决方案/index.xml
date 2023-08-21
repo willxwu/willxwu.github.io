@@ -1,4 +1,44 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>解决方案 on Come Back</title><link>https://willxwu.github.io/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link><description>Recent content in 解决方案 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Tue, 07 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.xml" rel="self" type="application/rss+xml"/><item><title>openFeign远程调用丢失请求头-解决方案</title><link>https://willxwu.github.io/post/problem/openfeign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E4%B8%A2%E5%A4%B1%E8%AF%B7%E6%B1%82%E5%A4%B4/</link><pubDate>Tue, 07 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/openfeign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E4%B8%A2%E5%A4%B1%E8%AF%B7%E6%B1%82%E5%A4%B4/</guid><description>&lt;p>openFeign远程调用丢失请求头&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>解决方案 on Come Back</title><link>https://willxwu.github.io/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link><description>Recent content in 解决方案 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Tue, 14 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.xml" rel="self" type="application/rss+xml"/><item><title>OpenAI's services are not available in your country.</title><link>https://willxwu.github.io/post/tool/chatgpt/</link><pubDate>Tue, 14 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/tool/chatgpt/</guid><description>OpenAI&amp;rsquo;s services are not available in your country.
+chatGpt注册，OpenAI&amp;rsquo;s services are not available in your country.解决方法。
+1、chatGpt注册 打开chatpgt官网https://chat.openai.com/auth/login，点击Sign up注册，跳转至注册页面。
+2、邮箱验证 最好使用gmail、outlook海外邮箱，注册。打开邮箱链接，即可验证。
+3、重新登录 提示设置用户姓名
+4、手机号验证 使用国内手机号会提示“OpenAI&amp;rsquo;s services are not available in your country.”
+5、OpenAI&amp;rsquo;s services are not available in your country 解决方案：
+5.1、使用公共接码号码，但是基本都被使用过了。
+5.2、使用虚拟外海号码。
+6、虚拟外海号码 1、注册账号 打开官网https://sms-activate.org/注册，最好使用海外邮箱Gmail、Outlook。
+2、账号充值 切换成中文，选择“充值”。
+选择支付宝充值
+选择充值1美元即可，大约6.46人民币。
+3、获取号码 根据需求选择需要使用的服务类型、选择号码国家。这里注册chatgpt，直接搜索OpenAI即可。
+选择要使用的国家号码，这里选择的印度。
+填写要使用的数量，然后点后面的购物车后，右边会显示号码和一会接收到的验证码。
+复制号码到chatGpt注册时，验证手机号的地方，一会就可以看到验证码了。
+后面就可以直接注册成功chatgpt了。</description></item><item><title>Shiro权限管理框架</title><link>https://willxwu.github.io/post/permissions/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/</link><pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/permissions/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/</guid><description>&lt;p>&lt;strong>首先知道Shiro架构有3个主要概念：Subject、SecurityManager和Realms。&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Shiro基础架构图&lt;/strong> ：&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.2/images/uploads/2021/06/shiro/ShiroBasicArchitecture.png" alt="Shiro基础架构图">
+基础架构说明：
+Subject: As we’ve mentioned in our Tutorial, the Subject is essentially a security specific ‘view’ of the the currently executing user. Whereas the word ‘User’ often implies a human being, a Subject can be a person, but it could also represent a 3rd-party service, daemon account, cron job, or anything similar - basically anything that is currently interacting with the software.
+Subject instances are all bound to (and require) a SecurityManager. When you interact with a Subject, those interactions translate to subject-specific interactions with the SecurityManager.
+（大概意思：Subject一词是一个安全术语，其基本意思是“当前的操作用户”。称之为“用户”并不准确，因为“用户”一词通常跟人相关。在安全领域，术语“Subject”可以是人，也可以是第三方进程、后台帐户（Daemon Account）、定时作业（Corn Job）或其他类似事物。它仅仅意味着“当前跟软件交互的东西”。但考虑到大多数目的和用途，你可以把它认为是Shiro的“用户”概念。
+在程序中你都能轻易的获得Subject，允许在任何需要的地方进行安全操作。每个Subject对象都必须与一个SecurityManager进行绑定，你访问Subject对象其实都是在与SecurityManager里的特定Subject进行交互。）&lt;/p></description></item><item><title>本地事务与分布式事务</title><link>https://willxwu.github.io/post/distributed/%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link><pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/distributed/%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid><description>&lt;h1 id="本地事务">本地事务&lt;/h1>
+&lt;h2 id="一事务的基本性质">一、事务的基本性质&lt;/h2>
+&lt;p>数据库事务的几个特性：原子性(Atomicity )、一致性( Consistency )、隔离性或独立性( Isolation)
+和持久性(Durabilily)，简称就是ACID；&lt;/p>
+&lt;ol>
+&lt;li>原子性：一系列的操作整体不可拆分，要么同时成功，要么同时失败&lt;/li>
+&lt;li>一致性：数据在事务的前后，业务整体一致。(A向B转账，转账前后AB总金额一致)&lt;/li>
+&lt;li>隔离性：事务之间互相隔离。&lt;/li>
+&lt;li>持久性：一旦事务成功，数据一定会落盘在数据库。&lt;/li>
+&lt;/ol>
+&lt;p>单体应用中，我们多个业务操作使用同一条连接操作不同的数据表，一旦有异常，我们可以很容易的整体回滚；&lt;/p></description></item><item><title>接口幂等性</title><link>https://willxwu.github.io/post/distributed/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/</link><pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/distributed/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/</guid><description>&lt;h1 id="接口幂等性">接口幂等性&lt;/h1>
+&lt;h1 id="1什么是幂等性">1、什么是幂等性&lt;/h1>
+&lt;p>&lt;strong>接口幂等性就是用户对于同一操作发起的一次请求或者多次请求的结果是一致的&lt;/strong>，不会因为多次点击而产生了副作用；比如说支付场景，用户购买了商品支付扣款成功，但是返回结果的时候网络异常，此时钱已经扣了，用户再次点击按钮，此时会进行第二次扣款，返回结果成功，用户查询余额返发现多扣钱了，流水记录也变成了两条&amp;hellip;，这就没有保证接口的幂等性。&lt;/p>
+&lt;h1 id="2哪些情况需要防止">2、哪些情况需要防止&lt;/h1>
+&lt;p>用户多次点击按钮
+用户页面回退再次提交
+微服务互相调用，由于网络问题，导致请求失败。feign触发重试机制其他业务情况&lt;/p></description></item><item><title>openFeign远程调用丢失请求头-解决方案</title><link>https://willxwu.github.io/post/problem/openfeign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E4%B8%A2%E5%A4%B1%E8%AF%B7%E6%B1%82%E5%A4%B4/</link><pubDate>Tue, 07 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/openfeign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8%E4%B8%A2%E5%A4%B1%E8%AF%B7%E6%B1%82%E5%A4%B4/</guid><description>&lt;p>openFeign远程调用丢失请求头&lt;/p>
 &lt;p>feign在远程调用之前要构造请求，调用会经过很多拦截器。丢失请求头原因，是远程调用重新构建了request请求，新的request没有请求头headr。&lt;/p>
 &lt;p>&lt;strong>解决方案：定义一个feign的拦截器&lt;/strong>&lt;/p>
 &lt;p>&lt;strong>先来看一下feign远程调用类SynchronousMethodHandler&lt;/strong>&lt;/p></description></item><item><title>Nacos持久化MySQL问题-解决方案</title><link>https://willxwu.github.io/post/problem/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</link><pubDate>Mon, 06 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/problem/nacos%E6%8C%81%E4%B9%85%E5%8C%96mysql%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/</guid><description>&lt;h1 id="nacos持久化mysql问题-解决方案">Nacos持久化MySQL问题-解决方案&lt;/h1>

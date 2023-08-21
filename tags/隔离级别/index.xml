@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>隔离级别 on Come Back</title><link>https://willxwu.github.io/tags/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/</link><description>Recent content in 隔离级别 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 11 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E9%9A%94%E7%A6%BB%E7%BA%A7%E5%88%AB/index.xml" rel="self" type="application/rss+xml"/><item><title>本地事务与分布式事务</title><link>https://willxwu.github.io/post/distributed/%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link><pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/distributed/%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid><description>&lt;h1 id="本地事务">本地事务&lt;/h1>
+&lt;h2 id="一事务的基本性质">一、事务的基本性质&lt;/h2>
+&lt;p>数据库事务的几个特性：原子性(Atomicity )、一致性( Consistency )、隔离性或独立性( Isolation)
+和持久性(Durabilily)，简称就是ACID；&lt;/p>
+&lt;ol>
+&lt;li>原子性：一系列的操作整体不可拆分，要么同时成功，要么同时失败&lt;/li>
+&lt;li>一致性：数据在事务的前后，业务整体一致。(A向B转账，转账前后AB总金额一致)&lt;/li>
+&lt;li>隔离性：事务之间互相隔离。&lt;/li>
+&lt;li>持久性：一旦事务成功，数据一定会落盘在数据库。&lt;/li>
+&lt;/ol>
+&lt;p>单体应用中，我们多个业务操作使用同一条连接操作不同的数据表，一旦有异常，我们可以很容易的整体回滚；&lt;/p></description></item></channel></rss>

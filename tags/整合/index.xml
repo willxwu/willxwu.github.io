@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>整合 on Come Back</title><link>https://willxwu.github.io/tags/%E6%95%B4%E5%90%88/</link><description>Recent content in 整合 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Thu, 16 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E6%95%B4%E5%90%88/index.xml" rel="self" type="application/rss+xml"/><item><title>springboot整合redis</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88redis/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88redis/</guid><description>&lt;h1 id="适合当如缓存场景">适合当如缓存场景：&lt;/h1>
+&lt;ol>
+&lt;li>即时性、数据一致性要求不高的。&lt;/li>
+&lt;li>访问量大且更新频率不高的数据(读多，写少)&lt;/li>
+&lt;/ol>
+&lt;p>承担持久化工作。&lt;/p>
+&lt;h1 id="读模式缓存使用流程">读模式缓存使用流程:&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203031925978.png" alt="">&lt;/p>
+&lt;p>凡是放入缓存中的数据，我们应该指定过期时间，使其可以再系统即使没有主动更新数据也能自动触发数据加载进缓存的流程。避免业务崩溃导致的数据永久不一致问题。&lt;/p>
+&lt;p>解决分布式缓存中本地缓存导致数据不一致问题，可以使用redis中间件解决。&lt;/p></description></item><item><title>SpringBoot整合SpringCache</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springcache/</link><pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springcache/</guid><description>&lt;h1 id="springboot整合springcache">SpringBoot整合SpringCache&lt;/h1>
+&lt;h1 id="1引入依赖">1、引入依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;artifactId&amp;gt;spring-boot-starter-cache&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2引入redis依赖">2、引入redis依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置redis地址密码等等，可参考springboo整合redis&lt;/p></description></item></channel></rss>

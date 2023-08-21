@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>接口 on Come Back</title><link>https://willxwu.github.io/tags/%E6%8E%A5%E5%8F%A3/</link><description>Recent content in 接口 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Fri, 10 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E6%8E%A5%E5%8F%A3/index.xml" rel="self" type="application/rss+xml"/><item><title>接口幂等性</title><link>https://willxwu.github.io/post/distributed/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/</link><pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/distributed/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/</guid><description>&lt;h1 id="接口幂等性">接口幂等性&lt;/h1>
+&lt;h1 id="1什么是幂等性">1、什么是幂等性&lt;/h1>
+&lt;p>&lt;strong>接口幂等性就是用户对于同一操作发起的一次请求或者多次请求的结果是一致的&lt;/strong>，不会因为多次点击而产生了副作用；比如说支付场景，用户购买了商品支付扣款成功，但是返回结果的时候网络异常，此时钱已经扣了，用户再次点击按钮，此时会进行第二次扣款，返回结果成功，用户查询余额返发现多扣钱了，流水记录也变成了两条&amp;hellip;，这就没有保证接口的幂等性。&lt;/p>
+&lt;h1 id="2哪些情况需要防止">2、哪些情况需要防止&lt;/h1>
+&lt;p>用户多次点击按钮
+用户页面回退再次提交
+微服务互相调用，由于网络问题，导致请求失败。feign触发重试机制其他业务情况&lt;/p></description></item></channel></rss>

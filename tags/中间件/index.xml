@@ -1,4 +1,32 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>中间件 on Come Back</title><link>https://willxwu.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link><description>Recent content in 中间件 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 28 May 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>初识RabbitMQ</title><link>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</link><pubDate>Sat, 28 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</guid><description>&lt;h1 id="rabbitmq作用">RabbitMQ作用&lt;/h1>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>中间件 on Come Back</title><link>https://willxwu.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link><description>Recent content in 中间件 on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Sat, 18 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/%E4%B8%AD%E9%97%B4%E4%BB%B6/index.xml" rel="self" type="application/rss+xml"/><item><title>springboot整合SpringSession</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springsession/</link><pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springsession/</guid><description>&lt;p>springboot整合SpringSession&lt;/p>
+&lt;h1 id="1引入依赖">1、引入依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;groupId&amp;gt;&lt;/span>org.springframework.session&lt;span style="color:#f92672">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;artifactId&amp;gt;&lt;/span>spring-session-data-redis&lt;span style="color:#f92672">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;/dependencies&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2springboot配置">2、springboot配置&lt;/h1>
+&lt;p>&lt;em>application.properties&lt;/em>配置：保存类型&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>spring.session.store-type=redis # Session store type.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SpringBoot整合定时任务和异步任务</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88quartz-scheduler%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link><pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88quartz-scheduler%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid><description>&lt;h1 id="springboot整合定时任务和异步任务">SpringBoot整合定时任务和异步任务&lt;/h1>
+&lt;h1 id="一定时任务">一、定时任务&lt;/h1>
+&lt;p>&lt;strong>SpringBoot整合quartz-scheduler，执行定时任务。&lt;/strong>&lt;/p>
+&lt;h2 id="1开启定时任务">1、开启定时任务&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@EnableScheduling&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2开启一个定时任务">2、开启一个定时任务&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@Scheduled&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3编写cron表达式">3、编写cron表达式&lt;/h2>
+&lt;p>cron表达式格式请参考&lt;a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">官方文档&lt;/a>&lt;/p></description></item><item><title>springboot整合redis</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88redis/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88redis/</guid><description>&lt;h1 id="适合当如缓存场景">适合当如缓存场景：&lt;/h1>
+&lt;ol>
+&lt;li>即时性、数据一致性要求不高的。&lt;/li>
+&lt;li>访问量大且更新频率不高的数据(读多，写少)&lt;/li>
+&lt;/ol>
+&lt;p>承担持久化工作。&lt;/p>
+&lt;h1 id="读模式缓存使用流程">读模式缓存使用流程:&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203031925978.png" alt="">&lt;/p>
+&lt;p>凡是放入缓存中的数据，我们应该指定过期时间，使其可以再系统即使没有主动更新数据也能自动触发数据加载进缓存的流程。避免业务崩溃导致的数据永久不一致问题。&lt;/p>
+&lt;p>解决分布式缓存中本地缓存导致数据不一致问题，可以使用redis中间件解决。&lt;/p></description></item><item><title>初识RabbitMQ</title><link>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</link><pubDate>Sat, 28 May 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/rabbitmq/%E5%88%9D%E8%AF%86rabbitmq/</guid><description>&lt;h1 id="rabbitmq作用">RabbitMQ作用&lt;/h1>
 &lt;p>&lt;strong>异步处理、应用解耦、流量控制&lt;/strong>&lt;/p>
 &lt;h1 id="概述">概述&lt;/h1>
 &lt;p>1、大多应用中，可通过消息服务中间件来提升系统异步通信、扩展解耦能力&lt;/p>

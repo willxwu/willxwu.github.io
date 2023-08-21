@@ -1,0 +1,589 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>SpringBoot整合RabbitMQ</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="SpringBoot整合RabbitMQ 1、引入依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-amqp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.6.3&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 2、配置rabbitmq 通过RabbitProperties.properties配置文件配置链接
+rabbitmq: host: 192.168.56.10 virtual-host: / port: 5672 publisher-confirm-type: correlated publisher-returns: true template: mandatory: true "><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="SpringBoot整合RabbitMQ"><meta name=twitter:description content="SpringBoot整合RabbitMQ 1、引入依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-amqp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.6.3&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 2、配置rabbitmq 通过RabbitProperties.properties配置文件配置链接
+rabbitmq: host: 192.168.56.10 virtual-host: / port: 5672 publisher-confirm-type: correlated publisher-returns: true template: mandatory: true "><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="SpringBoot整合RabbitMQ"><meta property="og:description" content="SpringBoot整合RabbitMQ 1、引入依赖 &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt; &amp;lt;artifactId&amp;gt;spring-boot-starter-amqp&amp;lt;/artifactId&amp;gt; &amp;lt;version&amp;gt;2.6.3&amp;lt;/version&amp;gt; &amp;lt;/dependency&amp;gt; 2、配置rabbitmq 通过RabbitProperties.properties配置文件配置链接
+rabbitmq: host: 192.168.56.10 virtual-host: / port: 5672 publisher-confirm-type: correlated publisher-returns: true template: mandatory: true "><meta property="og:url" content="https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88mq/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88mq/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>SpringBoot整合RabbitMQ</h1><p class=post-meta>@Come Back · Jun 19, 2022 · 6 min read</p></header><article class=post-content><h1 id=springboot整合rabbitmq>SpringBoot整合RabbitMQ</h1><h1 id=1引入依赖>1、引入依赖</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span><span style=color:#f92672>&lt;dependency&gt;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>&lt;groupId&gt;</span>org.springframework.boot<span style=color:#f92672>&lt;/groupId&gt;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>&lt;artifactId&gt;</span>spring-boot-starter-amqp<span style=color:#f92672>&lt;/artifactId&gt;</span>
+</span></span><span style=display:flex><span>	<span style=color:#f92672>&lt;version&gt;</span>2.6.3<span style=color:#f92672>&lt;/version&gt;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>&lt;/dependency&gt;</span>
+</span></span></code></pre></div><h1 id=2配置rabbitmq>2、配置rabbitmq</h1><p>通过RabbitProperties.properties配置文件配置链接</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-xml data-lang=xml><span style=display:flex><span>  rabbitmq:
+</span></span><span style=display:flex><span>    host: 192.168.56.10
+</span></span><span style=display:flex><span>    virtual-host: /
+</span></span><span style=display:flex><span>    port: 5672
+</span></span><span style=display:flex><span>    publisher-confirm-type: correlated
+</span></span><span style=display:flex><span>    publisher-returns: true
+</span></span><span style=display:flex><span>    template:
+</span></span><span style=display:flex><span>      mandatory: true
+</span></span></code></pre></div><h2 id=重点><strong>重点：</strong></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e>#开启发送端确认机制，发送到Broke的确认</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>publisher-confirm-type</span>: <span style=color:#ae81ff>correlated</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#开启时消息发送到队列的消息确认机制</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>publisher-returns</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#只要抵达队列，以异步发送优先回调我们这个Returnconfirm</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>template</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>mandatory</span>: <span style=color:#66d9ef>true</span>
+</span></span></code></pre></div><h1 id=3开启rabbit>3、开启Rabbit</h1><p>启动类添加@EnableRabbit注解</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@EnableRabbit</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@SpringBootApplication</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FamilyBookingApplication</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        SpringApplication<span style=color:#f92672>.</span><span style=color:#a6e22e>run</span><span style=color:#f92672>(</span>FamilyBookingApplication<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>,</span> args<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h1 id=4rabbit使用>4、Rabbit使用</h1><p>现在RabbitAutoConfiguration就生效了，就有了组件RabbitTemplate、AmqpAdmin、CachingConnectionFactory、RabbitMessagingTemplate</p><h1 id=5使用测试>5、使用测试</h1><h2 id=1创建exchangequeuebinding><strong>1、创建Exchange、Queue、Binding</strong></h2><p>使用AmqpAdmin创建。</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203122103706.png alt></p><p>通过创建各交换机构造方法，找到对应接口的实现，传入参数即可创建Exchange。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#a6e22e>DirectExchange</span><span style=color:#f92672>(</span>String name<span style=color:#f92672>,</span> <span style=color:#66d9ef>boolean</span> durable<span style=color:#f92672>,</span> <span style=color:#66d9ef>boolean</span> autoDelete<span style=color:#f92672>,</span> Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> Object<span style=color:#f92672>&gt;</span> arguments<span style=color:#f92672>)</span> 
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#a6e22e>@Autowired</span>
+</span></span><span style=display:flex><span>    AmqpAdmin amqpAdmin<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 创建Exchange交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>craeteChage</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * public DirectExchange(String name, boolean durable, boolean autoDelete, Map&lt;String, Object&gt; arguments)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         */</span>
+</span></span><span style=display:flex><span>        DirectExchange directExchange <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> DirectExchange<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Family-Hello-Exchange&#34;</span><span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        amqpAdmin<span style=color:#f92672>.</span><span style=color:#a6e22e>declareExchange</span><span style=color:#f92672>(</span>directExchange<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 创建Queue交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>craetQueue</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * public Queue(String name, boolean durable, boolean exclusive, boolean autoDelete, @Nullable Map&lt;String, Object&gt; arguments)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         */</span>
+</span></span><span style=display:flex><span>        Queue queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Queue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Family-Hello-Queue&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        amqpAdmin<span style=color:#f92672>.</span><span style=color:#a6e22e>declareQueue</span><span style=color:#f92672>(</span>queue<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 创建Bind交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>craetBind</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * public Binding(String destination, 绑定目标
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * Binding.DestinationType destinationType, 绑定类型
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * String exchange, 交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * String routingKey, router-key
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         * @Nullable Map&lt;String, Object&gt; arguments  参数) {
+</span></span></span><span style=display:flex><span><span style=color:#75715e>         */</span>
+</span></span><span style=display:flex><span>        Binding binding <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Binding<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Family-Hello-Queue&#34;</span><span style=color:#f92672>,</span> Binding<span style=color:#f92672>.</span><span style=color:#a6e22e>DestinationType</span><span style=color:#f92672>.</span><span style=color:#a6e22e>QUEUE</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;Family-Hello-Exchange&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;Java.hello&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        amqpAdmin<span style=color:#f92672>.</span><span style=color:#a6e22e>declareBinding</span><span style=color:#f92672>(</span>binding<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>上面为DirectExchange类型交换机的创建，其它类型Exchange类似。</p><p>更多API可参考AmqpAdmin的各方法。</p><h2 id=2收发消息><strong>2、收发消息</strong></h2><p><strong>发送消息</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * rabbitTemplate 发送消息
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Test</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>sendMessage</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送字符串
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>convertAndSend</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Family-Hello-Exchange&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;Java.hello&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;Hello RabbitMQ 。。。&#34;</span><span style=color:#f92672>,</span><span style=color:#66d9ef>new</span> CorrelationData<span style=color:#f92672>(</span>UUID<span style=color:#f92672>.</span><span style=color:#a6e22e>randomUUID</span><span style=color:#f92672>().</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MemberEntity memberEntity <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MemberEntity<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setAddress</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;rabbitMQ测试-会员地址信息&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setEmail</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;rabbitMQ测试-会员邮箱,batis@foxmial.com&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送对象,注意:发送的对象必须序列化。默认发送的对象是序列化的，如果想以json格式方式发送，需要进行配置。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>convertAndSend</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Family-Hello-Exchange&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;Java.hello&#34;</span><span style=color:#f92672>,</span>memberEntity<span style=color:#f92672>,</span><span style=color:#66d9ef>new</span> CorrelationData<span style=color:#f92672>(</span>UUID<span style=color:#f92672>.</span><span style=color:#a6e22e>randomUUID</span><span style=color:#f92672>().</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;向RabbitMQ发送消息成功&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><h2 id=3接受消息>3、<strong>接受消息</strong></h2><p>RabbitMQ为我们提供了监听@RabbitListener监听注解，使用时，必须开启@EnableRabbit功能。<strong>不用监听消息队列时，可以不用开启@EnableRabbit注解。</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 监听队列是各数组，可以同时监听多个队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 通过返回的消息类型知道是一个org.springframework.amqp.core.Message;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param message
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@RabbitListener</span><span style=color:#f92672>(</span>queues<span style=color:#f92672>={</span><span style=color:#e6db74>&#34;Family-Hello-Queue&#34;</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>sendMessage</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送字符串
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        rabbitTemplate.convertAndSend(&#34;Family-Hello-Exchange&#34;,&#34;Java.hello&#34;,&#34;Hello RabbitMQ 。。。&#34;,new CorrelationData(UUID.randomUUID().toString()));
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MemberEntity memberEntity <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MemberEntity<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setAddress</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;rabbitMQ测试-会员地址信息&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setEmail</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;rabbitMQ测试-会员邮箱,batis@foxmial.com&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送对象,注意:发送的对象必须序列化。默认发送的对象是序列化的，如果想以json格式方式发送，需要进行配置。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>convertAndSend</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;Family-Hello-Exchange&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;Java.hello&#34;</span><span style=color:#f92672>,</span>memberEntity<span style=color:#f92672>,</span><span style=color:#66d9ef>new</span> CorrelationData<span style=color:#f92672>(</span>UUID<span style=color:#f92672>.</span><span style=color:#a6e22e>randomUUID</span><span style=color:#f92672>().</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;向RabbitMQ发送消息成功&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 通过传入第二个参数spring可以帮我们把之间转的对象获取后转成对象，第二个参数不固定的泛型&lt;T&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 比如上面发送的是一个user对象，那我们第二个参数就是User user，接受到的数据就直接是user了。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 还可以直接获取到链接中传输数据的通道channel
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param message
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@RabbitListener</span><span style=color:#f92672>(</span>queues<span style=color:#f92672>={</span><span style=color:#e6db74>&#34;Family-Hello-Queue&#34;</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>receiveMessageAndObject</span><span style=color:#f92672>(</span>Message message<span style=color:#f92672>,</span> MemberEntity memberEntity<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息体，数据内容
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//通过原生Message message获取的消息还得进行转化才好使用，需要转成对象。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> body <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息头信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MessageProperties messageProperties <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;监听到队列消息2:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;消息类型:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;监听到队列消息2:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;消息内容:&#34;</span><span style=color:#f92672>+</span>memberEntity<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p><strong>Queue：可以很多人都来监听。只要收到消息，队列删除消息，而且只能有一个收到此消息</strong></p><p><strong>注意：</strong></p><p><strong>1）、同一个消息，只能有一个客户端收到</strong></p><p><strong>2）、只有一个消息完全处理完，方法运行结束，我们才可以接收到下一个消息</strong></p><p><strong>3）、@RabbitHandler也可以接受队列消息</strong></p><p><strong>@RabbitListener可以用在类和方法上</strong></p><p><strong>@RabbitHandler只能用在方法上。</strong></p><p><strong>@RabbitHandler应用场景</strong>：当发送的数据为不同类型时，@RabbitListener接口消息时，参数类型不知道定义那个。</p><p>比如：想队列发送的对象有user、People people，那下面接受时，对象不知道写那个</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>receiveMessageObject</span><span style=color:#f92672>(</span>Message message<span style=color:#f92672>,</span> 这里该写那个对象<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>)</span>
+</span></span></code></pre></div><p>因此@RabbitHandler就可以用上了。通过在类上加上@RabbitHandler注解监听队列消息，在方法上加@RabbitHandler注解，参数就可以指定接受那个数据类型的消息了。</p><p>简单代码如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@RabbitListener</span><span style=color:#f92672>(</span>queues<span style=color:#f92672>={</span><span style=color:#e6db74>&#34;Family-Hello-Queue&#34;</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Service</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;memberService&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MemberServiceImpl</span> <span style=color:#66d9ef>extends</span> ServiceImpl<span style=color:#f92672>&lt;</span>MemberDao<span style=color:#f92672>,</span> MemberEntity<span style=color:#f92672>&gt;</span> <span style=color:#66d9ef>implements</span> MemberService <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//接受队列中指定的People类型数据
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@RabbitHandler</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>receiveMessageObj</span><span style=color:#f92672>(</span>Message message<span style=color:#f92672>,</span> MemberEntity memberEntity<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息体，数据内容
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//通过原生Message message获取的消息还得进行转化才好使用，需要转成对象。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> body <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息头信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MessageProperties messageProperties <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;监听到队列消息:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;消息内容:&#34;</span><span style=color:#f92672>+</span>memberEntity<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>   <span style=color:#75715e>//接受队列中指定的User类型数据
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@RabbitHandler</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>receiveMessageObj</span><span style=color:#f92672>(</span>Message message<span style=color:#f92672>,</span> MemberEntity memberEntity<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息体，数据内容
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//通过原生Message message获取的消息还得进行转化才好使用，需要转成对象。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> body <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息头信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MessageProperties messageProperties <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;监听到队列消息:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;消息内容:&#34;</span><span style=color:#f92672>+</span>memberEntity<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><h1 id=6rabbitmq-java配置json序列化>6、RabbitMQ Java配置Json序列化</h1><p>通过RabbitAutoConfiguration.java中注入的RabbitTemplate看到configure。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConditionalOnMissingBean</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> RabbitTemplateConfigurer <span style=color:#a6e22e>rabbitTemplateConfigurer</span><span style=color:#f92672>(</span>RabbitProperties properties<span style=color:#f92672>,</span> ObjectProvider<span style=color:#f92672>&lt;</span>MessageConverter<span style=color:#f92672>&gt;</span> messageConverter<span style=color:#f92672>,</span> ObjectProvider<span style=color:#f92672>&lt;</span>RabbitRetryTemplateCustomizer<span style=color:#f92672>&gt;</span> retryTemplateCustomizers<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            RabbitTemplateConfigurer configurer <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> RabbitTemplateConfigurer<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            configurer<span style=color:#f92672>.</span><span style=color:#a6e22e>setMessageConverter</span><span style=color:#f92672>((</span>MessageConverter<span style=color:#f92672>)</span>messageConverter<span style=color:#f92672>.</span><span style=color:#a6e22e>getIfUnique</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>            configurer<span style=color:#f92672>.</span><span style=color:#a6e22e>setRetryTemplateCustomizers</span><span style=color:#f92672>((</span>List<span style=color:#f92672>)</span>retryTemplateCustomizers<span style=color:#f92672>.</span><span style=color:#a6e22e>orderedStream</span><span style=color:#f92672>().</span><span style=color:#a6e22e>collect</span><span style=color:#f92672>(</span>Collectors<span style=color:#f92672>.</span><span style=color:#a6e22e>toList</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>            configurer<span style=color:#f92672>.</span><span style=color:#a6e22e>setRabbitProperties</span><span style=color:#f92672>(</span>properties<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> configurer<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConditionalOnSingleCandidate</span><span style=color:#f92672>(</span>ConnectionFactory<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ConditionalOnMissingBean</span><span style=color:#f92672>({</span>RabbitOperations<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>})</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> RabbitTemplate <span style=color:#a6e22e>rabbitTemplate</span><span style=color:#f92672>(</span>RabbitTemplateConfigurer configurer<span style=color:#f92672>,</span> ConnectionFactory connectionFactory<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            RabbitTemplate template <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> RabbitTemplate<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>            configurer<span style=color:#f92672>.</span><span style=color:#a6e22e>configure</span><span style=color:#f92672>(</span>template<span style=color:#f92672>,</span> connectionFactory<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> template<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>如果配置中有MessageConverter消息转换器就用configurer.setMessageConverter((MessageConverter)messageConverter.getIfUnique());如果没有就用RabbitTemplate默认配置的。</p><p>RabbitTemplateConfigurer.java默认配置源码中可以看到默认使用的转换器如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> MessageConverter <span style=color:#a6e22e>getMessageConverter</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>messageConverter</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    
+</span></span><span style=display:flex><span><span style=color:#66d9ef>private</span> MessageConverter messageConverter <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SimpleMessageConverter<span style=color:#f92672>();</span>
+</span></span></code></pre></div><p>然后通过SimpleMessageConverter可以看到默认创建消息时，使用的消息转换器类型</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>protected</span> Message <span style=color:#a6e22e>createMessage</span><span style=color:#f92672>(</span>Object object<span style=color:#f92672>,</span> MessageProperties messageProperties<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> MessageConversionException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> bytes <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>object <span style=color:#66d9ef>instanceof</span> <span style=color:#66d9ef>byte</span><span style=color:#f92672>[])</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            bytes <span style=color:#f92672>=</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>byte</span><span style=color:#f92672>[])((</span><span style=color:#66d9ef>byte</span><span style=color:#f92672>[])</span>object<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentType</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;application/octet-stream&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>object <span style=color:#66d9ef>instanceof</span> String<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                bytes <span style=color:#f92672>=</span> <span style=color:#f92672>((</span>String<span style=color:#f92672>)</span>object<span style=color:#f92672>).</span><span style=color:#a6e22e>getBytes</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>defaultCharset</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>UnsupportedEncodingException var6<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> MessageConversionException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;failed to convert to Message content&#34;</span><span style=color:#f92672>,</span> var6<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentType</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;text/plain&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentEncoding</span><span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>defaultCharset</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>object <span style=color:#66d9ef>instanceof</span> Serializable<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                bytes <span style=color:#f92672>=</span> SerializationUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>serialize</span><span style=color:#f92672>(</span>object<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>IllegalArgumentException var5<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> MessageConversionException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;failed to convert to serialized Message content&#34;</span><span style=color:#f92672>,</span> var5<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentType</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;application/x-java-serialized-object&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>bytes <span style=color:#f92672>!=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentLength</span><span style=color:#f92672>((</span><span style=color:#66d9ef>long</span><span style=color:#f92672>)</span>bytes<span style=color:#f92672>.</span><span style=color:#a6e22e>length</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Message<span style=color:#f92672>(</span>bytes<span style=color:#f92672>,</span> messageProperties<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span> <span style=color:#66d9ef>else</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> IllegalArgumentException<span style=color:#f92672>(</span><span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getSimpleName</span><span style=color:#f92672>()</span> <span style=color:#f92672>+</span> <span style=color:#e6db74>&#34; only supports String, byte[] and Serializable payloads, received: &#34;</span> <span style=color:#f92672>+</span> object<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getName</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>如果是序列化的就是使用的<strong>SerializationUtils.serialize(object);</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>else</span> <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span>object <span style=color:#66d9ef>instanceof</span> Serializable<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>try</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                bytes <span style=color:#f92672>=</span> SerializationUtils<span style=color:#f92672>.</span><span style=color:#a6e22e>serialize</span><span style=color:#f92672>(</span>object<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span> <span style=color:#66d9ef>catch</span> <span style=color:#f92672>(</span>IllegalArgumentException var5<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> MessageConversionException<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;failed to convert to serialized Message content&#34;</span><span style=color:#f92672>,</span> var5<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>            messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>setContentType</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;application/x-java-serialized-object&#34;</span><span style=color:#f92672>);</span>
+</span></span></code></pre></div><p>因此我们可以自定义MessageConverter。通过MessageConverter接口实现类型，可以看到json各实现类。</p><p><img src=https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203122253714.png alt></p><p>因此RabbitMQ自定义配置如下:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.support.converter.Jackson2JsonMessageConverter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.support.converter.MessageConverter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Bean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Configuration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: RabbitMQ配置
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/3/12 17:07
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>MyRabbitConfig</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> MessageConverter <span style=color:#a6e22e>messageConverter</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Jackson2JsonMessageConverter<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>再次发送对象时，从mq里面获取的对象就是json格式了。</p><h1 id=7开启消息回调确认机制>7、开启消息回调确认机制</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#75715e>#开启发送端确认机制，发送到Broke的确认</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>publisher-confirm-type</span>: <span style=color:#ae81ff>correlated</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#开启时消息发送到队列的消息确认机制</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>publisher-returns</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#只要抵达队列，以异步发送优先回调我们这个ReturnCallback</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>template</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>mandatory</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span><span style=color:#75715e>#手动确认ack</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>listener</span>:
+</span></span><span style=display:flex><span>	<span style=color:#f92672>simple</span>:
+</span></span><span style=display:flex><span>		<span style=color:#f92672>acknowledge-mode</span>: <span style=color:#ae81ff>manual</span>
+</span></span></code></pre></div><h2 id=8重点><strong>8、重点：</strong></h2><p><strong>发送端：</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.family.users.config<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.core.Message<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.rabbit.connection.ConnectionFactory<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.rabbit.connection.CorrelationData<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.rabbit.core.RabbitTemplate<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.support.converter.Jackson2JsonMessageConverter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.support.converter.MessageConverter<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Bean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Configuration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Primary<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: RabbitMQ配置 序列化
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/17 16:44
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>RabbitConfig</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> RabbitTemplate rabbitTemplate<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * rabbitTemplate循环依赖，解决方法：手动初始化模板方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param connectionFactory
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Primary</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> RabbitTemplate <span style=color:#a6e22e>rabbitTemplate</span><span style=color:#f92672>(</span>ConnectionFactory connectionFactory<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        RabbitTemplate rabbitTemplate <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> RabbitTemplate<span style=color:#f92672>(</span>connectionFactory<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>rabbitTemplate</span> <span style=color:#f92672>=</span> rabbitTemplate<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>setMessageConverter</span><span style=color:#f92672>(</span>messageConverter<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        initRabbitTemplate<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> rabbitTemplate<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> MessageConverter <span style=color:#a6e22e>messageConverter</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Jackson2JsonMessageConverter<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 定制rabbitMaTemplate
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 一、发送端消息确认机制，发送给Broke的消息确认回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 1、开始消息确认    publisher-confirm-type: correlated
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 2、设置确认回调   setConfirmCallback()
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 二、发送端消息确认机制，发送给队列的消息确认回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 1、开始消息确认
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *     publisher-returns: true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *     template:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *       mandatory: true
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 2、设置确认回调  setReturnsCallback
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 三、消费端确认(保证每个消息被正确消费，此时才可以broker删除这个消息)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  1、开启消费端消息确认
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *      listener:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *       simple:
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *         acknowledge-mode: manual
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  2、消费端默认是自动消息确认的，只要消息手法哦，客户端会自动确认，服务器就会移除这个消息。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *    默认的消息确认(默认ACK)问题：
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *        我们收到很多消息，自动回复给服务器ack，只有一个消息处理成功，服务器宕机了。会发生消息丢失；
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  3、因此，需要使用消费者手动确认默认（手动ack）,只要我们没有明确高数MQ，消息被消费，就没有ack，消息就一致是unacked状态。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  即使服务器宕机，消息也不会丢失，会重新变为ready,下一次有新的消费者链接进来就发给它处理。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  4、手动ack如何签收
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  //消息头信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *   MessageProperties messageProperties = message.getMessageProperties();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *   long deliveryTag = messageProperties.getDeliveryTag();
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *   channel.basicAck(deliveryTag,true); //手动确认签收，deliveryTag默认自增的，true是否批量确认签收
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *  5、消费退回
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *         //参数:long var1, boolean var3(是否批量), boolean var4
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *         channel.basicNack(deliveryTag,true,true); //可以批量回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *        //参数:long var1, boolean var3
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *         channel.basicReject(deliveryTag,true); //单个回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *         第三个参数或第二个参数:false 丢弃    true:发回服务器，服务器重新入对。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>initRabbitTemplate</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置确认回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>setConfirmCallback</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> RabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>ConfirmCallback</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * 只要消息抵达服务器
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param correlationData 当前消息关联的唯一数据（这个消息的唯一id）
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param ack 消息是否成功收到
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param cause 失败原因
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             */</span>
+</span></span><span style=display:flex><span>            <span style=color:#a6e22e>@Override</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>confirm</span><span style=color:#f92672>(</span>CorrelationData correlationData<span style=color:#f92672>,</span> <span style=color:#66d9ef>boolean</span> ack<span style=color:#f92672>,</span> String cause<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                <span style=color:#75715e>//correlationData：注意，这个correlationData就是发送消息时，设置的correlationData。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;====确认收到消息了。。。。================&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>correlationData<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;|&#34;</span><span style=color:#f92672>+</span>ack<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;|&#34;</span><span style=color:#f92672>+</span>cause<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//注意：必须要有这一步，不然不生效
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>setMandatory</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//设置消息抵达队列回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>setReturnCallback</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> RabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>ReturnCallback</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * 只要消息没有投递给指定的队列，就触发这个失败回调
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param message 投递失败的消息详细信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param replyCode 回复的状态码
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param replyText 回复的文本内容
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param exchange 当时这个消息发给哪个交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             * @param routingKey 当时这个消息用的哪个路由键
+</span></span></span><span style=display:flex><span><span style=color:#75715e>             */</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>returnedMessage</span><span style=color:#f92672>(</span>Message message<span style=color:#f92672>,</span> <span style=color:#66d9ef>int</span> replyCode<span style=color:#f92672>,</span> String replyText<span style=color:#f92672>,</span> String exchange<span style=color:#f92672>,</span> String routingKey<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;==========投递到队列失败了。。。==========&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>message<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>replyCode<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>replyText<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>exchange<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>routingKey<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>});</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>发送消息时，可以将new CorrelationData(UUID.randomUUID().toString())，传的uuid参数保存到数据库，到时候直接遍历数据库即可知道那些投递成功到队列，那些投递失败。</p><p>说明:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span> * 一、发送端消息确认机制，发送给Broke的消息确认回调
+</span></span><span style=display:flex><span> * 1、开始消息确认    publisher-confirm-type: correlated
+</span></span><span style=display:flex><span> * 2、设置确认回调   setConfirmCallback<span style=color:#f92672>()</span>
+</span></span><span style=display:flex><span> * 二、发送端消息确认机制，发送给队列的消息确认回调
+</span></span><span style=display:flex><span> * 1、开始消息确认
+</span></span><span style=display:flex><span> *     publisher-returns: true
+</span></span><span style=display:flex><span> *     template:
+</span></span><span style=display:flex><span> *       mandatory: true
+</span></span><span style=display:flex><span> * 2、设置确认回调  setReturnsCallback
+</span></span><span style=display:flex><span> * 三、消费端确认<span style=color:#f92672>(</span>保证每个消息被正确消费，此时才可以broker删除这个消息<span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span> *  1、开启消费端消息确认
+</span></span><span style=display:flex><span> *      listener:
+</span></span><span style=display:flex><span> *       simple:
+</span></span><span style=display:flex><span> *         acknowledge-mode: manual
+</span></span><span style=display:flex><span> *  2、消费端默认是自动消息确认的，只要消息手法哦，客户端会自动确认，服务器就会移除这个消息。
+</span></span><span style=display:flex><span> *    默认的消息确认<span style=color:#f92672>(</span>默认ACK<span style=color:#f92672>)</span>问题：
+</span></span><span style=display:flex><span> *        我们收到很多消息，自动回复给服务器ack，只有一个消息处理成功，服务器宕机了。会发生消息丢失；
+</span></span><span style=display:flex><span> *  3、因此，需要使用消费者手动确认默认（手动ack）,只要我们没有明确高数MQ，消息被消费，就没有ack，消息就一致是unacked状态。
+</span></span><span style=display:flex><span> *  即使服务器宕机，消息也不会丢失，会重新变为ready,下一次有新的消费者链接进来就发给它处理。
+</span></span></code></pre></div><p><strong>消费端手动ack</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     *
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 通过传入第二个参数spring可以帮我们把之间转的对象获取后转成对象，第二个参数不固定的泛型&lt;T&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 比如上面发送的是一个user对象，那我们第二个参数就是User user，接受到的数据就直接是user了。
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 还可以直接获取到链接中传输数据的通道channel
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param message
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@RabbitHandler</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>receiveMessageObject</span><span style=color:#f92672>(</span>Message message<span style=color:#f92672>,</span> MemberEntity memberEntity<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IOException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息体，数据内容
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//通过原生Message message获取的消息还得进行转化才好使用，需要转成对象。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>byte</span><span style=color:#f92672>[]</span> body <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getBody</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//消息头信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MessageProperties messageProperties <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>long</span> deliveryTag <span style=color:#f92672>=</span> messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>getDeliveryTag</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//手动确认签收
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        channel<span style=color:#f92672>.</span><span style=color:#a6e22e>basicAck</span><span style=color:#f92672>(</span>deliveryTag<span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;监听到队列消息3:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;消息类型:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>.</span><span style=color:#a6e22e>getClass</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;监听到队列消息3:&#34;</span><span style=color:#f92672>+</span>message<span style=color:#f92672>+</span><span style=color:#e6db74>&#34;消息内容:&#34;</span><span style=color:#f92672>+</span>memberEntity<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//可以批量回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        channel.basicNack(deliveryTag,true,true);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//单个回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//true重新排队，false丢弃
+</span></span></span><span style=display:flex><span><span style=color:#75715e>//        channel.basicReject(deliveryTag,true);
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明:</p><p><strong>手动ack如何签收</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#75715e>//消息头信息
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>     MessageProperties messageProperties <span style=color:#f92672>=</span> message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>     <span style=color:#66d9ef>long</span> deliveryTag <span style=color:#f92672>=</span> messageProperties<span style=color:#f92672>.</span><span style=color:#a6e22e>getDeliveryTag</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>     channel<span style=color:#f92672>.</span><span style=color:#a6e22e>basicAck</span><span style=color:#f92672>(</span>deliveryTag<span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span> <span style=color:#75715e>//手动确认签收，deliveryTag默认自增的，true是否批量确认签收
+</span></span></span></code></pre></div><p><strong>消费退回</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span> <span style=color:#75715e>//参数:long var1, boolean var3(是否批量), boolean var4
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>  channel<span style=color:#f92672>.</span><span style=color:#a6e22e>basicNack</span><span style=color:#f92672>(</span>deliveryTag<span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span> <span style=color:#75715e>//可以批量回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span> <span style=color:#75715e>//参数:long var1, boolean var3
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span> channel<span style=color:#f92672>.</span><span style=color:#a6e22e>basicReject</span><span style=color:#f92672>(</span>deliveryTag<span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span> <span style=color:#75715e>//单个回退
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>第三个参数或第二个参数:<span style=color:#66d9ef>false</span> 丢弃    <span style=color:#66d9ef>true</span><span style=color:#f92672>:</span>发回服务器<span style=color:#960050;background-color:#1e0010>，</span>服务器重新入对<span style=color:#960050;background-color:#1e0010>。</span>
+</span></span></code></pre></div><p>最后rabbitMQ配置：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=display:flex><span><span style=color:#f92672>spring</span>:
+</span></span><span style=display:flex><span>  <span style=color:#f92672>rabbitmq</span>:
+</span></span><span style=display:flex><span>    <span style=color:#f92672>host</span>: <span style=color:#ae81ff>192.168.56.10</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>virtual-host</span>: <span style=color:#ae81ff>/</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>port</span>: <span style=color:#ae81ff>5672</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#开启发送端确认</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>publisher-confirm-type</span>: <span style=color:#ae81ff>correlated</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#开启发送端消息抵达队列的确认</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>publisher-returns</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#只要抵达队列，以异步发送优先回调我们这个retureconfirm</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>template</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>mandatory</span>: <span style=color:#66d9ef>true</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>#开启手动确认</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>listener</span>:
+</span></span><span style=display:flex><span>      <span style=color:#f92672>simple</span>:
+</span></span><span style=display:flex><span>        <span style=color:#f92672>acknowledge-mode</span>: <span style=color:#ae81ff>manual</span>
+</span></span></code></pre></div><h1 id=springboot中使用延时队列>SpringBoot中使用延时队列</h1><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>1<span style=color:#960050;background-color:#1e0010>、</span>Queue<span style=color:#960050;background-color:#1e0010>、</span>Exchange<span style=color:#960050;background-color:#1e0010>、</span>Binding可以<span style=color:#a6e22e>@Bean进去</span>
+</span></span><span style=display:flex><span>2<span style=color:#960050;background-color:#1e0010>、</span>监听消息的方法可以有三种参数<span style=color:#960050;background-color:#1e0010>（</span>不分数量<span style=color:#960050;background-color:#1e0010>，</span>顺序<span style=color:#960050;background-color:#1e0010>）</span>
+</span></span><span style=display:flex><span>Object content<span style=color:#f92672>,</span> Message message<span style=color:#f92672>,</span> Channel channel
+</span></span><span style=display:flex><span>3<span style=color:#960050;background-color:#1e0010>、</span>channel可以用来拒绝消息<span style=color:#960050;background-color:#1e0010>，</span>否则自动ack<span style=color:#960050;background-color:#1e0010>；</span>
+</span></span></code></pre></div><h1 id=代码实现>代码实现</h1><p>发送消息到MQ：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String <span style=color:#a6e22e>sendDelayMessage</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        MemberEntity memberEntity <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> MemberEntity<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setId</span><span style=color:#f92672>(</span>11111111L<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setAddress</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;死信队列测试&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setEmail</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;延迟队列，异步处理会员信息&#34;</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        memberEntity<span style=color:#f92672>.</span><span style=color:#a6e22e>setCreateTime</span><span style=color:#f92672>(</span><span style=color:#66d9ef>new</span> Date<span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//发送对象,注意:发送的对象必须序列化。默认发送的对象是序列化的，如果想以json格式方式发送，需要进行配置。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        rabbitTemplate<span style=color:#f92672>.</span><span style=color:#a6e22e>convertAndSend</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;member-event-exchange&#34;</span><span style=color:#f92672>,</span><span style=color:#e6db74>&#34;users.create.member&#34;</span><span style=color:#f92672>,</span>memberEntity<span style=color:#f92672>,</span> <span style=color:#66d9ef>new</span> CorrelationData<span style=color:#f92672>(</span>UUID<span style=color:#f92672>.</span><span style=color:#a6e22e>randomUUID</span><span style=color:#f92672>().</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#e6db74>&#34;向RabbitMQ发送消息成功&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>通过延迟队列，将延迟的会员信息，发送到另一个队列，通过监听过期延迟的队列,接收延迟的会员信息。</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.family.users.config<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.rabbitmq.client.Channel<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.family.users.entity.MemberEntity<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.core.*<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.amqp.rabbit.annotation.RabbitListener<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Bean<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> org.springframework.context.annotation.Configuration<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.io.IOException<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.HashMap<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Map<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 延迟队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 说明： 1、首先通过创建的路由键(users.create.member)，将消息从交换机(member-event-exchange)发送到死信队列(member.delay.queue)。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *       2、根据死信队列(member.delay.queue)的配置，过期后，消息将通过路由键为(users.release.member)转发到交换机(member-event-exchange)。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *       3、最后交换机(member-event-exchange)再通过绑定的最终队列(users.release.member.queue)和路由键(users.release.member)转发到最终队列(member-event-exchange)。
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/17 20:47
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Configuration</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DelayQueueConfig</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 监听最终的队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param entity
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param channel
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @param message
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @throws IOException
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#a6e22e>@RabbitListener</span><span style=color:#f92672>(</span>queues<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;member.release.queue&#34;</span><span style=color:#f92672>)</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>listener</span><span style=color:#f92672>(</span>MemberEntity entity<span style=color:#f92672>,</span> Channel channel<span style=color:#f92672>,</span> Message message<span style=color:#f92672>)</span> <span style=color:#66d9ef>throws</span> IOException <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;收到过期的会员信息：准备关闭会员&#34;</span><span style=color:#f92672>+</span>entity<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        channel<span style=color:#f92672>.</span><span style=color:#a6e22e>basicAck</span><span style=color:#f92672>(</span>message<span style=color:#f92672>.</span><span style=color:#a6e22e>getMessageProperties</span><span style=color:#f92672>().</span><span style=color:#a6e22e>getDeliveryTag</span><span style=color:#f92672>(),</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//@bean自动创建交换机、路由、绑定
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Exchange <span style=color:#a6e22e>orderEventExchange</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> TopicExchange<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;member-event-exchange&#34;</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>true</span><span style=color:#f92672>,</span> <span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * 容器中的Binding、Queue、Exchange都会自动创建(RabbitMQ没有的情况)
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     * @return
+</span></span></span><span style=display:flex><span><span style=color:#75715e>     */</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//死信队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Queue <span style=color:#a6e22e>memberDelayQueue</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        Map<span style=color:#f92672>&lt;</span>String<span style=color:#f92672>,</span> Object<span style=color:#f92672>&gt;</span> arguments <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> HashMap<span style=color:#f92672>&lt;&gt;();</span>
+</span></span><span style=display:flex><span>        arguments<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;x-dead-letter-exchange&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;member-event-exchange&#34;</span><span style=color:#f92672>);</span><span style=color:#75715e>//交换机
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        arguments<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;x-dead-letter-routing-key&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;users.release.member&#34;</span><span style=color:#f92672>);</span><span style=color:#75715e>//路由键
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        arguments<span style=color:#f92672>.</span><span style=color:#a6e22e>put</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;x-message-ttl&#34;</span><span style=color:#f92672>,</span> 60000<span style=color:#f92672>);</span><span style=color:#75715e>//过期时间
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//public Queue(String name, boolean durable, boolean exclusive, boolean autoDelete, @Nullable Map&lt;String, Object&gt; arguments)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        Queue queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Queue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;member.delay.queue&#34;</span><span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span>arguments<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> queue<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//将死信队列和交换机绑定，路由键-users.create.member
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Binding <span style=color:#a6e22e>orderCreateOrderBingding</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//目的地、绑定类型、交换机、路由键、参数
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>//public Binding(String destination, Binding.DestinationType destinationType, String exchange, String routingKey, @Nullable Map&lt;String, Object&gt; arguments)
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Binding<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;member.delay.queue&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                Binding<span style=color:#f92672>.</span><span style=color:#a6e22e>DestinationType</span><span style=color:#f92672>.</span><span style=color:#a6e22e>QUEUE</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;member-event-exchange&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;users.create.member&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//最后过期的队列
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Queue <span style=color:#a6e22e>orderReleaseQueue</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        Queue queue <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> Queue<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;member.release.queue&#34;</span><span style=color:#f92672>,</span><span style=color:#66d9ef>true</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>,</span><span style=color:#66d9ef>false</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> queue<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//将最后的队列和交换机绑定，路由键-user.release.member
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#a6e22e>@Bean</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> Binding <span style=color:#a6e22e>orderReleaseOrderBingding</span><span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> Binding<span style=color:#f92672>(</span><span style=color:#e6db74>&#34;member.release.queue&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                Binding<span style=color:#f92672>.</span><span style=color:#a6e22e>DestinationType</span><span style=color:#f92672>.</span><span style=color:#a6e22e>QUEUE</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;member-event-exchange&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#e6db74>&#34;users.release.member&#34;</span><span style=color:#f92672>,</span>
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>null</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/spring><span class=tag>Spring</span></a></li><li><a href=https://willxwu.github.io/tags/springboot><span class=tag>Springboot</span></a></li><li><a href=https://willxwu.github.io/tags/rabbitmq><span class=tag>RabbitMQ</span></a></li><li><a href=https://willxwu.github.io/tags/frame><span class=tag>Frame</span></a></li><li><a href=https://willxwu.github.io/tags/mq><span class=tag>MQ</span></a></li><li><a href=https://willxwu.github.io/tags/%E6%B6%88%E6%81%AF%E4%B8%AD%E9%97%B4%E4%BB%B6><span class=tag>消息中间件</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>428</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>

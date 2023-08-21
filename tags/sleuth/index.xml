@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Sleuth on Come Back</title><link>https://willxwu.github.io/tags/sleuth/</link><description>Recent content in Sleuth on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Wed, 22 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/sleuth/index.xml" rel="self" type="application/rss+xml"/><item><title>SpringBoot整合Sleuth+Zipkin 服务链路追踪</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88sleuth+zipkin-%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</link><pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88sleuth+zipkin-%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</guid><description>&lt;h1 id="springboot整合sleuthzipkin-服务链路追踪">SpringBoot整合Sleuth+Zipkin 服务链路追踪&lt;/h1>
+&lt;h2 id="一整合-sleu">一、整合 Sleu&lt;/h2>
+&lt;h3 id="1服务提供者与消费者导入依赖">1、服务提供者与消费者导入依赖&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&amp;lt;!--整合 Sleut:服务提供者与消费者导入依赖--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;groupId&amp;gt;&lt;/span>org.springframework.cloud&lt;span style="color:#f92672">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;artifactId&amp;gt;&lt;/span>spring-cloud-starter-sleuth&lt;span style="color:#f92672">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;version&amp;gt;&lt;/span>3.1.1&lt;span style="color:#f92672">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2打开-debug-日志">2、打开 debug 日志&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>logging:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> level:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org.springframework.cloud.openfeign: debug
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org.springframework.cloud.sleuth: debug
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item></channel></rss>

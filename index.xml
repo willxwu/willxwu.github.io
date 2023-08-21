@@ -1,6 +1,159 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Come Back</title><link>https://willxwu.github.io/</link><description>Recent content on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Thu, 09 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Links</title><link>https://willxwu.github.io/links/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/links/</guid><description>Ritchie and his friends.</description></item><item><title>About</title><link>https://willxwu.github.io/about/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/about/</guid><description>Hugo is a static site engine written in Go.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Come Back</title><link>https://willxwu.github.io/</link><description>Recent content on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Thu, 23 Jun 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Links</title><link>https://willxwu.github.io/links/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/links/</guid><description>Ritchie and his friends.</description></item><item><title>About</title><link>https://willxwu.github.io/about/</link><pubDate>Wed, 09 Apr 2014 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/about/</guid><description>Hugo is a static site engine written in Go.
 It makes use of a variety of open source projects including:
-Github Blog Music Weibo Learn more and contribute on GitHub.</description></item><item><title>提交代码到github</title><link>https://willxwu.github.io/post/git/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</link><pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/git/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</guid><description>create a new repository on the command line. push an existing repository from the command line. import code from another repository You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+Github Blog Music Weibo Learn more and contribute on GitHub.</description></item><item><title>JDK1.8的新特性</title><link>https://willxwu.github.io/post/java8/jdk1.8%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/</link><pubDate>Thu, 23 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/java8/jdk1.8%E7%9A%84%E6%96%B0%E7%89%B9%E6%80%A7/</guid><description>&lt;h1 id="jdk18的新特性">JDK1.8的新特性&lt;/h1>
+&lt;h1 id="一接口的默认方法">一、接口的默认方法&lt;/h1>
+&lt;p>Java8允许我们给接口添加一个非抽象的方法实现，只需要使用default关键字即可，这个特征又叫做扩展方法，示例如下：&lt;/p>
+&lt;p>代码如下：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#66d9ef">interface&lt;/span> &lt;span style="color:#a6e22e">Formula&lt;/span>&lt;span style="color:#f92672">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">calculate&lt;/span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span> a&lt;span style="color:#f92672">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">default&lt;/span> &lt;span style="color:#66d9ef">double&lt;/span> &lt;span style="color:#a6e22e">sqrt&lt;/span>&lt;span style="color:#f92672">(&lt;/span>&lt;span style="color:#66d9ef">int&lt;/span> a&lt;span style="color:#f92672">){&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">return&lt;/span> Math&lt;span style="color:#f92672">.&lt;/span>&lt;span style="color:#a6e22e">sqrt&lt;/span>&lt;span style="color:#f92672">(&lt;/span>a&lt;span style="color:#f92672">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>Formula接口在拥有calculate方法之外同时还定义了sqrt方法，实现了Formula接口的子类只需要实现一个calculate方法，默认方法sqrt将在子类上可以直接使用。
+代码如下：
+Formula formula=new Formula）{@Override public double calculate（int a）{return sqrt（a&lt;em>100）；}]；formula.calculate（100）；/100.0 formula.sqrt（16）；//4.0&lt;/em>&lt;/p></description></item><item><title>SpringBoot整合Sleuth+Zipkin 服务链路追踪</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88sleuth+zipkin-%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</link><pubDate>Wed, 22 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88sleuth+zipkin-%E6%9C%8D%E5%8A%A1%E9%93%BE%E8%B7%AF%E8%BF%BD%E8%B8%AA/</guid><description>&lt;h1 id="springboot整合sleuthzipkin-服务链路追踪">SpringBoot整合Sleuth+Zipkin 服务链路追踪&lt;/h1>
+&lt;h2 id="一整合-sleu">一、整合 Sleu&lt;/h2>
+&lt;h3 id="1服务提供者与消费者导入依赖">1、服务提供者与消费者导入依赖&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&amp;lt;!--整合 Sleut:服务提供者与消费者导入依赖--&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;groupId&amp;gt;&lt;/span>org.springframework.cloud&lt;span style="color:#f92672">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;artifactId&amp;gt;&lt;/span>spring-cloud-starter-sleuth&lt;span style="color:#f92672">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;version&amp;gt;&lt;/span>3.1.1&lt;span style="color:#f92672">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h3 id="2打开-debug-日志">2、打开 debug 日志&lt;/h3>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>logging:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> level:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org.springframework.cloud.openfeign: debug
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> org.springframework.cloud.sleuth: debug
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SpringBoot整合Sentinel</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88sentinel/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88sentinel/</guid><description>&lt;h1 id="springboot整合sentinel">SpringBoot整合Sentinel&lt;/h1>
+&lt;h1 id="1引入依赖">1、引入依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;groupId&amp;gt;&lt;/span>com.alibaba.cloud&lt;span style="color:#f92672">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;artifactId&amp;gt;&lt;/span>spring-cloud-starter-alibaba-sentinel&lt;span style="color:#f92672">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2下载安装sentinel可视化控制台">2、下载安装Sentinel可视化控制台&lt;/h1>
+&lt;p>&lt;a href="https://github.com/alibaba/Sentinel/releases">&lt;strong>下载&lt;/strong>&lt;/a>自己引入sentinel对应的核心包版本，下载地址：https://github.com/alibaba/Sentinel/releases&lt;/p>
+&lt;p>&lt;strong>运行&lt;/strong>Sentinel可视化控制台&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-bash" data-lang="bash">&lt;span style="display:flex;">&lt;span>java -jar sentinel-dashboard-1.8.1.jar
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>Springboot整合seata分布式事务</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link><pubDate>Mon, 20 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88seata%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid><description>&lt;h1 id="springboot整合seata分布式事务">&lt;strong>Springboot整合seata分布式事务&lt;/strong>&lt;/h1>
+&lt;h1 id="一创建seata日志表">一、创建seata日志表&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sql" data-lang="sql">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">-- 注意此处0.3.0+ 增加唯一索引 ux_undo_log
+&lt;/span>&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#75715e">&lt;/span>&lt;span style="color:#66d9ef">CREATE&lt;/span> &lt;span style="color:#66d9ef">TABLE&lt;/span> &lt;span style="color:#f92672">`&lt;/span>undo_log&lt;span style="color:#f92672">`&lt;/span> (
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>id&lt;span style="color:#f92672">`&lt;/span> bigint(&lt;span style="color:#ae81ff">20&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span> AUTO_INCREMENT,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>branch_id&lt;span style="color:#f92672">`&lt;/span> bigint(&lt;span style="color:#ae81ff">20&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>xid&lt;span style="color:#f92672">`&lt;/span> varchar(&lt;span style="color:#ae81ff">100&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>context&lt;span style="color:#f92672">`&lt;/span> varchar(&lt;span style="color:#ae81ff">128&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>rollback_info&lt;span style="color:#f92672">`&lt;/span> longblob &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>log_status&lt;span style="color:#f92672">`&lt;/span> int(&lt;span style="color:#ae81ff">11&lt;/span>) &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>log_created&lt;span style="color:#f92672">`&lt;/span> datetime &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>log_modified&lt;span style="color:#f92672">`&lt;/span> datetime &lt;span style="color:#66d9ef">NOT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">`&lt;/span>ext&lt;span style="color:#f92672">`&lt;/span> varchar(&lt;span style="color:#ae81ff">100&lt;/span>) &lt;span style="color:#66d9ef">DEFAULT&lt;/span> &lt;span style="color:#66d9ef">NULL&lt;/span>,
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">PRIMARY&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> (&lt;span style="color:#f92672">`&lt;/span>id&lt;span style="color:#f92672">`&lt;/span>),
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#66d9ef">UNIQUE&lt;/span> &lt;span style="color:#66d9ef">KEY&lt;/span> &lt;span style="color:#f92672">`&lt;/span>ux_undo_log&lt;span style="color:#f92672">`&lt;/span> (&lt;span style="color:#f92672">`&lt;/span>xid&lt;span style="color:#f92672">`&lt;/span>,&lt;span style="color:#f92672">`&lt;/span>branch_id&lt;span style="color:#f92672">`&lt;/span>)
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>) ENGINE&lt;span style="color:#f92672">=&lt;/span>InnoDB AUTO_INCREMENT&lt;span style="color:#f92672">=&lt;/span>&lt;span style="color:#ae81ff">1&lt;/span> &lt;span style="color:#66d9ef">DEFAULT&lt;/span> CHARSET&lt;span style="color:#f92672">=&lt;/span>utf8;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SpringBoot整合RabbitMQ</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88mq/</link><pubDate>Sun, 19 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88mq/</guid><description>&lt;h1 id="springboot整合rabbitmq">SpringBoot整合RabbitMQ&lt;/h1>
+&lt;h1 id="1引入依赖">1、引入依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;groupId&amp;gt;&lt;/span>org.springframework.boot&lt;span style="color:#f92672">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;artifactId&amp;gt;&lt;/span>spring-boot-starter-amqp&lt;span style="color:#f92672">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;version&amp;gt;&lt;/span>2.6.3&lt;span style="color:#f92672">&amp;lt;/version&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2配置rabbitmq">2、配置rabbitmq&lt;/h1>
+&lt;p>通过RabbitProperties.properties配置文件配置链接&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span> rabbitmq:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> host: 192.168.56.10
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> virtual-host: /
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> port: 5672
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> publisher-confirm-type: correlated
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> publisher-returns: true
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> template:
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> mandatory: true
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>springboot整合SpringSession</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springsession/</link><pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springsession/</guid><description>&lt;p>springboot整合SpringSession&lt;/p>
+&lt;h1 id="1引入依赖">1、引入依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;dependencies&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;groupId&amp;gt;&lt;/span>org.springframework.session&lt;span style="color:#f92672">&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;artifactId&amp;gt;&lt;/span>spring-session-data-redis&lt;span style="color:#f92672">&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#f92672">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#f92672">&amp;lt;/dependencies&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2springboot配置">2、springboot配置&lt;/h1>
+&lt;p>&lt;em>application.properties&lt;/em>配置：保存类型&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-xml" data-lang="xml">&lt;span style="display:flex;">&lt;span>spring.session.store-type=redis # Session store type.
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div></description></item><item><title>SpringBoot整合定时任务和异步任务</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88quartz-scheduler%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</link><pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88quartz-scheduler%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1/</guid><description>&lt;h1 id="springboot整合定时任务和异步任务">SpringBoot整合定时任务和异步任务&lt;/h1>
+&lt;h1 id="一定时任务">一、定时任务&lt;/h1>
+&lt;p>&lt;strong>SpringBoot整合quartz-scheduler，执行定时任务。&lt;/strong>&lt;/p>
+&lt;h2 id="1开启定时任务">1、开启定时任务&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@EnableScheduling&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="2开启一个定时任务">2、开启一个定时任务&lt;/h2>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-java" data-lang="java">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#a6e22e">@Scheduled&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="3编写cron表达式">3、编写cron表达式&lt;/h2>
+&lt;p>cron表达式格式请参考&lt;a href="http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html">官方文档&lt;/a>&lt;/p></description></item><item><title>springboot整合redis</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88redis/</link><pubDate>Thu, 16 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88redis/</guid><description>&lt;h1 id="适合当如缓存场景">适合当如缓存场景：&lt;/h1>
+&lt;ol>
+&lt;li>即时性、数据一致性要求不高的。&lt;/li>
+&lt;li>访问量大且更新频率不高的数据(读多，写少)&lt;/li>
+&lt;/ol>
+&lt;p>承担持久化工作。&lt;/p>
+&lt;h1 id="读模式缓存使用流程">读模式缓存使用流程:&lt;/h1>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/CDN@main/images/202203031925978.png" alt="">&lt;/p>
+&lt;p>凡是放入缓存中的数据，我们应该指定过期时间，使其可以再系统即使没有主动更新数据也能自动触发数据加载进缓存的流程。避免业务崩溃导致的数据永久不一致问题。&lt;/p>
+&lt;p>解决分布式缓存中本地缓存导致数据不一致问题，可以使用redis中间件解决。&lt;/p></description></item><item><title>SpringBoot整合SpringCache</title><link>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springcache/</link><pubDate>Wed, 15 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/springboot/springboot%E6%95%B4%E5%90%88springcache/</guid><description>&lt;h1 id="springboot整合springcache">SpringBoot整合SpringCache&lt;/h1>
+&lt;h1 id="1引入依赖">1、引入依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;artifactId&amp;gt;spring-boot-starter-cache&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h1 id="2引入redis依赖">2、引入redis依赖&lt;/h1>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-yaml" data-lang="yaml">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;groupId&amp;gt;org.springframework.boot&amp;lt;/groupId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#ae81ff">&amp;lt;artifactId&amp;gt;spring-boot-starter-data-redis&amp;lt;/artifactId&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ae81ff">&amp;lt;/dependency&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>配置redis地址密码等等，可参考springboo整合redis&lt;/p></description></item><item><title>OpenAI's services are not available in your country.</title><link>https://willxwu.github.io/post/tool/chatgpt/</link><pubDate>Tue, 14 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/tool/chatgpt/</guid><description>OpenAI&amp;rsquo;s services are not available in your country.
+chatGpt注册，OpenAI&amp;rsquo;s services are not available in your country.解决方法。
+1、chatGpt注册 打开chatpgt官网https://chat.openai.com/auth/login，点击Sign up注册，跳转至注册页面。
+2、邮箱验证 最好使用gmail、outlook海外邮箱，注册。打开邮箱链接，即可验证。
+3、重新登录 提示设置用户姓名
+4、手机号验证 使用国内手机号会提示“OpenAI&amp;rsquo;s services are not available in your country.”
+5、OpenAI&amp;rsquo;s services are not available in your country 解决方案：
+5.1、使用公共接码号码，但是基本都被使用过了。
+5.2、使用虚拟外海号码。
+6、虚拟外海号码 1、注册账号 打开官网https://sms-activate.org/注册，最好使用海外邮箱Gmail、Outlook。
+2、账号充值 切换成中文，选择“充值”。
+选择支付宝充值
+选择充值1美元即可，大约6.46人民币。
+3、获取号码 根据需求选择需要使用的服务类型、选择号码国家。这里注册chatgpt，直接搜索OpenAI即可。
+选择要使用的国家号码，这里选择的印度。
+填写要使用的数量，然后点后面的购物车后，右边会显示号码和一会接收到的验证码。
+复制号码到chatGpt注册时，验证手机号的地方，一会就可以看到验证码了。
+后面就可以直接注册成功chatgpt了。</description></item><item><title>安全发布,详解单例模式</title><link>https://willxwu.github.io/post/design-patterns/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E8%AF%A6%E8%A7%A3%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link><pubDate>Mon, 13 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/design-patterns/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E8%AF%A6%E8%A7%A3%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid><description>安全发布对象 什么是安全发布？
+发布对象：使一个对象能够被当前范围之外的代码所使用
+代码示例
+package com.yanxizhu.demo.concurrency.unSafePublish; import com.yanxizhu.demo.concurrency.annotation.UnThreadSafety; import lombok.extern.slf4j.Slf4j; import java.util.Arrays; /** * @description: 安全发布,这个例子是线程不安全的 * @author: &amp;lt;a href=&amp;#34;mailto:batis@foxmail.com&amp;#34;&amp;gt;清风&amp;lt;/a&amp;gt; * @date: 2022/4/21 21:45 * @version: 1.0 */ @Slf4j @UnThreadSafety public class UnSafePublish { private String[] states = {&amp;#34;a&amp;#34;, &amp;#34;b&amp;#34;, &amp;#34;c&amp;#34;}; public String[] getStates() { return states; } public static void main(String[] args) { UnSafePublish unSafePublish = new UnSafePublish(); log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); unSafePublish.getStates()[0] = &amp;#34;d&amp;#34;; log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); } } 运行结果：
+21:48:00.633 [main] INFO com.</description></item><item><title>Shiro权限管理框架</title><link>https://willxwu.github.io/post/permissions/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/</link><pubDate>Sun, 12 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/permissions/shiro%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86%E6%A1%86%E6%9E%B6/</guid><description>&lt;p>&lt;strong>首先知道Shiro架构有3个主要概念：Subject、SecurityManager和Realms。&lt;/strong>&lt;/p>
+&lt;p>&lt;strong>Shiro基础架构图&lt;/strong> ：&lt;/p>
+&lt;p>&lt;img src="https://cdn.jsdelivr.net/gh/willxwu/cdn@1.2.2/images/uploads/2021/06/shiro/ShiroBasicArchitecture.png" alt="Shiro基础架构图">
+基础架构说明：
+Subject: As we’ve mentioned in our Tutorial, the Subject is essentially a security specific ‘view’ of the the currently executing user. Whereas the word ‘User’ often implies a human being, a Subject can be a person, but it could also represent a 3rd-party service, daemon account, cron job, or anything similar - basically anything that is currently interacting with the software.
+Subject instances are all bound to (and require) a SecurityManager. When you interact with a Subject, those interactions translate to subject-specific interactions with the SecurityManager.
+（大概意思：Subject一词是一个安全术语，其基本意思是“当前的操作用户”。称之为“用户”并不准确，因为“用户”一词通常跟人相关。在安全领域，术语“Subject”可以是人，也可以是第三方进程、后台帐户（Daemon Account）、定时作业（Corn Job）或其他类似事物。它仅仅意味着“当前跟软件交互的东西”。但考虑到大多数目的和用途，你可以把它认为是Shiro的“用户”概念。
+在程序中你都能轻易的获得Subject，允许在任何需要的地方进行安全操作。每个Subject对象都必须与一个SecurityManager进行绑定，你访问Subject对象其实都是在与SecurityManager里的特定Subject进行交互。）&lt;/p></description></item><item><title>本地事务与分布式事务</title><link>https://willxwu.github.io/post/distributed/%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</link><pubDate>Sat, 11 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/distributed/%E6%9C%AC%E5%9C%B0%E4%BA%8B%E5%8A%A1%E4%B8%8E%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1/</guid><description>&lt;h1 id="本地事务">本地事务&lt;/h1>
+&lt;h2 id="一事务的基本性质">一、事务的基本性质&lt;/h2>
+&lt;p>数据库事务的几个特性：原子性(Atomicity )、一致性( Consistency )、隔离性或独立性( Isolation)
+和持久性(Durabilily)，简称就是ACID；&lt;/p>
+&lt;ol>
+&lt;li>原子性：一系列的操作整体不可拆分，要么同时成功，要么同时失败&lt;/li>
+&lt;li>一致性：数据在事务的前后，业务整体一致。(A向B转账，转账前后AB总金额一致)&lt;/li>
+&lt;li>隔离性：事务之间互相隔离。&lt;/li>
+&lt;li>持久性：一旦事务成功，数据一定会落盘在数据库。&lt;/li>
+&lt;/ol>
+&lt;p>单体应用中，我们多个业务操作使用同一条连接操作不同的数据表，一旦有异常，我们可以很容易的整体回滚；&lt;/p></description></item><item><title>接口幂等性</title><link>https://willxwu.github.io/post/distributed/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/</link><pubDate>Fri, 10 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/distributed/%E6%8E%A5%E5%8F%A3%E5%B9%82%E7%AD%89%E6%80%A7/</guid><description>&lt;h1 id="接口幂等性">接口幂等性&lt;/h1>
+&lt;h1 id="1什么是幂等性">1、什么是幂等性&lt;/h1>
+&lt;p>&lt;strong>接口幂等性就是用户对于同一操作发起的一次请求或者多次请求的结果是一致的&lt;/strong>，不会因为多次点击而产生了副作用；比如说支付场景，用户购买了商品支付扣款成功，但是返回结果的时候网络异常，此时钱已经扣了，用户再次点击按钮，此时会进行第二次扣款，返回结果成功，用户查询余额返发现多扣钱了，流水记录也变成了两条&amp;hellip;，这就没有保证接口的幂等性。&lt;/p>
+&lt;h1 id="2哪些情况需要防止">2、哪些情况需要防止&lt;/h1>
+&lt;p>用户多次点击按钮
+用户页面回退再次提交
+微服务互相调用，由于网络问题，导致请求失败。feign触发重试机制其他业务情况&lt;/p></description></item><item><title>提交代码到github</title><link>https://willxwu.github.io/post/git/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</link><pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/git/%E6%8F%90%E4%BA%A4%E4%BB%A3%E7%A0%81%E5%88%B0github/</guid><description>create a new repository on the command line. push an existing repository from the command line. import code from another repository You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
 create a new repository on the command line git init git add README.md git commit -m &amp;#34;first commit&amp;#34; git branch -M main git remote add origin https://github.com/willxwu/xxx.git git push -u origin main push an existing repository from the command line git remote add origin https://github.</description></item><item><title>线程安全策略</title><link>https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/</link><pubDate>Wed, 08 Jun 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/thread/%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%AF%B9%E8%B1%A1/</guid><description>&lt;p>线程安全策略&lt;/p>
 &lt;h1 id="不可变对象">不可变对象&lt;/h1>
 &lt;p>&lt;strong>不可变对象需要满足的条件：&lt;/strong>

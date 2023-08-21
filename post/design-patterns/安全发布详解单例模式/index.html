@@ -1,0 +1,367 @@
+<!doctype html><html lang=en><head><meta charset=utf-8><title>安全发布,详解单例模式</title><link href=//cdn.jsdelivr.net rel=dns-prefetch><link href=//cdnjs.cloudflare.com rel=dns-prefetch><link href=//at.alicdn.com rel=dns-prefetch><link href=//fonts.googleapis.com rel=dns-prefetch><link href=//fonts.gstatic.com rel=dns-prefetch><link href=///disqus.com rel=dns-prefetch><link href=//c.disquscdn.com rel=dns-prefetch><link href=//www.google-analytics.com rel=dns-prefetch><meta name=description content="安全发布对象 什么是安全发布？
+发布对象：使一个对象能够被当前范围之外的代码所使用
+代码示例
+package com.yanxizhu.demo.concurrency.unSafePublish; import com.yanxizhu.demo.concurrency.annotation.UnThreadSafety; import lombok.extern.slf4j.Slf4j; import java.util.Arrays; /** * @description: 安全发布,这个例子是线程不安全的 * @author: &amp;lt;a href=&amp;#34;mailto:batis@foxmail.com&amp;#34;&amp;gt;清风&amp;lt;/a&amp;gt; * @date: 2022/4/21 21:45 * @version: 1.0 */ @Slf4j @UnThreadSafety public class UnSafePublish { private String[] states = {&amp;#34;a&amp;#34;, &amp;#34;b&amp;#34;, &amp;#34;c&amp;#34;}; public String[] getStates() { return states; } public static void main(String[] args) { UnSafePublish unSafePublish = new UnSafePublish(); log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); unSafePublish.getStates()[0] = &amp;#34;d&amp;#34;; log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); } } 运行结果：
+21:48:00.633 [main] INFO com."><meta name=twitter:card content="summary"><meta name=twitter:site content="@twitter_username"><meta name=twitter:title content="安全发布,详解单例模式"><meta name=twitter:description content="安全发布对象 什么是安全发布？
+发布对象：使一个对象能够被当前范围之外的代码所使用
+代码示例
+package com.yanxizhu.demo.concurrency.unSafePublish; import com.yanxizhu.demo.concurrency.annotation.UnThreadSafety; import lombok.extern.slf4j.Slf4j; import java.util.Arrays; /** * @description: 安全发布,这个例子是线程不安全的 * @author: &amp;lt;a href=&amp;#34;mailto:batis@foxmail.com&amp;#34;&amp;gt;清风&amp;lt;/a&amp;gt; * @date: 2022/4/21 21:45 * @version: 1.0 */ @Slf4j @UnThreadSafety public class UnSafePublish { private String[] states = {&amp;#34;a&amp;#34;, &amp;#34;b&amp;#34;, &amp;#34;c&amp;#34;}; public String[] getStates() { return states; } public static void main(String[] args) { UnSafePublish unSafePublish = new UnSafePublish(); log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); unSafePublish.getStates()[0] = &amp;#34;d&amp;#34;; log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); } } 运行结果：
+21:48:00.633 [main] INFO com."><meta name=twitter:image content="/images/avatar.png"><meta property="og:type" content="article"><meta property="og:title" content="安全发布,详解单例模式"><meta property="og:description" content="安全发布对象 什么是安全发布？
+发布对象：使一个对象能够被当前范围之外的代码所使用
+代码示例
+package com.yanxizhu.demo.concurrency.unSafePublish; import com.yanxizhu.demo.concurrency.annotation.UnThreadSafety; import lombok.extern.slf4j.Slf4j; import java.util.Arrays; /** * @description: 安全发布,这个例子是线程不安全的 * @author: &amp;lt;a href=&amp;#34;mailto:batis@foxmail.com&amp;#34;&amp;gt;清风&amp;lt;/a&amp;gt; * @date: 2022/4/21 21:45 * @version: 1.0 */ @Slf4j @UnThreadSafety public class UnSafePublish { private String[] states = {&amp;#34;a&amp;#34;, &amp;#34;b&amp;#34;, &amp;#34;c&amp;#34;}; public String[] getStates() { return states; } public static void main(String[] args) { UnSafePublish unSafePublish = new UnSafePublish(); log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); unSafePublish.getStates()[0] = &amp;#34;d&amp;#34;; log.info(&amp;#34;{}&amp;#34;, Arrays.toString(unSafePublish.getStates())); } } 运行结果：
+21:48:00.633 [main] INFO com."><meta property="og:url" content="https://willxwu.github.io/post/design-patterns/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E8%AF%A6%E8%A7%A3%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/"><meta property="og:image" content="/images/avatar.png"><link rel=canonical href=https://willxwu.github.io/post/design-patterns/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83%E8%AF%A6%E8%A7%A3%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/><meta name=renderer content="webkit"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=format-detection content="telephone=no,email=no,adress=no"><meta http-equiv=cache-control content="no-transform"><meta name=robots content="index,follow"><meta name=referrer content="origin-when-cross-origin"><meta name=theme-color content="#02b875"><meta name=apple-mobile-web-app-capable content="yes"><meta name=apple-mobile-web-app-status-bar-style content="black"><meta name=apple-mobile-web-app-title content="Come Back"><meta name=msapplication-tooltip content="Come Back"><meta name=msapplication-navbutton-color content="#02b875"><meta name=msapplication-TileColor content="#02b875"><meta name=msapplication-TileImage content="/icons/icon-144x144.png"><link rel=icon href=https://willxwu.github.io/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://willxwu.github.io/icons/icon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://willxwu.github.io/icons/icon-32x32.png><link rel=icon sizes=192x192 href=https://willxwu.github.io/icons/icon-192x192.png><link rel=apple-touch-icon href=https://willxwu.github.io/icons/icon-152x152.png><link rel=manifest href=https://willxwu.github.io/manifest.json><link rel=preload href=https://willxwu.github.io/styles/main-rendered.min.css as=style><link rel=preload href="https://fonts.googleapis.com/css?family=Lobster" as=style><link rel=preload href=https://willxwu.github.io/images/avatar.png as=image><link rel=preload href=https://willxwu.github.io/images/grey-prism.svg as=image><style>body{background:#f4f3f1 url(/images/grey-prism.svg)repeat fixed}</style><link rel=stylesheet href=https://willxwu.github.io/styles/main-rendered.min.css><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Lobster"><script src=https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js></script>
+<link rel=stylesheet href=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css><!--[if lte IE 8]><script src=https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js></script><![endif]--><!--[if lte IE 9]><script src=https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js></script><![endif]--></head><body><div class=suspension><a role=button aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden=true></span></a>
+<a role=button aria-label="Go to comments" title="Go to comments" class=to-comment href=#disqus_thread><span class="icon icon-comment" aria-hidden=true></span></a></div><header class=site-header><a href=https://willxwu.github.io><img class=avatar src=https://willxwu.github.io/images/avatar.png alt=Avatar></a><h2 class=title><a href=https://willxwu.github.io>Come Back</a></h2><p class=subtitle>All kinds of taste, are life.</p><button class=menu-toggle type=button aria-label="Main Menu" aria-expanded=false tab-index=0>
+<span class="icon icon-menu" aria-hidden=true></span></button><nav class="site-menu collapsed"><h2 class=offscreen>Main Menu</h2><ul class=menu-list><li class="menu-item
+is-active"><a href=https://willxwu.github.io/>Home</a></li><li class=menu-item><a href=https://willxwu.github.io/archives/>archives</a></li><li class=menu-item><a href=https://willxwu.github.io/tags/>Tags</a></li><li class=menu-item><a href=https://willxwu.github.io/links/>Links</a></li><li class=menu-item><a href=https://willxwu.github.io/resume/>resume</a></li><li class=menu-item><a href=https://willxwu.github.io/about/>About</a></li></ul></nav><nav class="social-menu collapsed"><h2 class=offscreen>Social Networks</h2><ul class=social-list><li class=social-item><a href=mailto:name@domain.com title=Email aria-label=Email><span class="icon icon-email" aria-hidden=true></span></a></li><li class=social-item><a href=//github.com/github_username rel=me title=GitHub aria-label=GitHub><span class="icon icon-github" aria-hidden=true></span></a></li><li class=social-item><a href=//twitter.com/twitter_username rel=me title=Twitter aria-label=Twitter><span class="icon icon-twitter" aria-hidden=true></span></a></li><li class=social-item><a href=//weibo.com/weibo_username rel=me title=Weibo aria-label=Weibo><span class="icon icon-weibo" aria-hidden=true></span></a></li><li class=social-item><a href=https://willxwu.github.io/images/qrcode.jpg rel=me title=Wechat aria-label=Wechat><span class="icon icon-wechat" aria-hidden=true></span></a></li><li class=social-item><a href=//www.linkedin.com/in/linkedin_username rel=me title=LinkedIn aria-label=LinkedIn><span class="icon icon-linkedin" aria-hidden=true></span></a></li></ul></nav></header><section class="main post-detail"><header class=post-header><h1 class=post-title>安全发布,详解单例模式</h1><p class=post-meta>@Come Back · Jun 13, 2022 · 4 min read</p></header><article class=post-content><h1 id=安全发布对象>安全发布对象</h1><p>什么是安全发布？</p><p><strong>发布对象：使一个对象能够被当前范围之外的代码所使用</strong></p><p><strong>代码示例</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.unSafePublish<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> java.util.Arrays<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 安全发布,这个例子是线程不安全的
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 21:45
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@UnThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UnSafePublish</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> String<span style=color:#f92672>[]</span> states <span style=color:#f92672>=</span> <span style=color:#f92672>{</span><span style=color:#e6db74>&#34;a&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;b&#34;</span><span style=color:#f92672>,</span> <span style=color:#e6db74>&#34;c&#34;</span><span style=color:#f92672>};</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> String<span style=color:#f92672>[]</span> <span style=color:#a6e22e>getStates</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> states<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        UnSafePublish unSafePublish <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> UnSafePublish<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;{}&#34;</span><span style=color:#f92672>,</span> Arrays<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(</span>unSafePublish<span style=color:#f92672>.</span><span style=color:#a6e22e>getStates</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        unSafePublish<span style=color:#f92672>.</span><span style=color:#a6e22e>getStates</span><span style=color:#f92672>()[</span>0<span style=color:#f92672>]</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;d&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;{}&#34;</span><span style=color:#f92672>,</span> Arrays<span style=color:#f92672>.</span><span style=color:#a6e22e>toString</span><span style=color:#f92672>(</span>unSafePublish<span style=color:#f92672>.</span><span style=color:#a6e22e>getStates</span><span style=color:#f92672>()));</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>运行结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>21:48<span style=color:#f92672>:</span>00<span style=color:#f92672>.</span><span style=color:#a6e22e>633</span> <span style=color:#f92672>[</span>main<span style=color:#f92672>]</span> INFO com<span style=color:#f92672>.</span><span style=color:#a6e22e>yanxizhu</span><span style=color:#f92672>.</span><span style=color:#a6e22e>demo</span><span style=color:#f92672>.</span><span style=color:#a6e22e>concurrency</span><span style=color:#f92672>.</span><span style=color:#a6e22e>unSafePublish</span><span style=color:#f92672>.</span><span style=color:#a6e22e>UnSafePublish</span> <span style=color:#f92672>-</span> <span style=color:#f92672>[</span>a<span style=color:#f92672>,</span> b<span style=color:#f92672>,</span> c<span style=color:#f92672>]</span>
+</span></span><span style=display:flex><span>21:48<span style=color:#f92672>:</span>00<span style=color:#f92672>.</span><span style=color:#a6e22e>636</span> <span style=color:#f92672>[</span>main<span style=color:#f92672>]</span> INFO com<span style=color:#f92672>.</span><span style=color:#a6e22e>yanxizhu</span><span style=color:#f92672>.</span><span style=color:#a6e22e>demo</span><span style=color:#f92672>.</span><span style=color:#a6e22e>concurrency</span><span style=color:#f92672>.</span><span style=color:#a6e22e>unSafePublish</span><span style=color:#f92672>.</span><span style=color:#a6e22e>UnSafePublish</span> <span style=color:#f92672>-</span> <span style=color:#f92672>[</span>d<span style=color:#f92672>,</span> b<span style=color:#f92672>,</span> c<span style=color:#f92672>]</span>
+</span></span></code></pre></div><p>说明：</p><p>上面代码，可以通过对象，调用getStates()方法获取数据，并可以外部直接修改里面的值。这样states的值是不安全的。</p><h1 id=对象溢出><strong>对象溢出</strong></h1><p><strong>对象逸出：一种错误的发布。当一个对象还没有构造完成时，就使它被其他线程所见</strong></p><p><strong>代码示例</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.unSafePublish<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> lombok.extern.slf4j.Slf4j<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 对象溢出
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 21:53
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Slf4j</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Escape</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>int</span> thisCanBeEascpe <span style=color:#f92672>=</span> 0<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>Escape</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> InnerClass<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>InnerClass</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> <span style=color:#a6e22e>InnerClass</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            log<span style=color:#f92672>.</span><span style=color:#a6e22e>info</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;{}&#34;</span><span style=color:#f92672>,</span> Escape<span style=color:#f92672>.</span><span style=color:#a6e22e>this</span><span style=color:#f92672>.</span><span style=color:#a6e22e>thisCanBeEascpe</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>new</span> Escape<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>21:55<span style=color:#f92672>:</span>01<span style=color:#f92672>.</span><span style=color:#a6e22e>416</span> <span style=color:#f92672>[</span>main<span style=color:#f92672>]</span> INFO com<span style=color:#f92672>.</span><span style=color:#a6e22e>yanxizhu</span><span style=color:#f92672>.</span><span style=color:#a6e22e>demo</span><span style=color:#f92672>.</span><span style=color:#a6e22e>concurrency</span><span style=color:#f92672>.</span><span style=color:#a6e22e>unSafePublish</span><span style=color:#f92672>.</span><span style=color:#a6e22e>Escape</span> <span style=color:#f92672>-</span> 0
+</span></span></code></pre></div><p>说明：Escape对象还没构造完，就被new InnerClass()线程使用Escape.this.thisCanBeEascpe。</p><hr><h1 id=安全发布对象4种方法>安全发布对象4种方法</h1><ol><li>在静态初始化函数中初始化一个对象引用</li><li>将对象的引用保存到volatile类型域或者AtomicReference对象中</li><li>将对象的引用保存到某个正确构造对象的final类型域中</li><li>将对象的引用保存到一个由锁保护的域中</li></ol><h2 id=heading></h2><h1 id=单例-懒汉模式>单例-懒汉模式</h1><p>代码实例，线程不按钮</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-懒汉模式
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 在第一次使用时创建
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 单线程下没问题，多线程下可能出现问题
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:05
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@UnThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonLazyMode</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//私有构造方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonLazyMode</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//实例对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> SingLetonLazyMode instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态工厂方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonLazyMode <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//注意：多线程下问题，当2个线程同时判断到不为null，是都会调用私有构造方法，创建2个示例对象。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// 如果在构造方法中有对环境一些设置，2次执行会出现一些错误
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> instance<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonLazyMode<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：</p><p>上面的单例-懒汉模式是线程不安全的。多线程下问题，当2个线程同时判断到不为null，是都会调用私有构造方法，创建2个示例对象。</p><p>如果在构造方法中有对环境一些设置，2次执行会出现一些错误。</p><h1 id=单例-饿汉模式>单例-饿汉模式</h1><p>代码实例，线程按钮</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-饿汉模式
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 类装载时创建，线程安全的
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 不足： 1、如果私有构造方法里面有过多的设置，会加载很慢
+</span></span></span><span style=display:flex><span><span style=color:#75715e> *       2、每次都会创建示例对象，造成资源浪费
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:20
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonHungryManMode</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonHungryManMode</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> SingLetonHungryManMode instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonHungryManMode<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonHungryManMode <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：</p><p>单例-饿汉模式，类装载时创建，线程安全的。</p><p>不足地方：</p><p>1、如果私有构造方法里面有过多的设置，会加载很慢。</p><p>2、每次都会创建示例对象，造成资源浪费。</p><p>使用需要考虑：私有构造方法里面是否有过多设置，创建对象是否被使用。</p><h1 id=单例-懒汉模式改进synchronized>单例-懒汉模式改进(synchronized)</h1><p>代码实例，线程安全，但是不推荐使用，性能不太好</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnRecommend<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-懒汉模式（synchronized保证线程保证线程安全）
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 在第一次使用时创建
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 单线程下没问题，多线程下通过synchronized保证线程只被执行一次，线程安全
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:05
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@UnRecommend</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonLazyModeSynchronized</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//私有构造方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonLazyModeSynchronized</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//实例对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> SingLetonLazyModeSynchronized instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态工厂方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>synchronized</span> SingLetonLazyModeSynchronized <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//注意：多线程下问题，当2个线程同时判断到不为null，是都会调用私有构造方法，创建2个示例对象。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#75715e>// 如果在构造方法中有对环境一些设置，2次执行会出现一些错误
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> instance<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonLazyModeSynchronized<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：</p><p>synchronized保证线程只能同时被执行一次，但是带来了性能上的开销。因此是线程安全但不推荐的写法。</p><h1 id=单例-懒汉模式改进双重同步锁单例>单例-懒汉模式改进(双重同步锁单例)</h1><p><strong>代码实例</strong>，线程不安全的</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-懒汉模式（双重同步锁单例）
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 线程不安全
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:05
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@UnThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonLazyModeSynchronized</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//私有构造方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonLazyModeSynchronized</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//实例对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> SingLetonLazyModeSynchronized instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态工厂方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonLazyModeSynchronized <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> instance<span style=color:#f92672>)</span> <span style=color:#f92672>{</span> <span style=color:#75715e>//双重检测机制
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//当第一个线程执行后，已经实例化一个对象了，第二个线程再次判断兑现是否实例。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//线程不安全问题所在：
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#75715e>//
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>synchronized</span><span style=color:#f92672>(</span>SingLetonLazyModeSynchronized<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span> <span style=color:#75715e>//同步锁
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span><span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> instance<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonLazyModeSynchronized<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：</p><p>instance = new SingLetonLazyModeSynchronized();分为3步骤。</p><p>1、分配对象的内存空间。</p><p>2、初始化对象。</p><p>3、设置instance指向刚分配的内存。</p><p><strong>问题分析：</strong></p><p>多线程情况下，上面3步，可能发生指令重排。</p><p>JVM和CPU优化，发生了指令重排。</p><p>因为指令2和3没有直接关联，所以上面3步指令可能优化重排成：</p><p>1、分配对象的内存空间。</p><p>3、设置instance指向刚分配的内存。</p><p>2、初始化对象。</p><p>当第一个线程执行instance = new SingLetonLazyModeSynchronized();设置对象指向刚分配的内存地址，还没执行2初始化对象时，第二个线程判断对象的执行步为空，直接返回对象，此时由于2初始化对象还没执行，导致调用对象报错。</p><h1 id=单列-懒汉模式volatile双重检测机制最终版>单列-懒汉模式（volatile+双重检测机制）最终版</h1><p>代码实例，线程安全，懒汉模式最终版</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.UnRecommend<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-懒汉模式（volatile+双重检测机制单列） 线程安全
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:05
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonLazyModeSynchronizedDoubleSyncVolatile</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//私有构造方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonLazyModeSynchronizedDoubleSyncVolatile</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//实例对象
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#75715e>//volatile禁止指令重排
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>volatile</span> <span style=color:#66d9ef>static</span> SingLetonLazyModeSynchronizedDoubleSyncVolatile instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态工厂方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonLazyModeSynchronizedDoubleSyncVolatile <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> instance<span style=color:#f92672>)</span> <span style=color:#f92672>{</span> <span style=color:#75715e>//双重检测机制
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>            <span style=color:#66d9ef>synchronized</span> <span style=color:#f92672>(</span>SingLetonLazyModeSynchronizedDoubleSyncVolatile<span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>)</span> <span style=color:#f92672>{</span> <span style=color:#75715e>//同步锁
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>                <span style=color:#66d9ef>if</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>null</span> <span style=color:#f92672>==</span> instance<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>                    instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonLazyModeSynchronizedDoubleSyncVolatile<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>                <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>            <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：</p><p>volatile+双重检测机制，volatile禁止指令重排，双重检测，加同步锁，保证多线程下线程安全。</p><h1 id=单例-饿汉模式静态代码块写法>单例-饿汉模式（静态代码块写法）</h1><p>代码实例，错误的，会发生控制在异常</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-饿汉模式，静态代码写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 注意：静态代码和静态域的顺序，不然会导致空指针
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:20
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonHungryManModeStatic</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonHungryManModeStatic</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态代码块
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>static</span><span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonHungryManModeStatic<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态作用域
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> SingLetonHungryManModeStatic instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonHungryManModeStatic <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>getInstance<span style=color:#f92672>().</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>getInstance<span style=color:#f92672>().</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>Exception in thread <span style=color:#e6db74>&#34;main&#34;</span> java<span style=color:#f92672>.</span><span style=color:#a6e22e>lang</span><span style=color:#f92672>.</span><span style=color:#a6e22e>NullPointerException</span>
+</span></span><span style=display:flex><span>	at com<span style=color:#f92672>.</span><span style=color:#a6e22e>yanxizhu</span><span style=color:#f92672>.</span><span style=color:#a6e22e>demo</span><span style=color:#f92672>.</span><span style=color:#a6e22e>concurrency</span><span style=color:#f92672>.</span><span style=color:#a6e22e>singleton</span><span style=color:#f92672>.</span><span style=color:#a6e22e>SingLetonHungryManModeStatic</span><span style=color:#f92672>.</span><span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>SingLetonHungryManModeStatic<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>30<span style=color:#f92672>)</span>
+</span></span></code></pre></div><p>**错误原因：**静态代码和静态域的顺序，导致空指针</p><p>代码调整后，正确代码</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-饿汉模式，静态代码写法
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * 注意：静态代码和静态域的顺序，不然会导致空指针
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 22:20
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonHungryManModeStatic</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonHungryManModeStatic</span><span style=color:#f92672>()</span> <span style=color:#f92672>{}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态作用域
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>static</span> SingLetonHungryManModeStatic instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//静态代码块
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>static</span><span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        instance <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonHungryManModeStatic<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonHungryManModeStatic <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> instance<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>)</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>getInstance<span style=color:#f92672>().</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>        System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>getInstance<span style=color:#f92672>().</span><span style=color:#a6e22e>hashCode</span><span style=color:#f92672>());</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>75457651
+</span></span><span style=display:flex><span>75457651
+</span></span></code></pre></div><h1 id=单例-枚举模式线程安全>单例-枚举模式线程安全</h1><p><strong>最终推荐版本时枚举模式的单例。</strong></p><p>示例代码：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#f92672>package</span> com.yanxizhu.demo.concurrency.singleton<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.Recommend<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>import</span> com.yanxizhu.demo.concurrency.annotation.ThreadSafety<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#75715e>/**
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @description: 单例-枚举模式，线程最安全的,推荐使用的
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @author: &lt;a href=&#34;mailto:batis@foxmail.com&#34;&gt;清风&lt;/a&gt;
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @date: 2022/4/21 23:11
+</span></span></span><span style=display:flex><span><span style=color:#75715e> * @version: 1.0
+</span></span></span><span style=display:flex><span><span style=color:#75715e> */</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@ThreadSafety</span>
+</span></span><span style=display:flex><span><span style=color:#a6e22e>@Recommend</span>
+</span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>SingLetonEnum</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>    <span style=color:#75715e>//私有构造方法
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>    <span style=color:#66d9ef>private</span> <span style=color:#a6e22e>SingLetonEnum</span><span style=color:#f92672>()</span> <span style=color:#f92672>{};</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> SingLetonEnum <span style=color:#a6e22e>getInstance</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>return</span> SingLeton<span style=color:#f92672>.</span><span style=color:#a6e22e>INSTANCE</span><span style=color:#f92672>.</span><span style=color:#a6e22e>getSingLetonEnum</span><span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>};</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>enum</span> SingLeton <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>        INSTANCE<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>private</span> SingLetonEnum singLetonEnum<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#75715e>//JVM保证这个方法绝对只会被执行一次
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>        SingLeton<span style=color:#f92672>(){</span>
+</span></span><span style=display:flex><span>            singLetonEnum <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> SingLetonEnum<span style=color:#f92672>();</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>        <span style=color:#66d9ef>public</span> SingLetonEnum <span style=color:#a6e22e>getSingLetonEnum</span><span style=color:#f92672>()</span> <span style=color:#f92672>{</span>
+</span></span><span style=display:flex><span>            <span style=color:#66d9ef>return</span> singLetonEnum<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>        <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span>    <span style=color:#f92672>}</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>}</span>
+</span></span></code></pre></div><p>说明：枚举的构造方法，JVM保证这个方法绝对只会被执行一次。</p><p>线程安全，推荐使用的单例模式-枚举模式。</p><p>比饿汉模式更能保证安全，比懒汉模式更能保证性能。</p><p>枚举模式只有使用时调用一次，不会造成资源浪费。</p><hr><p>总结：</p><p><strong>饿汉模式</strong>：有2种写法，最后这种饿汉模式注意静态代码块和作用域顺序。</p><p><strong>懒汉模式</strong>：只有最终版(volatile+双重检测机制)正确，其它都存在线程安全或性能问题。</p><p>单例模式，线程安全，最终推荐枚举模式。</p></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F><span class=tag>设计模式</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F><span class=tag>单例模式</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%8D%95%E4%BE%8B><span class=tag>单例</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%AE%89%E5%85%A8%E5%8F%91%E5%B8%83><span class=tag>安全发布</span></a></li><li><a href=https://willxwu.github.io/tags/%E5%AF%B9%E8%B1%A1%E6%BA%A2%E5%87%BA><span class=tag>对象溢出</span></a></li><li><a href=https://willxwu.github.io/tags/%E6%87%92%E6%B1%89%E6%A8%A1%E5%BC%8F><span class=tag>懒汉模式</span></a></li><li><a href=https://willxwu.github.io/tags/%E9%A5%BF%E6%B1%89%E6%A8%A1%E5%BC%8F><span class=tag>饿汉模式</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>434</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+<script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type=text/x-mathjax-config>
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script><script type=text/x-mathjax-config>
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script><script src=https://willxwu.github.io/scripts/index.min.js></script>
+<script>"serviceWorker"in navigator&&navigator.serviceWorker.register("/service-worker.js").then(function(){console.log("[ServiceWorker] Registered")})</script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-XXXXXXXX-X","auto"),ga("send","pageview"))</script><script async src=https://www.google-analytics.com/analytics.js></script></body></html>
