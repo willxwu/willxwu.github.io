@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Optional on Come Back</title><link>https://willxwu.github.io/tags/optional/</link><description>Recent content in Optional on Come Back</description><generator>Hugo -- gohugo.io</generator><language>en</language><copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright><lastBuildDate>Fri, 01 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://willxwu.github.io/tags/optional/index.xml" rel="self" type="application/rss+xml"/><item><title>JAVA8-Optional API</title><link>https://willxwu.github.io/post/java8/08_java-optional-api/</link><pubDate>Fri, 01 Jul 2022 00:00:00 +0000</pubDate><guid>https://willxwu.github.io/post/java8/08_java-optional-api/</guid><description>Optional API 一、Optional创建方式 前置条件： Insurance对象：
+public class Insurance { private String name; public String getName() { return name; } } 1、empty 特点：使用get()方法时会抛出异常：No value present
+范例：
+Optional&amp;lt;Insurance&amp;gt; emptyOptional = Optional.&amp;lt;Insurance&amp;gt;empty(); 使用get（）获取结果：抛出异常
+emptyOptional.get(); 输出结果:
+Exception in thread &amp;#34;main&amp;#34; java.util.NoSuchElementException: No value present at java.base/java.util.Optional.get(Optional.java:148) 2、of 特点：使用get（）,不会抛异常
+范例：
+Optional&amp;lt;Insurance&amp;gt; ofInsurance = Optional.of(new Insurance()); ofInsurance.get(); 3、ofNullable 特点：上面两者综合，为null是掉empty，不为空调of。
+3.1、为null时，调get()抛出异常 范例：
+Optional&amp;lt;Insurance&amp;gt; ofNullableOptionalNull = Optional.ofNullable(null); ofNullableOptionalNull.get(); 输出结果：
+Exception in thread &amp;#34;main&amp;#34; java.util.NoSuchElementException: No value present 3.2、不为null时，调get()不报错 范例：</description></item></channel></rss>
