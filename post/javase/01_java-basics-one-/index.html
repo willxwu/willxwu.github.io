@@ -78,7 +78,7 @@ int       num  =  100；
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ErrorVariable<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>9<span style=color:#f92672>:</span> 错误<span style=color:#f92672>:</span> 可能尚未初始化变量i
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ErrorVariable<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span><span style=color:#ae81ff>9</span><span style=color:#f92672>:</span> 错误<span style=color:#f92672>:</span> 可能尚未初始化变量i
 </span></span><span style=display:flex><span>System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span></code></pre></div><p>正确演示：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 变量使用注意事项演示
@@ -87,13 +87,13 @@ int       num  =  100；
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>CorrectVariable</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
 </span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> i<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		i <span style=color:#f92672>=</span> 100<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> 200<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		i <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>200</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>j<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>100
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>100</span>
 </span></span></code></pre></div></li><li><p>变量是有自己的作用范围，变量的有效范围为：定义的一对大括号内.</p><p>错误演示：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 变量使用注意事项演示
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 错误演示:变量有效范围
@@ -101,31 +101,31 @@ int       num  =  100；
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ErrorVariable2</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
 </span></span><span style=display:flex><span>		<span style=color:#f92672>{</span>
-</span></span><span style=display:flex><span>			<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 100<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>			<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ErrorVariable2<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>11<span style=color:#f92672>:</span> 错误<span style=color:#f92672>:</span> 找不到符号
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ErrorVariable2<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span><span style=color:#ae81ff>11</span><span style=color:#f92672>:</span> 错误<span style=color:#f92672>:</span> 找不到符号
 </span></span><span style=display:flex><span>                System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>                                   <span style=color:#f92672>^</span>
 </span></span><span style=display:flex><span>符号:   变量 i
 </span></span><span style=display:flex><span>位置: 类 ErrorVariable2
-</span></span><span style=display:flex><span>1 个错误
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> 个错误
 </span></span></code></pre></div></li><li><p>变量不能重复定义</p><p>错误演示：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 变量使用注意事项演示
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 错误演示:变量不能变量重复定义
 </span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ErrorVariable2</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> 50<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> 30<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>50</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ErrorVariable3<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span>9<span style=color:#f92672>:</span> 错误<span style=color:#f92672>:</span> 已在方法 <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[])</span>中定义了变量 a
-</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> 30<span style=color:#f92672>;</span>
+</span></span></code></pre></div><p>输出结果:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>ErrorVariable3<span style=color:#f92672>.</span><span style=color:#a6e22e>java</span><span style=color:#f92672>:</span><span style=color:#ae81ff>9</span><span style=color:#f92672>:</span> 错误<span style=color:#f92672>:</span> 已在方法 <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[])</span>中定义了变量 a
+</span></span><span style=display:flex><span>                <span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>30</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>                    <span style=color:#f92672>^</span>
-</span></span><span style=display:flex><span>1 个错误
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span> 个错误
 </span></span></code></pre></div></li></ol><p>变量使用总结：1、变量没有赋值不能使用 2、变量有效范围 3、变量不能重复定义</p><h3 id=9数据类型代码演示>9、数据类型代码演示</h3><ol><li><p>定义Java八种基本数据类型变量</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 定义Java八种基本数据类型变量。
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 变量只能存一个值，以最后一个值为准。
@@ -133,22 +133,22 @@ int       num  =  100；
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DataType</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//字节类型（127～-128） 1个字节
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>byte</span> b <span style=color:#f92672>=</span> 127<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>byte</span> b <span style=color:#f92672>=</span> <span style=color:#ae81ff>127</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//短整型 2个字节
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>short</span> s <span style=color:#f92672>=</span> 128<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>short</span> s <span style=color:#f92672>=</span> <span style=color:#ae81ff>128</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//整型 4个字节
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span>111111<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span><span style=color:#ae81ff>111111</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//长整型 8个字节
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>long</span> l <span style=color:#f92672>=</span> 22222222222222L<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>long</span> l <span style=color:#f92672>=</span> <span style=color:#ae81ff>22222222222222L</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>b<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>s<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>l<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//单精度 4个字节
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>float</span> f <span style=color:#f92672>=</span>1<span style=color:#f92672>.</span><span style=color:#a6e22e>176F</span><span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>float</span> f <span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>.</span><span style=color:#a6e22e>176F</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//双精度 8个字节
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span>1<span style=color:#f92672>.</span><span style=color:#a6e22e>100D</span><span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>.</span><span style=color:#a6e22e>100D</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>f<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>d<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
@@ -167,13 +167,13 @@ int       num  =  100；
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>boo2<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>127
-</span></span><span style=display:flex><span>128
-</span></span><span style=display:flex><span>111111
-</span></span><span style=display:flex><span>22222222222222
-</span></span><span style=display:flex><span>1<span style=color:#f92672>.</span><span style=color:#a6e22e>176</span>
-</span></span><span style=display:flex><span>1<span style=color:#f92672>.</span><span style=color:#a6e22e>1</span>
-</span></span><span style=display:flex><span>6
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>127</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>128</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>111111</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>22222222222222</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span><span style=color:#f92672>.</span><span style=color:#a6e22e>176</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>1</span><span style=color:#f92672>.</span><span style=color:#a6e22e>1</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>6</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>true</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>false</span>
@@ -183,16 +183,16 @@ int       num  =  100；
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DemoOne</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//输出整数 十进制
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>50<span style=color:#f92672>);</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#ae81ff>50</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//输出整数 二进制，数字开头oB
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>0B11<span style=color:#f92672>);</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#ae81ff>0</span>B11<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//输出整数 八进制，数字开头0
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>0537<span style=color:#f92672>);</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#ae81ff>0537</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//输出整数 十六进制，数组开头0X 0-9 A-F
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>0XE<span style=color:#f92672>);</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#ae81ff>0</span>XE<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//输出浮点数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>3<span style=color:#f92672>.</span><span style=color:#a6e22e>2</span><span style=color:#f92672>);</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#ae81ff>3</span><span style=color:#f92672>.</span><span style=color:#a6e22e>2</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//输出布尔数据，只有2个值，true/false
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#66d9ef>true</span><span style=color:#f92672>);</span>
@@ -208,14 +208,14 @@ int       num  =  100；
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>50
-</span></span><span style=display:flex><span>3
-</span></span><span style=display:flex><span>351
-</span></span><span style=display:flex><span>14
-</span></span><span style=display:flex><span>3<span style=color:#f92672>.</span><span style=color:#a6e22e>2</span>
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>50</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>351</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>14</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span><span style=color:#f92672>.</span><span style=color:#a6e22e>2</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>true</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>false</span>
-</span></span><span style=display:flex><span>6
+</span></span><span style=display:flex><span><span style=color:#ae81ff>6</span>
 </span></span></code></pre></div><p>注意：最后输出的2个为空。</p></li><li><p>字符串类型演示</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#75715e>/**
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 字符串，引用类型
 </span></span></span><span style=display:flex><span><span style=color:#75715e>* 常量：字符串，&#34;&#34;双引号包裹起来
@@ -240,14 +240,14 @@ int       num  =  100；
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DataTypeConversion</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//double类型变量
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span> 10000<span style=color:#f92672>;</span>  <span style=color:#75715e>//出现类型自动转换，int自动转换成double
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span> <span style=color:#ae81ff>10000</span><span style=color:#f92672>;</span>  <span style=color:#75715e>//出现类型自动转换，int自动转换成double
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>d<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span>100<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span><span style=color:#ae81ff>100</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#66d9ef>double</span> d2 <span style=color:#f92672>=</span> i<span style=color:#f92672>;</span> <span style=color:#75715e>//出现类型自动转换，int自动转换成double
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>d2<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>        
-</span></span><span style=display:flex><span>     <span style=color:#66d9ef>byte</span> b <span style=color:#f92672>=</span>10<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>     <span style=color:#66d9ef>byte</span> b <span style=color:#f92672>=</span><span style=color:#ae81ff>10</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>     <span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> b<span style=color:#f92672>;</span> <span style=color:#75715e>//自动类型转换，byte类型自动转换成int类型
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>     System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>j<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
@@ -258,7 +258,7 @@ int       num  =  100；
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>DataTypeConversion2</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//double浮点，转成int
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span> 3<span style=color:#f92672>.</span><span style=color:#a6e22e>14</span><span style=color:#f92672>;</span> 
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>double</span> d <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>.</span><span style=color:#a6e22e>14</span><span style=color:#f92672>;</span> 
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//被转后的数据类型 变量名 = (被转换后数据类型)要被转的数据
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>int</span><span style=color:#f92672>)</span>d<span style=color:#f92672>;</span>
@@ -266,12 +266,12 @@ int       num  =  100；
 </span></span><span style=display:flex><span>     System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//类似大桶中的水倒入小桶，水肯定会丢失（精度丢失）
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>byte</span> b <span style=color:#f92672>=</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>byte</span><span style=color:#f92672>)</span>200<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>byte</span> b <span style=color:#f92672>=</span> <span style=color:#f92672>(</span><span style=color:#66d9ef>byte</span><span style=color:#f92672>)</span><span style=color:#ae81ff>200</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>b<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>3
-</span></span><span style=display:flex><span><span style=color:#f92672>-</span>56
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>3</span>
+</span></span><span style=display:flex><span><span style=color:#f92672>-</span><span style=color:#ae81ff>56</span>
 </span></span></code></pre></div><p><strong>注意：强制类型转换，实际开发中没有要求强制转换时，不转换，不然会丢失精度 ，除非要求转换才做强制转换。</strong></p><hr><h3 id=11运算符>11、运算符</h3><p>运算符分为：算术运算符、赋值运算符、比较运算符、三元运算符。</p><ol><li><p>算术运算符</p><p><strong>运算符是用来计算数据的符号。数据可以是常量，也可以是变量。被运算符操作的数我们称为操作数。</strong></p><p>算术运算符最常见的操作是将操作数参与数学计算，如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>运算符		运算规则		范列		结果 
 </span></span><span style=display:flex><span>+	        正号      	    +3       	 3
 </span></span><span style=display:flex><span>+	        加       	    2+3       	 5
@@ -297,22 +297,22 @@ int       num  =  100；
 </span></span><span style=display:flex><span>		<span style=color:#75715e>// + 连接作用，将一个字符串和其他数据连接起来
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>// 遇到字符串，变成连&#34;5+4=54&#34;
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>// + 任何类型只要和字符串+,所有的数据都变成了字符串。
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;5+4=&#34;</span><span style=color:#f92672>+</span>5<span style=color:#f92672>+</span>4<span style=color:#f92672>);</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span><span style=color:#e6db74>&#34;5+4=&#34;</span><span style=color:#f92672>+</span><span style=color:#ae81ff>5</span><span style=color:#f92672>+</span><span style=color:#ae81ff>4</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//除法运算
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>//java中，整数除法运算最后只会得到整数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> 100<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> 9<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>100</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> j <span style=color:#f92672>=</span> <span style=color:#ae81ff>9</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>i<span style=color:#f92672>/</span>j<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//取模运算，两数相除，获取的余数
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> k <span style=color:#f92672>=</span>6<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> m <span style=color:#f92672>=</span>4<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> k <span style=color:#f92672>=</span><span style=color:#ae81ff>6</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> m <span style=color:#f92672>=</span><span style=color:#ae81ff>4</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>k<span style=color:#f92672>%</span>m<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//++/-- 自增/自减运算
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> 3<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b <span style=color:#f92672>=</span> 3<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>		a<span style=color:#f92672>++;</span> <span style=color:#75715e>//变量a自己增加1
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>);</span>
@@ -321,8 +321,8 @@ int       num  =  100；
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>b<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//======================================================
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>//++：写在变量前面，和写在后面的，区别
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> c <span style=color:#f92672>=</span> 3<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> d <span style=color:#f92672>=</span> 3<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> c <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> d <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#f92672>++</span>c<span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		d<span style=color:#f92672>++;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//结论：符号写在前面，还是后面，在变量自己独立计算的时候，没有区别。
@@ -330,27 +330,27 @@ int       num  =  100；
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>//f = e++,++后算，先将e的值赋予f，然后e再自增1.
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>//q = ++h,++先算，先将h自增1，后再赋值给q。
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#75715e>//======================测试============================
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> e <span style=color:#f92672>=</span> 5<span style=color:#f92672>;</span>
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		<span style=color:#66d9ef>int</span> e <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> f <span style=color:#f92672>=</span> e<span style=color:#f92672>++;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>e<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>f<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> h <span style=color:#f92672>=</span> 5<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> h <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> q <span style=color:#f92672>=</span> <span style=color:#f92672>++</span>h<span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>h<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>q<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>5<span style=color:#f92672>+</span>4<span style=color:#f92672>=</span>54
-</span></span><span style=display:flex><span>11
-</span></span><span style=display:flex><span>2
-</span></span><span style=display:flex><span>4
-</span></span><span style=display:flex><span>4
-</span></span><span style=display:flex><span>6
-</span></span><span style=display:flex><span>5
-</span></span><span style=display:flex><span>6
-</span></span><span style=display:flex><span>6
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>5</span><span style=color:#f92672>+</span><span style=color:#ae81ff>4</span><span style=color:#f92672>=</span><span style=color:#ae81ff>54</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>11</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>2</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>6</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>6</span>
 </span></span></code></pre></div><p><strong>++：写在变量前面，和写在后面的，区别：</strong></p><p>符号写在前面，还是后面，在变量自己独立计算的时候，没有区别。但是变量，要是参与了其它运算，就有区别了。</p><pre tabindex=0><code class=language-dos data-lang=dos>f = e++,++后算，先将e的值赋予f，然后e再自增1.
 q = ++h,++先算，先将h自增1，后再赋值给q。
 </code></pre><p>&ndash; 与++类似，不再做说明。</p></li><li><p>赋值运算符</p><p><strong>赋值运算符就是为变量赋值的符号。</strong></p><p>赋值运算符的使用如下：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>运算符		运算规则		范例		结果
@@ -362,37 +362,37 @@ q = ++h,++先算，先将h自增1，后再赋值给q。
 </span></span><span style=display:flex><span>%=		     取模后赋值	int a=2,a%=2	0
 </span></span></code></pre></div><p><strong>注意：诸如+=这样形式的赋值运算符，会将结果自动强制转成等号左边的数据类型。</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Operator2</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> 1<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		a<span style=color:#f92672>+=</span>4<span style=color:#f92672>.</span><span style=color:#a6e22e>8</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		a<span style=color:#f92672>+=</span><span style=color:#ae81ff>4</span><span style=color:#f92672>.</span><span style=color:#a6e22e>8</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b <span style=color:#f92672>=</span> 10<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		b<span style=color:#f92672>%=</span>3<span style=color:#f92672>.</span><span style=color:#a6e22e>3</span><span style=color:#f92672>;</span>  <span style=color:#75715e>//会先把10转成double 10.0 然后相除余数0.1，去整数0.
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		b<span style=color:#f92672>%=</span><span style=color:#ae81ff>3</span><span style=color:#f92672>.</span><span style=color:#a6e22e>3</span><span style=color:#f92672>;</span>  <span style=color:#75715e>//会先把10转成double 10.0 然后相除余数0.1，去整数0.
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>b<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> h <span style=color:#f92672>=</span> 10<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> h <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//h=h%3.3;  会报 不兼容的类型: 从double转换到int可能会有损失
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>h<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> c <span style=color:#f92672>=</span> 10<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>double</span> d<span style=color:#f92672>=</span>3<span style=color:#f92672>.</span><span style=color:#a6e22e>3</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> c <span style=color:#f92672>=</span> <span style=color:#ae81ff>10</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>double</span> d<span style=color:#f92672>=</span><span style=color:#ae81ff>3</span><span style=color:#f92672>.</span><span style=color:#a6e22e>3</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>c<span style=color:#f92672>/</span>d<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>c<span style=color:#f92672>%</span>d<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>byte</span> m <span style=color:#f92672>=</span>1<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>byte</span> m <span style=color:#f92672>=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		<span style=color:#75715e>//m = m + 1; //出错，会丢失精度，类似把小桶加大桶的水，放到小桶。
-</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		m<span style=color:#f92672>=(</span><span style=color:#66d9ef>byte</span><span style=color:#f92672>)(</span>m<span style=color:#f92672>+</span>1<span style=color:#f92672>);</span><span style=color:#75715e>//通过强转就可以。
+</span></span></span><span style=display:flex><span><span style=color:#75715e></span>		m<span style=color:#f92672>=(</span><span style=color:#66d9ef>byte</span><span style=color:#f92672>)(</span>m<span style=color:#f92672>+</span><span style=color:#ae81ff>1</span><span style=color:#f92672>);</span><span style=color:#75715e>//通过强转就可以。
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>
-</span></span><span style=display:flex><span>		m<span style=color:#f92672>+=</span>1<span style=color:#f92672>;</span><span style=color:#75715e>//这种加就包含了上面的强转，因此推荐使用+=这种
+</span></span><span style=display:flex><span>		m<span style=color:#f92672>+=</span><span style=color:#ae81ff>1</span><span style=color:#f92672>;</span><span style=color:#75715e>//这种加就包含了上面的强转，因此推荐使用+=这种
 </span></span></span><span style=display:flex><span><span style=color:#75715e></span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>m<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>5
-</span></span><span style=display:flex><span>0
-</span></span><span style=display:flex><span>10
-</span></span><span style=display:flex><span>3<span style=color:#f92672>.</span><span style=color:#a6e22e>0303030303030303</span>
-</span></span><span style=display:flex><span>0<span style=color:#f92672>.</span><span style=color:#a6e22e>10000000000000053</span>
-</span></span><span style=display:flex><span>3
+</span></span></code></pre></div><p>输出结果:</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>5</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>10</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span><span style=color:#f92672>.</span><span style=color:#a6e22e>0303030303030303</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>0</span><span style=color:#f92672>.</span><span style=color:#a6e22e>10000000000000053</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>3</span>
 </span></span></code></pre></div><p><strong>注意：在运算时，都会往类型占有字节大的转换后再运算，除/余数运算，结果去整数。</strong></p></li><li><p>比较运算符</p><p><strong>比较运算符，又叫关系运算符，它是用来判断两个操作数的大小关系及是否相等关系的，结果是布尔值true/false。</strong></p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-txt data-lang=txt><span style=display:flex><span>运算符		运算规则		范例		结果
 </span></span><span style=display:flex><span>==		    相等于		    4==3		false
 </span></span><span style=display:flex><span>！=		    不等于		    4！=3		true
@@ -405,15 +405,15 @@ q = ++h,++先算，先将h自增1，后再赋值给q。
 </span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Operator3</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> 3<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b <span style=color:#f92672>=</span> 4<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b <span style=color:#f92672>=</span> <span style=color:#ae81ff>4</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>=</span>b<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>==</span>b<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>==</span>3<span style=color:#f92672>);</span>
-</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>!=</span>3<span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>==</span><span style=color:#ae81ff>3</span><span style=color:#f92672>);</span>
+</span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>!=</span><span style=color:#ae81ff>3</span><span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>4
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>4</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>true</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>false</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>true</span>
@@ -490,19 +490,19 @@ q = ++h,++先算，先将h自增1，后再赋值给q。
 </span></span></span><span style=display:flex><span><span style=color:#75715e>*/</span>
 </span></span><span style=display:flex><span><span style=color:#66d9ef>public</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>Operator5</span><span style=color:#f92672>{</span>
 </span></span><span style=display:flex><span>	<span style=color:#66d9ef>public</span> <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>void</span> <span style=color:#a6e22e>main</span><span style=color:#f92672>(</span>String<span style=color:#f92672>[]</span> args<span style=color:#f92672>){</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span>2<span style=color:#f92672>;</span>
-</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b<span style=color:#f92672>=</span>6<span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> a <span style=color:#f92672>=</span><span style=color:#ae81ff>2</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		<span style=color:#66d9ef>int</span> b<span style=color:#f92672>=</span><span style=color:#ae81ff>6</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>&gt;</span>b <span style=color:#f92672>?</span> a<span style=color:#f92672>+</span>b <span style=color:#f92672>:</span> b<span style=color:#f92672>-</span>a<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>a<span style=color:#f92672>&lt;</span>b <span style=color:#f92672>?</span> a<span style=color:#f92672>+</span>b <span style=color:#f92672>:</span> b<span style=color:#f92672>-</span>a<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>
-</span></span><span style=display:flex><span>		String c <span style=color:#f92672>=</span> 9<span style=color:#f92672>&gt;</span>4 <span style=color:#f92672>?</span> <span style=color:#e6db74>&#34;Hello&#34;</span> <span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;呵呵&#34;</span><span style=color:#f92672>;</span>
+</span></span><span style=display:flex><span>		String c <span style=color:#f92672>=</span> <span style=color:#ae81ff>9</span><span style=color:#f92672>&gt;</span><span style=color:#ae81ff>4</span> <span style=color:#f92672>?</span> <span style=color:#e6db74>&#34;Hello&#34;</span> <span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;呵呵&#34;</span><span style=color:#f92672>;</span>
 </span></span><span style=display:flex><span>		System<span style=color:#f92672>.</span><span style=color:#a6e22e>out</span><span style=color:#f92672>.</span><span style=color:#a6e22e>println</span><span style=color:#f92672>(</span>c<span style=color:#f92672>);</span>
 </span></span><span style=display:flex><span>	<span style=color:#f92672>}</span>
 </span></span><span style=display:flex><span><span style=color:#f92672>}</span>
-</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span>4
-</span></span><span style=display:flex><span>8
+</span></span></code></pre></div><p>输出结果：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-java data-lang=java><span style=display:flex><span><span style=color:#ae81ff>4</span>
+</span></span><span style=display:flex><span><span style=color:#ae81ff>8</span>
 </span></span><span style=display:flex><span>Hello
-</span></span></code></pre></div></li></ol></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/javase><span class=tag>Javase</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>572</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
+</span></span></code></pre></div></li></ol></article><footer class=post-footer><ul class=post-tags><li><a href=https://willxwu.github.io/tags/java><span class=tag>Java</span></a></li><li><a href=https://willxwu.github.io/tags/javase><span class=tag>Javase</span></a></li></ul><p class=post-copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>613</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.</p></footer><div id=disqus_thread></div><script type=application/javascript>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yanxizhu.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}()</script><noscript>Please enable JavaScript to view the <a href=https://disqus.com/?ref_noscript>comments powered by Disqus.</a></noscript><a href=https://disqus.com class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a></section><footer class=site-footer><p>© 2017-2023 Come Back</p><p>Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> with theme <a href=https://github.com/laozhu/hugo-nuo target=_blank rel=noopener>Nuo</a>.</p></footer><script src=https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js></script>
 <script async src=https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js></script>
 <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <script type=text/x-mathjax-config>
